@@ -55,7 +55,7 @@ namespace ICRC.Data.Infrastructure
             IEnumerable<T> objects = dbSet.Where(where);
             foreach(T obj in objects)
             {
-                dbSet.Remove(obj);dasd
+                dbSet.Remove(obj);
             }
             
         }
