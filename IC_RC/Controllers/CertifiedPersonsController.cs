@@ -114,7 +114,7 @@ namespace IC_RC.Controllers
         {
 
             var data = ReciprocityService.ReciprocityGetByPersonID(ID);
-
+            asd
             return PartialView("_Recprocities",data);
         }
 
