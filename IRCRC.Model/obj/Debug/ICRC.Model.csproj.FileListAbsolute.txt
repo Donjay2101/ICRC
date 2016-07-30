@@ -1,0 +1,5 @@
+c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\bin\Debug\IRCRC.Model.dll
+c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\bin\Debug\IRCRC.Model.pdb
+c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
+c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\obj\Debug\IRCRC.Model.dll
+c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\obj\Debug\IRCRC.Model.pdb

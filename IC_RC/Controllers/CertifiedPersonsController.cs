@@ -113,8 +113,7 @@ namespace IC_RC.Controllers
         public ActionResult Reciprocity(int ID)
         {
 
-            var data = ReciprocityService.ReciprocityGetByPersonID(ID);
-            asd
+            var data = ReciprocityService.ReciprocityGetByPersonID(ID);           
             return PartialView("_Recprocities",data);
         }
 
