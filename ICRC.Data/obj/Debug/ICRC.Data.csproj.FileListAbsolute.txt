@@ -10,3 +10,15 @@ c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\ICRC.Data\bin\Debug\E
 c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
 c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\ICRC.Data\obj\Debug\ICRC.Data.dll
 c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\ICRC.Data\obj\Debug\ICRC.Data.pdb
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\ICRC.Data.dll.config
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\ICRC.Data.dll
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\ICRC.Data.pdb
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\EntityFramework.dll
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\IRCRC.Model.dll
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\IRCRC.Model.pdb
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\EntityFramework.xml
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\obj\Debug\ICRC.Data.dll
+E:\Official\Work\Projects\source\IC_RC\ICRC.Data\obj\Debug\ICRC.Data.pdb
