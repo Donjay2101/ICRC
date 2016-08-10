@@ -8,6 +8,6 @@ namespace ICRC.Data.Infrastructure
 {
     public interface IUnitOfWork
     {
-        void Commit();
+        int Commit();
     }
 }

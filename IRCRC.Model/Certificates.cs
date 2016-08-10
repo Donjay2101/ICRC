@@ -10,9 +10,9 @@ namespace ICRC.Model
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public int ModifiedBy { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<DateTime> CreatedAt { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<DateTime> ModifiedAt { get; set; }
     }
 }

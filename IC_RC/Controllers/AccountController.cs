@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IC_RC.Models;
+using ICRC.Model;
+using System.Web.Security;
+using ICRCService;
 
 namespace IC_RC.Controllers
 {
@@ -17,16 +20,31 @@ namespace IC_RC.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        //private IRoleService roleService;
+        private LoginService _loginManager;
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+         
         }
+
+        public LoginService LoginManager
+        {
+            get
+            {
+                return _loginManager==null ?_loginManager=new LoginService():_loginManager;
+            }
+        }
+
+
+
+
 
         public ApplicationSignInManager SignInManager
         {
@@ -73,24 +91,58 @@ namespace IC_RC.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            if(LoginManager.ValidateUser(model.Username, model.Password))
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                var user=LoginManager.GetUser(model.Username);
+                SetupFormsAuthTicket(user, false);
+                return RedirectToLocal(returnUrl);
             }
+
+
+            ModelState.AddModelError("", "Invalid login attempt.");
+            return View(model);
+            
+
+
+
+            //// This doesn't count login failures towards account lockout
+            //// To enable password failures to trigger account lockout, change to shouldLockout: true
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
         }
 
+
+
+
+        private Users SetupFormsAuthTicket(Users user, bool persistanceFlag)
+        {
+            //Student user;
+
+            var userId = user.ID;
+            var userData = userId.ToString(CultureInfo.InvariantCulture);
+            var authTicket = new FormsAuthenticationTicket(1, //version
+                                                        user.Username, // user name
+                                                        DateTime.Now,             //creation
+                                                        DateTime.Now.AddMinutes(30), //Expiration
+                                                        persistanceFlag, //Persistent
+                                                        userData);
+
+            var encTicket = FormsAuthentication.Encrypt(authTicket);
+            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+            return user;
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -151,23 +203,36 @@ namespace IC_RC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                Users user = new Users();
+                user.Username = model.Username;
+                user.Password = model.Password;
+
+                int i=LoginManager.RegisterUser(user);
+                
+
+                
+                if(i>0)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    SetupFormsAuthTicket(user, false);
+                    return RedirectToAction("Login");
                 }
-                AddErrors(result);
-            }
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var result = await UserManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                //    // Send an email with this link
+                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                //    return RedirectToAction("Index", "Home");
+                //}
+               // AddErrors(result);
+            }
+            ModelState.AddModelError("", "something went wrong.");
             // If we got this far, something failed, redisplay form
             return View(model);
         }

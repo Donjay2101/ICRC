@@ -10,6 +10,12 @@ namespace IC_RC.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ActionResult Error()
+        {
+            return View();
+        }
+
         public readonly ICertifiedPersonService personService;
         
         public HomeController(ICertifiedPersonService personService)

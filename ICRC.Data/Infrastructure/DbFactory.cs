@@ -8,17 +8,17 @@ namespace ICRC.Data.Infrastructure
 {
     public class DbFactory: Disposable,IDbFactory
     {
-        ICRCEntities dbcontext;
+        ICRCEntities dbContext;
         public ICRCEntities Init()
         {
-            return dbcontext ?? (dbcontext = new ICRCEntities());
+            return dbContext ?? (dbContext = new ICRCEntities());
         }
 
         protected override void DisposeCore()
         {
-            if(dbcontext!=null)
+            if(dbContext != null)
             {
-                dbcontext.Dispose();
+                dbContext.Dispose();
             }
         }
           

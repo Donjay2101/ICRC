@@ -52,9 +52,16 @@
       <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="LoggerApp">
+      <HintPath>..\..\..\Videos\Automate_ImportExport\bin\Debug\LoggerApp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -202,6 +209,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SessionContext.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -209,16 +217,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BoardsController.cs" />
+    <Compile Include="Controllers\CertificationsController.cs" />
     <Compile Include="Controllers\CertifiedPersonsController.cs" />
+    <Compile Include="Controllers\EthicalVoilationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReciprocitiesController.cs" />
+    <Compile Include="Controllers\TestingCompaniesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="InfraStructure\CustomRoleProvider.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShrdMaster.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -288,16 +303,36 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\Shared\_CertifiedPerson.cshtml" />
+    <Content Include="Views\Shared\_CertifiedPersons.cshtml" />
     <Content Include="Views\Shared\_Certifications.cshtml" />
     <Content Include="Views\Shared\_Voilations.cshtml" />
-    <Content Include="Views\Shared\_Reciprocities.cshtml" />
     <Content Include="Views\CertifiedPersons\Index.cshtml" />
     <Content Include="Views\CertifiedPersons\Edit.cshtml" />
     <Content Include="Views\CertifiedPersons\Create.cshtml" />
+    <Content Include="Views\Certifications\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Certifications\Create.cshtml" />
+    <Content Include="Views\Certifications\Edit.cshtml" />
+    <Content Include="Views\Shared\_Reciprocities.cshtml" />
+    <Content Include="Views\Reciprocity\Index.cshtml" />
+    <Content Include="Views\Reciprocity\Create.cshtml" />
+    <Content Include="Views\Reciprocity\Edit.cshtml" />
+    <Content Include="Views\EthicalVoilations\Index.cshtml" />
+    <Content Include="Views\EthicalVoilations\Create.cshtml" />
+    <Content Include="Views\EthicalVoilations\Edit.cshtml" />
+    <Content Include="Views\Shared\_TestingCompany.cshtml" />
+    <Content Include="Views\TestingCompanies\Index.cshtml" />
+    <Content Include="Views\TestingCompanies\Create.cshtml" />
+    <Content Include="Views\Boards\Index.cshtml" />
+    <Content Include="Views\Shared\_Boards.cshtml" />
+    <Content Include="Views\TestingCompanies\Edit.cshtml" />
+    <Content Include="Views\Boards\Create.cshtml" />
+    <Content Include="Views\Boards\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\TestingCompany\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

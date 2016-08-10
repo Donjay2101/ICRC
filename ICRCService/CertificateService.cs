@@ -54,11 +54,20 @@ namespace ICRCService
 
         public void CreateCertificate(Certificates certificate)
         {
+            certificate.CreatedAt = DateTime.Now;
+            int ID;
+            int.TryParse(System.Web.HttpContext.Current.Session["User"].ToString(), out ID);
+            certificate.CreatedBy = ID;
             certificateRepository.Add(certificate);
         }
 
         public void UpdateCertificate(Certificates certificate)
         {
+
+            certificate.ModifiedAt= DateTime.Now;
+            int ID;
+            int.TryParse(System.Web.HttpContext.Current.Session["User"].ToString(), out ID);
+            certificate.ModifiedBy= ID;
             certificateRepository.Update(certificate);
         }
 

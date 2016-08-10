@@ -24,22 +24,20 @@ namespace IC_RC.App_Start
         public static void SetAutoFacContainer()
         {
             var builder = new ContainerBuilder();
-
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
-            //Repositries
-            builder.RegisterAssemblyTypes(typeof(BoardRepository).Assembly)
-                .Where(t => t.Name.EndsWith("Repository")).AsImplementedInterfaces().InstancePerRequest();
-
-            //Services
-            builder.RegisterAssemblyTypes(typeof(BoardsService).Assembly)
-                .Where(t => t.Name.EndsWith("Service")).AsImplementedInterfaces().InstancePerRequest();
-
+            // Repositories
+            builder.RegisterAssemblyTypes(typeof(CertificatesRepository).Assembly)
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces().InstancePerRequest();
+            // Services
+            builder.RegisterAssemblyTypes(typeof(CertificateService).Assembly)
+               .Where(t => t.Name.EndsWith("Service"))
+               .AsImplementedInterfaces().InstancePerRequest();
 
             IContainer container = builder.Build();
-
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
         }

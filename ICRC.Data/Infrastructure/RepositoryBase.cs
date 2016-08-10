@@ -21,15 +21,15 @@ namespace ICRC.Data.Infrastructure
             private set;
         }
 
-        protected ICRCEntities dbContext
+        protected ICRCEntities DbContext
         {
-            get { return dataContext ?? (dataContext = new ICRCEntities()); }
+            get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }
 
-        protected RepositoryBase(IDbFactory DbFactory)
+        protected RepositoryBase(IDbFactory dbFactory)
         {
-            this.DbFactory = DbFactory;
-            dbSet = dbContext.Set<T>();
+            DbFactory = dbFactory;
+            dbSet = DbContext.Set<T>();
         }
 
         #region Methods

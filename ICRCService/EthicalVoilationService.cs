@@ -12,62 +12,59 @@ namespace ICRCService
 {
     public interface IEthicalVoliationService
     {
-        IEnumerable<EthicalVoilations> GetEthicalVoilations();
-        EthicalVoilations GetEthicalVoilationByID(int ID);
-        IEnumerable<EthicalVoilations> GetEthicalVoilations(Expression<Func<EthicalVoilations, bool>> where);
-        IEnumerable<EthicalVoilations> GetVoiltaionsByPersonID(int ID);
-        void CreateEthicalVoilation(EthicalVoilations Board);
-        void UpdateEthicalVoilation(EthicalVoilations Board);
+        IEnumerable<EthicalVoilation> GetEthicalVoilations();
+        EthicalVoilation GetEthicalVoilationByID(int ID);
+        IEnumerable<EthicalVoilation> GetEthicalVoilations(Expression<Func<EthicalVoilation, bool>> where);       
+        void CreateEthicalVoilation(EthicalVoilation Board);
+        void UpdateEthicalVoilation(EthicalVoilation Board);
         void Save();
     }
-    public class EthicalVoilationService:IEthicalVoliationService
+    public class EthicalVoilationService : IEthicalVoliationService
     {
-        public readonly IEthicalVoilationRepository ethicalVoilationRepository;
+        public readonly IEthicalVoilationsRepository EthicalVoilationRepository;
         public readonly IUnitOfWork unitOfWork;
 
-        public EthicalVoilationService(IEthicalVoilationRepository ethicalVoilationRepository, IUnitOfWork unitOfWork)
+        public EthicalVoilationService(IEthicalVoilationsRepository EthicalVoilationRepository, IUnitOfWork unitOfWork)
         {
-            this.ethicalVoilationRepository = ethicalVoilationRepository;
+            this.EthicalVoilationRepository = EthicalVoilationRepository;
             this.unitOfWork = unitOfWork;
         }
 
         #region Methods
-        public IEnumerable<EthicalVoilations> GetEthicalVoilations()
+        public IEnumerable<EthicalVoilation> GetEthicalVoilations()
         {
-            return ethicalVoilationRepository.GetAll();
+            return EthicalVoilationRepository.GetAll();
         }
 
-        public EthicalVoilations GetEthicalVoilationByID(int ID)
+        public EthicalVoilation GetEthicalVoilationByID(int ID)
         {
-            return ethicalVoilationRepository.GetByID(ID);
+            return EthicalVoilationRepository.GetByID(ID);
         }
 
-        public IEnumerable<EthicalVoilations> GetEthicalVoilations(Expression<Func<EthicalVoilations,bool>>where)
+        public IEnumerable<EthicalVoilation> GetEthicalVoilations(Expression<Func<EthicalVoilation, bool>> where)
         {
-            return ethicalVoilationRepository.GetMany(where);
+            return EthicalVoilationRepository.GetMany(where);
         }
 
-        public void CreateEthicalVoilation(EthicalVoilations voilation)
+        public void CreateEthicalVoilation(EthicalVoilation voilation)
         {
-            ethicalVoilationRepository.Add(voilation);
+            EthicalVoilationRepository.Add(voilation);
         }
 
-        public void UpdateEthicalVoilation(EthicalVoilations voilation)
+        public void UpdateEthicalVoilation(EthicalVoilation voilation)
         {
-            ethicalVoilationRepository.Update(voilation);
+            EthicalVoilationRepository.Update(voilation);
         }
 
-        public IEnumerable<EthicalVoilations> GetVoiltaionsByPersonID(int ID)
-        {
-            return ethicalVoilationRepository.GetByPersonID(ID);
-        }
+     
 
-        public void Save()           
+        public void Save()
         {
             unitOfWork.Commit();
         }
 
 
         #endregion  
-    }   
+    }
+
 }

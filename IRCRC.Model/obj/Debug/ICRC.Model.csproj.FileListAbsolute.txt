@@ -3,3 +3,8 @@ c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\bin\Debug
 c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
 c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\obj\Debug\IRCRC.Model.dll
 c:\Users\deep2\documents\visual studio 2015\Projects\IC_RC\IRCRC.Model\obj\Debug\IRCRC.Model.pdb
+E:\Official\Work\Projects\source\IC_RC\IRCRC.Model\bin\Debug\IRCRC.Model.dll
+E:\Official\Work\Projects\source\IC_RC\IRCRC.Model\bin\Debug\IRCRC.Model.pdb
+E:\Official\Work\Projects\source\IC_RC\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
+E:\Official\Work\Projects\source\IC_RC\IRCRC.Model\obj\Debug\IRCRC.Model.dll
+E:\Official\Work\Projects\source\IC_RC\IRCRC.Model\obj\Debug\IRCRC.Model.pdb

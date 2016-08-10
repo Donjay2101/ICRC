@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,16 @@ namespace ICRC.Model
         public string Zip { get; set; }
         public string SSN { get; set; }
         public string Email { get; set; }
-        public string Notes { get; set; }
-        public bool EthicalVoilation { get; set; }        
+        public string Notes { get; set; }                
+        public int TestingCompany { get; set; }
+        public bool EthicalVoilation { get; set; }
         public int CurrentBoardID { get; set; }
         public int OtherBoardID { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public int ModifiedBy { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<DateTime> CreatedAt { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<DateTime> ModifiedAt { get; set; }
+        [NotMapped]
+        public string FullName { get; set; }
     }
 }

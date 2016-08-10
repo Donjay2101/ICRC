@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<ICRC.Model.Reciprocities>
 @using GridMvc.Html
 
-
+<div>
+    <a href="/Reciprocity/Create">Create new</a>
+</div>
 @Html.Grid(Model).Columns(columns =>
                     {
                         columns.Add()
@@ -26,11 +28,18 @@
                                         <a href="#" onclick="Deleteconfirm('@c.ID')">Delete</a>
                                     </b>
                                 </div>);
-                        columns.Add(c => c.DateOfEntry).Titled("Certificate No.");
-                        columns.Add(c => c.RequestedBoard).Titled("Start Date");
-                        //columns.Add(c => c.productType).Titled("Product Type");
-                        columns.Add(c => c.CertificateID).Titled("State Recert. Date");                        
-                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+                        columns.Add(c => c.OrginiatingBoardName).Titled("Oeginating Board.");
+                        columns.Add(c => c.RequestedBoardName).Titled("Requested Board");
+                        columns.Add(c => c.CertificationAcronym).Titled("Certificate Acronym");
+                        columns.Add(c => c.Status).Titled("Approved?");
+                        columns.Add(c => c.ApprovalDate).Titled("Approval Date");
+                        columns.Add(c => c.RecprocityFee).Titled("Reciprocity Fee");
+                        columns.Add(c => c.PaymentType).Titled("Payment Type");
+                        columns.Add(c => c.PaymentNumber).Titled("Payment Number");
+                        columns.Add(c => c.Notes).Titled("Reciprocity Notes");
 
+
+                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/gridmvc.min.js"></script>
 

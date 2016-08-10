@@ -8,15 +8,17 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
+    //[Authorize(Users="abc")]        
     public class CertifiedPersonsController : Controller
     {
         public readonly ICertifiedPersonService CertifiedPersonService;
         public readonly ICertificationService CertificationService;
         public readonly IReciprocitiesService ReciprocityService;
-        public readonly IEthicalVoliationService VoilationService;
+        public readonly IStudentEthicalVoliationService VoilationService;
         public readonly IBoardService BoardService;
+        
 
-        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IEthicalVoliationService VoilationService, IBoardService BoardService)
+        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IStudentEthicalVoliationService VoilationService, IBoardService BoardService)
         {
             this.CertifiedPersonService = CertifiedPersonService;
             this.CertificationService = CertificationService;
@@ -33,7 +35,7 @@ namespace IC_RC.Controllers
         public ActionResult GetData()
         {
             var data = CertifiedPersonService.GetCertifiedPersons();
-            return PartialView("_CertifiedPerson", data);
+            return PartialView("_CertifiedPersons", data);
         }
 
 
@@ -45,12 +47,17 @@ namespace IC_RC.Controllers
             return View();
         }
 
+
+       
+
         // GET: CertifiedPersons/Create
         public ActionResult Create()
+
+
         {
 
-            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
-            ViewBag.OtherBoardID= new SelectList(BoardService.GetBoards(), "ID", "Name");
+            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Board");
+            
             return View();
         }
 
@@ -58,24 +65,22 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(CertifiedPersons person)
         {
-            try
-            {
+            
                 // TODO: Add insert logic here
                 if(ModelState.IsValid)
                 {
+                    person.CreatedAt = DateTime.Now;
+                    person.CreatedBy = 1;                                    
                     CertifiedPersonService.CreateCertifiedPerson(person);
+                    CertifiedPersonService.Save();
+                //db.SaveChanges();
                     return RedirectToAction("Index");
                 }
 
-                ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
-                ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
+                ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+                ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
                 return View(person);
-                
-            }
-            catch
-            {
-                return View();
-            }
+                            
         }
 
         // GET: CertifiedPersons/Edit/5
@@ -83,12 +88,32 @@ namespace IC_RC.Controllers
         {
             var data = CertifiedPersonService.GetCertifiedPersonByID(id);
 
-            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
-            ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
+            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym",data.CurrentBoardID);
+            ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym",data.OtherBoardID);
             //Certifications
 
 
             return View(data);
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(CertifiedPersons person)
+        {
+            // TODO: Add insert logic here
+            if (ModelState.IsValid)
+            {
+                person.ModifiedAt= DateTime.Now;
+                person.ModifiedBy= 1;
+                CertifiedPersonService.UpdateCertifiedPerson(person);
+                CertifiedPersonService.Save();
+                //db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
+            ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
+            return View(person);
         }
 
         [ChildActionOnly]
@@ -121,23 +146,23 @@ namespace IC_RC.Controllers
 
 
 
-        // POST: CertifiedPersons/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: CertifiedPersons/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
-                ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
+        //        ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: CertifiedPersons/Delete/5
         public ActionResult Delete(int id)

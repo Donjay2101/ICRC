@@ -2,6 +2,10 @@
 @using GridMvc.Html
 
 
+<div>
+    <a href="/Certifications/Create">Create new</a>
+</div>
+
 @Html.Grid(Model).Columns(columns =>
                     {
                         columns.Add()
@@ -27,12 +31,12 @@
                                     </b>
                                 </div>);
                         columns.Add(c => c.certificateNo).Titled("Certificate No.");
-                        columns.Add(c => c.StartDate).Titled("Start Date");
-                        //columns.Add(c => c.productType).Titled("Product Type");
+                        columns.Add(c => c.PersonName).Titled("Individual");
+                        columns.Add(c => c.CertIssueDate).Titled("Start Date");                        
                         columns.Add(c => c.RecertDate).Titled("State Recert. Date");
-                        columns.Add(c => c.CertiFicateAccronym).Titled("Certificate");                        
+                        columns.Add(c => c.CertificateAcronym).Titled("CertID");                        
 
 
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/gridmvc.min.js"></script>

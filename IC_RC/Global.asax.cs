@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.Identity;
 
 namespace IC_RC
 {
@@ -21,5 +22,25 @@ namespace IC_RC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Bootstrapper.Run();
         }
+
+        protected void Session_Start()
+        {
+
+            Session["userID"] = User.Identity.GetUserId();
+            Session["username"] = User.Identity.Name;
+
+        }
+
+        protected void Application_Error()
+        {
+            //Server.GetLastError();
+            //Server.ClearError();
+
+            //Response.Redirect("/Home/Error");
+
+
+        }
     }
+
+    
 }

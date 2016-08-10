@@ -8,7 +8,7 @@ namespace ICRC.Data.Infrastructure
 {
     public class Disposable:IDisposable
     {
-        private bool IsDisposable;
+        private bool isDisposed;
 
         ~Disposable()
         {
@@ -23,11 +23,11 @@ namespace ICRC.Data.Infrastructure
 
         public void Dispose(bool disposing)
         {
-            if(!IsDisposable && disposing)
+            if(!isDisposed && disposing)
             {
                 DisposeCore();
             }
-            IsDisposable = true;
+            isDisposed = true;
         }
 
         protected virtual void DisposeCore() { }

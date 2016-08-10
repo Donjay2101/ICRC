@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ICRCService
 {
@@ -27,7 +28,7 @@ namespace ICRCService
         public readonly ICertifiedPersonRepository certifiedRepository;
         public readonly IUnitOfWork unitOfWork;
 
-        public CertifiedPersonService(ICertifiedPersonRepository certifiedRepository,IUnitOfWork unitOfWork  )
+        public CertifiedPersonService(ICertifiedPersonRepository certifiedRepository,IUnitOfWork unitOfWork)
         {
             this.certifiedRepository = certifiedRepository;
             this.unitOfWork = unitOfWork;
@@ -38,7 +39,30 @@ namespace ICRCService
 
         public IEnumerable<CertifiedPersons> GetCertifiedPersons()
         {
-            return certifiedRepository.GetAll();
+            return certifiedRepository.GetAll().Select(x=> new CertifiedPersons{
+                Address=x.Address,
+                Address2=x.Address2,
+                City=x.City,
+                Country=x.Country,
+                CreatedAt=x.CreatedAt,
+                CreatedBy=x.CreatedBy,
+                CurrentBoardID=x.CurrentBoardID,
+                Email=x.Email,
+              //  EthicalVoilation=x.EthicalVoilation,
+                FirstName=x.FirstName,
+                ID=x.ID,
+                LastName=x.LastName,
+                MiddleName=x.MiddleName,
+                ModifiedAt=x.ModifiedAt,
+                ModifiedBy=x.ModifiedBy,
+                Notes=x.Notes,
+                OtherBoardID=x.OtherBoardID,
+                Providence=x.Providence,
+                SSN=x.SSN,
+                State=x.State,
+                Zip=x.Zip,
+                FullName=x.FirstName+" "+x.MiddleName+" "+x.LastName
+            });
         }
 
         public CertifiedPersons GetCertifiedPersonByID (int ID)
@@ -53,11 +77,19 @@ namespace ICRCService
 
         public void CreateCertifiedPerson(CertifiedPersons person)
         {
+            person.CreatedAt = DateTime.Now;
+           // int ID;
+            //int.TryParse(System.Web.HttpContext.Current.Session["User"].ToString(), out ID);
+            //person.CreatedBy = ID;
             certifiedRepository.Add(person);
         }
 
         public void UpdateCertifiedPerson(CertifiedPersons person)
         {
+            person.ModifiedAt = DateTime.Now;
+           // int ID;
+            //int.TryParse(System.Web.HttpContext.Current.Session["User"].ToString(), out ID);
+          //  person.ModifiedBy = ID;
             certifiedRepository.Update(person);
         }
 

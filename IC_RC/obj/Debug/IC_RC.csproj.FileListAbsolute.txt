@@ -184,3 +184,7 @@ E:\Official\Work\Projects\source\IC_RC\IC_RC\bin\Microsoft.Owin.Security.Microso
 E:\Official\Work\Projects\source\IC_RC\IC_RC\obj\Debug\IC_RC.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\IC_RC\obj\Debug\IC_RC.dll
 E:\Official\Work\Projects\source\IC_RC\IC_RC\obj\Debug\IC_RC.pdb
+E:\Official\Work\Projects\source\IC_RC\IC_RC\bin\LoggerApp.dll
+E:\Official\Work\Projects\source\IC_RC\IC_RC\bin\LoggerApp.pdb
+E:\Official\Work\Projects\source\IC_RC\IC_RC\bin\AutoMapper.dll
+E:\Official\Work\Projects\source\IC_RC\IC_RC\bin\AutoMapper.xml

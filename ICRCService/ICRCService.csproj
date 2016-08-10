@@ -31,7 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,9 +47,16 @@
     <Compile Include="CertificateService.cs" />
     <Compile Include="CertificationsService.cs" />
     <Compile Include="CertifiedPersonService.cs" />
+    <Compile Include="CustomRoleProviderService.cs" />
     <Compile Include="EthicalVoilationService.cs" />
+    <Compile Include="StudentEthicalVoilationService.cs" />
+    <Compile Include="LoginService.cs" />
+    <Compile Include="PaymentTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReciprocitiesService.cs" />
+    <Compile Include="RolesService.cs" />
+    <Compile Include="TestingCompanyService.cs" />
+    <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ICRC.Data\ICRC.Data.csproj">

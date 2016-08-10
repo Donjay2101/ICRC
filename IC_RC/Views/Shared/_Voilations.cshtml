@@ -1,5 +1,10 @@
-﻿@model IEnumerable<ICRC.Model.EthicalVoilations>
+﻿@model IEnumerable<ICRC.Model.StudentVoilations>
 @using GridMvc.Html
+
+
+<div>
+    <a href="/EthicalVoilations/Create">Create new</a>
+</div>
 
 
 @Html.Grid(Model).Columns(columns =>
@@ -26,12 +31,14 @@
                                         <a href="#" onclick="Deleteconfirm('@c.ID')">Delete</a>
                                     </b>
                                 </div>);
+                        columns.Add(c => c.BoardName).Titled("Originating Board");
                         columns.Add(c => c.Date).Titled("Date");
-                        columns.Add(c => c.EthicalVoilation).Titled("Ethical Voilation");
                         //columns.Add(c => c.productType).Titled("Product Type");
-                        columns.Add(c => c.Comments).Titled("Comments");                       
-
-
+                        columns.Add(c => c.EthicalVoilation).Titled("Type of Ethical Voilation");
+                        columns.Add(c => c.IsScanned).Titled("Scanned & Saved");
+                        columns.Add(c => c.IsLetterSent).Titled("Letter sent to professional");
+                        columns.Add(c => c.ISsharable).Titled("Not to be shared with general public");
+                        columns.Add(c => c.Notes).Titled("notes");
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
 
 <script src="~/Scripts/gridmvc.min.js"></script>

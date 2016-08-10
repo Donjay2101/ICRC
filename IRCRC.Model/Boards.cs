@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ICRC.Model
 {
+    [Table("Boards")]
     public class Boards
     {
         public int ID { get; set; }
         public string Board { get; set; }
         public string Acronym { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public int ModifiedBy { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<DateTime> CreatedAt { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<DateTime> ModifiedAt { get; set; }
     }
 }

@@ -17,14 +17,14 @@ namespace ICRC.Data.Infrastructure
             this.dbFactory = dbFactory;
         }
 
-        public ICRCEntities Dbcontext
+        public ICRCEntities DbContext
         {
-            get { return dbContext ?? (dbContext = new ICRCEntities()); }
+            get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }
 
-        public void Commit()
+        public int Commit()
         {
-            Dbcontext.Commit();
+            return DbContext.Commit();
         }
     }
 }
