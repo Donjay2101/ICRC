@@ -49,6 +49,7 @@
     <Compile Include="CertifiedPersonService.cs" />
     <Compile Include="CustomRoleProviderService.cs" />
     <Compile Include="EthicalVoilationService.cs" />
+    <Compile Include="ScoresService.cs" />
     <Compile Include="StudentEthicalVoilationService.cs" />
     <Compile Include="LoginService.cs" />
     <Compile Include="PaymentTypeService.cs" />

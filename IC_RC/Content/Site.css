@@ -22,3 +22,12 @@ select,
 textarea {
     max-width: 280px;
 }
+.navbar-inverse {
+    background-color: #fff;
+    border-color: #fcfcfc;
+}
+img#logo {
+    width: 65%;
+    margin-top: 10px;
+}
+

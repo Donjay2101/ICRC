@@ -1,0 +1,16 @@
+﻿$orange:#ea8824;
+$blue:#2B90D1;
+$dark-blue:#062e46;
+$white:white;
+@mixin menu_spacing{
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+body {
+}
+.menu {
+    background: $orange;
+    
+}

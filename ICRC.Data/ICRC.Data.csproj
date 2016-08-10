@@ -72,6 +72,7 @@
     <Compile Include="Repositories\ReciprocitiesRepository.cs" />
     <Compile Include="Repositories\ReciprocityPersonMapping.cs" />
     <Compile Include="Repositories\RolesRepository.cs" />
+    <Compile Include="Repositories\ScoresRepository.cs" />
     <Compile Include="Repositories\TestingCompanyRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
   </ItemGroup>
