@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
+    [Authorize]
     public class ReciprocitiesController : Controller
     {
         public readonly ICertifiedPersonService CertifiedPersonService;

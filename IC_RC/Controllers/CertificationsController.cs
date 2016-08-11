@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
+    [Authorize]
     public class CertificationsController : Controller
     {
 

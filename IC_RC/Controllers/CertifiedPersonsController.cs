@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
-    [Authorize(Users="Admin")]        
+    [Authorize]        
     public class CertifiedPersonsController : Controller
     {
         public readonly ICertifiedPersonService CertifiedPersonService;
@@ -16,15 +16,17 @@ namespace IC_RC.Controllers
         public readonly IReciprocitiesService ReciprocityService;
         public readonly IStudentEthicalVoliationService VoilationService;
         public readonly IBoardService BoardService;
+        public readonly IScoreservice scoreService;
         
 
-        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IStudentEthicalVoliationService VoilationService, IBoardService BoardService)
+        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IStudentEthicalVoliationService VoilationService, IBoardService BoardService, IScoreservice scoreService)
         {
             this.CertifiedPersonService = CertifiedPersonService;
             this.CertificationService = CertificationService;
             this.ReciprocityService = ReciprocityService;
             this.VoilationService = VoilationService;
             this.BoardService = BoardService;
+            this.scoreService = scoreService;
         }
 
         public ActionResult Index()
@@ -42,18 +44,37 @@ namespace IC_RC.Controllers
 
 
         // GET: CertifiedPersons/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+
+            var data = CertifiedPersonService.GetCertifiedPersonByID(id.Value);
+            if(data==null)
+            {
+                return HttpNotFound();
+            }           
+            return View(data);
         }
 
+
+        public ActionResult Scores(int? ID)
+        {
+            if(ID==null)
+            {
+                return HttpNotFound();
+            }
+            var data = scoreService.ScoresGetByPersonID(ID.Value);
+            return PartialView("_Scores",data);
+
+        }
 
        
 
         // GET: CertifiedPersons/Create
-        public ActionResult Create()
-
-
+       public ActionResult Create()
         {
 
             ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Board");
