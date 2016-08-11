@@ -251,7 +251,6 @@ C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\IRCRC.Model.pdb
 C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\Autofac.xml
 C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\Autofac.Integration.Mvc.xml
 C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\AutoMapper.xml
-C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\LoggerApp.pdb
 C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\Microsoft.AI.Web.xml
