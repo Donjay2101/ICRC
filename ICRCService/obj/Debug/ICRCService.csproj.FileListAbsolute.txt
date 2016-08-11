@@ -20,3 +20,14 @@ E:\Official\Work\Projects\source\IC_RC\ICRCService\bin\Debug\EntityFramework.xml
 E:\Official\Work\Projects\source\IC_RC\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\ICRCService\obj\Debug\ICRCService.dll
 E:\Official\Work\Projects\source\IC_RC\ICRCService\obj\Debug\ICRCService.pdb
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\ICRCService.dll
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\ICRCService.pdb
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\ICRC.Data.dll
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\IRCRC.Model.dll
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\EntityFramework.dll
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\ICRC.Data.pdb
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\IRCRC.Model.pdb
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\bin\Debug\EntityFramework.xml
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\obj\Debug\ICRCService.dll
+C:\Users\EACDPC-044\Source\Repos\ICRC\ICRCService\obj\Debug\ICRCService.pdb
