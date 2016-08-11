@@ -173,26 +173,25 @@
 <div id="divContainer">
       @Html.Action("Certifications")
 </div>
-
 @section scripts
 {
     <script>
-        $(document).on('click', '#childnav span', function () {
-            var val = $(this).attr('value');
-            var ID = $('#ID').val();
-            if(val==1)
-            {
-                $("#divContainer").load('certifiedPersons/Certifications?ID='+ID);
-            }
-            else if(val==2)
-            {
-                $("#divContainer").load('certifiedPersons/Reciprocity?ID=' + ID);
-            }
-            else (val==3)
-            {
-                $("#divContainer").load('certifiedPersons/Voilations?ID=' + ID);
-            }
+        //$(document).on('click', '#childnav span', function () {
+        //    var val = $(this).attr('value');
+        //    var ID = $('#ID').val();
+        //    if(val==1)
+        //    {
+        //        $("#divContainer").load('certifiedPersons/Certifications?ID='+ID);
+        //    }
+        //    else if(val==2)
+        //    {
+        //        $("#divContainer").load('certifiedPersons/Reciprocity?ID=' + ID);
+        //    }
+        //    else (val==3)
+        //    {
+        //        $("#divContainer").load('certifiedPersons/Voilations?ID=' + ID);
+        //    }
 
-        });
+        //});
     </script>
-    }
+}

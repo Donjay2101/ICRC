@@ -22,7 +22,8 @@ namespace ICRC.Model
         public string Zip { get; set; }
         public string SSN { get; set; }
         public string Email { get; set; }
-        public string Notes { get; set; }                
+        public string Notes { get; set; }  
+        public string Phone { get; set; }             
         public int TestingCompany { get; set; }
         public bool EthicalVoilation { get; set; }
         public int CurrentBoardID { get; set; }

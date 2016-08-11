@@ -342,6 +342,7 @@
     <Content Include="Views\Scores\Index.cshtml" />
     <Content Include="Views\Scores\Create.cshtml" />
     <Content Include="Views\Scores\Edit.cshtml" />
+    <Content Include="Views\CertifiedPersons\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

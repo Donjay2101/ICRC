@@ -1,0 +1,41 @@
+﻿@model ICRC.Model.CertifiedPersons
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+        <div class="row">
+                    @Model.FullName
+        </div>
+
+    <div class="row">
+        @Model.Address
+    </div>
+    <div class="row">
+        @Model.City ,@Model.State @Model.Zip
+    </div>
+    <div class="row">
+        @Model.Country
+    </div>
+    <div class="row">
+        @Model.Email
+    </div>
+    <div class="row">
+        @Model.Phone
+    </div>
+
+</div>
+<div class="row">
+        <div class="row">
+        <a href="#">Scores</a>|<a href="#">Certificates</a>|<a href="#">Reciprocity</a>|<a href="#">Ethical Voilations</a>             
+        </div>
+           <div class="row" id="ajaxLoad">
+                    @Html.Action("Scores")
+            </div>
+  
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
