@@ -3,17 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IC&RC</title>
-    <link rel="icon" type="image/png" href="~/Images/globe.png" />
-    @*<script src="" type="text/javascript"></script>*@
-    <link href="~/Content/Mysass.css" rel="stylesheet" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">  
-            @*<img src="~/Images/header.png" />*@          
+        <div class="container-fluid">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,17 +22,14 @@
                     <div class="logo">
                         <img src="~/Images/IC_RClogo.png" alt="" id="logo" />
                     </div>
-                    @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@             
+                    @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                 </div>
-                <div role="navigation" class="signIn pull-right">
-                    <a href="" class="linkbtn"><span class="glyphicon glyphicon-user space" aria-hidden="true"></span>Welcome user</a>
-                    <a href="" class="linkbtn"><span class="glyphicon glyphicon-off space" aria-hidden="true"></span>Log Out</a>
-                </div>              
             </div>
             <div class="menu">
                 <div class="container">
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
+                            <li><a href="/Home/index">Home</a></li>
                             <li><a href="/Boards/index">Boards</a></li>
                             <li><a href="/Certifications/index">Certifications</a></li>
                             <li><a href="/CertifiedPersons/index">Certified Persons</a></li>
@@ -43,7 +38,7 @@
                             <li><a href="/Scores/index">Scores</a></li>
                             <li><a href="/TestingCompanies">Testing Companies</a></li>
                         </ul>
-                        @*Html.Partial("_LoginPartial")*@
+                        @*@Html.Partial("_LoginPartial")*@
                     </div>
                 </div>
             </div>
@@ -51,16 +46,12 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
     </div>
-    <hr />
-    <footer>
-     <p>&copy; @DateTime.Now.Year - <a href="http://www.internationalcredentialing.org/">internationalcredentialing.org</a></p>
-    </footer>
-    <script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    </script>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

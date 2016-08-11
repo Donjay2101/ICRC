@@ -212,9 +212,6 @@
     <Content Include="Content\Mysass.css">
       <DependentUpon>Mysass.scss</DependentUpon>
     </Content>
-    <Content Include="Images\globe.png" />
-    <Content Include="Images\header.png" />
-    <Content Include="Images\icrc.png" />
     <Content Include="Images\IC_RClogo.png" />
     <Content Include="Images\new2.png" />
     <Content Include="SessionContext.cs" />
@@ -324,9 +321,9 @@
     <Content Include="Views\Certifications\Create.cshtml" />
     <Content Include="Views\Certifications\Edit.cshtml" />
     <Content Include="Views\Shared\_Reciprocities.cshtml" />
-    <Content Include="Views\Reciprocities\Index.cshtml" />
-    <Content Include="Views\Reciprocities\Create.cshtml" />
-    <Content Include="Views\Reciprocities\Edit.cshtml" />
+    <Content Include="Views\Reciprocity\Index.cshtml" />
+    <Content Include="Views\Reciprocity\Create.cshtml" />
+    <Content Include="Views\Reciprocity\Edit.cshtml" />
     <Content Include="Views\EthicalVoilations\Index.cshtml" />
     <Content Include="Views\EthicalVoilations\Create.cshtml" />
     <Content Include="Views\EthicalVoilations\Edit.cshtml" />
