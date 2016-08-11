@@ -40,6 +40,17 @@ table.grid-table tr.grid-row-selected td {
     background: #899fb5!important;
     color: #fff;
 }
+span.card-type{
+    padding-right: 10px;
+    color: #9d9a97;
+}
+textarea{
+    
+    width: 100%;
+    box-shadow: inset 0px 3px #f3f3f3;
+    border: 1px solid #cccccc;
+}
+
 /*.table > tbody > tr:hover {
     background-color:grey!important;
 }*/
