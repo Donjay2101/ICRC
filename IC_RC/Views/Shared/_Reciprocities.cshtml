@@ -2,8 +2,7 @@
 @using GridMvc.Html
 
 <div>
-    @*<a href="/Reciprocity/Create">Create new</a>*@
-    <a href="/Reciprocities/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    <a href="/Reciprocity/Create">Create new</a>
 </div>
 @Html.Grid(Model).Columns(columns =>
                     {
@@ -15,8 +14,7 @@
                .RenderValueAs(c =>
             @<div id="balloon" class="balloonClass">
                 <b>
-                    @*@Html.ActionLink("Edit", "Edit", new { id = c.ID }, new { @class = "modal_link", @Id = "editlink" })*@
-                    <a href="/Reciprocities/edit?id=@c.ID" class="modal_link" id="editlink" data-toggle="tooltip" data-placement="bottom" title="Edit"><span class="glyphicon glyphicon-pencil space" aria-hidden="true"></span></a>
+                    @Html.ActionLink("Edit", "Edit", new { id = c.ID }, new { @class = "modal_link", @Id = "editlink" })
                 </b>
             </div>);
                         columns.Add()
@@ -27,8 +25,7 @@
                                    .RenderValueAs(c =>
                                 @<div id="balloon" class="balloonClass">
                                     <b>
-                                        @*<a href="#" onclick="Deleteconfirm('@c.ID')">Delete</a>*@
-                                        <a href="#" onclick="Deleteconfirm('@c.ID')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
+                                        <a href="#" onclick="Deleteconfirm('@c.ID')">Delete</a>
                                     </b>
                                 </div>);
                         columns.Add(c => c.OrginiatingBoardName).Titled("Oeginating Board.");
