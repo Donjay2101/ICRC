@@ -7,6 +7,7 @@ $ten: 10px;
 $FontSize: 16px;
 $black:#101010;
 $dark-orange: #d87b1d;
+$mid-blue:#327aa8;
 @mixin menu_spacing() {
     margin-top: $num;
     margin-bottom: $num;
@@ -47,7 +48,7 @@ body {
     }
 }
 .active-link{
-      background:$dark-orange;
+      background:$mid-blue;
 }
 .navbar-toggle {
 background:$dark-blue!important;
