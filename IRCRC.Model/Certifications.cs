@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ICRC.Model
     public class Certifications
     {
         public int ID { get; set; }
+        [DisplayName ("IC&RC credential Acronym")]
         public int CertID { get; set; }
         public int certificateNo { get; set; }
         public int IssueBoard { get; set; }

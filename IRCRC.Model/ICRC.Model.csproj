@@ -45,7 +45,6 @@
     <Compile Include="Certificates.cs" />
     <Compile Include="CertifiedPersons.cs" />
     <Compile Include="EthicalVoilation.cs" />
-    <Compile Include="Name.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="StudentVoilations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

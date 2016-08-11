@@ -16,10 +16,11 @@ namespace ICRC.Model
         public string Acronym { get; set; }
         [DisplayName("Created By")]
         public Nullable<int> CreatedBy { get; set; }
-        [DisplayName("Created By")]
+        [DisplayName("Created At")]
         public Nullable<DateTime> CreatedAt { get; set; }
-          [DisplayName("Created By")]
+        [DisplayName("Modified By")]
         public Nullable<int> ModifiedBy { get; set; }
+          [DisplayName("Modified At")]
         public Nullable<DateTime> ModifiedAt { get; set; }
     }
 }
