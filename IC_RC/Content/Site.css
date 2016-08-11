@@ -12,14 +12,31 @@
 
 }
 .grid-mvc{
-    overflow:scroll;
-    padding-top:20px;
+     padding-top:20px;
     padding-bottom:20px;
+    font-size: 12px;
+    color:grey;
+    /*overflow:scroll;  
     border-top: 1px solid #dcd9d9;
-    border-left: 1px solid #dcd9d9;
+    border-left: 1px solid #dcd9d9;*/
 }
 .grid-mvc a{
  font-size: 12px;
+ color:#052c43;
+}
+.tabel tr:hover{
+     color:#052c43;
+}
+#login {
+    background: #Ea8824;
+    color: white;
+    border-radius: 0px;
+    border: none;
+    width: 100%;
+}
+.logout-logo{
+    width: 80%;
+    margin-bottom: 40px;
 }
 .grid-mvc a:hover{
    font-size: 12px;

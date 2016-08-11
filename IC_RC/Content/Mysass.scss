@@ -6,12 +6,12 @@ $num: 20px;
 $ten: 10px;
 $FontSize: 16px;
 $black:#101010;
-
+$dark-orange: #d87b1d;
 @mixin menu_spacing() {
     margin-top: $num;
     margin-bottom: $num;
-    padding-top: $ten;
-    padding-bottom: $ten;
+    /*padding-top: $ten;
+    padding-bottom: $ten;*/
 }
 @mixin my_btn(){
     color: $white;
@@ -37,11 +37,17 @@ body {
     @include menu_spacing();
 }
 
-.navbar-nav {    
+.navbar-nav { 
+    li:hover{
+        background:$dark-orange;
+    }   
     a {
         color: $white !important;
         font-size: $FontSize;
     }
+}
+.active-link{
+      background:$dark-orange;
 }
 .navbar-toggle {
 background:$dark-blue!important;
