@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,11 @@ namespace ICRC.Model
         public int ID { get; set; }
         public string Board { get; set; }
         public string Acronym { get; set; }
+        [DisplayName("Created By")]
         public Nullable<int> CreatedBy { get; set; }
+        [DisplayName("Created By")]
         public Nullable<DateTime> CreatedAt { get; set; }
+          [DisplayName("Created By")]
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<DateTime> ModifiedAt { get; set; }
     }
