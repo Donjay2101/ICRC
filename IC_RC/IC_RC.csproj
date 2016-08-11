@@ -217,6 +217,7 @@
     <Content Include="Images\icrc.png" />
     <Content Include="Images\IC_RClogo.png" />
     <Content Include="Images\new2.png" />
+    <Content Include="Images\Untitled-1.png" />
     <Content Include="SessionContext.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
