@@ -34,3 +34,15 @@ C:\Users\EACDPC-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\EntityFramework.SqlSer
 C:\Users\EACDPC-044\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
 C:\Users\EACDPC-044\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.dll
 C:\Users\EACDPC-044\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.pdb
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\ICRC.Data.dll.config
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\ICRC.Data.dll
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\ICRC.Data.pdb
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\EntityFramework.dll
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\IRCRC.Model.dll
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\IRCRC.Model.pdb
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\EntityFramework.xml
+E:\Official\Work\Projects\ICRC\ICRC.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\Official\Work\Projects\ICRC\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
+E:\Official\Work\Projects\ICRC\ICRC.Data\obj\Debug\ICRC.Data.dll
+E:\Official\Work\Projects\ICRC\ICRC.Data\obj\Debug\ICRC.Data.pdb

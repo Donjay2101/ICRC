@@ -451,13 +451,20 @@ namespace IC_RC.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // POST: /Account/LogOff      
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            Session.Clear();
+            Session.Abandon();
+            Session.RemoveAll();           
+            this.Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            this.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            this.Response.Cache.SetNoStore();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
         }
 
         //
