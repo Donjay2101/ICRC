@@ -12,18 +12,19 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     @Scripts.Render("~/bundles/modernizr")  
     <script>
-        $(function () {
-            alert("asdadd");
-            debugger;
-            var url = document.URL,
-            shortUrl = url.substring(0, url.lastIndexOf("/")+1);
-            //var last = (shortUrl.substr(href.lastIndexOf('/') + 1))
-            //var pgurl = (str.substring(str.lastIndexOf("/");
-        $("nav li a").each(function () {
-            if ($(this).attr("href") == pgurl || $(this).attr("href") == '')
-                $(this).addClass("active-link");
-        })
-    });
+        $(document).ready(function () {  
+                var url = document.URL,
+                shortUrl = url.substring(0, url.lastIndexOf("/"));
+                var link = shortUrl.split('/');
+                $(".nav li a").each(function () {
+                    var name=$(this).attr("name");
+                    if(shortUrl.indexOf(name)>0)
+                    {
+                        $(this).addClass("active-link");
+                    }                                      
+                });
+        });
+    
     </script>
 
 </head>
@@ -52,13 +53,13 @@
                 <div class="container">
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="/CertifiedPersons/index">Certified Persons</a></li>
-                            <li><a href="/Boards/index">Boards</a></li>
-                            <li><a href="/Certifications/index">Certifications</a></li>                           
-                            <li><a href="/EthicalVoilations/index">Ethical Voilation</a></li>
-                            <li><a href="/Reciprocities/index">Reciprocities</a></li>
-                            <li><a href="/Scores/index">Scores</a></li>
-                            <li><a href="/TestingCompanies">Testing Companies</a></li>
+                            <li><a href="/CertifiedPersons/index" name="CertifiedPersons">Certified Persons</a></li>
+                            <li><a href="/Boards/index" name="Boards">Boards</a></li>
+                            <li><a href="/Certifications/index" name="Certifications">Certifications</a></li>                           
+                            <li><a href="/EthicalVoilations/index" name="EthicalVoilations">Ethical Voilation</a></li>
+                            <li><a href="/Reciprocities/index" name="Reciprocities">Reciprocities</a></li>
+                            <li><a href="/Scores/index" name="Scores">Scores</a></li>
+                            <li><a href="/TestingCompanies/index" name="TestingCompanies">Testing Companies</a></li>
                         </ul>
                         @*Html.Partial("_LoginPartial")*@
                     </div>
