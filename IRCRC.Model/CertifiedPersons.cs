@@ -22,7 +22,7 @@ namespace ICRC.Model
         public string City { get; set; }
         public string State { get; set; }
         [DisplayName("province")]
-        public string Providence { get; set; }
+        public string province { get; set; }
         public string Country { get; set; }
         public string Zip { get; set; }
         public string SSN { get; set; }

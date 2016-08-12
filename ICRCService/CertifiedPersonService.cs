@@ -57,7 +57,7 @@ namespace ICRCService
                 ModifiedBy=x.ModifiedBy,
                 Notes=x.Notes,
                 OtherBoardID=x.OtherBoardID,
-                Providence=x.Providence,
+                province=x.province,
                 SSN=x.SSN,
                 State=x.State,
                 Zip=x.Zip,
