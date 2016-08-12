@@ -62,7 +62,7 @@ namespace ICRCService
                 State=x.State,
                 Zip=x.Zip,
                 FullName=x.FirstName+" "+x.MiddleName+" "+x.LastName
-            });
+            }).OrderBy(x=>x.FirstName).ThenBy(x=>x.MiddleName).ThenBy(x=>x.LastName);
         }
 
         public CertifiedPersons GetCertifiedPersonByID (int ID)
