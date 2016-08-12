@@ -15,19 +15,12 @@ namespace IC_RC.Controllers
         {
             return View();
         }
-        public ActionResult PageNound()
-        { 
-            return View();
-        }
-      
+
        
         public ActionResult Index()
         {
             return View();
         }
-
-       
-       
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
