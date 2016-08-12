@@ -5,38 +5,82 @@
 }
 
 <div class="row">
-        <div class="row">
-                    @Model.FullName
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                   <span class="highlight">text</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Model.Address
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Model.City ,@Model.State @Model.Zip
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Model.Country
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Model.Email
+                </div>
+            </div>          
+            <div class="row">
+                <div class="col-md-12">
+                    @Model.Phone
+                </div>
+            </div>
         </div>
-
-    <div class="row">
-        @Model.Address
     </div>
-    <div class="row">
-        @Model.City ,@Model.State @Model.Zip
-    </div>
-    <div class="row">
-        @Model.Country
-    </div>
-    <div class="row">
-        @Model.Email
-    </div>
-    <div class="row">
-        @Model.Phone
-    </div>
-
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" placeholder="Name" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="search">Search<span class="glyphicon glyphicon-search" aria-hidden="true" style="padding-left: 12px;"></span></button>
+                
+            </div>
+        </div>
+    </div>       
 </div>
 <div class="row">
-        <div class="row">
-        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical Voilations</a>             
+    <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Scores</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Certificates</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Reciprocity</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Ethical Voilations</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="Scores">...</div>
+            <div role="tabpanel" class="tab-pane" id="Certificates">...</div>
+            <div role="tabpanel" class="tab-pane" id="Reciprocity">...</div>
+            <div role="tabpanel" class="tab-pane" id="Ethical Voilations">...</div>
         </div>
+
+    </div>
+        @*<div class="row">
+        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical Voilations</a>             
+        </div>*@
            <div class="row" id="ajaxLoad">
                     @Html.Action("Scores")
             </div>
   
 </div>
 
-@section script{
+@section scripts{
     
     <script>
         $(document).on('click', '#candidateNav>li>a', function () {

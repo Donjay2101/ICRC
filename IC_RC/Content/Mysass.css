@@ -45,4 +45,8 @@ a.linkbtn:hover {
 label {
   color: #2B90D1; }
 
+.nav-tabs {
+  margin-top: 20px;
+  margin-bottom: 20px !important; }
+
 /*# sourceMappingURL=Mysass.css.map */
