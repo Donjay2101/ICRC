@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ICRC.Model.Scores>
 @using GridMvc.Html
+@using ICRC.Model
 
 
 <div>
@@ -7,6 +8,17 @@
     <a href="/Scores/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
 </div>
 
+@helper IsPass(Scores score)
+{
+if (score.Status)
+{
+        <text>Pass</text>
+}
+else
+{
+        <text>Fail</text>
+}
+}
 @Html.Grid(Model).Columns(columns =>
                     {
                         columns.Add()
@@ -36,29 +48,21 @@
                     columns.Add(c => c.PersonName).Titled("Candidate");
                     columns.Add(c => c.ExamName).Titled("Exam Name");
                     columns.Add(c => c.ExamDate).Titled("Exam Date");
-                    columns.Add()
+                    columns.Add(c=>c.Status)
                               .Encoded(false)
-                              .Sanitized(false)
+                              .Sanitized(true)
                               .SetWidth(30)
+                              .Filterable(false)
+                              .Sortable(false)                              
                               .Css("hidden-xs") //hide on phones
-                              .RenderValueAs(c =>
-                            @<div id="balloon" class="balloonClass">
-                                @if(c.Status)
-                                {
-                                    <span>Pass</span>
-                                }
-                                else
-                                {
-                                    <span>fail</span>
-                                }                               
-                            </div>);
+                              .RenderValueAs(c =>IsPass(c)).Titled("Pass/Fail").Sortable(true).Filterable(true);
                         columns.Add(c => c.ScaledScore).Titled("Scaled Score");
                         columns.Add(c => c.CompanyName).Titled("Testing Company");
-                        columns.Add(c => c.Board).Titled("Board");
+                        columns.Add(c => c.BoardName).Titled("Board");
 
 
 
-                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+                    }).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/gridmvc.min.js"></script>
 
