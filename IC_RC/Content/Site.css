@@ -72,6 +72,16 @@ table.grid-table .grid-header>.grid-header-title {
 .dl-horizontal dt {
     white-space: normal;
 }
+.top{
+   height:60px;
+   background: #ea8824;
+   margin-bottom:100px;
+}
+.error-logo
+    {
+    width: 16%;
+    padding-bottom: 20px;
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,

@@ -15,23 +15,19 @@ namespace IC_RC.Controllers
         {
             return View();
         }
-
-        public readonly ICertifiedPersonService personService;
-        
-        public HomeController(ICertifiedPersonService personService)
-        {
-            this.personService = personService;
+        public ActionResult PageNound()
+        { 
+            return View();
         }
+      
+       
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult GetData()
-        {
-            var data=personService.GetCertifiedPersons();
-            return PartialView("_CertifiedPerson",data);
-        }
+       
+       
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

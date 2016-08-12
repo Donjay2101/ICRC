@@ -52,10 +52,6 @@
       <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
       <Private>True</Private>
@@ -212,6 +208,7 @@
     <Content Include="Content\Mysass.css">
       <DependentUpon>Mysass.scss</DependentUpon>
     </Content>
+    <Content Include="Images\error.png" />
     <Content Include="Images\globe.png" />
     <Content Include="Images\header.png" />
     <Content Include="Images\icrc.png" />
@@ -345,6 +342,7 @@
     <Content Include="Views\Scores\Edit.cshtml" />
     <Content Include="Views\CertifiedPersons\Details.cshtml" />
     <Content Include="Views\Shared\_logOut-layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
