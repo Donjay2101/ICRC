@@ -1,5 +1,4 @@
 ﻿@using GridMvc.Columns
-
 @model GridMvc.IGrid
 @if (Model == null) { return; }
 @if (Model.RenderOptions.RenderRowsOnly)
@@ -46,9 +45,6 @@ else
         }
     }
 }
-
-
-
 @helper RenderGridHeader()
 {
     <tr>
