@@ -3,12 +3,18 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-offset-8 col-md-4">
+            <input type="submit" value="Save" class="btn btn-default custom-button" />
+            <input type="button" value="Back" class="btn btn-default custom-button" onclick="window.location = '/CertifiedPersons/index';" />
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         @*<h4>CertifiedPersons</h4>
         <hr />*@
@@ -154,23 +160,15 @@
                 </div>
 
             </div>
-        </div>
+        </div>  
       
-
-     
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-8">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
         <input type="hidden" value="@Model.ID" id="ID" />
     </div>
 }
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 @*<div id="childnav">
      <span id="Certifications" value="1">Certifications</span>
     <span id="Reciprocity" value="2"> Reciprocity</span>
