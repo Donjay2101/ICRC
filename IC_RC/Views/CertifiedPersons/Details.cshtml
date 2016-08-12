@@ -55,7 +55,7 @@
     <div>
 
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id="candidateNav">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Scores</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Certificates</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Reciprocity</a></li>
@@ -64,19 +64,19 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="Scores">...</div>
-            <div role="tabpanel" class="tab-pane" id="Certificates">...</div>
-            <div role="tabpanel" class="tab-pane" id="Reciprocity">...</div>
-            <div role="tabpanel" class="tab-pane" id="Ethical Voilations">...</div>
+            <div role="tabpanel" class="tab-pane active" id="Scores">@Html.Action("Scores")</div>
+            <div role="tabpanel" class="tab-pane" id="Certificates"></div>
+            <div role="tabpanel" class="tab-pane" id="Reciprocity"></div>
+            <div role="tabpanel" class="tab-pane" id="EthicalVoilations"></div>
         </div>
 
     </div>
         @*<div class="row">
         <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical Voilations</a>             
         </div>*@
-           <div class="row" id="ajaxLoad">
-                    @Html.Action("Scores")
-            </div>
+           @*<div class="row" id="ajaxLoad">
+                    
+            </div>*@
   
 </div>
 
@@ -89,17 +89,17 @@
 
             if(data.toUpperCase()=="SCORES")
             {
-                $('#ajaxLoad').load('/CertifiedPersons/Scores');
+                $('#Scores').load('/CertifiedPersons/Scores');
             }
             else if(data.toUpperCase()=="CERTIFICATIONS")
             {
-                $('#ajaxLoad').load('/CertifiedPersons/Certifications');
+                $('#Certificates').load('/CertifiedPersons/Certifications');
             }
             else if (data.toUpperCase() == "RECIPROCITY") {
-                $('#ajaxLoad').load('/CertifiedPersons/Reciprocity');
+                $('#Reciprocity').load('/CertifiedPersons/Reciprocity');
             }
             else if (data.toUpperCase() == "VOILATIONS") {
-                $('#ajaxLoad').load('/CertifiedPersons/voilations');
+                $('#EthicalVoilations').load('/CertifiedPersons/voilations');
             }
         });
 
