@@ -34,6 +34,16 @@
     border: none;
     width: 100%;
 }
+.custom-button
+     {
+    background: #415b68;
+    color: white;
+    border-radius: 1px;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .search{
     background: #ea8824;
     border: 0px;
@@ -41,6 +51,11 @@
     padding: 5px;
     padding-left: 25px;
     padding-right: 25px;
+}
+.nav-tabs a:hover, .nav-tabs a:focus {
+    text-decoration: none;
+    background-color: #2196F3!important;
+    color: white;
 }
 .highlight{
      font-size: 16px;
