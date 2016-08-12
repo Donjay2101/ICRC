@@ -136,7 +136,7 @@
                     <label class="control-label col-md-4">Current Board</label>
                     @*@Html.LabelFor(model => model.CurrentBoardID, htmlAttributes: new { @class = "control-label col-md-4" })*@
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.CurrentBoardID, ViewBag.CurrentBoardID as List<SelectListItem>, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.CurrentBoardID, ViewBag.CurrentBoardID as List<SelectListItem>,"select--",new { @class = "form-control" })
                         @*@Html.DropDownList("CurrentBoardID", "select--")*@
                         @*@Html.EditorFor(model => model.CurrentBoardID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CurrentBoardID, "", new { @class = "text-danger" })*@
@@ -146,7 +146,7 @@
                     <label class="control-label col-md-4">Other Board</label>
                     @*@Html.LabelFor(model => model.OtherBoardID, htmlAttributes: new { @class = "" })*@
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.OtherBoardID, ViewBag.CurrentBoardID as List<SelectListItem>, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.OtherBoardID, ViewBag.CurrentBoardID as List<SelectListItem>,"select--", new { @class = "form-control" })
                         @*@Html.DropDownList("OtherBoardID", "select--")*@
                         @*@Html.EditorFor(model => model.OtherBoardID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OtherBoardID, "", new { @class = "text-danger" })*@

@@ -35,7 +35,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.CertID, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.CertID, (SelectList)ViewBag.Certificates, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.CertID, (SelectList)ViewBag.Certificates,"select--", new { @class = "form-control" })
                         @*@Html.EditorFor(model => model.CertID, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.CertID, "", new { @class = "text-danger" })
                     </div>
@@ -94,7 +94,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.IssueBoard, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.IssueBoard, (SelectList)ViewBag.Boards, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.IssueBoard, (SelectList)ViewBag.Boards,"select--",new { @class = "form-control" })
                         @*@Html.EditorFor(model => model.IssueBoard, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.IssueBoard, "", new { @class = "text-danger" })
                     </div>
@@ -102,7 +102,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.BoardCertificateAcronym, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.BoardCertificateAcronym, (SelectList)ViewBag.Certificates, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.BoardCertificateAcronym, (SelectList)ViewBag.Certificates,"select--",new { @class = "form-control" })
                         @*@Html.DropDownListFor(model => model.IssueBoard, (SelectList)ViewBag.Boards, new { @class = "form-control" })*@
                         @*@Html.EditorFor(model => model.BoardCertificateAcronym, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.BoardCertificateAcronym, "", new { @class = "text-danger" })
@@ -134,7 +134,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.PersonID, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.PersonID, (SelectList)ViewBag.Persons, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.PersonID, (SelectList)ViewBag.Persons,"select--",new { @class = "form-control" })
                         @*@Html.EditorFor(model => model.PersonID, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.PersonID, "", new { @class = "text-danger" })
                     </div>

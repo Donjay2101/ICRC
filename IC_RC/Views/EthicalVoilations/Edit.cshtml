@@ -18,7 +18,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Board, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.Board, (SelectList)ViewBag.Boards, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.Board, (SelectList)ViewBag.Boards,"select--",new { @class = "form-control" })
                         @*@Html.EditorFor(model => model.Board, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.Board, "", new { @class = "text-danger" })
                     </div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EthicalVoilationId, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.EthicalVoilationId, (SelectList)ViewBag.EthicalVoilations, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.EthicalVoilationId, (SelectList)ViewBag.EthicalVoilations,"select--",new { @class = "form-control" })
                         @*@Html.EditorFor(model => model.EthicalVoilationId, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.EthicalVoilationId, "", new { @class = "text-danger" })
                     </div>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.personID, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(model => model.personID, (SelectList)ViewBag.Persons, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.personID, (SelectList)ViewBag.Persons,"select--",new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.personID, "", new { @class = "text-danger" })
                     </div>
                 </div>
