@@ -33,7 +33,7 @@ namespace ICRCService
         #region Methods
         public IEnumerable<EthicalVoilation> GetEthicalVoilations()
         {
-            return EthicalVoilationRepository.GetAll();
+            return EthicalVoilationRepository.GetAll().OrderBy(x=>x.Name);
         }
 
         public EthicalVoilation GetEthicalVoilationByID(int ID)

@@ -34,7 +34,7 @@ namespace ICRCService
         #region Methods
         public IEnumerable<StudentVoilations> GetEthicalVoilations()
         {
-            return StudentEthicalVoilationRepository.GetAll();
+            return StudentEthicalVoilationRepository.GetAll().OrderBy(x=>x.Date);
         }
 
         public StudentVoilations GetEthicalVoilationByID(int ID)

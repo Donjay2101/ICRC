@@ -28,13 +28,41 @@
 </div>
 <div class="row">
         <div class="row">
-        <a href="#">Scores</a>|<a href="#">Certificates</a>|<a href="#">Reciprocity</a>|<a href="#">Ethical Voilations</a>             
+        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical Voilations</a>             
         </div>
            <div class="row" id="ajaxLoad">
                     @Html.Action("Scores")
             </div>
   
 </div>
+
+@section script{
+    
+    <script>
+        $(document).on('click', '#candidateNav>li>a', function () {
+
+            var data = $(this).attr('id');
+
+            if(data.toUpperCase()=="SCORES")
+            {
+                $('#ajaxLoad').load('/CertifiedPersons/Scores');
+            }
+            else if(data.toUpperCase()=="CERTIFICATIONS")
+            {
+                $('#ajaxLoad').load('/CertifiedPersons/Certifications');
+            }
+            else if (data.toUpperCase() == "RECIPROCITY") {
+                $('#ajaxLoad').load('/CertifiedPersons/Reciprocity');
+            }
+            else if (data.toUpperCase() == "VOILATIONS") {
+                $('#ajaxLoad').load('/CertifiedPersons/voilations');
+            }
+        });
+
+    </script>
+            
+}
+
 @*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

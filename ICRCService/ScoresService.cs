@@ -36,7 +36,7 @@ namespace ICRCService
 
         public IEnumerable<Scores> GetScores()
         {
-            return scoresRepository.GetAll();
+            return scoresRepository.GetAll().OrderBy(x=>x.ExamDate);
         }
 
         public Scores GetScoreByID(int ID)
@@ -66,7 +66,7 @@ namespace ICRCService
 
         public IEnumerable<Scores>  ScoresGetByPersonID(int ID)
         {
-            return scoresRepository.ScoresGetByPersonID(ID);
+            return scoresRepository.ScoresGetByPersonID(ID).OrderBy(x=>x.ExamDate);
         }
 
         #endregion

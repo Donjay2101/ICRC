@@ -50,7 +50,7 @@ namespace ICRCService
 
         public IEnumerable<Certifications> GetCertificationsForIndex()
         {
-            var certifications = certificationRepository.GetAll();            
+            var certifications = certificationRepository.GetAll().OrderBy(x=>x.CertID);            
             return certifications;
         }
 

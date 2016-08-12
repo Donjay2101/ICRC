@@ -43,7 +43,7 @@ namespace ICRCService
 
         public IEnumerable<TestingCompany> GetTestingCompanies()
         {
-            return testingCompanyRepository.GetAll(); ;
+            return testingCompanyRepository.GetAll().OrderBy(x=>x.Name);
         }
 
         public TestingCompany GetTestingCompanyByID(int ID)

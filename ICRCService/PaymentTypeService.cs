@@ -36,7 +36,7 @@ namespace ICRCService
 
         public IEnumerable<PaymentType> GetPaymentTypes()
         {
-            return paymentTypeRepository.GetAll();
+            return paymentTypeRepository.GetAll().OrderBy(x=>x.Name);
         }
 
 

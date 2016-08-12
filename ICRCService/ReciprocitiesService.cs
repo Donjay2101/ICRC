@@ -37,7 +37,7 @@ namespace ICRCService
          
         public IEnumerable<Reciprocities> GetReciprocities()
         {
-            return reciprocityRepository.GetAll();
+            return reciprocityRepository.GetAll().OrderBy(x=>x.DateofEntry);
         }
 
 

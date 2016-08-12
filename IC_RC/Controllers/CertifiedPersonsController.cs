@@ -17,9 +17,10 @@ namespace IC_RC.Controllers
         public readonly IStudentEthicalVoliationService VoilationService;
         public readonly IBoardService BoardService;
         public readonly IScoreservice scoreService;
+        public readonly IStudentEthicalVoliationService StundentethicalvoilationService;
         
 
-        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IStudentEthicalVoliationService VoilationService, IBoardService BoardService, IScoreservice scoreService)
+        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IStudentEthicalVoliationService VoilationService, IBoardService BoardService, IScoreservice scoreService, IStudentEthicalVoliationService StundentethicalvoilationService)
         {
             this.CertifiedPersonService = CertifiedPersonService;
             this.CertificationService = CertificationService;
@@ -27,6 +28,7 @@ namespace IC_RC.Controllers
             this.VoilationService = VoilationService;
             this.BoardService = BoardService;
             this.scoreService = scoreService;
+            this.StundentethicalvoilationService = StundentethicalvoilationService;
         }
 
         public ActionResult Index()
@@ -71,10 +73,40 @@ namespace IC_RC.Controllers
 
         }
 
-       
+        public ActionResult Certificates(int? ID)
+        {
+            if (ID == null)
+            {
+                return HttpNotFound();
+            }
+            var data = CertificationService.GetCertificationsByPersonID(ID.Value);
+            return PartialView("_Certifications", data);
+        }
+
+        public ActionResult EthicalVoilations(int? ID)
+        {
+            if (ID == null)
+            {
+                return HttpNotFound();
+            }
+            var data = StundentethicalvoilationService.GetVoiltaionsByPersonID(ID.Value);
+            return PartialView("_Voilations", data);
+        }
+
+
+        public ActionResult Reciprocities(int? ID)
+        {
+            if (ID == null)
+            {
+                return HttpNotFound();
+            }
+            var data = ReciprocityService.ReciprocityGetByPersonID(ID.Value);
+            return PartialView("_Voilations", data);
+        }
+
 
         // GET: CertifiedPersons/Create
-       public ActionResult Create()
+        public ActionResult Create()
         {
 
             ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Board");

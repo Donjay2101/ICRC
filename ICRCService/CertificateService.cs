@@ -37,7 +37,7 @@ namespace ICRCService
         
         public IEnumerable<Certificates> GetCertificates()
         {
-            return certificateRepository.GetAll();
+            return certificateRepository.GetAll().OrderBy(x=>x.Name);
         }
         
 
