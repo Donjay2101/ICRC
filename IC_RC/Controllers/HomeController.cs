@@ -15,6 +15,10 @@ namespace IC_RC.Controllers
         {
             return View();
         }
+        public ActionResult PageNotFound()
+        {
+            return View();
+        }
 
         public readonly ICertifiedPersonService personService;
         

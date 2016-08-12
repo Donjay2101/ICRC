@@ -87,6 +87,10 @@ img#logo {
     width: 60%;
     margin-top: 10px;
 }
+img.error-logo {
+    width: 20%;
+    margin-bottom: 20px;
+}
 .signIn {
     padding-top: 40px;
 }
@@ -104,7 +108,11 @@ textarea{
     box-shadow: inset 0px 3px #f3f3f3;
     border: 1px solid #cccccc;
 }
-
+.top{
+    height:60px;
+    background: #ea8824;
+    margin-bottom:50px;
+}
 /*.table > tbody > tr:hover {
     background-color:grey!important;
 }*/

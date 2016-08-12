@@ -208,11 +208,13 @@
     <Content Include="Content\Mysass.css">
       <DependentUpon>Mysass.scss</DependentUpon>
     </Content>
+    <Content Include="Images\error.png" />
     <Content Include="Images\globe.png" />
     <Content Include="Images\header.png" />
     <Content Include="Images\icrc.png" />
     <Content Include="Images\IC_RClogo.png" />
     <Content Include="Images\new2.png" />
+    <Content Include="Images\page404.png" />
     <Content Include="Images\Untitled-1.png" />
     <Content Include="SessionContext.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
@@ -341,6 +343,8 @@
     <Content Include="Views\Scores\Edit.cshtml" />
     <Content Include="Views\CertifiedPersons\Details.cshtml" />
     <Content Include="Views\Shared\_logOut-layout.cshtml" />
+    <Content Include="Views\Home\PageNotFound.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
