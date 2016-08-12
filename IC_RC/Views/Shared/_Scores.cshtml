@@ -1,6 +1,17 @@
 ﻿@model IEnumerable<ICRC.Model.Scores>
 @using GridMvc.Html
-
+@using ICRC.Model
+@helper IsPass(Scores score)
+{
+if(score.Status)
+{
+        <text>Pass</text>
+}
+else
+{
+        <text>Fail</text>
+}
+}
 
 <div>
     @*<a href="/Scores/Create">Create new</a>*@
@@ -36,22 +47,12 @@
                     columns.Add(c => c.PersonName).Titled("Candidate");
                     columns.Add(c => c.ExamName).Titled("Exam Name");
                     columns.Add(c => c.ExamDate).Titled("Exam Date");
-                    columns.Add()
+                    columns.Add(c=>c.Status)
                               .Encoded(false)
                               .Sanitized(false)
                               .SetWidth(30)
                               .Css("hidden-xs") //hide on phones
-                              .RenderValueAs(c =>
-                            @<div id="balloon" class="balloonClass">
-                                @if(c.Status)
-                                {
-                                    <span>Pass</span>
-                                }
-                                else
-                                {
-                                    <span>fail</span>
-                                }                               
-                            </div>);
+                              .RenderValueAs(c =>IsPass(c));
                         columns.Add(c => c.ScaledScore).Titled("Scaled Score");
                         columns.Add(c => c.CompanyName).Titled("Testing Company");
                         columns.Add(c => c.Board).Titled("Board");
