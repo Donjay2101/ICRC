@@ -80,14 +80,14 @@ namespace IC_RC.Controllers
         {
             if(id==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
 
             var data = scoreService.GetScoreByID(id.Value);
 
             if(data==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             ViewBag.Exams = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.Persons = new SelectList(personService.GetCertifiedPersons(), "ID", "FullName");

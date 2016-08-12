@@ -81,7 +81,7 @@ namespace IC_RC.Controllers
 
             if(id==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
 
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");

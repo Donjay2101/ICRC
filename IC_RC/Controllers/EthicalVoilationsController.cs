@@ -80,12 +80,12 @@ namespace IC_RC.Controllers
         {
             if(id==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             var data = studentethicalvoilationService.GetEthicalVoilationByID(id.Value);
             if(data==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");

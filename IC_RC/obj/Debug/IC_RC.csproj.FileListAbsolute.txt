@@ -300,7 +300,6 @@ E:\Official\Work\Projects\ICRC\IC_RC\bin\IC_RC.pdb
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Antlr3.Runtime.dll
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Autofac.dll
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Autofac.Integration.Mvc.dll
-E:\Official\Work\Projects\ICRC\IC_RC\bin\AutoMapper.dll
 E:\Official\Work\Projects\ICRC\IC_RC\bin\EntityFramework.dll
 E:\Official\Work\Projects\ICRC\IC_RC\bin\EntityFramework.SqlServer.dll
 E:\Official\Work\Projects\ICRC\IC_RC\bin\GridMvc.dll
@@ -343,7 +342,6 @@ E:\Official\Work\Projects\ICRC\IC_RC\bin\ICRCService.pdb
 E:\Official\Work\Projects\ICRC\IC_RC\bin\IRCRC.Model.pdb
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Autofac.xml
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Autofac.Integration.Mvc.xml
-E:\Official\Work\Projects\ICRC\IC_RC\bin\AutoMapper.xml
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Microsoft.AI.DependencyCollector.xml
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\Official\Work\Projects\ICRC\IC_RC\bin\Microsoft.AI.Web.xml

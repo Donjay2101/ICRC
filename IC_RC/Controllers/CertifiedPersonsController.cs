@@ -50,13 +50,13 @@ namespace IC_RC.Controllers
         {
             if(id==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
 
             var data = CertifiedPersonService.GetCertifiedPersonByID(id.Value);
             if(data==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }           
             return View(data);
         }
@@ -66,7 +66,7 @@ namespace IC_RC.Controllers
         {
             if(ID==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             var data = scoreService.ScoresGetByPersonID(ID.Value);
             return PartialView("_Scores",data);
@@ -77,7 +77,7 @@ namespace IC_RC.Controllers
         {
             if (ID == null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             var data = CertificationService.GetCertificationsByPersonID(ID.Value);
             return PartialView("_Certifications", data);
@@ -87,7 +87,7 @@ namespace IC_RC.Controllers
         {
             if (ID == null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             var data = StundentethicalvoilationService.GetVoiltaionsByPersonID(ID.Value);
             return PartialView("_Voilations", data);
@@ -98,7 +98,7 @@ namespace IC_RC.Controllers
         {
             if (ID == null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             var data = ReciprocityService.ReciprocityGetByPersonID(ID.Value);
             return PartialView("_Voilations", data);

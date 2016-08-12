@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace IC_RC.App_Code
+namespace IC_RC.Models
 {
     public class SessionContext<T>
     {
@@ -14,11 +14,11 @@ namespace IC_RC.App_Code
         {
             get
             {
-                return _instance??(_instance=new SessionContext<T>());
+                return _instance ?? (_instance = new SessionContext<T>());
             }
         }
 
-        public void SetSession(string name,T obj)
+        public void SetSession(string name, T obj)
         {
             HttpContext.Current.Session[name] = obj;
         }
@@ -26,10 +26,10 @@ namespace IC_RC.App_Code
 
         public T GetSession(string name)
         {
-            
-            if(HttpContext.Current.Session[name]!=null)
+
+            if (HttpContext.Current.Session[name] != null)
             {
-                return (T)HttpContext.Current.Session[name] ;
+                return (T)HttpContext.Current.Session[name];
             }
             return default(T);
         }

@@ -95,6 +95,14 @@ namespace IC_RC.Controllers
             {
                 var user=LoginManager.GetUser(model.Username);
                 SetupFormsAuthTicket(user, false);
+                SessionContext<Users>.Instance.SetSession("User", user);
+                SessionContext<int>.Instance.SetSession("UserID",user.ID);
+                
+                if(user.Name=="admin")
+                {
+                    SessionContext<bool>.Instance.SetSession("IsAdmin", true);                    
+                }
+                
                 return RedirectToLocal(returnUrl);
             }
 

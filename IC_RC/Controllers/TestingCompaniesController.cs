@@ -65,12 +65,12 @@ namespace IC_RC.Controllers
         {
             if(id==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             var data = companyService.GetTestingCompanyByID(id.Value);
             if(data==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             return View(data);
         }

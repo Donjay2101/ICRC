@@ -15,7 +15,7 @@ namespace ICRC.Data.Repositories
         {
 
         }
-
+        
         public override IEnumerable<StudentVoilations> GetAll()
         {
             var data=(from voi in DbContext.StudentVoilations join 

@@ -1,4 +1,5 @@
-﻿using IC_RC.ViewModels;
+﻿using IC_RC.Models;
+using IC_RC.ViewModels;
 using ICRC.Model;
 using ICRCService;
 using System;
@@ -33,6 +34,7 @@ namespace IC_RC.Controllers
 
         public ActionResult GetData()
         {
+            var userID = SessionContext<int>.Instance.GetSession("UserID");
             var data=CertificationService.GetCertificationsForIndex();
             return PartialView("_Certifications",data);
         }
@@ -96,7 +98,7 @@ namespace IC_RC.Controllers
             var data = CertificationService.GetCertificationByID(id);
             if(data == null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound", "Home");
             }
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");

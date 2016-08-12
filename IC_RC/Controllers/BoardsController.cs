@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IC_RC.Models;
 
 namespace IC_RC.Controllers
 {
@@ -22,16 +23,16 @@ namespace IC_RC.Controllers
         // GET: Boards
         public ActionResult Index()
         {
+            
+            
             return View();
         }
 
 
         public ActionResult GetData()
-        {
+        {            
             var data = boardService.GetBoards();
-
             return PartialView("_Boards", data);
-
         }
 
         // GET: Boards/Details/5
@@ -65,7 +66,7 @@ namespace IC_RC.Controllers
         {
             if(id==null)
             {
-                return HttpNotFound();
+                return RedirectToActionPermanent("PageNotFound","Home");
             }
             var data = boardService.GetBoardByID(id.Value);
             if(data==null)
