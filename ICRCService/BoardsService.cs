@@ -17,6 +17,7 @@ namespace ICRCService
         IEnumerable<Boards> GetBoard(Expression<Func<Boards,bool>> where);
         void CreateBoard(Boards Board);
         void UpdateBoard(Boards Board);
+        void Delete(int ID);
         void Save();        
     }
 
@@ -58,6 +59,12 @@ namespace ICRCService
             return boardRepository.GetMany(where);
         }
 
+
+        public void Delete(int ID)
+        {
+            var data = boardRepository.GetByID(ID);
+            boardRepository.Delete(data);
+        }
         public void Save()
         {
             unitOfWork.Commit();

@@ -11,10 +11,10 @@ namespace ICRC.Data.Infrastructure
     {
         void Add(T entity);
         void Update(T entity);
-        void Delete(T entity);
+        void Delete(T entity);        
         void Delete(Expression<Func<T, bool>> where);
         IEnumerable<T> GetAll();
-        T GetByID(int ID);
+        T GetByID(int ID);        
         IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
     }
 }

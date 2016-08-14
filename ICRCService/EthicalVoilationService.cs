@@ -18,6 +18,7 @@ namespace ICRCService
         void CreateEthicalVoilation(EthicalVoilation Board);
         void UpdateEthicalVoilation(EthicalVoilation Board);
         void Save();
+        void Delete(int ID);
     }
     public class EthicalVoilationService : IEthicalVoliationService
     {
@@ -54,6 +55,13 @@ namespace ICRCService
         public void UpdateEthicalVoilation(EthicalVoilation voilation)
         {
             EthicalVoilationRepository.Update(voilation);
+        }
+
+        public void Delete(int ID)
+        {
+            var data = EthicalVoilationRepository.GetByID(ID);
+            EthicalVoilationRepository.Delete(data);
+
         }
 
      

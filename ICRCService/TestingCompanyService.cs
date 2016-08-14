@@ -18,7 +18,8 @@ namespace ICRCService
         IEnumerable<TestingCompany> GetTestingCompanies(Expression<Func<TestingCompany, bool>> where);        
         void CreateCompany(TestingCompany company);
         void UpdateCompany(TestingCompany company);
-        void Save();      
+        void Save();
+        void Delete(int ID);
     }
 
     public class TestingCompanyService : ITestingCompanyService
@@ -70,7 +71,11 @@ namespace ICRCService
             testingCompanyRepository.Update(company);
         }
 
-       
+       public void Delete(int ID)
+        {
+            var data=testingCompanyRepository.GetByID(ID);
+            testingCompanyRepository.Delete(data);
+        }
 
         public void Save()
         {

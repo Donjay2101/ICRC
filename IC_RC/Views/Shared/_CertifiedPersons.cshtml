@@ -23,7 +23,7 @@
                                    .RenderValueAs(c =>
                                 @<div id="balloon" class="balloonClass">
                                     <b>                                        
-                                        <a href="#" onclick="Deleteconfirm('@c.ID','@c.FirstName')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
+                                        <a href="#" onclick="confirmDelete('/CertifiedPersons/Delete/@c.ID','/CertifiedPersons')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
                                     </b>
                                 </div>); 
                       columns.Add()

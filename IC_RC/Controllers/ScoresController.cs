@@ -17,6 +17,7 @@ namespace IC_RC.Controllers
         public readonly ITestingCompanyService companyService;
         public readonly IBoardService boardService;
         public readonly ICertificateService certificateService;
+        string returnUrl="";
 
         public ScoresController(IScoreservice scoreService, ICertifiedPersonService personService, ITestingCompanyService companyService, IBoardService boardService, ICertificateService certificateService)
         {
@@ -47,12 +48,22 @@ namespace IC_RC.Controllers
         }
 
         // GET: Scores/Create
-        public ActionResult Create()
+        public ActionResult Create(string returnUrl="")
         {
+
+            if(string.IsNullOrEmpty(returnUrl))
+            {
+                ViewBag.ReturnURL = "/Scores/Index";
+            }
+            else
+            {
+                ViewBag.ReturnURL = returnUrl;
+            }
             ViewBag.Exams = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.Persons=new SelectList(personService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
             ViewBag.Boards = new SelectList(boardService.GetBoards(), "ID", "Acronym");
+            
             return View();
         }
 
@@ -60,13 +71,20 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(Scores model)
         {
-            if(ModelState.IsValid)
+
+            //to go to previous page
+            SetReturnUrl();
+
+
+            if (ModelState.IsValid)
             {
                 scoreService.CreateScore(model);
                 scoreService.Save();
 
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
+            ////
+
 
             ViewBag.Exams = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.Persons = new SelectList(personService.GetCertifiedPersons(), "ID", "FullName");
@@ -78,6 +96,7 @@ namespace IC_RC.Controllers
         // GET: Scores/Edit/5
         public ActionResult Edit(int? id)
         {
+           
             if(id==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
@@ -86,7 +105,7 @@ namespace IC_RC.Controllers
             var data = scoreService.GetScoreByID(id.Value);
 
             if(data==null)
-            {
+            {                
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
             ViewBag.Exams = new SelectList(certificateService.GetCertificates(), "ID", "Name");
@@ -101,12 +120,17 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(Scores model)
         {
+            //to set the returnURl
+            SetReturnUrl();
+
+
+            ////
             if (ModelState.IsValid)
             {
                 scoreService.UpdateScore(model);
                 scoreService.Save();
 
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
 
             ViewBag.Exams = new SelectList(certificateService.GetCertificates(), "ID", "Name");
@@ -116,21 +140,39 @@ namespace IC_RC.Controllers
             return View(model);
         }
 
-        // GET: Scores/Delete/5
-        public ActionResult Delete(int id)
+        public void SetReturnUrl()
         {
-            return View();
+            //to go to previous page
+            returnUrl = ShrdMaster.Instance.GetQueryString("returnUrl");
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/Scores/Index";
+                ViewBag.ReturnURL = returnUrl;
+
+            }
+            else
+            {
+                ViewBag.ReturnURL = returnUrl;
+            }
+           // return returnUrl;
         }
+
+        // GET: Scores/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: Scores/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                scoreService.Delete(id);
+                return Json(true, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("Index");
             }
             catch
             {

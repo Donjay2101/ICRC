@@ -18,6 +18,7 @@ namespace IC_RC.Controllers
         public readonly ICertificationService CertificationService;
         public readonly ICertificateService CertificateService;
         public readonly IBoardService BoardService;
+        string returnUrl="";
 
         public CertificationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService)
         {
@@ -69,6 +70,7 @@ namespace IC_RC.Controllers
         // GET: Certifications/Create
         public ActionResult Create()
         {
+            SetReturnUrl();
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(),"ID","FullName");
             ViewBag.Certificates= new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
@@ -80,12 +82,13 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(Certifications model)
         {
+            SetReturnUrl();
             
                 if(ModelState.IsValid)
                 {
                 CertificationService.CreateCertification(model);
                 CertifiedPersonService.Save();
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
                 }
 
             return View(model);                                            
@@ -94,7 +97,7 @@ namespace IC_RC.Controllers
         // GET: Certifications/Edit/5
         public ActionResult Edit(int id)
         {
-
+            SetReturnUrl();
             var data = CertificationService.GetCertificationByID(id);
             if(data == null)
             {
@@ -110,44 +113,62 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(Certifications model)
         {
-            try
+            SetReturnUrl();
+           if(ModelState.IsValid)
             {
-                // TODO: Add update logic here
-                if(ModelState.IsValid)
-                {
-                    CertificationService.UpdateCertification(model);                     
-                    CertificateService.Save();
-                    return RedirectToAction("Index");
-                }
-
-                return RedirectToAction("Index");
+                CertificationService.UpdateCertification(model);
+                CertificateService.Save();
+                return Redirect(returnUrl);
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+            ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
+            ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            return View(model);
+                    
+                
         }
 
-        // GET: Certifications/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: Certifications/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: Certifications/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                CertificationService.Delete(id);
+                return Json(true,JsonRequestBehavior.AllowGet);
             }
             catch
             {
                 return View();
             }
+        }
+
+        public void SetReturnUrl()
+        {
+            //to go to previous page
+            if (Request.QueryString["returnUrl"] != null)
+            {
+                returnUrl = Request.QueryString["returnUrl"];
+            }
+            
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/Scores/Index";
+                ViewBag.ReturnURL = returnUrl;
+
+            }
+            else
+            {
+                ViewBag.ReturnURL = returnUrl;
+            }
+            // return returnUrl;
         }
     }
 }

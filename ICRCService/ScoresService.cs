@@ -19,6 +19,7 @@ namespace ICRCService
         void UpdateScore(Scores Board);
         IEnumerable<Scores> ScoresGetByPersonID(int ID);
         void Save();
+        void Delete(int ID);
     }
 
     public class ScoresService: IScoreservice
@@ -67,6 +68,12 @@ namespace ICRCService
         public IEnumerable<Scores>  ScoresGetByPersonID(int ID)
         {
             return scoresRepository.ScoresGetByPersonID(ID).OrderBy(x=>x.ExamDate);
+        }
+
+        public void Delete(int ID)
+        {
+            var data = scoresRepository.GetByID(ID);
+            scoresRepository.Delete(data);
         }
 
         #endregion

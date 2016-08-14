@@ -19,6 +19,7 @@ namespace ICRCService
         void CreateEthicalVoilation(StudentVoilations Board);
         void UpdateEthicalVoilation(StudentVoilations Board);
         void Save();
+        void Delete(int ID);
     }
     public class StudentEthicalVoilationService:IStudentEthicalVoliationService
     {
@@ -60,6 +61,12 @@ namespace ICRCService
         public IEnumerable<StudentVoilations> GetVoiltaionsByPersonID(int ID)
         {
             return StudentEthicalVoilationRepository.GetByPersonID(ID);
+        }
+
+        public void Delete(int ID)
+        {
+            var data = StudentEthicalVoilationRepository.GetByID(ID);
+            StudentEthicalVoilationRepository.Delete(data);
         }
 
         public void Save()           

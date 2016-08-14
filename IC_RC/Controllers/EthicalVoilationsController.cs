@@ -18,6 +18,7 @@ namespace IC_RC.Controllers
         public readonly IBoardService BoardService;
         public readonly IStudentEthicalVoliationService studentethicalvoilationService;
         public readonly IEthicalVoliationService ethicalVoilationService;
+        string returnUrl="";
         public EthicalVoilationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService, IStudentEthicalVoliationService studentethicalvoilationService, IEthicalVoliationService ethicalVoilationService)
         {
             this.CertifiedPersonService = CertifiedPersonService;
@@ -49,7 +50,7 @@ namespace IC_RC.Controllers
         // GET: EthicalVoilations/Create
         public ActionResult Create()
         {
-
+            SetReturnUrl();
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.EthicalVoilations = new SelectList(ethicalVoilationService.GetEthicalVoilations(), "ID", "Name");            
@@ -62,12 +63,12 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(StudentVoilations model)
         {
-           
+            SetReturnUrl();
             if(ModelState.IsValid)
             {
                 studentethicalvoilationService.CreateEthicalVoilation(model);
                 studentethicalvoilationService.Save();
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
@@ -78,6 +79,7 @@ namespace IC_RC.Controllers
         // GET: EthicalVoilations/Edit/5
         public ActionResult Edit(int? id)
         {
+            SetReturnUrl();
             if(id==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
@@ -97,13 +99,13 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(StudentVoilations model)
         {
-            
+            SetReturnUrl();
             if (ModelState.IsValid)
             {
                 studentethicalvoilationService.UpdateEthicalVoilation(model);
                 studentethicalvoilationService.Save();
 
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
@@ -112,25 +114,47 @@ namespace IC_RC.Controllers
         }
 
         // GET: EthicalVoilations/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: EthicalVoilations/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                studentethicalvoilationService.Delete(id);
+                return Json(true, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+
+        public void SetReturnUrl()
+        {
+            //to go to previous page
+            if (Request.QueryString["returnUrl"] != null)
+            {
+                returnUrl = Request.QueryString["returnUrl"];
+            }
+
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/Scores/Index";
+                ViewBag.ReturnURL = returnUrl;
+
+            }
+            else
+            {
+                ViewBag.ReturnURL = returnUrl;
+            }
+            // return returnUrl;
         }
     }
 }

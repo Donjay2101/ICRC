@@ -18,6 +18,7 @@ namespace ICRCService
         void CreateCertificate(Certificates cetificate);
         void UpdateCertificate(Certificates cetificate);
         void Save();
+        void Delete(int ID);
     }
 
     public class CertificateService:ICertificateService
@@ -71,6 +72,11 @@ namespace ICRCService
             certificateRepository.Update(certificate);
         }
 
+        public void Delete(int ID)
+        {
+            var data = certificateRepository.GetByID(ID);
+            certificateRepository.Delete(data);
+        }
         public void Save()
         {
             unitOfWork.Commit();

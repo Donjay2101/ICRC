@@ -19,6 +19,7 @@ namespace ICRCService
         void CreateReciprocity(Reciprocities reciprocity);
         void UpdateReciprocity(Reciprocities reciprocity);
         void Save();
+        void Delete(int ID);
 
     }
     public class ReciprocitiesService:IReciprocitiesService
@@ -60,6 +61,11 @@ namespace ICRCService
         public void UpdateReciprocity(Reciprocities Reciprocity)
         {
             reciprocityRepository.Update(Reciprocity);
+        }
+        public void Delete(int ID)
+        {
+            var data=reciprocityRepository.GetByID(ID);
+            reciprocityRepository.Delete(data);
         }
 
 

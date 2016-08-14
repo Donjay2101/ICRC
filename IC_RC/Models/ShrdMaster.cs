@@ -26,7 +26,22 @@ namespace IC_RC
             List<PaymentType> list = new List<PaymentType>() { new PaymentType() { ID=1,Name="Credit Card"}, new PaymentType() { ID = 1, Name = "Money Order" }, new PaymentType() { ID = 1, Name = "Cheque" } };
             return list;
         }
+
+        public string GetQueryString(string value)
+        {
+            if (HttpContext.Current.Request.QueryString[value] != null)
+            {
+                return HttpContext.Current.Request.QueryString[value];
+            }
+            return "";
+        }
+
+       
+
     }
+
+
+
 
 
 

@@ -57,7 +57,8 @@ namespace IC_RC.Controllers
             if(data==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
-            }           
+            }
+            ViewBag.CurrentBoard = BoardService.GetBoardByID(data.CurrentBoardID).Acronym;
             return View(data);
         }
 
@@ -89,7 +90,7 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-            var data = StundentethicalvoilationService.GetVoiltaionsByPersonID(ID.Value);
+            var data = StundentethicalvoilationService.GetVoiltaionsByPersonID(ID.Value).ToList();
             return PartialView("_Voilations", data);
         }
 
@@ -100,8 +101,8 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-            var data = ReciprocityService.ReciprocityGetByPersonID(ID.Value);
-            return PartialView("_Voilations", data);
+            var data = ReciprocityService.ReciprocityGetByPersonID(ID.Value).ToList();
+            return PartialView("_Reciprocities", data);
         }
 
 
@@ -218,20 +219,20 @@ namespace IC_RC.Controllers
         //}
 
         // GET: CertifiedPersons/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: CertifiedPersons/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                CertifiedPersonService.Delete(id);
+                return Json(true,JsonRequestBehavior.AllowGet);
             }
             catch
             {

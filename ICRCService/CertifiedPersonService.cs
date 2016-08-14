@@ -20,6 +20,7 @@ namespace ICRCService
         void CreateCertifiedPerson(CertifiedPersons Board);
         void UpdateCertifiedPerson(CertifiedPersons Board);
         void Save();
+        void Delete(int ID);
 
     }
 
@@ -91,6 +92,13 @@ namespace ICRCService
             //int.TryParse(System.Web.HttpContext.Current.Session["User"].ToString(), out ID);
           //  person.ModifiedBy = ID;
             certifiedRepository.Update(person);
+        }
+
+        public void Delete(int ID)
+        {
+            var data = certifiedRepository.GetByID(ID);
+
+            certifiedRepository.Delete(data);
         }
 
         public void Save()

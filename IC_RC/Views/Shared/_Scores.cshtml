@@ -15,7 +15,8 @@ else
 
 <div>
     @*<a href="/Scores/Create">Create new</a>*@
-    <a href="/Scores/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    <a href="#" id="create" onclick='gotoCreate("/Scores/Create")' class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    
 </div>
 
 @Html.Grid(Model).Columns(columns =>
@@ -41,12 +42,12 @@ else
                                 @<div id="balloon" class="balloonClass">
                                     <b>
                                         @*<a href="#" onclick="Deleteconfirm('@c.ID')">Delete</a>*@
-                                        <a href="#" onclick="Deleteconfirm('@c.ID')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
+                                        <a href="#" onclick="confirmDelete('/Scores/Delete/@c.ID', '/Scores')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
                                     </b>
                                 </div>);
                     columns.Add(c => c.PersonName).Titled("Candidate");
                     columns.Add(c => c.ExamName).Titled("Exam Name");
-                    columns.Add(c => c.ExamDate).Titled("Exam Date");
+                    columns.Add(c => c.ExamDate).Titled("Exam Date").Format("{0:MM/dd/yyyy}");
                     columns.Add(c=>c.Status)
                               .Encoded(false)
                               .Sanitized(false)
@@ -60,7 +61,19 @@ else
 
 
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+
+@section scripts
+{
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/gridmvc.min.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script>
+      
+    </script>
+    
+  
+    
+    }
 
 

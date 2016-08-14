@@ -94,20 +94,21 @@ namespace IC_RC.Controllers
         }
 
         // GET: Boards/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: Boards/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                boardService.Delete(id);
+                return Json(true, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("Index");
             }
             catch
             {

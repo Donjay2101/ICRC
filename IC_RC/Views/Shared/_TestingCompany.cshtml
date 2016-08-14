@@ -30,7 +30,7 @@
                                 @<div id="balloon" class="balloonClass">
                                     <b>
                                         @*<a href="#" onclick="Deleteconfirm('@c.ID')">Delete</a>*@
-                                        <a href="#" onclick="Deleteconfirm('@c.ID')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
+                                        <a href="#" onclick="confirmDelete('/TestingCompanies/Delete/@c.ID','/TestingCompanies')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
                                     </b>
                                 </div>);
                         columns.Add(c => c.Name).Titled("Name");                       

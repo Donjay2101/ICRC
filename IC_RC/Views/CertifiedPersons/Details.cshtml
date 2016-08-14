@@ -50,12 +50,12 @@
     </div>
     <div class="col-md-6">
         <div class="row">
-            <span>Current board:</span><label></label>
+            <span>Current board:</span><label>@ViewBag.CurrentBoard</label>
         </div>
    <div class="row">
        <span>Ethical Voilations:</span><input type="checkbox"/>
    </div>
-
+        @Html.HiddenFor(model=>model.ID)
     </div>       
 </div>
 <div class="row">
@@ -63,18 +63,18 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist" id="candidateNav">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Scores</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Certificates</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Reciprocity</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Ethical Voilations</a></li>
+            <li role="presentation" class="active"><a href="#Scores" aria-controls="Scores" id="tab1" name="SCORES" role="tab" data-toggle="tab">Scores</a></li>
+            <li role="presentation"><a href="#Certificates" aria-controls="Certificates" id="tab2" role="tab" name="CERTIFICATIONS" data-toggle="tab">Certificates</a></li>
+            <li role="presentation"><a href="#Reciprocity" aria-controls="Reciprocity" id="tab3"role="tab" name="RECIPROCITY" data-toggle="tab">Reciprocity</a></li>
+            <li role="presentation"><a href="#EthicalVoilations" aria-controls="EthicalVoilations" id="tab4" role="tab" name="VOILATIONS" data-toggle="tab">Ethical Voilations</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="Scores">@Html.Action("Scores")</div>
-            <div role="tabpanel" class="tab-pane" id="Certificates"></div>
-            <div role="tabpanel" class="tab-pane" id="Reciprocity"></div>
-            <div role="tabpanel" class="tab-pane" id="EthicalVoilations"></div>
+            <div role="tabpanel" class="tab-pane active"  id="Scores">@Html.Action("Scores")</div>
+            <div role="tabpanel" class="tab-pane"  id="Certificates"></div>
+            <div role="tabpanel" class="tab-pane"  id="Reciprocity"></div>
+            <div role="tabpanel" class="tab-pane"  id="EthicalVoilations"></div>
         </div>
 
     </div>
@@ -90,25 +90,48 @@
 @section scripts{
     
     <script>
-        $(document).on('click', '#candidateNav>li>a', function () {
 
-            var data = $(this).attr('id');
-
-            if(data.toUpperCase()=="SCORES")
+        $(document).ready(function () {
+            debugger;
+            var data = sessionStorage.getItem("selected");
+            var id = $('#ID').val();
+            if(data!=null)
             {
-                $('#Scores').load('/CertifiedPersons/Scores');
+                $("[name='" + data.toUpperCase() + "']").tab('show');
+                selectedTab(data, id);
+            }                          
+        });
+
+        $(document).on('click', '#candidateNav>li>a', function () {          
+            var data = $(this).attr('name');
+            console.log(data);
+            var id = $('#ID').val();
+            selectedTab(data, id);
+            
+        });
+
+        function selectedTab(data,id)
+        {
+            if (data.toUpperCase() == "SCORES") {
+
+                sessionStorage.setItem('selected', 'Scores');
+                $('#Scores').load('/CertifiedPersons/Scores/' + id);
+
             }
-            else if(data.toUpperCase()=="CERTIFICATIONS")
-            {
-                $('#Certificates').load('/CertifiedPersons/Certifications');
+            else if (data.toUpperCase() == "CERTIFICATIONS") {
+                sessionStorage.setItem('selected', 'Certifications');
+                $('#Certificates').load('/CertifiedPersons/Certificates/' + id);
+
             }
             else if (data.toUpperCase() == "RECIPROCITY") {
-                $('#Reciprocity').load('/CertifiedPersons/Reciprocity');
+                sessionStorage.setItem('selected', 'Reciprocity');
+                $('#Reciprocity').load('/CertifiedPersons/Reciprocities/' + id);
             }
             else if (data.toUpperCase() == "VOILATIONS") {
-                $('#EthicalVoilations').load('/CertifiedPersons/voilations');
+                sessionStorage.setItem('selected', 'Voilations');
+                $('#EthicalVoilations').load('/CertifiedPersons/EthicalVoilations/' + id);
             }
-        });
+        }
 
     </script>
             

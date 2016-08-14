@@ -23,6 +23,7 @@ namespace ICRCService
         void UpdateCertification(Certifications Board);
         void Save();
         bool CheckNumber(int number);
+        void Delete(int ID);
     }
 
     public class CertificationsService:ICertificationService
@@ -86,6 +87,12 @@ namespace ICRCService
         public IEnumerable<Certifications> GetCertificationsByPersonID(int ID)
         {
             return certificationRepository.GetCertificationsByPersonID(ID);
+        }
+
+        public void Delete(int ID)
+        {
+            var data = certificationRepository.GetByID(ID);
+            certificationRepository.Delete(data);
         }
 
         public void Save()
