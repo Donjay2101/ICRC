@@ -130,6 +130,7 @@ namespace IC_RC.Controllers
             {
                 // TODO: Add delete logic here
                 reciprocityService.Delete(id);
+                reciprocityService.Save();
                 return Json(true, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Index");
             }

@@ -232,6 +232,7 @@ namespace IC_RC.Controllers
             {
                 // TODO: Add delete logic here
                 CertifiedPersonService.Delete(id);
+                CertifiedPersonService.Save();
                 return Json(true,JsonRequestBehavior.AllowGet);
             }
             catch

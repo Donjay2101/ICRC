@@ -56,14 +56,14 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.CertIssueDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.CertIssueDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.CertIssueDate, new { htmlAttributes = new { @class = "form-control date" } })
                         @Html.ValidationMessageFor(model => model.CertIssueDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.CertRequestDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.CertRequestDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.CertRequestDate, new { htmlAttributes = new { @class = "form-control date" } })
                         @Html.ValidationMessageFor(model => model.CertRequestDate, "", new { @class = "text-danger" })
                     </div>
                 </div>

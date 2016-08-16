@@ -60,14 +60,14 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.CertIssueDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.CertIssueDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.CertIssueDate, new { htmlAttributes = new { @class = "form-control date" } })
                         @Html.ValidationMessageFor(model => model.CertIssueDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.CertRequestDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.CertRequestDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.CertRequestDate, new { htmlAttributes = new { @class = "form-control date" } })
                         @Html.ValidationMessageFor(model => model.CertRequestDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -108,7 +108,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.RecertDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.RecertDate, new { htmlAttributes = new { @class = "form-control" } })
+                        <input type="text" id="RecertDate" name="RecertDate"  class="form-control text-box single-line date"/>
+                        @*@Html.EditorFor(model => model.RecertDate, new { htmlAttributes = new { @class = "form-control date" } })*@
                         @Html.ValidationMessageFor(model => model.RecertDate, "", new { @class = "text-danger" })
                     </div>
                 </div>

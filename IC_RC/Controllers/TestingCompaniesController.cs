@@ -103,6 +103,7 @@ namespace IC_RC.Controllers
                 // TODO: Add delete logic here
 
                 companyService.Delete(id);
+                companyService.Save();
                 return Json(true,JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Index");
             }

@@ -142,6 +142,7 @@ namespace IC_RC.Controllers
             {
                 // TODO: Add delete logic here
                 CertificationService.Delete(id);
+                CertificationService.Save();
                 return Json(true,JsonRequestBehavior.AllowGet);
             }
             catch

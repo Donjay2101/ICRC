@@ -171,6 +171,7 @@ namespace IC_RC.Controllers
             {
                 // TODO: Add delete logic here
                 scoreService.Delete(id);
+                scoreService.Save();
                 return Json(true, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Index");
             }

@@ -127,6 +127,7 @@ namespace IC_RC.Controllers
             {
                 // TODO: Add delete logic here
                 studentethicalvoilationService.Delete(id);
+                studentethicalvoilationService.Save();
                 return Json(true, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Index");
             }
