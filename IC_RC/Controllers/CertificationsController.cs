@@ -18,14 +18,16 @@ namespace IC_RC.Controllers
         public readonly ICertificationService CertificationService;
         public readonly ICertificateService CertificateService;
         public readonly IBoardService BoardService;
+        public readonly IPaymentTypeService paymenttypeService;
         string returnUrl="";
 
-        public CertificationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService)
+        public CertificationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService, IPaymentTypeService paymenttypeService)
         {
             this.CertifiedPersonService = CertifiedPersonService;
             this.CertificationService = CertificationService;
             this.CertificateService = CertificateService;
             this.BoardService = BoardService;
+            this.paymenttypeService = paymenttypeService;
         }
         // GET: Certifications
         public ActionResult Index()
@@ -74,7 +76,8 @@ namespace IC_RC.Controllers
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(),"ID","FullName");
             ViewBag.Certificates= new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
-            ViewBag.CertificateNumber = GenerateNumber();                        
+            ViewBag.CertificateNumber = GenerateNumber();
+            ViewBag.PaymentTypes = paymenttypeService.GetPaymentTypes();
             return View();
         }
 
@@ -90,7 +93,11 @@ namespace IC_RC.Controllers
                 CertifiedPersonService.Save();
                 return Redirect(returnUrl);
                 }
-
+            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+            ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
+            ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            ViewBag.CertificateNumber = GenerateNumber();
+            ViewBag.PaymentTypes = paymenttypeService.GetPaymentTypes();
             return View(model);                                            
         }
 
@@ -106,6 +113,8 @@ namespace IC_RC.Controllers
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+          
+            ViewBag.PaymentTypes = paymenttypeService.GetPaymentTypes();
             return View(data);
         }
 
@@ -123,6 +132,8 @@ namespace IC_RC.Controllers
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            
+            ViewBag.PaymentTypes = paymenttypeService.GetPaymentTypes();
             return View(model);
                     
                 

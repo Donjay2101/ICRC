@@ -20,7 +20,7 @@ namespace ICRC.Data.Repositories
             var data =( from cr in DbContext.Certifications                      
                        join c in DbContext.Certificates on cr.CertID equals c.ID
                        join bc in DbContext.Boards on cr.BoardCertificateAcronym equals bc.ID
-                       join ib in DbContext.Certificates on cr.IssueBoard equals ib.ID
+                       join ib in DbContext.Boards on cr.IssueBoard equals ib.ID
                        join cp in DbContext.CertifiedPersons on cr.PersonID equals cp.ID
                        select new {
                            AddToPrintQueues=cr.AddToPrintQueues,
@@ -38,7 +38,7 @@ namespace ICRC.Data.Repositories
                            CreatedBy=cr.CreatedBy,
                            ID=cr.ID,
                            IssueBoard=cr.IssueBoard,
-                           IssueBoardAcronym=ib.Name,
+                           IssueBoardAcronym=ib.Acronym,
                            ModifiedAt=cr.ModifiedAt,
                            ModifiedBy=cr.ModifiedBy,
                            PaymentNumber=cr.PaymentNumber,

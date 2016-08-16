@@ -54,7 +54,7 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
-            ViewBag.PaymentTypes = new SelectList(paymentService.GetPaymentTypes(), "ID", "Name");
+            ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
             ViewBag.Persons= new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             return View();
         }
@@ -73,7 +73,7 @@ namespace IC_RC.Controllers
 
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
-            ViewBag.PaymentTypes = new SelectList(paymentService.GetPaymentTypes(), "ID", "Name");
+            ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             return View(model);
         }
@@ -90,7 +90,7 @@ namespace IC_RC.Controllers
 
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
-            ViewBag.PaymentTypes = new SelectList(paymentService.GetPaymentTypes(), "ID", "Name");
+            ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             var data=reciprocityService.GetReciprocitiesByID(id.Value);
 
@@ -111,7 +111,7 @@ namespace IC_RC.Controllers
 
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
-            ViewBag.PaymentTypes = new SelectList(paymentService.GetPaymentTypes(), "ID", "Name");
+            ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             return View(model);
         }

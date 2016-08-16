@@ -28,7 +28,7 @@ namespace IC_RC.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","CertifiedPersons");
         }
 
         public ActionResult GetData()

@@ -10,10 +10,10 @@
     @Styles.Render("~/Content/css")
     @*<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>*@
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     @Scripts.Render("~/bundles/modernizr")  
 
     <script src="~/Scripts/Common.js"></script>
@@ -38,6 +38,8 @@
                 });
 
                 $(".date").each(function () {
+                    //debugger;
+                  //  var j= $.noConflict();
                     $(this).datepicker();
                 });
 
@@ -99,7 +101,7 @@
     })
     </script>
     
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

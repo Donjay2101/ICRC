@@ -98,9 +98,13 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        <span class="card-type">Visa</span><input type="radio" value="1" name="PaymentType" />
+                        @foreach (var item in ViewBag.PaymentTypes)
+                        {
+                            <span>@item.Name</span><input type="radio" value="@item.ID" name="PaymentType" />
+                        }
+                        @*<span class="card-type">Visa</span><input type="radio" value="1" name="PaymentType" />
                         <span class="card-type">MasterCard</span><input type="radio" value="2" name="PaymentType" />
-                        <span class="card-type">Express</span><input type="radio" value="3" name="PaymentType" />
+                        <span class="card-type">Express</span><input type="radio" value="3" name="PaymentType" />*@
                         @*@Html.RadioButtonFor(model=>model.PaymentType,(SelectList)ViewBag.PaymentTypes,new { @class="form-control"})*@
                         @Html.ValidationMessageFor(model => model.PaymentType, "", new { @class = "text-danger" })
                     </div>

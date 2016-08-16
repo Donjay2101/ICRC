@@ -15,7 +15,7 @@ using ICRCService;
 
 namespace IC_RC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

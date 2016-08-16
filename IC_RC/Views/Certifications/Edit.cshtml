@@ -28,7 +28,9 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.certificateNo, htmlAttributes: new { @class = "control-label col-md-4", @disabled = "true" })
                     <div class="col-md-8">
-                        <label id="CertificateNumber" name="CertificateNumber" value="@Model.certificateNo"> </label>
+
+                        <label id="certificateNo" name="certificateNo" >@Model.certificateNo</label>
+                        @Html.HiddenFor(model=>model.certificateNo)
                         @*@Html.EditorFor(model => model.certificateNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.certificateNo, "", new { @class = "text-danger" })*@
                     </div>
@@ -126,9 +128,20 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        <span class="card-type">Visa</span><input type="radio" value="1" name="PaymentType" />
+                        @foreach (var item in ViewBag.PaymentTypes)
+                        {
+                            if (item.ID == Model.PaymentType)
+                            {
+                                <span>@item.Name</span><input type="radio" value="@item.ID" checked name="PaymentType" />
+                            }
+                            else
+                            {
+                                <span>@item.Name</span><input type="radio" value="@item.ID"  name="PaymentType" />
+                            }
+                        }
+                        @*<span class="card-type">Visa</span><input type="radio" value="1" name="PaymentType" />
                         <span class="card-type">MasterCard</span><input type="radio" value="2" name="PaymentType" />
-                        <span class="card-type">Express</span><input type="radio" value="3" name="PaymentType" />
+                        <span class="card-type">Express</span><input type="radio" value="3" name="PaymentType" />*@
                         @Html.ValidationMessageFor(model => model.PaymentType, "", new { @class = "text-danger" })
                     </div>
                 </div>
