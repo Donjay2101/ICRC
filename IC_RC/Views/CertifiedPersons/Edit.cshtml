@@ -175,7 +175,7 @@
 @*<div id="childnav">
      <span id="Certifications" value="1">Certifications</span>
     <span id="Reciprocity" value="2"> Reciprocity</span>
-    <span id="Voilations" value="3">Ethical Voilations</span>
+    <span id="violations" value="3">Ethical violations</span>
 </div>
 <div id="divContainer">
       @Html.Action("Certifications")
@@ -197,7 +197,7 @@
             }
             else (val==3)
             {
-                $("#divContainer").load('certifiedPersons/Voilations?ID=' + ID);
+                $("#divContainer").load('certifiedPersons/violations?ID=' + ID);
             }
 
         });

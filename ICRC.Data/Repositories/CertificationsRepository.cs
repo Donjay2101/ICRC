@@ -15,62 +15,71 @@ namespace ICRC.Data.Repositories
         public CertificationsRepository(IDbFactory dbFactory) : base(dbFactory) { }
         
         public override  IEnumerable<Certifications> GetAll()
-        {           
-            
-            var data =( from cr in DbContext.Certifications                      
-                       join c in DbContext.Certificates on cr.CertID equals c.ID
-                       join bc in DbContext.Boards on cr.BoardCertificateAcronym equals bc.ID
-                       join ib in DbContext.Boards on cr.IssueBoard equals ib.ID
-                       join cp in DbContext.CertifiedPersons on cr.PersonID equals cp.ID
-                       select new {
-                           AddToPrintQueues=cr.AddToPrintQueues,
-                           BoardCertificateAcronym=cr.BoardCertificateAcronym,
-                           CertID=cr.CertID,
-                           BoardCertificateNumber=cr.BoardCertificateNumber,
-                           BoardCertificateAcronymName=bc.Acronym,
-                           CertificateAcronym=c.Name,
-                           certificateNo=cr.certificateNo,
-                           CertIssueDate=cr.CertIssueDate,
-                           CertNotes=cr.CertNotes,
-                           CertRequestDate=cr.CertRequestDate,
-                           CertRequestFee=cr.CertRequestFee,
-                           CreatedAt=cr.CreatedAt,
-                           CreatedBy=cr.CreatedBy,
-                           ID=cr.ID,
-                           IssueBoard=cr.IssueBoard,
-                           IssueBoardAcronym=ib.Acronym,
-                           ModifiedAt=cr.ModifiedAt,
-                           ModifiedBy=cr.ModifiedBy,
-                           PaymentNumber=cr.PaymentNumber,
-                           PaymentType=cr.PaymentType,
-                           PersonID=cr.PersonID,
-                           PersonName=cp.FirstName+" "+cp.MiddleName+" "+cp.LastName,
-                           RecertDate=cr.RecertDate                                                                              
-                       }).ToList().Select(x=>new Certifications {
-                           AddToPrintQueues = x.AddToPrintQueues,
-                           BoardCertificateAcronym = x.BoardCertificateAcronym,
-                           CertID = x.CertID,
-                           BoardCertificateNumber = x.BoardCertificateNumber,
-                           BoardCertificateAcronymName = x.BoardCertificateAcronymName,
-                           CertificateAcronym = x.CertificateAcronym,
-                           certificateNo = x.certificateNo,
-                           CertIssueDate = x.CertIssueDate,
-                           CertNotes = x.CertNotes,
-                           CertRequestDate = x.CertRequestDate,
-                           CertRequestFee = x.CertRequestFee,
-                           CreatedAt = x.CreatedAt,
-                           CreatedBy = x.CreatedBy,
-                           ID = x.ID,
-                           IssueBoard = x.IssueBoard,
-                           IssueBoardAcronym = x.IssueBoardAcronym,
-                           ModifiedAt = x.ModifiedAt,
-                           ModifiedBy = x.ModifiedBy,
-                           PaymentNumber = x.PaymentNumber,
-                           PaymentType = x.PaymentType,
-                           PersonID = x.PersonID,
-                           PersonName = x.PersonName,
-                           RecertDate = x.RecertDate
-                       }).ToList();                
+        {
+
+            // var data = DbContext.Database.SqlQuery<Certifications>("exec SP_GetCertifications").ToList();
+            var data = (from c in DbContext.Certificates
+                        join cr in DbContext.Certifications on c.ID equals cr.CertID
+                        into t
+                        from rt in t.DefaultIfEmpty()
+                        join bc in DbContext.Boards on rt.BoardCertificateAcronym equals bc.ID
+                        into t1
+                        from rt1 in t1.DefaultIfEmpty()
+                        join ib in DbContext.Boards on rt.IssueBoard equals ib.ID
+                        into t2
+                        from rt2 in t2.DefaultIfEmpty()
+                        join cp in DbContext.CertifiedPersons on rt.PersonID equals cp.ID                      
+                        select new
+                        {
+                            AddToPrintQueues = (bool?)rt.AddToPrintQueues,
+                            BoardCertificateAcronym = (int?)rt.BoardCertificateAcronym,
+                            CertID = (int?)rt.CertID,
+                            BoardCertificateNumber = rt.BoardCertificateNumber,
+                            BoardCertificateAcronymName = rt1.Acronym,
+                            CertificateAcronym = c.Name,
+                            certificateNo = rt.certificateNo,
+                            CertIssueDate = rt.CertIssueDate,
+                            CertNotes = rt.CertNotes,
+                            CertRequestDate = rt.CertRequestDate,
+                            CertRequestFee = rt.CertRequestFee,
+                            CreatedAt = rt.CreatedAt,
+                            CreatedBy = (int?)rt.CreatedBy,
+                            ID = rt.ID,
+                            IssueBoard = (int?)rt.IssueBoard,
+                            IssueBoardAcronym = rt2.Acronym,
+                            ModifiedAt = rt.ModifiedAt,
+                            ModifiedBy = rt.ModifiedBy,
+                            PaymentNumber = rt.PaymentNumber,
+                            PaymentType = rt.PaymentType,
+                            PersonID = (int?)rt.PersonID,
+                            PersonName = cp.FirstName + " " + cp.MiddleName + " " + cp.LastName,
+                            RecertDate = rt.RecertDate
+                        }).ToList().Select(x => new Certifications
+                        {
+                            AddToPrintQueues = x.AddToPrintQueues,
+                            BoardCertificateAcronym = x.BoardCertificateAcronym,
+                            CertID = x.CertID,
+                            BoardCertificateNumber = x.BoardCertificateNumber,
+                            BoardCertificateAcronymName = x.BoardCertificateAcronymName,
+                            CertificateAcronym = x.CertificateAcronym,
+                            certificateNo = x.certificateNo,
+                            CertIssueDate = x.CertIssueDate,
+                            CertNotes = x.CertNotes,
+                            CertRequestDate = x.CertRequestDate,
+                            CertRequestFee = x.CertRequestFee,
+                            CreatedAt = x.CreatedAt,
+                            CreatedBy = x.CreatedBy,
+                            ID = x.ID,
+                            IssueBoard = x.IssueBoard ?? x.IssueBoard.Value,
+                            IssueBoardAcronym = x.IssueBoardAcronym,
+                            ModifiedAt = x.ModifiedAt,
+                            ModifiedBy = x.ModifiedBy,
+                            PaymentNumber = x.PaymentNumber,
+                            PaymentType = x.PaymentType,
+                            PersonID = x.PersonID,
+                            PersonName = x.PersonName,
+                            RecertDate = x.RecertDate
+                        }).ToList();
 
             return data;
         }

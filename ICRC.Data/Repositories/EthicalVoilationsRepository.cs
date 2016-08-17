@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 namespace ICRC.Data.Repositories
 {
 
-    public interface IEthicalVoilationsRepository:IRepository<EthicalVoilation>
+    public interface IEthicalviolationsRepository:IRepository<EthicalViolation>
     {
 
     }
 
 
-    public class EthicalVoilationsRepository:RepositoryBase<EthicalVoilation>,IEthicalVoilationsRepository
+    public class EthicalviolationsRepository:RepositoryBase<EthicalViolation>,IEthicalviolationsRepository
     {
-        public EthicalVoilationsRepository(IDbFactory dbFactory):base(dbFactory)
+        public EthicalviolationsRepository(IDbFactory dbFactory):base(dbFactory)
         {
 
         }              

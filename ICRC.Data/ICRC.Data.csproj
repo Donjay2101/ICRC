@@ -68,6 +68,7 @@
     <Compile Include="Repositories\CertifiedPersonRepository.cs" />
     <Compile Include="Repositories\EthicalVoilationRepository.cs" />
     <Compile Include="Repositories\EthicalVoilationsRepository.cs" />
+    <Compile Include="Repositories\FileMakerRepository.cs" />
     <Compile Include="Repositories\PaymentTypeRepository.cs" />
     <Compile Include="Repositories\ReciprocitiesRepository.cs" />
     <Compile Include="Repositories\ReciprocityPersonMapping.cs" />

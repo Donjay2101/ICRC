@@ -53,7 +53,7 @@
             <span>Current board:</span><label>@ViewBag.CurrentBoard</label>
         </div>
    <div class="row">
-       <span>Ethical Voilations:</span><input type="checkbox"/>
+       <span>Ethical violations:</span><input type="checkbox"/>
    </div>
         @Html.HiddenFor(model=>model.ID)
     </div>       
@@ -66,7 +66,7 @@
             <li role="presentation" class="active"><a href="#Scores" aria-controls="Scores" id="tab1" name="SCORES" role="tab" data-toggle="tab">Scores</a></li>
             <li role="presentation"><a href="#Certificates" aria-controls="Certificates" id="tab2" role="tab" name="CERTIFICATIONS" data-toggle="tab">Certificates</a></li>
             <li role="presentation"><a href="#Reciprocity" aria-controls="Reciprocity" id="tab3"role="tab" name="RECIPROCITY" data-toggle="tab">Reciprocity</a></li>
-            <li role="presentation"><a href="#EthicalVoilations" aria-controls="EthicalVoilations" id="tab4" role="tab" name="VOILATIONS" data-toggle="tab">Ethical Voilations</a></li>
+            <li role="presentation"><a href="#Ethicalviolations" aria-controls="Ethicalviolations" id="tab4" role="tab" name="VIOLATIONS" data-toggle="tab">Ethical violations</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -74,12 +74,12 @@
             <div role="tabpanel" class="tab-pane active"  id="Scores">@Html.Action("Scores")</div>
             <div role="tabpanel" class="tab-pane"  id="Certificates"></div>
             <div role="tabpanel" class="tab-pane"  id="Reciprocity"></div>
-            <div role="tabpanel" class="tab-pane"  id="EthicalVoilations"></div>
+            <div role="tabpanel" class="tab-pane"  id="Ethicalviolations"></div>
         </div>
 
     </div>
         @*<div class="row">
-        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical Voilations</a>             
+        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical violations</a>             
         </div>*@
            @*<div class="row" id="ajaxLoad">
                     
@@ -127,9 +127,10 @@
                 sessionStorage.setItem('selected', 'Reciprocity');
                 $('#Reciprocity').load('/CertifiedPersons/Reciprocities/' + id);
             }
-            else if (data.toUpperCase() == "VOILATIONS") {
-                sessionStorage.setItem('selected', 'Voilations');
-                $('#EthicalVoilations').load('/CertifiedPersons/EthicalVoilations/' + id);
+            else if (data.toUpperCase() == "VIOLATIONS") {
+                debugger;
+                sessionStorage.setItem('selected', 'violations');
+                $('#Ethicalviolations').load('/CertifiedPersons/Ethicalviolations/' + id);
             }
         }
 

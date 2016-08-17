@@ -44,7 +44,8 @@
     <Compile Include="Boards.cs" />
     <Compile Include="Certificates.cs" />
     <Compile Include="CertifiedPersons.cs" />
-    <Compile Include="EthicalVoilation.cs" />
+    <Compile Include="EthicalViolation.cs" />
+    <Compile Include="FileMaker.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="StudentVoilations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +57,10 @@
     <Compile Include="UserRoles.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="ViewModels\CertificationViewModel.cs" />
+    <Compile Include="ViewModel\ReciprocitiesViewModel.cs" />
+    <Compile Include="ViewModel\ScoresViewModel.cs" />
+    <Compile Include="ViewModel\ScoreViewModel.cs" />
+    <Compile Include="ViewModel\StudentEthicalVoilationViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

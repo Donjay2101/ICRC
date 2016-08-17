@@ -49,8 +49,9 @@
     <Compile Include="CertifiedPersonService.cs" />
     <Compile Include="CustomRoleProviderService.cs" />
     <Compile Include="EthicalVoilationService.cs" />
+    <Compile Include="FileMakerService.cs" />
     <Compile Include="ScoresService.cs" />
-    <Compile Include="StudentEthicalVoilationService.cs" />
+    <Compile Include="StudentEthicalViolationService.cs" />
     <Compile Include="LoginService.cs" />
     <Compile Include="PaymentTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

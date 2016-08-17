@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICRC.Model
 {
-    public class EthicalVoilation
+    public class EthicalViolation
     {
         public int ID { get; set; }
         public string Name { get; set; }

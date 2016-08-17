@@ -2,123 +2,127 @@
 using ICRC.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ICRC.Data.Repositories
 {
-    public class StudentEthicalVoilationRepository:RepositoryBase<StudentVoilations>, IStudentEthicalVoilationRepository
+    public class StudentEthicalViolationRepository:RepositoryBase<Studentviolations>, IStudentEthicalViolationRepository
     {
 
-        public StudentEthicalVoilationRepository(IDbFactory dbFactory):base(dbFactory)
+        public StudentEthicalViolationRepository(IDbFactory dbFactory):base(dbFactory)
         {
 
         }
         
-        public override IEnumerable<StudentVoilations> GetAll()
+        public override IEnumerable<Studentviolations> GetAll()
         {
-            var data=(from voi in DbContext.StudentVoilations join 
-                     bc in DbContext.Boards  on voi.Board equals bc.ID
-                     join person in DbContext.CertifiedPersons on voi.personID equals person.ID
-                     join ethi in DbContext.EthicalVoilations on voi.EthicalVoilationId equals ethi.ID
-                     select new
-                     {
-                         Board=voi.Board,
-                         BoardName=bc.Acronym,
-                         Comments=voi.Comments,
-                         CreatedAt=voi.CreatedAt,
-                         CreatedBy=voi.CreatedBy,
-                         Date=voi.Date,
-                         EthicalVoilationId=voi.EthicalVoilationId,
-                         ID=voi.ID,
-                         IsLetterSent=voi.IsLetterSent,
-                         IsScanned=voi.IsScanned,
-                         ISsharable=voi.ISsharable,
-                         ModifiedAt=voi.ModifiedAt,
-                         ModifiedBy=voi.ModifiedBy,
-                         personID=voi.personID,
-                         PersonName=person.FirstName+" "+person.MiddleName+" "+person.LastName,
-                         EthicalVoilation=ethi.Name,
-                         Notes=voi.Notes
-                     }).ToList().Select(x=>new StudentVoilations {
+            var data = DbContext.Database.SqlQuery<IRCRC.Model.ViewModel.StudentEthicalViolationViewModel>("exec sp_StudentViolatons")
+                .Select(x => new Studentviolations
+                {
+                    Board = x.Board ,
+                    BoardName = x.BoardName,
+                    Comments = x.Comments,
+                    CreatedAt = x.CreatedAt,
+                    CreatedBy = x.CreatedBy,
+                    Date = x.Date,
+                    EthicalViolationId = x.EthicalViolationId ,
+                    ID = x.ID,
+                    IsLetterSent = x.IsLetterSent,
+                    IsScanned = x.IsScanned,
+                    ISsharable = x.ISsharable,
+                    ModifiedAt = x.ModifiedAt,
+                    ModifiedBy = x.ModifiedBy,
+                    personID = x.personID,
+                    PersonName = x.PersonName,
+                    EthicalViolation= x.EthicalViolation,
+                    Notes = x.Notes
+                }).ToList();
 
-                         Board = x.Board,
-                         BoardName = x.BoardName,
-                         Comments = x.Comments,
-                         CreatedAt = x.CreatedAt,
-                         CreatedBy = x.CreatedBy,
-                         Date = x.Date,
-                         EthicalVoilationId=x.EthicalVoilationId,                         
-                         ID = x.ID,
-                         IsLetterSent = x.IsLetterSent,
-                         IsScanned = x.IsScanned,
-                         ISsharable = x.ISsharable,
-                         ModifiedAt = x.ModifiedAt,
-                         ModifiedBy = x.ModifiedBy,
-                         personID = x.personID,
-                         PersonName = x.PersonName,
-                         EthicalVoilation=x.EthicalVoilation,
-                         Notes=x.Notes                         
-                     }).ToList();
+            //var data=(from bc in DbContext.Boards join
+            //    voi in DbContext.Studentviolations on bc.ID equals voi.Board
+            //      into g1
+            //          from grp1 in g1.DefaultIfEmpty()
+            //          join person in DbContext.CertifiedPersons on grp1.personID equals person.ID
+            //       into g2
+            //          from grp2 in g2.DefaultIfEmpty()
+            //          join ethi in DbContext.Ethicalviolations on  grp1.EthicalVoilationId equals ethi.ID
+            //         select new
+            //         {
+            //             Board=(int?)grp1.Board,
+            //             BoardName=bc.Acronym,
+            //             Comments= grp1.Comments,
+            //             CreatedAt= grp1.CreatedAt,
+            //             CreatedBy= grp1.CreatedBy,
+            //             Date= grp1.Date,
+            //             EthicalVoilationId = (int?)grp1.EthicalVoilationId,
+            //             ID=grp1.ID,
+            //             IsLetterSent= grp1.IsLetterSent,
+            //             IsScanned= grp1.IsScanned,
+            //             ISsharable= grp1.ISsharable,
+            //             ModifiedAt= grp1.ModifiedAt,
+            //             ModifiedBy= grp1.ModifiedBy,
+            //             personID=(int?)grp1.personID,
+            //             PersonName=grp2!=null?(grp2.FirstName+" "+ grp2.MiddleName+" "+ grp2.LastName):null,
+            //             EthicalVoilation=ethi.Name,
+            //             Notes= grp1.Notes
+            //         }).ToList().Select(x=>new Studentviolations {
+
+            //             Board = x.Board?? x.Board.Value,
+            //             BoardName = x.BoardName,
+            //             Comments = x.Comments,
+            //             CreatedAt = x.CreatedAt,
+            //             CreatedBy = x.CreatedBy,
+            //             Date = x.Date,
+            //             EthicalVoilationId=x.EthicalVoilationId?? x.EthicalVoilationId.Value,                         
+            //             ID = x.ID,
+            //             IsLetterSent = x.IsLetterSent,
+            //             IsScanned = x.IsScanned,
+            //             ISsharable = x.ISsharable,
+            //             ModifiedAt = x.ModifiedAt,
+            //             ModifiedBy = x.ModifiedBy,
+            //             personID = x.personID??x.personID.Value,
+            //             PersonName = x.PersonName,
+            //             EthicalVoilation=x.EthicalVoilation,
+            //             Notes=x.Notes                         
+            //         }).ToList();
 
             return data;
         }
 
-        public IEnumerable<StudentVoilations> GetByPersonID(int ID)
+        public IEnumerable<Studentviolations> GetByPersonID(int ID)
         {
-            var data = (from voi in DbContext.StudentVoilations where voi.personID==ID
-                        join bc in DbContext.Boards on voi.Board equals bc.ID
-                        join person in DbContext.CertifiedPersons on voi.personID equals person.ID
-                        join ethi in DbContext.EthicalVoilations on voi.EthicalVoilationId equals ethi.ID
-                        select new
-                        {
-                            Board = voi.Board,
-                            BoardName = bc.Acronym,
-                            Comments = voi.Comments,
-                            CreatedAt = voi.CreatedAt,
-                            CreatedBy = voi.CreatedBy,
-                            Date = voi.Date,
-                            EthicalVoilationId = voi.EthicalVoilationId,
-                            ID = voi.ID,
-                            IsLetterSent = voi.IsLetterSent,
-                            IsScanned = voi.IsScanned,
-                            ISsharable = voi.ISsharable,
-                            ModifiedAt = voi.ModifiedAt,
-                            ModifiedBy = voi.ModifiedBy,
-                            personID = voi.personID,
-                            PersonName = person.FirstName + " " + person.MiddleName + " " + person.LastName,
-                            EthicalVoilation = ethi.Name,
-                            Notes = voi.Notes
-                        }).ToList().Select(x => new StudentVoilations
-                        {
-
-                            Board = x.Board,
-                            BoardName = x.BoardName,
-                            Comments = x.Comments,
-                            CreatedAt = x.CreatedAt,
-                            CreatedBy = x.CreatedBy,
-                            Date = x.Date,
-                            EthicalVoilationId = x.EthicalVoilationId,
-                            ID = x.ID,
-                            IsLetterSent = x.IsLetterSent,
-                            IsScanned = x.IsScanned,
-                            ISsharable = x.ISsharable,
-                            ModifiedAt = x.ModifiedAt,
-                            ModifiedBy = x.ModifiedBy,
-                            personID = x.personID,
-                            PersonName = x.PersonName,
-                            EthicalVoilation = x.EthicalVoilation,
-                            Notes = x.Notes
-                        }).ToList();
+             var data = DbContext.Database.SqlQuery<IRCRC.Model.ViewModel.StudentEthicalViolationViewModel>("exec sp_StudentViolatons @personID",new SqlParameter("@personID",ID))
+               .Select(x => new Studentviolations
+               {
+                   Board = x.Board,
+                   BoardName = x.BoardName,
+                   Comments = x.Comments,
+                   CreatedAt = x.CreatedAt,
+                   CreatedBy = x.CreatedBy,
+                   Date = x.Date,
+                   EthicalViolationId = x.EthicalViolationId,
+                   ID = x.ID,
+                   IsLetterSent = x.IsLetterSent,
+                   IsScanned = x.IsScanned,
+                   ISsharable = x.ISsharable,
+                   ModifiedAt = x.ModifiedAt,
+                   ModifiedBy = x.ModifiedBy,
+                   personID = x.personID,
+                   PersonName = x.PersonName,
+                   EthicalViolation = x.EthicalViolation,
+                   Notes = x.Notes
+               }).ToList();
 
             return data;
         }
 
     }
 
-    public interface IStudentEthicalVoilationRepository:IRepository<StudentVoilations>
+    public interface IStudentEthicalViolationRepository :IRepository<Studentviolations>
     {
-        IEnumerable<StudentVoilations> GetByPersonID(int ID);
+        IEnumerable<Studentviolations> GetByPersonID(int ID);
     }
 }

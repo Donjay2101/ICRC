@@ -9,27 +9,27 @@ using System.Web.Mvc;
 namespace IC_RC.Controllers
 {
     [Authorize]
-    public class EthicalVoilationsController : Controller
+    public class EthicalviolationsController : Controller
     {
 
         public readonly ICertifiedPersonService CertifiedPersonService;
         public readonly ICertificationService CertificationService;
         public readonly ICertificateService CertificateService;
         public readonly IBoardService BoardService;
-        public readonly IStudentEthicalVoliationService studentethicalvoilationService;
-        public readonly IEthicalVoliationService ethicalVoilationService;
+        public readonly IStudentEthicalViolationService studentethicalviolationservice;
+        public readonly IEthicalViolationService ethicalviolationservice;
         string returnUrl="";
-        public EthicalVoilationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService, IStudentEthicalVoliationService studentethicalvoilationService, IEthicalVoliationService ethicalVoilationService)
+        public EthicalviolationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService, IStudentEthicalViolationService studentethicalviolationservice, IEthicalViolationService ethicalviolationservice)
         {
             this.CertifiedPersonService = CertifiedPersonService;
             this.CertificationService = CertificationService;
             this.CertificateService = CertificateService;
             this.BoardService = BoardService;
-            this.studentethicalvoilationService = studentethicalvoilationService;
-            this.ethicalVoilationService = ethicalVoilationService;
+            this.studentethicalviolationservice = studentethicalviolationservice;
+            this.ethicalviolationservice = ethicalviolationservice;
         }
 
-        // GET: EthicalVoilations
+        // GET: Ethicalviolations
         public ActionResult Index()
         {
             return View();
@@ -37,46 +37,46 @@ namespace IC_RC.Controllers
 
         public ActionResult GetData()
         {
-            var data = studentethicalvoilationService.GetEthicalVoilations();
+            var data = studentethicalviolationservice.GetEthicalviolations();
 
-            return PartialView("_Voilations", data);
+            return PartialView("_violations", data);
         }
-        // GET: EthicalVoilations/Details/5
+        // GET: Ethicalviolations/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: EthicalVoilations/Create
+        // GET: Ethicalviolations/Create
         public ActionResult Create()
         {
             SetReturnUrl();
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
-            ViewBag.EthicalVoilations = new SelectList(ethicalVoilationService.GetEthicalVoilations(), "ID", "Name");            
+            ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");            
             return View();
         }
 
 
 
-        // POST: EthicalVoilations/Create
+        // POST: Ethicalviolations/Create
         [HttpPost]
-        public ActionResult Create(StudentVoilations model)
+        public ActionResult Create(Studentviolations model)
         {
             SetReturnUrl();
             if(ModelState.IsValid)
             {
-                studentethicalvoilationService.CreateEthicalVoilation(model);
-                studentethicalvoilationService.Save();
+                studentethicalviolationservice.CreateEthicalVoilation(model);
+                studentethicalviolationservice.Save();
                 return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
-            ViewBag.EthicalVoilations = new SelectList(ethicalVoilationService.GetEthicalVoilations(), "ID", "Name");
+            ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");
             return View(model);
         }
 
-        // GET: EthicalVoilations/Edit/5
+        // GET: Ethicalviolations/Edit/5
         public ActionResult Edit(int? id)
         {
             SetReturnUrl();
@@ -84,50 +84,50 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-            var data = studentethicalvoilationService.GetEthicalVoilationByID(id.Value);
+            var data = studentethicalviolationservice.GetEthicalVoilationByID(id.Value);
             if(data==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
-            ViewBag.EthicalVoilations = new SelectList(ethicalVoilationService.GetEthicalVoilations(), "ID", "Name");
+            ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");
             return View(data);
         }
 
-        // POST: EthicalVoilations/Edit/5
+        // POST: Ethicalviolations/Edit/5
         [HttpPost]
-        public ActionResult Edit(StudentVoilations model)
+        public ActionResult Edit(Studentviolations model)
         {
             SetReturnUrl();
             if (ModelState.IsValid)
             {
-                studentethicalvoilationService.UpdateEthicalVoilation(model);
-                studentethicalvoilationService.Save();
+                studentethicalviolationservice.UpdateEthicalVoilation(model);
+                studentethicalviolationservice.Save();
 
                 return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
-            ViewBag.EthicalVoilations = new SelectList(ethicalVoilationService.GetEthicalVoilations(), "ID", "Name");
+            ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");
             return View(model);
         }
 
-        // GET: EthicalVoilations/Delete/5
+        // GET: Ethicalviolations/Delete/5
         //public ActionResult Delete(int id)
         //{
         //    return View();
         //}
 
-        // POST: EthicalVoilations/Delete/5
+        // POST: Ethicalviolations/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-                studentethicalvoilationService.Delete(id);
-                studentethicalvoilationService.Save();
+                studentethicalviolationservice.Delete(id);
+                studentethicalviolationservice.Save();
                 return Json(true, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Index");
             }

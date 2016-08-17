@@ -14,21 +14,21 @@ namespace IC_RC.Controllers
         public readonly ICertifiedPersonService CertifiedPersonService;
         public readonly ICertificationService CertificationService;
         public readonly IReciprocitiesService ReciprocityService;
-        public readonly IStudentEthicalVoliationService VoilationService;
+        public readonly IEthicalViolationService violationservice;
         public readonly IBoardService BoardService;
         public readonly IScoreservice scoreService;
-        public readonly IStudentEthicalVoliationService StundentethicalvoilationService;
+        public readonly IStudentEthicalViolationService Stundentethicalviolationservice;
         
 
-        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IStudentEthicalVoliationService VoilationService, IBoardService BoardService, IScoreservice scoreService, IStudentEthicalVoliationService StundentethicalvoilationService)
+        public CertifiedPersonsController(ICertifiedPersonService CertifiedPersonService, ICertificationService CertificationService, IReciprocitiesService ReciprocityService, IEthicalViolationService violationservice, IBoardService BoardService, IScoreservice scoreService, IStudentEthicalViolationService Stundentethicalviolationservice)
         {
             this.CertifiedPersonService = CertifiedPersonService;
             this.CertificationService = CertificationService;
             this.ReciprocityService = ReciprocityService;
-            this.VoilationService = VoilationService;
+            this.violationservice = violationservice;
             this.BoardService = BoardService;
             this.scoreService = scoreService;
-            this.StundentethicalvoilationService = StundentethicalvoilationService;
+            this.Stundentethicalviolationservice = Stundentethicalviolationservice;
         }
 
         public ActionResult Index()
@@ -84,14 +84,14 @@ namespace IC_RC.Controllers
             return PartialView("_Certifications", data);
         }
 
-        public ActionResult EthicalVoilations(int? ID)
+        public ActionResult Ethicalviolations(int? ID)
         {
             if (ID == null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-            var data = StundentethicalvoilationService.GetVoiltaionsByPersonID(ID.Value).ToList();
-            return PartialView("_Voilations", data);
+            var data = Stundentethicalviolationservice.GetVoiltaionsByPersonID(ID.Value).ToList();
+            return PartialView("_violations", data);
         }
 
 
@@ -170,31 +170,31 @@ namespace IC_RC.Controllers
             return View(person);
         }
 
-        [ChildActionOnly]
-        public ActionResult Certifications(int ID)
-        {
+        //[ChildActionOnly]
+        //public ActionResult Certifications(int ID)
+        //{
 
-            var certifications = CertificationService.GetCertificationsByPersonID(ID);
+        //    var certifications = CertificationService.GetCertificationsByPersonID(ID);
 
-            return PartialView("_Certifications",certifications);
-        }
+        //    return PartialView("_Certifications",certifications);
+        //}
 
-        [ChildActionOnly]
-        public ActionResult Voilations(int ID)
-        {
-            var voilations = VoilationService.GetVoiltaionsByPersonID(ID);
+        //[ChildActionOnly]
+        //public ActionResult violations(int ID)
+        //{
+        //    var violations = Stundentethicalviolationservice.GetVoiltaionsByPersonID(ID);
 
-            return PartialView("_Voilations",voilations);
+        //    return PartialView("_violations",violations);
 
-        }
+        //}
 
-        [ChildActionOnly]
-        public ActionResult Reciprocity(int ID)
-        {
+        //[ChildActionOnly]
+        //public ActionResult Reciprocity(int ID)
+        //{
 
-            var data = ReciprocityService.ReciprocityGetByPersonID(ID);           
-            return PartialView("_Recprocities",data);
-        }
+        //    var data = ReciprocityService.ReciprocityGetByPersonID(ID);           
+        //    return PartialView("_Recprocities",data);
+        //}
 
 
 

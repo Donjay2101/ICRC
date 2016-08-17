@@ -10,49 +10,49 @@ using System.Threading.Tasks;
 
 namespace ICRCService
 {
-    public interface IEthicalVoliationService
+    public interface IEthicalViolationService
     {
-        IEnumerable<EthicalVoilation> GetEthicalVoilations();
-        EthicalVoilation GetEthicalVoilationByID(int ID);
-        IEnumerable<EthicalVoilation> GetEthicalVoilations(Expression<Func<EthicalVoilation, bool>> where);       
-        void CreateEthicalVoilation(EthicalVoilation Board);
-        void UpdateEthicalVoilation(EthicalVoilation Board);
+        IEnumerable<EthicalViolation> GetEthicalviolations();
+        EthicalViolation GetEthicalVoilationByID(int ID);
+        IEnumerable<EthicalViolation> GetEthicalviolations(Expression<Func<EthicalViolation, bool>> where);       
+        void CreateEthicalVoilation(EthicalViolation Board);
+        void UpdateEthicalVoilation(EthicalViolation Board);
         void Save();
         void Delete(int ID);
     }
-    public class EthicalVoilationService : IEthicalVoliationService
+    public class EthicalviolationService : IEthicalViolationService
     {
-        public readonly IEthicalVoilationsRepository EthicalVoilationRepository;
+        public readonly IEthicalviolationsRepository EthicalVoilationRepository;
         public readonly IUnitOfWork unitOfWork;
 
-        public EthicalVoilationService(IEthicalVoilationsRepository EthicalVoilationRepository, IUnitOfWork unitOfWork)
+        public EthicalviolationService(IEthicalviolationsRepository EthicalVoilationRepository, IUnitOfWork unitOfWork)
         {
             this.EthicalVoilationRepository = EthicalVoilationRepository;
             this.unitOfWork = unitOfWork;
         }
 
         #region Methods
-        public IEnumerable<EthicalVoilation> GetEthicalVoilations()
+        public IEnumerable<EthicalViolation> GetEthicalviolations()
         {
             return EthicalVoilationRepository.GetAll().OrderBy(x=>x.Name);
         }
 
-        public EthicalVoilation GetEthicalVoilationByID(int ID)
+        public EthicalViolation GetEthicalVoilationByID(int ID)
         {
             return EthicalVoilationRepository.GetByID(ID);
         }
 
-        public IEnumerable<EthicalVoilation> GetEthicalVoilations(Expression<Func<EthicalVoilation, bool>> where)
+        public IEnumerable<EthicalViolation> GetEthicalviolations(Expression<Func<EthicalViolation, bool>> where)
         {
             return EthicalVoilationRepository.GetMany(where);
         }
 
-        public void CreateEthicalVoilation(EthicalVoilation voilation)
+        public void CreateEthicalVoilation(EthicalViolation voilation)
         {
             EthicalVoilationRepository.Add(voilation);
         }
 
-        public void UpdateEthicalVoilation(EthicalVoilation voilation)
+        public void UpdateEthicalVoilation(EthicalViolation voilation)
         {
             EthicalVoilationRepository.Update(voilation);
         }

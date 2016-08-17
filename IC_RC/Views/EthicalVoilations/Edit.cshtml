@@ -1,4 +1,4 @@
-﻿@model ICRC.Model.StudentVoilations
+﻿@model ICRC.Model.Studentviolations
 
 @{
     ViewBag.Title = "Create";
@@ -13,14 +13,14 @@
             <div class="form-group bottom-space">
                 <div class="col-md-offset-2 col-md-7">
                     <input type="submit" value="Save" class="btn btn-default custom-button" />
-                    <input type="button" value="Back" class="btn btn-default custom-button" onclick="window.location = '/EthicalVoilations/index';" />
+                    <input type="button" value="Back" class="btn btn-default custom-button" onclick="window.location = '/Ethicalviolations/index';" />
                 </div>
             </div>
         </div>
     </div>
     <hr />
     <div class="form-horizontal">
-        @*<h4>StudentVoilations</h4>
+        @*<h4>Studentviolations</h4>
         <hr />*@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.EthicalVoilationId, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
-                        @Html.DropDownListFor(model => model.EthicalVoilationId, (SelectList)ViewBag.EthicalVoilations, "select--", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.EthicalVoilationId, (SelectList)ViewBag.Ethicalviolations, "select--", new { @class = "form-control" })
                         @*@Html.EditorFor(model => model.EthicalVoilationId, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.ValidationMessageFor(model => model.EthicalVoilationId, "", new { @class = "text-danger" })
                     </div>

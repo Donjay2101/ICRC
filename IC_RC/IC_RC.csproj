@@ -227,6 +227,7 @@
     <Compile Include="Controllers\CertificationsController.cs" />
     <Compile Include="Controllers\CertifiedPersonsController.cs" />
     <Compile Include="Controllers\EthicalVoilationsController.cs" />
+    <Compile Include="Controllers\FileMakerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReciprocitiesController.cs" />
@@ -318,7 +319,7 @@
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\_CertifiedPersons.cshtml" />
     <Content Include="Views\Shared\_Certifications.cshtml" />
-    <Content Include="Views\Shared\_Voilations.cshtml" />
+    <Content Include="Views\Shared\_Violations.cshtml" />
     <Content Include="Views\CertifiedPersons\Index.cshtml" />
     <Content Include="Views\CertifiedPersons\Edit.cshtml" />
     <Content Include="Views\CertifiedPersons\Create.cshtml" />
@@ -349,6 +350,8 @@
     <Content Include="Views\Shared\_logOut-layout.cshtml" />
     <Content Include="Views\Home\PageNotFound.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
+    <Content Include="Views\Shared\_FileMaker.cshtml" />
+    <Content Include="Views\FileMaker\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

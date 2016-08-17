@@ -32,7 +32,7 @@ namespace ICRC.Model
         [DisplayName("Testing Company")]
         public int TestingCompany { get; set; }
         [DisplayName("Ethical Voilation")]
-        public bool EthicalVoilation { get; set; }
+        public bool EthicalViolation { get; set; }
         [DisplayName("Current Board")]
         public int CurrentBoardID { get; set; }
         [DisplayName("Other Board")]
