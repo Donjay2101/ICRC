@@ -10,13 +10,15 @@ using System.Threading.Tasks;
 namespace ICRC.Data.Repositories
 {
     public interface IFileMakerRepository:IRepository<FileMaker>
-    {       
+    {
+        IEnumerable<FileMakerReciprocities> GetReciprocities();
     }
     public class FileMakerRepository:RepositoryBase<FileMaker>,IFileMakerRepository
     {
         public FileMakerRepository(IDbFactory dbFactory):base(dbFactory)
         {
-
+            
+            
         }
 
         public override IEnumerable<FileMaker> GetAll()
@@ -46,6 +48,11 @@ namespace ICRC.Data.Repositories
             }); 
 
 
+        }
+
+        public IEnumerable<FileMakerReciprocities> GetReciprocities()
+        {
+            return DbContext.FileMakerReciprocities.ToList();
         }
     }
 }

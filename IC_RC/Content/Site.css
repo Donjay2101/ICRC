@@ -27,6 +27,7 @@
 .tabel tr:hover{
      color:#052c43;
 }
+
 #login {
     background: #Ea8824;
     color: white;
@@ -169,3 +170,16 @@ textarea{
     margin-top:60px;
 }
 }
+/*#submenu a:hover{
+      background-color: burlywood;
+     }*/
+
+/*#submenu ul li a:active {
+    color: yellowgreen;
+    background-color: white;
+}*/
+.activeclass{ 
+    background: burlywood!important;
+    text-decoration:none!important;
+}
+    

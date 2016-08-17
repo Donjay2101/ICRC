@@ -36,6 +36,7 @@ namespace ICRC.Data
         public DbSet<EthicalViolation> Ethicalviolations { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<FileMaker> FileMaker { get; set; }
+        public DbSet<FileMakerReciprocities> FileMakerReciprocities{ get; set; }
 
     }
 }

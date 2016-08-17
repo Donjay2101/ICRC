@@ -13,6 +13,7 @@ namespace ICRCService
     public interface IFileMakerService
     {
         IEnumerable<FileMaker> GetFileMakerData();
+        IEnumerable<FileMakerReciprocities> GetReciprocities();
 
 
     }
@@ -28,6 +29,11 @@ namespace ICRCService
        public IEnumerable<FileMaker> GetFileMakerData()
         {
             return FileMakerRepository.GetAll();
+        }
+
+        public IEnumerable<FileMakerReciprocities> GetReciprocities()
+        {
+            return FileMakerRepository.GetReciprocities();
         }
     }
 }

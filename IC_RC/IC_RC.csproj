@@ -352,6 +352,7 @@
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\Shared\_FileMaker.cshtml" />
     <Content Include="Views\FileMaker\Index.cshtml" />
+    <Content Include="Views\Shared\_FileMakerReciprocities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

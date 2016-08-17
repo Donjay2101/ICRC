@@ -2,8 +2,42 @@
 @{
     ViewBag.Title = "Index";
 }
+@section scripts
+{
+      <script>
+          
+          $(document).on('click', '#submenu > a', function () {
+
+              var value = $(this).attr('value');
+              $('a').removeClass('activeclass');
+              $(this).addClass('activeclass');
+              if(value.toUpperCase()=="CERTIFICATE")
+              {
+                  //$(this).removeClass('linkbtn');
+                
+                 
+                  $('#dataContainer').load('/FileMaker/Certificates');
+              }
+              else
+              {
+                 
+                  //$(this).removeClass('linkbtn');
+               
+                  $('#dataContainer').load('/FileMaker/Reciprocities');
+              }
+          })
+      </script>
+}
+<ul id="submenu">
+    
+        <a href="#" class="linkbtn activeclass" value="certificate">Certification</a>
+    
+    
+        <a href="#" class="linkbtn" value="reciprocity">Reciprocities</a>
+    
+</ul>
 
 <div id="dataContainer">
-    @Html.Action("GetData")
+    @Html.Action("Certificates")
 </div>
 

@@ -20,11 +20,18 @@ namespace IC_RC.Controllers
             return View();
         }
 
-        public ActionResult GetData()
+        public ActionResult Certificates()
         {
             var data = FileMakerService.GetFileMakerData().ToList();
 
             return PartialView("_FileMaker",data);
+        }
+
+        public ActionResult Reciprocities()
+        {
+            var data = FileMakerService.GetReciprocities().ToList();
+
+            return PartialView("_FileMakerReciprocities", data);
         }
 
         // GET: FileMaker/Details/5

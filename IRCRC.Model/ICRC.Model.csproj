@@ -46,6 +46,7 @@
     <Compile Include="CertifiedPersons.cs" />
     <Compile Include="EthicalViolation.cs" />
     <Compile Include="FileMaker.cs" />
+    <Compile Include="FileMakerReciprocities.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="StudentVoilations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

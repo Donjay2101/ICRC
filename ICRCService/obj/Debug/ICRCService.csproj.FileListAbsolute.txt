@@ -53,3 +53,14 @@ E:\Official\Work\Projects\source\ICRC\ICRCService\bin\Debug\EntityFramework.xml
 E:\Official\Work\Projects\source\ICRC\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\ICRC\ICRCService\obj\Debug\ICRCService.dll
 E:\Official\Work\Projects\source\ICRC\ICRCService\obj\Debug\ICRCService.pdb
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\ICRCService.dll
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\ICRCService.pdb
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\ICRC.Data.dll
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\IRCRC.Model.dll
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\EntityFramework.dll
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\ICRC.Data.pdb
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\IRCRC.Model.pdb
+E:\ICRC-master\ICRC-master\ICRCService\bin\Debug\EntityFramework.xml
+E:\ICRC-master\ICRC-master\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
+E:\ICRC-master\ICRC-master\ICRCService\obj\Debug\ICRCService.dll
+E:\ICRC-master\ICRC-master\ICRCService\obj\Debug\ICRCService.pdb
