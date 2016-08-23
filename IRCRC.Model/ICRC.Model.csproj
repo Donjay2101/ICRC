@@ -48,20 +48,26 @@
     <Compile Include="FileMaker.cs" />
     <Compile Include="FileMakerReciprocities.cs" />
     <Compile Include="PaymentType.cs" />
-    <Compile Include="StudentVoilations.cs" />
+    <Compile Include="ScoreBoard.cs" />
+    <Compile Include="StudentVilations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Certifications.cs" />
     <Compile Include="Reciprocities.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Scores.cs" />
     <Compile Include="TestingCompany.cs" />
+    <Compile Include="TestScore.cs" />
     <Compile Include="UserRoles.cs" />
     <Compile Include="Users.cs" />
-    <Compile Include="ViewModels\CertificationViewModel.cs" />
+    <Compile Include="ViewModel\CertificationViewModel.cs" />
     <Compile Include="ViewModel\ReciprocitiesViewModel.cs" />
     <Compile Include="ViewModel\ScoresViewModel.cs" />
     <Compile Include="ViewModel\ScoreViewModel.cs" />
     <Compile Include="ViewModel\StudentEthicalVoilationViewModel.cs" />
+    <Compile Include="ViewModel\TestScoreViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -66,7 +66,7 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             if(ModelState.IsValid)
             {
-                studentethicalviolationservice.CreateEthicalVoilation(model);
+                studentethicalviolationservice.CreateEthicalviolation(model);
                 studentethicalviolationservice.Save();
                 return Redirect(returnUrl);
             }
@@ -84,7 +84,7 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-            var data = studentethicalviolationservice.GetEthicalVoilationByID(id.Value);
+            var data = studentethicalviolationservice.GetEthicalviolationByID(id.Value);
             if(data==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
@@ -102,7 +102,7 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             if (ModelState.IsValid)
             {
-                studentethicalviolationservice.UpdateEthicalVoilation(model);
+                studentethicalviolationservice.UpdateEthicalviolation(model);
                 studentethicalviolationservice.Save();
 
                 return Redirect(returnUrl);

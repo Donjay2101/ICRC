@@ -66,15 +66,17 @@
     <Compile Include="Repositories\CertificatesRepository.cs" />
     <Compile Include="Repositories\CertificationsRepository.cs" />
     <Compile Include="Repositories\CertifiedPersonRepository.cs" />
-    <Compile Include="Repositories\EthicalVoilationRepository.cs" />
+    <Compile Include="Repositories\EthicalViolationRepository.cs" />
     <Compile Include="Repositories\EthicalVoilationsRepository.cs" />
     <Compile Include="Repositories\FileMakerRepository.cs" />
     <Compile Include="Repositories\PaymentTypeRepository.cs" />
     <Compile Include="Repositories\ReciprocitiesRepository.cs" />
     <Compile Include="Repositories\ReciprocityPersonMapping.cs" />
     <Compile Include="Repositories\RolesRepository.cs" />
+    <Compile Include="Repositories\ScoreBoardRepoistory.cs" />
     <Compile Include="Repositories\ScoresRepository.cs" />
     <Compile Include="Repositories\TestingCompanyRepository.cs" />
+    <Compile Include="Repositories\TestScoreRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>

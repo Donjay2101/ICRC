@@ -63,7 +63,7 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist" id="candidateNav">
-            <li role="presentation" class="active"><a href="#Scores" aria-controls="Scores" id="tab1" name="SCORES" role="tab" data-toggle="tab">Scores</a></li>
+            @*<li role="presentation" class="active"><a href="#Scores" aria-controls="Scores" id="tab1" name="SCORES" role="tab" data-toggle="tab">Scores</a></li>*@
             <li role="presentation"><a href="#Certificates" aria-controls="Certificates" id="tab2" role="tab" name="CERTIFICATIONS" data-toggle="tab">Certificates</a></li>
             <li role="presentation"><a href="#Reciprocity" aria-controls="Reciprocity" id="tab3"role="tab" name="RECIPROCITY" data-toggle="tab">Reciprocity</a></li>
             <li role="presentation"><a href="#Ethicalviolations" aria-controls="Ethicalviolations" id="tab4" role="tab" name="VIOLATIONS" data-toggle="tab">Ethical violations</a></li>
@@ -71,7 +71,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active"  id="Scores">@Html.Action("Scores")</div>
+            <div role="tabpanel" class="tab-pane active"  id="Scores">@Html.Action("Certificates",new { ID=Model.ID})</div>
             <div role="tabpanel" class="tab-pane"  id="Certificates"></div>
             <div role="tabpanel" class="tab-pane"  id="Reciprocity"></div>
             <div role="tabpanel" class="tab-pane"  id="Ethicalviolations"></div>
@@ -79,7 +79,7 @@
 
     </div>
         @*<div class="row">
-        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="voilation">Ethical violations</a>             
+        <a href="#" id="scores">Scores</a>|<a href="#" id="Certificates">Certificates</a>|<a href="#" id="Reciprocity">Reciprocity</a>|<a href="#" id="violation">Ethical violations</a>             
         </div>*@
            @*<div class="row" id="ajaxLoad">
                     

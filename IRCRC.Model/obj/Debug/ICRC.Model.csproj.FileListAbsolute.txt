@@ -25,6 +25,6 @@ E:\ICRC-master\ICRC-master\IRCRC.Model\obj\Debug\IRCRC.Model.dll
 E:\ICRC-master\ICRC-master\IRCRC.Model\obj\Debug\IRCRC.Model.pdb
 E:\Official\Work\Projects\source\ICRC\IRCRC.Model\bin\Debug\IRCRC.Model.dll
 E:\Official\Work\Projects\source\ICRC\IRCRC.Model\bin\Debug\IRCRC.Model.pdb
-E:\Official\Work\Projects\source\ICRC\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\ICRC\IRCRC.Model\obj\Debug\IRCRC.Model.dll
 E:\Official\Work\Projects\source\ICRC\IRCRC.Model\obj\Debug\IRCRC.Model.pdb
+E:\Official\Work\Projects\source\ICRC\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache

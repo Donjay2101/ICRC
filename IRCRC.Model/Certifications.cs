@@ -14,7 +14,7 @@ namespace ICRC.Model
         [DisplayName ("IC&RC Acronym")]
         public Nullable<int> CertID { get; set; }
         [DisplayName("Certificate Number")]
-        public int certificateNo { get; set; }
+        public Nullable<int> certificateNo { get; set; }
         [DisplayName("Issuing Board")]
         public Nullable<int> IssueBoard { get; set; }
 
@@ -23,13 +23,13 @@ namespace ICRC.Model
         [DisplayName("Board's Certificate Accronym")]
         public Nullable<int> BoardCertificateAcronym { get; set; }
         [DisplayName("Certificate Issued Date")]
-        public DateTime CertIssueDate { get; set; }
+        public Nullable<DateTime> CertIssueDate { get; set; }
         [DisplayName("Expiration Date")]
-        public DateTime RecertDate { get; set; }
+        public Nullable<DateTime> RecertDate { get; set; }
         [DisplayName("Certificate Request Date")]
-        public DateTime CertRequestDate { get; set; }
+        public Nullable<DateTime> CertRequestDate { get; set; }
         [DisplayName("Certificate Request Fee")]
-        public double CertRequestFee { get; set; }
+        public Nullable<double> CertRequestFee { get; set; }
         [DisplayName("Payment Number")]
         public string PaymentNumber { get; set; }
         [DisplayName("Payment Type")]

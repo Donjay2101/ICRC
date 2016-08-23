@@ -13,54 +13,54 @@ namespace ICRCService
     public interface IEthicalViolationService
     {
         IEnumerable<EthicalViolation> GetEthicalviolations();
-        EthicalViolation GetEthicalVoilationByID(int ID);
+        EthicalViolation GetEthicalviolationByID(int ID);
         IEnumerable<EthicalViolation> GetEthicalviolations(Expression<Func<EthicalViolation, bool>> where);       
-        void CreateEthicalVoilation(EthicalViolation Board);
-        void UpdateEthicalVoilation(EthicalViolation Board);
+        void CreateEthicalviolation(EthicalViolation Board);
+        void UpdateEthicalviolation(EthicalViolation Board);
         void Save();
         void Delete(int ID);
     }
     public class EthicalviolationService : IEthicalViolationService
     {
-        public readonly IEthicalviolationsRepository EthicalVoilationRepository;
+        public readonly IEthicalviolationsRepository EthicalviolationRepository;
         public readonly IUnitOfWork unitOfWork;
 
-        public EthicalviolationService(IEthicalviolationsRepository EthicalVoilationRepository, IUnitOfWork unitOfWork)
+        public EthicalviolationService(IEthicalviolationsRepository EthicalviolationRepository, IUnitOfWork unitOfWork)
         {
-            this.EthicalVoilationRepository = EthicalVoilationRepository;
+            this.EthicalviolationRepository = EthicalviolationRepository;
             this.unitOfWork = unitOfWork;
         }
 
         #region Methods
         public IEnumerable<EthicalViolation> GetEthicalviolations()
         {
-            return EthicalVoilationRepository.GetAll().OrderBy(x=>x.Name);
+            return EthicalviolationRepository.GetAll().OrderBy(x=>x.Name);
         }
 
-        public EthicalViolation GetEthicalVoilationByID(int ID)
+        public EthicalViolation GetEthicalviolationByID(int ID)
         {
-            return EthicalVoilationRepository.GetByID(ID);
+            return EthicalviolationRepository.GetByID(ID);
         }
 
         public IEnumerable<EthicalViolation> GetEthicalviolations(Expression<Func<EthicalViolation, bool>> where)
         {
-            return EthicalVoilationRepository.GetMany(where);
+            return EthicalviolationRepository.GetMany(where);
         }
 
-        public void CreateEthicalVoilation(EthicalViolation voilation)
+        public void CreateEthicalviolation(EthicalViolation violation)
         {
-            EthicalVoilationRepository.Add(voilation);
+            EthicalviolationRepository.Add(violation);
         }
 
-        public void UpdateEthicalVoilation(EthicalViolation voilation)
+        public void UpdateEthicalviolation(EthicalViolation violation)
         {
-            EthicalVoilationRepository.Update(voilation);
+            EthicalviolationRepository.Update(violation);
         }
 
         public void Delete(int ID)
         {
-            var data = EthicalVoilationRepository.GetByID(ID);
-            EthicalVoilationRepository.Delete(data);
+            var data = EthicalviolationRepository.GetByID(ID);
+            EthicalviolationRepository.Delete(data);
 
         }
 

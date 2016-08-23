@@ -58,7 +58,11 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-            ViewBag.CurrentBoard = BoardService.GetBoardByID(data.CurrentBoardID).Acronym;
+            if(data!=null && data.CurrentBoardID>0)
+            {
+                ViewBag.CurrentBoard = BoardService.GetBoardByID(data.CurrentBoardID).Acronym;
+            }
+            
             return View(data);
         }
 

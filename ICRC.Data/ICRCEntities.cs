@@ -37,6 +37,8 @@ namespace ICRC.Data
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<FileMaker> FileMaker { get; set; }
         public DbSet<FileMakerReciprocities> FileMakerReciprocities{ get; set; }
+        public DbSet<ScoreBoard> ScoreBoards { get; set; }
+        public DbSet<TestScore> TestScores { get; set; }
 
     }
 }

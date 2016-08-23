@@ -50,6 +50,7 @@
     <Compile Include="CustomRoleProviderService.cs" />
     <Compile Include="EthicalVoilationService.cs" />
     <Compile Include="FileMakerService.cs" />
+    <Compile Include="ScoreboardService.cs" />
     <Compile Include="ScoresService.cs" />
     <Compile Include="StudentEthicalViolationService.cs" />
     <Compile Include="LoginService.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="ReciprocitiesService.cs" />
     <Compile Include="RolesService.cs" />
     <Compile Include="TestingCompanyService.cs" />
+    <Compile Include="TestScoreService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>

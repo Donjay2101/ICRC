@@ -13,11 +13,11 @@ namespace ICRCService
     public interface IStudentEthicalViolationService
     {
         IEnumerable<Studentviolations> GetEthicalviolations();
-        Studentviolations GetEthicalVoilationByID(int ID);
+        Studentviolations GetEthicalviolationByID(int ID);
         IEnumerable<Studentviolations> GetEthicalviolations(Expression<Func<Studentviolations, bool>> where);
         IEnumerable<Studentviolations> GetVoiltaionsByPersonID(int ID);
-        void CreateEthicalVoilation(Studentviolations Board);
-        void UpdateEthicalVoilation(Studentviolations Board);
+        void CreateEthicalviolation(Studentviolations Board);
+        void UpdateEthicalviolation(Studentviolations Board);
         void Save();
         void Delete(int ID);
     }
@@ -38,7 +38,7 @@ namespace ICRCService
             return StudentEthicalViolationRepository.GetAll().OrderBy(x=>x.Date);
         }
 
-        public Studentviolations GetEthicalVoilationByID(int ID)
+        public Studentviolations GetEthicalviolationByID(int ID)
         {
             return StudentEthicalViolationRepository.GetByID(ID);
         }
@@ -48,14 +48,14 @@ namespace ICRCService
             return StudentEthicalViolationRepository.GetMany(where);
         }
 
-        public void CreateEthicalVoilation(Studentviolations voilation)
+        public void CreateEthicalviolation(Studentviolations violation)
         {
-            StudentEthicalViolationRepository.Add(voilation);
+            StudentEthicalViolationRepository.Add(violation);
         }
 
-        public void UpdateEthicalVoilation(Studentviolations voilation)
+        public void UpdateEthicalviolation(Studentviolations violation)
         {
-            StudentEthicalViolationRepository.Update(voilation);
+            StudentEthicalViolationRepository.Update(violation);
         }
 
         public IEnumerable<Studentviolations> GetVoiltaionsByPersonID(int ID)

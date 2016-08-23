@@ -48,7 +48,7 @@ namespace ICRC.Data.Repositories
             //          join person in DbContext.CertifiedPersons on grp1.personID equals person.ID
             //       into g2
             //          from grp2 in g2.DefaultIfEmpty()
-            //          join ethi in DbContext.Ethicalviolations on  grp1.EthicalVoilationId equals ethi.ID
+            //          join ethi in DbContext.Ethicalviolations on  grp1.EthicalviolationId equals ethi.ID
             //         select new
             //         {
             //             Board=(int?)grp1.Board,
@@ -57,7 +57,7 @@ namespace ICRC.Data.Repositories
             //             CreatedAt= grp1.CreatedAt,
             //             CreatedBy= grp1.CreatedBy,
             //             Date= grp1.Date,
-            //             EthicalVoilationId = (int?)grp1.EthicalVoilationId,
+            //             EthicalviolationId = (int?)grp1.EthicalviolationId,
             //             ID=grp1.ID,
             //             IsLetterSent= grp1.IsLetterSent,
             //             IsScanned= grp1.IsScanned,
@@ -66,7 +66,7 @@ namespace ICRC.Data.Repositories
             //             ModifiedBy= grp1.ModifiedBy,
             //             personID=(int?)grp1.personID,
             //             PersonName=grp2!=null?(grp2.FirstName+" "+ grp2.MiddleName+" "+ grp2.LastName):null,
-            //             EthicalVoilation=ethi.Name,
+            //             Ethicalviolation=ethi.Name,
             //             Notes= grp1.Notes
             //         }).ToList().Select(x=>new Studentviolations {
 
@@ -76,7 +76,7 @@ namespace ICRC.Data.Repositories
             //             CreatedAt = x.CreatedAt,
             //             CreatedBy = x.CreatedBy,
             //             Date = x.Date,
-            //             EthicalVoilationId=x.EthicalVoilationId?? x.EthicalVoilationId.Value,                         
+            //             EthicalviolationId=x.EthicalviolationId?? x.EthicalviolationId.Value,                         
             //             ID = x.ID,
             //             IsLetterSent = x.IsLetterSent,
             //             IsScanned = x.IsScanned,
@@ -85,7 +85,7 @@ namespace ICRC.Data.Repositories
             //             ModifiedBy = x.ModifiedBy,
             //             personID = x.personID??x.personID.Value,
             //             PersonName = x.PersonName,
-            //             EthicalVoilation=x.EthicalVoilation,
+            //             Ethicalviolation=x.Ethicalviolation,
             //             Notes=x.Notes                         
             //         }).ToList();
 

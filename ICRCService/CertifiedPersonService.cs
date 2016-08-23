@@ -49,7 +49,7 @@ namespace ICRCService
                 CreatedBy=x.CreatedBy,
                 CurrentBoardID=x.CurrentBoardID,
                 Email=x.Email,
-              //  EthicalVoilation=x.EthicalVoilation,
+              //  Ethicalviolation=x.Ethicalviolation,
                 FirstName=x.FirstName,
                 ID=x.ID,
                 LastName=x.LastName,

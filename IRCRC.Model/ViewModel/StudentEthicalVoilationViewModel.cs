@@ -14,13 +14,13 @@ namespace IRCRC.Model.ViewModel
         
         public Nullable<int> EthicalViolationId { get; set; }
         
-        public DateTime Date { get; set; }
+        public Nullable<DateTime> Date { get; set; }
         
-        public bool IsScanned { get; set; }
+        public Nullable<bool> IsScanned { get; set; }
         
-        public bool IsLetterSent { get; set; }
+        public Nullable<bool> IsLetterSent { get; set; }
         
-        public bool ISsharable { get; set; }
+        public Nullable<bool> ISsharable { get; set; }
         
         public string Comments { get; set; }
         

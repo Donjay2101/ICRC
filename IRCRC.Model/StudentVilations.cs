@@ -14,16 +14,16 @@ namespace ICRC.Model
         public int ID { get; set; }
         [DisplayName("Originating Board")]
         public Nullable<int> Board { get; set; }
-        [DisplayName("Type of Ethical Voilation")]
+        [DisplayName("Type of Ethical violation")]
         public Nullable<int> EthicalViolationId { get; set; }
-        [DisplayName("Date of Voilation")]
-        public DateTime Date { get; set; }
+        [DisplayName("Date of violation")]
+        public Nullable<DateTime> Date { get; set; }
         [DisplayName("Scanned & Saved")]
-        public bool IsScanned { get; set; }
+        public Nullable<bool> IsScanned { get; set; }
         [DisplayName("Letter Sent to Professional")]
-        public bool IsLetterSent { get; set; }
+        public Nullable<bool> IsLetterSent { get; set; }
         [DisplayName("Not to be shared with General Public")]
-        public bool ISsharable { get; set;}
+        public Nullable<bool> ISsharable { get; set;}
         [DisplayName("Comments")]
         public string Comments { get; set; }                
         [DisplayName("Person")]

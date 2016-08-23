@@ -13,6 +13,11 @@ namespace ICRC.Data.Repositories
         public CertifiedPersonRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
+
+        public override IEnumerable<CertifiedPersons> GetAll()
+        {
+            return DbContext.CertifiedPersons.OrderBy(x => x.LastName).ToList();
+        }
     }
 
     public interface ICertifiedPersonRepository:IRepository<CertifiedPersons>

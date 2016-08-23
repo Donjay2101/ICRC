@@ -31,7 +31,7 @@ namespace ICRC.Model
         public string Phone { get; set; }             
         [DisplayName("Testing Company")]
         public int TestingCompany { get; set; }
-        [DisplayName("Ethical Voilation")]
+        [DisplayName("Ethical violation")]
         public bool EthicalViolation { get; set; }
         [DisplayName("Current Board")]
         public int CurrentBoardID { get; set; }

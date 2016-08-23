@@ -233,6 +233,7 @@
     <Compile Include="Controllers\ReciprocitiesController.cs" />
     <Compile Include="Controllers\ScoresController.cs" />
     <Compile Include="Controllers\TestingCompaniesController.cs" />
+    <Compile Include="Controllers\TestScoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -331,9 +332,9 @@
     <Content Include="Views\Reciprocities\Index.cshtml" />
     <Content Include="Views\Reciprocities\Create.cshtml" />
     <Content Include="Views\Reciprocities\Edit.cshtml" />
-    <Content Include="Views\EthicalVoilations\Index.cshtml" />
-    <Content Include="Views\EthicalVoilations\Create.cshtml" />
-    <Content Include="Views\EthicalVoilations\Edit.cshtml" />
+    <Content Include="Views\EthicalViolations\Index.cshtml" />
+    <Content Include="Views\EthicalViolations\Create.cshtml" />
+    <Content Include="Views\EthicalViolations\Edit.cshtml" />
     <Content Include="Views\Shared\_TestingCompany.cshtml" />
     <Content Include="Views\TestingCompanies\Index.cshtml" />
     <Content Include="Views\TestingCompanies\Create.cshtml" />
@@ -353,6 +354,8 @@
     <Content Include="Views\Shared\_FileMaker.cshtml" />
     <Content Include="Views\FileMaker\Index.cshtml" />
     <Content Include="Views\Shared\_FileMakerReciprocities.cshtml" />
+    <Content Include="Views\Shared\_TestScore.cshtml" />
+    <Content Include="Views\TestScores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
