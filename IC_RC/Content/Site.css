@@ -7,7 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 160px;
+    margin-top: 130px;
     /*min-height: 500px;*/
 
 }
@@ -57,6 +57,9 @@
     text-decoration: none;
     background-color: #2196F3!important;
     color: white;
+}
+.navbar {
+    margin-bottom: 0px;
 }
 .highlight{
      font-size: 16px;
@@ -110,6 +113,32 @@ table.grid-table .grid-header>.grid-header-title {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
+.search-by-name {
+    border: 1px solid #d2d2d2;
+    padding-top: 10px;
+    border-radius: 5px;
+     padding-bottom: 5PX;
+}
+.search-by-name label{
+    font-size:12px;
+}
+.search-by-name .form-control {
+    height: 24px!important;
+    padding: 0px 6px!important;
+}
+.search-by-name .form-group {
+    margin-bottom: 5px;
+}
+.candidate {
+    font-size: 12px;
+    margin-top: 0px;
+    background: #2b90d1;
+    color: white;
+    padding-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 3px;
+}
 input,
 select,
 textarea {
@@ -156,10 +185,39 @@ textarea{
     background-color: white;
 }*/
 .form-control {
-    height: 30px!important;
-    padding: 6px 6px!important;
-    border-radius:0px;
+    height: 25px!important;
+    padding: 3px 6px!important;
+    border-radius: 0;
     box-shadow: inset 0 2px 2px rgba(0,0,0,.075)!important;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.test-result{
+    color: white;
+    background: #2b90d1;
+    font-size: 15px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+        margin-top: 5px;
+}
+.new-btn{
+    background: #2b90d1;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.menu {
+    margin-bottom: 10px;
+}
+label {
+    text-align: right;
+    font-size: smaller;
 }
 /*.table>tbody>tr:hover,table-striped>tbody>tr:nth-child(odd):hover
 {

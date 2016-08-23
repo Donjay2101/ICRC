@@ -17,10 +17,10 @@ $mid-blue:#327aa8;
 @mixin my_btn(){
     color: $white;
     background: $blue;
-    padding-top:$ten;
-    padding-bottom:$ten;
-    padding-right: $num;
-    padding-left:$num;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-right: 15px;
+    padding-left:15px;
     border-radius:3px;
 }
 @mixin my_btn_over(){
