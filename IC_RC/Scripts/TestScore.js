@@ -255,17 +255,23 @@ function getFullData(obj)
                             "<td>" +ConvertJsonDateString(data[i].ExamDate)+ "</td>" +
                             "<td>" + data[i].Status + "</td>" +
                             "<td>" + data[i].Score + "</td>" +
-                            "<td>" + data[i].TestingCompanyName + "</td>" +
-                            "<td>" + data[i].BoardName + "</td>" +
-                            "<td>" +
-                "<b>" +
+                            "<td>" + data[i].TestingCompanyName + "</td>";
+                    if(data[i].BoardName!=null)
+                    {
+                        htmlString+="<td>"+data[i].BoardName+"</td>";
+                    }
+                    else
+                    {
+                        htmlString+="<td></td>";
+                    }
+                    htmlString += "<td><div><b>" +
 
-                    "<a href='/CertifiedPersons/edit?id=69336' class='modal_link' id='editlink' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Edit'><span class='glyphicon glyphicon-pencil space' aria-hidden='true'></span></a>" +
+                    "<a href='#' onclick='openDialog(\"\/TestScores\/EditScores\",\'"+data[i].ID+"\')' class='modal_link' id='editlink' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Edit'><span class='glyphicon glyphicon-pencil space' aria-hidden='true'></span></a>" +
                 "</b>" +
             "</div></td>" +
 			"<td ><div>" +
                                     "<b>" +
-                                        "<a href='#' onclick='confirmDelete('/CertifiedPersons/Delete/69336','/CertifiedPersons')' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Delete'><span class='glyphicon glyphicon-trash space' aria-hidden='true'></span></a>" +
+                                        "<a href='#' onclick='confirmDelete(\"\/TestScores\/Delete\/" + data[i].ID + "\",\"/TestScores\")' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Delete'><span class='glyphicon glyphicon-trash space' aria-hidden='true'></span></a>" +
                                     "</b>" +
                                 "</div></td>" +
                             "</tr>";
