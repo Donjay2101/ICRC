@@ -6,7 +6,7 @@
         <div class="form-horizontal">
             @*<h4>TestScore</h4>*@
             <div class="row">
-                <div class="col-md-offset-6 col-md-6 search-by-name">
+                <div class="col-md-offset-4 col-md-8 search-by-name">
                     <h4 class="candidate">Find a Candidate</h4>
                     <div class="row">
                         <div class="col-md-6">
@@ -14,10 +14,8 @@
                                 <label class="control-label col-md-4">Last Name</label>
                                 @*@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })*@
                                 <div class="col-md-8" id="parentDiv">
-                                    <input type="text" class="form-control" name="@ViewBag.PageNumber" @*onfocus="getDropDown('1')"*@ id="txtLastName" />
-                                    <ul id="cmbLastName" style="height:100px;overflow-y:scroll;display:none">
-                                       
-                                    </ul>
+                                    <input type="text" class="form-control" name="@ViewBag.PageNumber" @*onfocus="getDropDown('1')"*@ id="txtLastName" />                       
+                                        <ul id="cmbLastName" class="nonbullet"></ul>                                   
                                     @*@Html.DropDownList("LastName",ViewBag.LastName as IEnumerable<SelectListItem>,new  { @class= "firstname form-control" })*@
                                     @*<select class="lastname form-control">
                                         <option value=""></option>
@@ -27,11 +25,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label col-md-4">First Name</label>
+                                <label class="control-label col-md-3">First Name</label>
                                 @*@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-4" })*@
-                                <div class="col-md-8" id="divFirstName">
+                                <div class="col-md-9" id="divFirstName">
                                     <input type="text" class="form-control"  @*onfocus="getDropDown('1')"*@ id="txtFirstName" />
-                                    <table id="tblfirstname" style="display:none">
+                                    <table id="tblfirstname" style="display:none" class="first-name-table table-bordered table table-condensed">
                                         <tr>
                                             <th>FirstName</th>
                                             <th>MI</th>
