@@ -1,4 +1,5 @@
-﻿using ICRCService;
+﻿using ICRC.Model;
+using ICRCService;
 using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,13 @@ namespace IC_RC.Controllers
 
         public readonly ITestScoreService testScoreService;
         public readonly IScoreboardService scoreboardService;
-        public TestScoresController(ITestScoreService testScoreService, IScoreboardService scoreboardService)
+        public readonly ITestingCompanyService companyService;
+        string returnUrl;
+        public TestScoresController(ITestScoreService testScoreService, IScoreboardService scoreboardService, ITestingCompanyService companyService)
         {
             this.testScoreService = testScoreService;
             this.scoreboardService = scoreboardService;
+            this.companyService = companyService;
         }
 
         // GET: TestScores
@@ -78,23 +82,37 @@ namespace IC_RC.Controllers
         // GET: TestScores/Create
         public ActionResult Create()
         {
+            SetReturnUrl();
+            ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
+            ViewBag.Boards= new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
             return View();
         }
 
         // POST: TestScores/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(TestScore model)
         {
-            try
+            SetReturnUrl();
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                testScoreService.CreateTestScore(model);
+                testScoreService.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction(returnUrl);
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
+            ViewBag.Boards = new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
+            return View(model);
+            //try
+            //{
+            //    // TODO: Add insert logic here
+
+            //    return RedirectToAction("Index");
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         // GET: TestScores/Edit/5
@@ -139,6 +157,27 @@ namespace IC_RC.Controllers
             {
                 return View();
             }
+        }
+
+        public void SetReturnUrl()
+        {
+            //to go to previous page
+            if (Request.QueryString["returnUrl"] != null)
+            {
+                returnUrl = Request.QueryString["returnUrl"];
+            }
+
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                returnUrl = "/TestScores/Index";
+                ViewBag.ReturnURL = returnUrl;
+
+            }
+            else
+            {
+                ViewBag.ReturnURL = returnUrl;
+            }
+            // return returnUrl;
         }
     }
 }

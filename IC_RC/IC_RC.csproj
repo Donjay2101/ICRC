@@ -358,9 +358,9 @@
     <Content Include="Views\Shared\_FileMakerReciprocities.cshtml" />
     <Content Include="Views\Shared\_TestScore.cshtml" />
     <Content Include="Views\TestScores\Index.cshtml" />
-    <Content Include="Views\TestScores\Create.cshtml" />
     <Content Include="Views\Shared\_TestScoreNormalView.cshtml" />
     <Content Include="Views\Shared\_TestScoreView.cshtml" />
+    <Content Include="Views\TestScores\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
