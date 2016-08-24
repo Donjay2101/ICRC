@@ -17,7 +17,7 @@ $(document).on('click', '#normalView', function () {
 
 //lazy loading code
 $(document).on('focus', '#txtLastName', function () {
-    $('#cmbLastName').css('display', 'block');
+   
     showOverLay();
     GetLastNames();                   
 });
@@ -33,6 +33,7 @@ function GetLastNames()
         type: "GET",
         success: function (data) {
             hideOverLay();
+            $('#cmbLastName').css('display', 'block');
             var htmlString = "";
             for (i = 0; i < data.length; i++) {
                 htmlString += "<li>" + data[i].LastName + "</li>";
@@ -67,25 +68,25 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click', '#cmbLastName>li', function (e) {
-        debugger;
-        //e.preventDefault();
+    $(document).on('click','#cmbLastName>li',function (e) {
+       
         var data = $(this).html();
         $('#txtLastName').val(data);
-       // console.log(data);
+        // console.log(data);
         console.log($('#txtLastName').val());
         $('#cmbLastName').css('display', 'none');
-                
     });
+   
             
 
            
 
            
-    //$(document).on('mouseleave', '#parentDiv', function () {
-    //    $('#LastName').focus();
-    //    $('#cmbLastName').css('display', 'none');
-    //});
+    $(document).on('mouseleave', '#parentDiv', function () {
+        $('#LastName').focus();
+        $('#cmbLastName').css('display', 'none');
+        $('#tblfirstname').css("display",'none');
+    });
 
     //$('#txtLastName').change(function () {
     //    console.log('asdadasd');
@@ -106,7 +107,10 @@ $(document).ready(function () {
     //    }
 
     //});
-
+    //$(document).on('focusout', '#txtLastName', function () {
+    //    //$('#LastName').focus();
+    //    $('#cmbLastName').css('display', 'none');
+    //});
 
 });
         
@@ -131,6 +135,7 @@ $(document).on('input', '#txtLastName', function () {
                     htmlString += "<li>" + data[i].LastName + "</li>";
                 }
                 $('#cmbLastName').html(htmlString);
+                $('#tblfirstname').html("");
             },
 
         });
@@ -153,8 +158,14 @@ function getFirstName() {
         success: function (data) {
             hideOverLay();
             if (data != null) {
-                
-                var htmlString = "";
+                $('#tblfirstname').html("");
+                var htmlString = "<tr>"+
+                                            "<th>FirstName</th>"+
+                                            "+<th>MI</th>"+
+                                            "<th>Address1</th>"+
+                                            "<th>City</th>"+
+                                            "<th>State</th>"+
+                                        "</tr>";
                 for (i = 0; i < data.length; i++) {
                     htmlString += "<tr>" +
                             "<td>" + data[i].FirstName + "</td>" +
@@ -172,8 +183,16 @@ function getFirstName() {
     });
 
 }
-$(document).on('focus', '#txtFirstName', function () {          
-    getFirstName();
+$(document).on('focus', '#txtFirstName', function () {
+    debugger;
+    var html=$('#tblfirstname').html();
+    
+    if (html == undefined || html == "")
+    {
+        getFirstName();
+    }
+
+    $('#tblfirstname').css('display', 'block');
 });
 
 $(document).on('click', '#tblfirstname tr', function () {
@@ -208,6 +227,7 @@ $(document).on('click', '#tblfirstname tr', function () {
 function getFullData(obj)
 {
     showOverLay();
+    $('#tblfirstname').css('display', 'none');
     $.ajax({
         url: "/TestScores/GetFullData",
         data: { model: obj },               
