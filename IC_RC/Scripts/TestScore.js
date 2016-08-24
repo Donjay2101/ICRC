@@ -41,7 +41,7 @@ function GetLastNames()
             }
             $('#cmbLastName').append(htmlString);
             var intval = parseInt(val);
-            debugger;
+            //debugger;
             intval = intval+1;
             //console.log(intval);
             $('#pagenum').val(intval);
@@ -124,7 +124,7 @@ $(document).ready(function () {
 //AutoComplete Code
 
 $(document).on('input', '#txtLastName', function () {
-    debugger;
+    //debugger;
     var data = $(this).val();
     if (data.length >=3) {
         $.ajax({
@@ -185,7 +185,7 @@ function getFirstName() {
 
 }
 $(document).on('focus', '#txtFirstName', function () {
-    debugger;
+    //debugger;
     var html=$('#tblfirstname').html();
     
     if (html == undefined || html == "")
@@ -198,7 +198,7 @@ $(document).on('focus', '#txtFirstName', function () {
 
 $(document).on('click', '#tblfirstname tr', function () {
             
-    debugger;
+    //debugger;
     var FirstName=$(this).find('td').eq(0).html();
     if (FirstName != undefined)
     {
@@ -278,12 +278,12 @@ function getFullData(obj)
                     {
                         htmlString+="<td></td>";
                     }
-                    htmlString += "<td><div><b>" +
+                    htmlString += "<td width=5% style='text-align:end'><div><b>" +
 
                     "<a href='#' onclick='openDialog(\"\/TestScores\/EditTestScores\",\""+data[i].ID+"\")' class='modal_link' id='editlink' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Edit'><span class='glyphicon glyphicon-pencil space' aria-hidden='true'></span></a>" +
                 "</b>" +
             "</div></td>" +
-			"<td ><div>" +
+			"<td width=5% style='text-align:end'><div>" +
                                     "<b>" +
                                         "<a href='#' onclick='confirmDelete(\"\/TestScores\/Delete\/" + data[i].ID + "\",\"/TestScores\")' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Delete'><span class='glyphicon glyphicon-trash space' aria-hidden='true'></span></a>" +
                                     "</b>" +
@@ -300,7 +300,7 @@ function getFullData(obj)
             console.log(err);
             alert(err.statusCode);
             alert(err.statusText);
-            debugger;
+            //debugger;
         }                
     });
 }
