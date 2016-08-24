@@ -68,25 +68,25 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click', '#cmbLastName>li', function (e) {
-        debugger;
-        //e.preventDefault();
+    $(document).on('click','#cmbLastName>li',function (e) {
+       
         var data = $(this).html();
         $('#txtLastName').val(data);
-       // console.log(data);
+        // console.log(data);
         console.log($('#txtLastName').val());
         $('#cmbLastName').css('display', 'none');
-                
     });
+   
             
 
            
 
            
-    //$(document).on('mouseleave', '#parentDiv', function () {
-    //    $('#LastName').focus();
-    //    $('#cmbLastName').css('display', 'none');
-    //});
+    $(document).on('mouseleave', '#parentDiv', function () {
+        $('#LastName').focus();
+        $('#cmbLastName').css('display', 'none');
+        $('#tblfirstname').css("display",'none');
+    });
 
     //$('#txtLastName').change(function () {
     //    console.log('asdadasd');
@@ -107,7 +107,10 @@ $(document).ready(function () {
     //    }
 
     //});
-
+    //$(document).on('focusout', '#txtLastName', function () {
+    //    //$('#LastName').focus();
+    //    $('#cmbLastName').css('display', 'none');
+    //});
 
 });
         
@@ -132,6 +135,7 @@ $(document).on('input', '#txtLastName', function () {
                     htmlString += "<li>" + data[i].LastName + "</li>";
                 }
                 $('#cmbLastName').html(htmlString);
+                $('#tblfirstname').html("");
             },
 
         });

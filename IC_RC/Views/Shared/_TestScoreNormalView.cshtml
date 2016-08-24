@@ -8,12 +8,12 @@
             <div class="row">
                 <div class="col-md-offset-4 col-md-8 search-by-name">
                     <h4 class="candidate">Find a Candidate</h4>
-                    <div class="row">
+                    <div class="row" id="parentDiv">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4">Last Name</label>
                                 @*@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })*@
-                                <div class="col-md-8" id="parentDiv">
+                                <div class="col-md-8" >
                                     <input type="text" class="form-control" name="@ViewBag.PageNumber" @*onfocus="getDropDown('1')"*@ id="txtLastName" />                       
                                         <ul id="cmbLastName" class="nonbullet"></ul>                                   
                                     @*@Html.DropDownList("LastName",ViewBag.LastName as IEnumerable<SelectListItem>,new  { @class= "firstname form-control" })*@
