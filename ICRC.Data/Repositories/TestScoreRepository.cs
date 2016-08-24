@@ -49,6 +49,44 @@ namespace ICRC.Data.Repositories
             return data;
         }
 
+
+        public void UpdateScores(TestScore model)
+        {
+            DbContext.Database.ExecuteSqlCommand("sp_udpateScores @Exam,@ExamDate,@Score,@Status,@TestingCompany,@Board,@Id", new SqlParameter("@Exam", model.Exam),
+                new SqlParameter("@ExamDate", model.ExamDate),
+                new SqlParameter("@Score", model.Score)
+                , new SqlParameter("@Status", model.Status),
+                new SqlParameter("@TestingCompany", model.TestingCompany),
+                new SqlParameter("@Board", model.Board),
+                new SqlParameter("@ID", model.ID));
+
+            //DbContext.Database.SqlQuery(null,"sp_udpateScores @Eaxm,@ExamDate,@Status,@TestingCompany,@Board,@Id", new SqlParameter("@Exam", model.Exam),
+            //    new SqlParameter("@ExamDate", model.ExamDate)
+            //    , new SqlParameter("@Status", model.Status),
+            //    new SqlParameter("@TestingCompany", model.TestingCompany),
+            //    new SqlParameter("@Board", model.Board),
+            //    new SqlParameter("@ID", model.ID));
+        }
+
+        public override void Update(TestScore model)
+        {
+            DbContext.Database.ExecuteSqlCommand("sp_udpateTestScoreInformation @LastName,@FirstName,@MiddleName,@Address1,@Address2,@EmailAddress,@City,@state,@ZipCode,@ZipPlus,@PreviousFname,@PreviousLName,@previousAddress1",
+                new SqlParameter("@LastName", model.LastName??""),
+                new SqlParameter("@FirstName", model.FirstName==null?"": model.FirstName)
+                , new SqlParameter("@MiddleName", model.MiddleName??""),
+                new SqlParameter("@Address1", model.Address1??""),
+                new SqlParameter("@Address2", model.Address2??""),
+                new SqlParameter("@EmailAddress", model.EmailAddress),
+                new SqlParameter("@City", model.City),
+                new SqlParameter("@State", model.State),
+                new SqlParameter("@ZipCode", model.ZipCode),
+                new SqlParameter("@ZipPlus", model.ZipPlus),
+                new SqlParameter("@PreviousFName", model.PreviousFirstName),
+                new SqlParameter("@PreviousLName", model.PreviousLastName),
+                new SqlParameter("@PreviousAddress1", model.PreviousAddress1)
+                );
+        }
+
     }
 
     public interface ITestScoreRepository : IRepository<TestScore>
@@ -62,6 +100,7 @@ namespace ICRC.Data.Repositories
         IEnumerable<TestScoreViewModel> GetFirstNames(string name);
 
         IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
+        void UpdateScores(TestScore model);
     }
     
 }

@@ -36,6 +36,18 @@ namespace IC_RC
             return "";
         }
 
+
+
+        public List<Status> Getstatus()
+        {
+            List<Status> list = new List<Status>()
+            {
+                new Status() { ID="Pass",Name="Pass"},
+                new Status() { ID="Fail",Name="Fail"}
+            };
+
+            return list;
+        }
        
 
     }
@@ -48,6 +60,13 @@ namespace IC_RC
     public class PaymentType
     {
         public int ID { get; set; }
+        public string Name { get; set; }
+    }
+
+
+    public class Status
+    {
+        public string ID { get; set; }
         public string Name { get; set; }
     }
 }

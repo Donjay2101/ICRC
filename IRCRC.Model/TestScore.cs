@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,5 +41,16 @@ public string City { get;set;}
 public string State { get;set;}
 public string ZipCode { get;set;}
 public string ZipPlus { get;set;}
+
+
+        [NotMapped]
+        public string PreviousFirstName { get; set; }
+
+        [NotMapped]
+        public string PreviousLastName { get; set; }
+
+        [NotMapped]
+        public string PreviousAddress1{ get; set; }
+
     }
 }

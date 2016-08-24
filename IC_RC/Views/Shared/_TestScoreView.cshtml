@@ -1,78 +1,153 @@
-﻿@model IRCRC.Model.ViewModel.TestScoreViewModel
+﻿@model ICRC.Model.TestScore
+    <div class="row">
+        <span id="closeDialog">X</span>
+    </div>
+<div class="row">
+    @Html.HiddenFor(model=>model.ID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Exam, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Exam, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Exam, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExamDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @if (Model.ExamDate.HasValue)
+                {
+                    <input type="text" class="form-control date" id="ExamDate" name="ExamDate"  value="@Model.ExamDate.Value.ToShortDateString()" />
+                }
+                else
+                {
+                    <input type="text" class="form-control date" id="ExamDate" name="ExamDate" />
+                }
 
-<div class="col-md-4">
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.ExamDate.Value.ToShortDateString(), new { htmlAttributes = new { @class = "form-control date" } })*@
+                @Html.ValidationMessageFor(model => model.ExamDate, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                <select name="Status" id="Status" class="form-control">
+                    <option  value="-1">Select--</option>
+                    @if (Model.Status == "Pass")
+                    {
+                        <option selected value="Pass">Pass</option>
+                    }
+                    else
+                    {
+                        <option value="Pass">Pass</option>
+                    }
+                    @if (Model.Status == "Fail")
+                    {
+                        <option selected value="Fail">Fail</option>
+                    }
+                    else
+                    {
+                        <option value="Fail">Fail</option>
+                    }
+                    
+                </select>
+                @*@Html.DropDownListFor(model => model.Status,ViewBag.Status as IEnumerable<SelectListItem>, "select--", new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Score, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestingCompany, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.TestingCompany,ViewBag.Companies as IEnumerable<SelectListItem>,"select--", new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.TestingCompany, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.TestingCompany, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Board, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.Board, ViewBag.Boards as IEnumerable<SelectListItem>,"select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Board, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ZipPlus, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.ZipPlus, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ZipPlus, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-7">
+                @*<input type="submit" value="Create" class="btn btn-default custom-button">*@
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-7">
+                        <input type="button" value="Save" id="btnScoreSave" class="btn btn-default custom-button">
+                    </div>
+                </div>
+            </div>
+        </div>    
 </div>
-<div class="col-md-4">
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-        </div>
-    </div>
-</div>
-<div class="col-md-4">
-    <div class="form-group">
-        @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        $(".date").each(function () {
+            //debugger;
+            //  var j= $.noConflict();
+            $(this).datepicker();
+        });
+
+    });
+
+    $(document).on('click', '#btnScoreSave', function () {
+
+        var ID = $('#ID').val();
+        var Exam = $('#Exam').val();
+        var ExamDate = $('#ExamDate').val();
+        var Status = $('#Status').val();
+        var Score = $('#Score').val();
+        var TestingCompany = $('#TestingCompany').val();
+        var Board = $('#Board').val();
+
+        var obj = {};
+        obj.ID = ID;
+        obj.Exam = Exam;
+        obj.ExamDate = ExamDate;
+        obj.Status = Status;
+        obj.TestingCompany = TestingCompany;
+        if (Board == "" || Board == undefined)
+        {
+            obj.Board = 0;
+        }
+        else
+        {
+            obj.Board = Board;
+        }
+
+        
+        obj.Score = Score;
+        showOverLay();
+        $.ajax({
+            url: "/TestScores/UpdateTestScores",
+            type: "POST",
+            data: { Model: obj },
+            dataType: "JSON",
+            success: function (data) {
+                hideOverLay();
+                getFullData();
+            },
+            error: function (err) {
+                alert(err.statusText);
+                hideOverLay();
+            }
+        });
+
+    });
+
+    $(document).on('click', '#closeDialog', function () {
+        $('#overlayDialog').css('display', 'none');
+    })
+</script>
+
+

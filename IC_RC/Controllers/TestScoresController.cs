@@ -73,6 +73,38 @@ namespace IC_RC.Controllers
         }
 
 
+        public ActionResult EditTestScores(int ID)
+        {
+
+            var data = testScoreService.GetTestScoresByID(ID);
+            ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
+            ViewBag.Boards = new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
+            ViewBag.Status = new SelectList(ShrdMaster.Instance.Getstatus(), "ID", "Name");
+            return PartialView("_TestScoreView", data);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTestScores(TestScore Model)
+        {
+            testScoreService.UpdateScores(Model);
+            testScoreService.Save();
+
+            return Json("1", JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateInformation(TestScore Model)
+        {
+            testScoreService.UpdateTestScore(Model);
+            testScoreService.Save();
+
+            return Json("1", JsonRequestBehavior.AllowGet);
+
+        }
+
+
         // GET: TestScores/Details/5
         public ActionResult Details(int id)
         {
@@ -85,6 +117,7 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
             ViewBag.Boards= new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
+            ViewBag.Status = new SelectList(ShrdMaster.Instance.Getstatus(), "ID", "Name");
             return View();
         }
 
@@ -102,6 +135,7 @@ namespace IC_RC.Controllers
             }
             ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
             ViewBag.Boards = new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
+            ViewBag.Status = new SelectList(ShrdMaster.Instance.Getstatus(), "ID", "Name");
             return View(model);
             //try
             //{

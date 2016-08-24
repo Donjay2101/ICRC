@@ -234,10 +234,14 @@ function getFullData(obj)
         type: "POST",
         dataType: "JSON",
         success: function (data) {
+            
             hideOverLay();
             if (data != null)
             {
-
+                $('#txtFirstName').val(data[0].FirstName);
+                $('#PreviousFirstName').val(data[0].FirstName);
+                $('#PreviousLastName').val(data[0].LastName);
+                $('#PreviousAddress1').val(data[0].Address1);
                 $('#LastName').val(data[0].LastName);
                 $('#FirstName').val(data[0].FirstName);
                 $('#MiddleName').val(data[0].MiddleName);
@@ -266,7 +270,7 @@ function getFullData(obj)
                     }
                     htmlString += "<td><div><b>" +
 
-                    "<a href='#' onclick='openDialog(\"\/TestScores\/EditScores\",\'"+data[i].ID+"\')' class='modal_link' id='editlink' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Edit'><span class='glyphicon glyphicon-pencil space' aria-hidden='true'></span></a>" +
+                    "<a href='#' onclick='openDialog(\"\/TestScores\/EditTestScores\",\""+data[i].ID+"\")' class='modal_link' id='editlink' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Edit'><span class='glyphicon glyphicon-pencil space' aria-hidden='true'></span></a>" +
                 "</b>" +
             "</div></td>" +
 			"<td ><div>" +
@@ -290,6 +294,48 @@ function getFullData(obj)
         }                
     });
 }
+
+
+function openDialog(url,id)
+{
+    $('#dataContainer').load(url + "?ID=" + id);
+    $('#overlayDialog').css('display', 'block');
+}
+
+
+function saveInformation()
+{
+    showOverLay();
+    var obj = {};
+    obj.PreviousFirstName=$('#PreviousFirstName').val();
+    obj.PreviousLastName=$('#PreviousLastName').val();
+    obj.PreviousAddress1=$('#PreviousAddress1').val();
+    obj.LastName=$('#LastName').val();
+    obj.FirstName = $('#FirstName').val();
+    obj.MiddleName = $('#MiddleName').val();
+    obj.Address1= $('#Address1').val();
+    obj.Address2 = $('#Address2').val();
+    obj.EmailAddress = $('#EmailAddress').val();
+    obj.City= $('#City').val();
+    obj.State=$('#State').val();
+    obj.ZipCode=$('#ZipCode').val();
+    obj.ZipPlue = $('#ZipPlus').val();    
+    $.ajax({
+        url: "/TestScores/UpdateInformation",
+        type: "POST",
+        data: { model: obj },       
+        success: function (data) {
+            hideOverLay();
+        },
+        error:function(err)
+        {
+            alert(err.statusText)
+            hideOverLay();
+        }
+
+    });
+}
+
 
 
 

@@ -25,6 +25,7 @@ namespace ICRCService
         IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string data);
         IEnumerable<TestScoreViewModel> GetFirstNames(string name);
         IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
+        void UpdateScores(TestScore model);
         void Save();
         void Delete(int ID);
 
@@ -43,6 +44,11 @@ namespace ICRCService
 
         #region Methods
 
+
+        public void UpdateScores(TestScore model)
+        {
+            testScoreRepository.UpdateScores(model);
+        }
 
         public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model)
         {
