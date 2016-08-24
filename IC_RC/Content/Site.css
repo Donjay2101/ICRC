@@ -139,6 +139,34 @@ table.grid-table .grid-header>.grid-header-title {
     padding-bottom: 4px;
     border-radius: 3px;
 }
+.lastname-search{
+  
+}
+#cmbLastName {
+    padding-left: 6px;
+    font-size: 12px;
+    list-style-type: none;
+    height: 250px;
+    overflow-y: scroll;
+    border-bottom: 1px solid #d1cfcf;
+    border-right: 1px solid #d1cfcf;
+    border-left: 1px solid #d1cfcf;
+    display: none;
+    position: absolute;
+    width: 88%;
+    z-index: 9999;
+    background: #e7f5ff;
+    color: #8b9296;
+}
+.first-name-table{
+    display: block;
+    font-size: 11px;
+    position: absolute;
+    width: 100%;
+    background: #dfeff9;
+    z-index: 9999;
+    /* top: 23px; */
+}
 input,
 select,
 textarea {
