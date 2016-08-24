@@ -1,17 +1,17 @@
 ﻿@model ICRC.Model.TestScore
     <div class="row">
-        <span id="closeDialog">X</span>
+        <span id="closeDialog" class="glyphicon glyphicon-remove pull-right"></span>
     </div>
-<div class="row">
+<div class="row" style="margin-top: 30px;">
     @Html.HiddenFor(model=>model.ID)
-        <div class="form-group">
+        <div class="form-group field-space">
             @Html.LabelFor(model => model.Exam, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 @Html.EditorFor(model => model.Exam, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Exam, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group field-space">
             @Html.LabelFor(model => model.ExamDate, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 @if (Model.ExamDate.HasValue)
@@ -27,7 +27,7 @@
                 @Html.ValidationMessageFor(model => model.ExamDate, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group field-space">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 <select name="Status" id="Status" class="form-control">
@@ -54,14 +54,14 @@
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group field-space">
             @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 @Html.EditorFor(model => model.Score, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group field-space">
             @Html.LabelFor(model => model.TestingCompany, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 @Html.DropDownListFor(model => model.TestingCompany,ViewBag.Companies as IEnumerable<SelectListItem>,"select--", new { @class = "form-control" })
@@ -69,19 +69,19 @@
                 @Html.ValidationMessageFor(model => model.TestingCompany, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group field-space">
             @Html.LabelFor(model => model.Board, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
                 @Html.DropDownListFor(model => model.Board, ViewBag.Boards as IEnumerable<SelectListItem>,"select--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Board, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group field-space">
             <div class="col-md-offset-2 col-md-7">
                 @*<input type="submit" value="Create" class="btn btn-default custom-button">*@
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-7">
-                        <input type="button" value="Save" id="btnScoreSave" class="btn btn-default custom-button">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="button" value="Save" id="btnScoreSave" class="btn btn-default custom-button popup-btn">
                     </div>
                 </div>
             </div>

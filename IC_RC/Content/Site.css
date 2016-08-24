@@ -270,4 +270,29 @@ label {
     background: burlywood!important;
     text-decoration:none!important;
 }
-    
+    #dataContainer{
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    background: #f4fbf9;
+    padding: 30px;
+    box-shadow: 0 0 30px #585050;
+    border-radius: 4px;
+    padding-top: 10px;
+    width: 30%;
+    border: 3px solid #7191a5;
+}
+    .field-space{
+          padding-bottom: 25px;
+    }
+    .popup-btn{
+     background: #ef9232;
+    margin-left: -15PX;
+    border-radius: 2px;
+    width: 100%;
+    margin-top: 15%;
+    }
+     .popup-btn:hover {
+  background:#c17629;
+  color:white;
+}
