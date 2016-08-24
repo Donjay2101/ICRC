@@ -19,6 +19,7 @@ $(document).on('click', '#normalView', function () {
 $(document).on('focus', '#txtLastName', function () {
    
     showOverLay();
+    $('#tblfirstname').html("");
     GetLastNames();                   
 });
        
@@ -227,6 +228,7 @@ $(document).on('click', '#tblfirstname tr', function () {
 function getFullData(obj)
 {
     showOverLay();
+    $('#tblResult').html("");
     $('#tblfirstname').css('display', 'none');
     $.ajax({
         url: "/TestScores/GetFullData",
@@ -251,7 +253,15 @@ function getFullData(obj)
                 $('#State').val(data[0].State);
                 $('#ZipCode').val(data[0].ZipCode);
                 $('#ZipPlus').val(data[0].ZipPlus);
-                var htmlString = "";
+                var htmlString = "<tr>"+
+                            "<th><label>Exam</label></th>"+
+                            "<th><label>Exam Date</label></th>"+
+                            "<th><label>Status</label></th>"+
+                            "<th><label>Scalesd Score</label></th>"+
+                            "<th><label>Testing Company</label></th>"+
+                            "<th><label>Board</label></th>"+
+                            "<th colspan='2'><label>Action</label></th>"+
+                        "</tr>";
                 for (i = 0;i<data.length;i++)
                 {
                     htmlString+="<tr>"+

@@ -110,6 +110,9 @@
         var TestingCompany = $('#TestingCompany').val();
         var Board = $('#Board').val();
 
+        var firstname = $('#FirstName').val();
+        var lastname = $('#LastName').val();
+        var address = $('#Address1').val();
         var obj = {};
         obj.ID = ID;
         obj.Exam = Exam;
@@ -135,7 +138,11 @@
             dataType: "JSON",
             success: function (data) {
                 hideOverLay();
-                getFullData();
+                var obj1 = {};
+                obj1.FirstName = firstname;
+                obj1.LastName = lastname;
+                obj1.Address1 = address;
+                getFullData(obj1);
             },
             error: function (err) {
                 alert(err.statusText);
