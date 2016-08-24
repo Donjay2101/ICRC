@@ -213,6 +213,7 @@
     <Content Include="Images\header.png" />
     <Content Include="Images\icrc.png" />
     <Content Include="Images\IC_RClogo.png" />
+    <Content Include="Images\loader.gif" />
     <Content Include="Images\new2.png" />
     <Content Include="Images\page404.png" />
     <Content Include="Images\Untitled-1.png" />
@@ -279,6 +280,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\TestScore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -357,6 +359,8 @@
     <Content Include="Views\Shared\_TestScore.cshtml" />
     <Content Include="Views\TestScores\Index.cshtml" />
     <Content Include="Views\TestScores\Create.cshtml" />
+    <Content Include="Views\Shared\_TestScoreNormalView.cshtml" />
+    <Content Include="Views\Shared\_TestScoreView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

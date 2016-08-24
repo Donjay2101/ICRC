@@ -1,4 +1,5 @@
 ﻿using ICRCService;
+using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,44 @@ namespace IC_RC.Controllers
             var data = testScoreService.GetTestScores().ToList();
             return PartialView("_TestScore", data);
         }
+
+        public ActionResult NormalView()
+        {
+            ViewBag.PageNumber = 1;
+           // ViewBag.LastName = new SelectList(testScoreService.GetLastNames(1),"LastName","LastName");
+            return PartialView("_TestScoreNormalView");
+        }
+
+
+        public ActionResult GetLastNames(int PageNum)
+        {
+            var data = testScoreService.GetLastNames(PageNum);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult SearchLastNames(string initial)
+        {
+            var data = testScoreService.GetTestScoreByPerson(initial);
+            return Json(data,JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult GetFirstNames(string name)
+        {
+            var data = testScoreService.GetFirstNames(name);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetFullData(TestScoreViewModel model)
+        {            
+                var data = testScoreService.GetDataByFirstAndLastName(model);
+                return Json(data,JsonRequestBehavior.AllowGet);            
+        }
+
 
         // GET: TestScores/Details/5
         public ActionResult Details(int id)

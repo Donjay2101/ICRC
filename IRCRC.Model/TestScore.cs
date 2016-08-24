@@ -9,31 +9,31 @@ namespace ICRC.Model
     public class TestScore
     {
         public int ID { get; set; }
-      public int TestingCompany { get; set; }
+      public Nullable<int> TestingCompany { get; set; }
       public string Exam { get; set; }
         public string LastName { get;set;}
         public string FirstName { get;set;}
         public string MiddleName { get;set;}
         public string CandidateId { get;set;}
         public string EmailAddress { get;set;}
-        public string ExamDate { get;set;}
+        public Nullable<DateTime> ExamDate { get;set;}
         public string Status { get;set;}
-        public string Score { get;set;}
-        public string Scale { get;set;}
+        public Nullable<double> Score { get;set;}
+        public Nullable<double> Scale { get;set;}
         public string TestCode { get;set;}
         public string Form { get;set;}
-        public string One{get;set;}
-    public string Two { get;set;}
-public string Three{get;set;}
-      public string Four{get;set;}
-      public string Five{get;set;}
-      public string Six{get;set;}
-      public string Seventh{get;set;}
-      public string Eight{get;set;}
-      public string Nine{get;set;}
-      public string Ten{get;set;}
+        public Nullable<double> One {get;set;}
+    public Nullable<double> Two { get;set;}
+public Nullable<double> Three {get;set;}
+      public Nullable<double>  Four {get;set;}
+      public Nullable<double> Five {get;set;}
+      public Nullable<double> Six {get;set;}
+      public Nullable<double>  Seventh {get;set;}
+      public Nullable<double>  Eight {get;set;}
+      public Nullable<double>  Nine {get;set;}
+      public Nullable<double> Ten {get;set;}
       public string Method { get;set;}
-public string Board { get;set;}
+public Nullable<int> Board { get;set;}
 public string Address1 { get;set;}
 public string Address2 { get;set;}
 public string City { get;set;}

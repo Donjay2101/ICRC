@@ -21,6 +21,10 @@ namespace ICRCService
         void CreateTestScore(TestScore Board);
         void UpdateTestScore(TestScore Board);
         IEnumerable<TestScoreViewModel> GetDistinctTestScores();
+        IEnumerable<TestScoreViewModel> GetLastNames(int num);
+        IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string data);
+        IEnumerable<TestScoreViewModel> GetFirstNames(string name);
+        IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
         void Save();
         void Delete(int ID);
 
@@ -38,6 +42,22 @@ namespace ICRCService
 
 
         #region Methods
+
+
+        public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model)
+        {
+            return testScoreRepository.GetDataByFirstAndLastName(model);
+        }
+        public IEnumerable<TestScoreViewModel> GetFirstNames(string name)
+        {
+            return testScoreRepository.GetFirstNames(name);
+        }
+
+
+        public IEnumerable<TestScoreViewModel> GetLastNames(int num)
+        {
+            return testScoreRepository.GetLastNames(num);
+        }
 
         public IEnumerable<TestScoreViewModel> GetDistinctTestScores()
         {
@@ -77,7 +97,7 @@ namespace ICRCService
             testScoreRepository.Update(score);
         }
 
-        public IEnumerable<TestScore> GetTestScoreByPerson(string name)
+        public IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string name)
         {
             return testScoreRepository.GetTestScoreByPerson(name);
         }
