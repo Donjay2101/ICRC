@@ -374,7 +374,6 @@ E:\Official\Work\Projects\ICRC\IC_RC\bin\Microsoft.Owin.Security.MicrosoftAccoun
 E:\Official\Work\Projects\ICRC\IC_RC\obj\Debug\IC_RC.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\ICRC\IC_RC\obj\Debug\IC_RC.dll
 E:\Official\Work\Projects\ICRC\IC_RC\obj\Debug\IC_RC.pdb
-C:\Users\EACDPC-044\Source\Repos\ICRC\IC_RC\bin\LoggerApp.pdb
 E:\ICRC-master\ICRC-master\IC_RC\bin\ApplicationInsights.config
 E:\ICRC-master\ICRC-master\IC_RC\bin\roslyn\csc.exe
 E:\ICRC-master\ICRC-master\IC_RC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
