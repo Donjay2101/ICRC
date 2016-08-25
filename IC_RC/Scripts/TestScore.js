@@ -272,13 +272,13 @@ function getFullData(obj)
                 $('#ZipCode').val(data[0].ZipCode);
                 $('#ZipPlus').val(data[0].ZipPlus);
                 var htmlString = "<tr>"+
-                            "<th><label>Exam</label></th>"+
-                            "<th><label>Exam Date</label></th>"+
-                            "<th><label>Status</label></th>"+
-                            "<th><label>Scalesd Score</label></th>"+
-                            "<th><label>Testing Company</label></th>"+
-                            "<th><label>Board</label></th>"+
-                            "<th colspan='2'><label>Action</label></th>"+
+                            "<th style='text-align:center'><label>Exam</label></th>"+
+                            "<th style='text-align:center'><label>Exam Date</label></th>" +
+                            "<th style='text-align:center'><label>Status</label></th>" +
+                            "<th style='text-align:center'><label>Scalesd Score</label></th>" +
+                            "<th style='text-align:center'><label>Testing Company</label></th>" +
+                            "<th style='text-align:center'><label>Board</label></th>" +
+                            "<th colspan='2' style='text-align:center'><label>Action</label></th>" +
                         "</tr>";
                 for (i = 0;i<data.length;i++)
                 {
