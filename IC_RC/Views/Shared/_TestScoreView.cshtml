@@ -14,14 +14,7 @@
         <div class="form-group field-space">
             @Html.LabelFor(model => model.ExamDate, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @if (Model.ExamDate.HasValue)
-                {
-                    <input type="text" class="form-control date" id="ExamDate" name="ExamDate"  value="@Model.ExamDate.Value.ToShortDateString()" />
-                }
-                else
-                {
-                    <input type="text" class="form-control date" id="ExamDate" name="ExamDate" />
-                }
+                <input type="text" class="form-control date" id="ExamDate" name="ExamDate" value="@Model.ExamDate" />
 
                 @*@Html.EditorFor(model => model.ExamDate.Value.ToShortDateString(), new { htmlAttributes = new { @class = "form-control date" } })*@
                 @Html.ValidationMessageFor(model => model.ExamDate, "", new { @class = "text-danger" })

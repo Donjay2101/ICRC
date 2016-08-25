@@ -3,6 +3,7 @@ using ICRCService;
 using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -56,7 +57,48 @@ namespace IC_RC.Controllers
             return Json(data,JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult UploadCSV()
+        {
+            if(Request.Files.Count>0)
+            {
+                HttpFileCollectionBase files = Request.Files;
+                HttpPostedFileBase file = files[0];
+                string filename = "";
 
+                if(Request.Browser.Browser.ToUpper()=="IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                {
+                    string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                    filename = testfiles[testfiles.Length - 1];
+                }
+                else
+                {
+                    filename = file.FileName+"-"+DateTime.Now.Day.ToString()+"-"+DateTime.Now.Month.ToString()+"-"+DateTime.Now.Year.ToString()+"-("+DateTime.Now.Minute+"-"+DateTime.Now.Second+")";
+                }
+                filename = Path.Combine(Server.MapPath("~/Uploads/TestScores"),filename);
+                file.SaveAs(filename);
+
+                testScoreService.UploadCSV(filename);
+
+                return Json("1", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("-1", JsonRequestBehavior.AllowGet);
+            }
+
+            
+        }
+
+        //public void UploadData(string FilePath)
+        //{
+
+
+        //}
+
+        //public string Name(string filename)
+        //{
+        //    string path = Server.MapPath("~/Uploads/TestScores");
+        //}
 
         public ActionResult GetFirstNames(string name)
         {
@@ -172,25 +214,22 @@ namespace IC_RC.Controllers
         }
 
         // GET: TestScores/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: TestScores/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+       
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            SetReturnUrl();
+            // TODO: Add delete logic here
+            testScoreService.Delete(id);
+            testScoreService.Save();
+            return Json("1", JsonRequestBehavior.AllowGet);
+            
         }
 
         public void SetReturnUrl()

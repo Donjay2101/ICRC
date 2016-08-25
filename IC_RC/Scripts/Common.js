@@ -5,7 +5,7 @@ function gotoCreate(url) {
     debugger;
     var cururl = window.location.href;
     var comidx = cururl.split('/');
-    var returnUrl=""; 
+    var returnUrl="/"; 
     for(i=3;i<comidx.length;i++)
     {
         if(comidx[i]!="#")

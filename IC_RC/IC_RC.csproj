@@ -365,6 +365,7 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\TestScores\" />
     <Folder Include="Views\TestingCompany\" />
   </ItemGroup>
   <ItemGroup>

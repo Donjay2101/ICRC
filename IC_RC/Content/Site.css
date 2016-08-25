@@ -118,6 +118,7 @@ table.grid-table .grid-header>.grid-header-title {
     padding-top: 10px;
     border-radius: 5px;
      padding-bottom: 5PX;
+     margin-top: 8px;
 }
 .search-by-name label{
     font-size:12px;

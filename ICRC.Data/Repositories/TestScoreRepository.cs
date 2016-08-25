@@ -3,8 +3,12 @@ using ICRC.Model;
 using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +19,54 @@ namespace ICRC.Data.Repositories
     public class TestScoreRepository : RepositoryBase<TestScore>, ITestScoreRepository
     {
         public TestScoreRepository(IDbFactory dbFactory) : base(dbFactory) { }
+
+        public void UploadCSV(string FilePath)
+        {
+            DataTable dt = new DataTable();
+
+            Type type = typeof(TestScore);
+            var properties = type.GetProperties();
+            foreach(PropertyInfo prop in properties)
+            {
+                
+        
+                if(prop.Name!="ID" && prop.Name!="PreviousFirstName" && prop.Name!= "PreviousLastName" && prop.Name != "PreviousAddress1")
+                {
+                    dt.Columns.Add(new DataColumn(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType));
+                }
+                
+            }
+
+            string CSVData=File.ReadAllText(FilePath);
+            int count = 0;
+            foreach (string row in CSVData.Split('\n'))
+            {
+                if(count!=0)
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        dt.Rows.Add();
+                        int i = 0;
+                        foreach (string cell in row.Split(','))
+                        {
+                            dt.Rows[dt.Rows.Count - 1][i] = cell;
+                            i++;
+                        }
+                    }
+                }
+                count++;                
+            }
+
+            string conn = ConfigurationManager.ConnectionStrings["IRCREntities"].ConnectionString;
+
+            SqlBulkCopy bulkinsert = new SqlBulkCopy(conn);
+            bulkinsert.DestinationTableName = "dbo.TestScores";
+            bulkinsert.WriteToServer(dt);
+
+        }
+
+
+
 
         public IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string name)
         {
@@ -100,6 +152,9 @@ namespace ICRC.Data.Repositories
         IEnumerable<TestScoreViewModel> GetFirstNames(string name);
 
         IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
+
+
+        void UploadCSV(string FilePath);
         void UpdateScores(TestScore model);
     }
     

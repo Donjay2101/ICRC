@@ -18,7 +18,7 @@ $(document).on('click', '#normalView', function () {
 //lazy loading code
 $(document).on('focus', '#txtLastName', function () {
    
-    showOverLay();
+    //showOverLay();
     $('#tblfirstname').html("");
     GetLastNames();                   
 });
@@ -34,6 +34,7 @@ function GetLastNames()
         type: "GET",
         success: function (data) {
             hideOverLay();
+            //$('#txtLastName').focus();
             $('#cmbLastName').css('display', 'block');
             var htmlString = "";
             for (i = 0; i < data.length; i++) {
@@ -225,6 +226,23 @@ $(document).on('click', '#tblfirstname tr', function () {
 
 });
 
+function reloadData()
+{
+    var LastName = $('#txtLastName').val();
+    var FirstName= $("#FirstName").val();
+    var Address1 = $("#Address1").val();
+    var obj = {};
+
+    obj.FirstName = FirstName;
+    obj.LastName = LastName;
+    // obj.MiddleName = MiddleName;
+    obj.Address1 = Address1;
+    //obj.City= City;
+    //obj.State = State;
+
+    getFullData(obj);
+}
+
 function getFullData(obj)
 {
     showOverLay();
@@ -269,7 +287,7 @@ function getFullData(obj)
                             "<td>" +ConvertJsonDateString(data[i].ExamDate)+ "</td>" +
                             "<td>" + data[i].Status + "</td>" +
                             "<td>" + data[i].Score + "</td>" +
-                            "<td>" + data[i].TestingCompanyName + "</td>";
+                            "<td>" + data[i].TestingCompany + "</td>";
                     if(data[i].BoardName!=null)
                     {
                         htmlString+="<td>"+data[i].BoardName+"</td>";
@@ -285,7 +303,7 @@ function getFullData(obj)
             "</div></td>" +
 			"<td width=5% style='text-align:end'><div>" +
                                     "<b>" +
-                                        "<a href='#' onclick='confirmDelete(\"\/TestScores\/Delete\/" + data[i].ID + "\",\"/TestScores\")' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Delete'><span class='glyphicon glyphicon-trash space' aria-hidden='true'></span></a>" +
+                                        "<a href='#' onclick='deleteScore(\"\/TestScores\/Delete\/" + data[i].ID + "\",\"/TestScores\")' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Delete'><span class='glyphicon glyphicon-trash space' aria-hidden='true'></span></a>" +
                                     "</b>" +
                                 "</div></td>" +
                             "</tr>";
@@ -305,11 +323,35 @@ function getFullData(obj)
     });
 }
 
+function deleteScore(url)
+{
+    if (confirm("you are about to delete a record.are you sure?"))
+    {
+        showOverLay();
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (data) {
+                reloadData();
+                hideOverLay();
+                clearData();
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    
+}
 
 function openDialog(url,id)
 {
-    $('#dataContainer').load(url + "?ID=" + id);
-    $('#overlayDialog').css('display', 'block');
+    showOverLay();
+    $('#dataContainer').load(url + "?ID=" + id, function () {
+        hideOverLay();
+        $('#overlayDialog').css('display', 'block');
+    });
+    
 }
 
 
@@ -336,6 +378,7 @@ function saveInformation()
         data: { model: obj },       
         success: function (data) {
             hideOverLay();
+            $('#overlayDialog').css('display', 'none');
         },
         error:function(err)
         {
@@ -377,3 +420,88 @@ function hideOverLay() {
     $('#overlay').css('display', 'none');
     
 }
+
+
+
+function clearData()
+{
+    $('#txtLastName').val("");
+    $('#txtFirstName').val("");
+    $('#LastName').val("");
+    $('#Address1').val("");
+    $('#Address2').val("");
+    $('#City').val("");
+    $('#State').val("");
+    $('#ZipCode').val("");
+    $('#ZipPlus').val("");
+    $('#FirstName').val("");
+    $('#MiddleName').val("");
+    $('#EmailAddress').val("");  
+}
+
+$(document).on('click', '#Import', function () {
+    debugger;
+    showOverLay();
+    var htmlString = "<span id='closeDialog1' class='glyphicon glyphicon-remove pull-right'></span><div class='row'>" +
+                        "<div class='col-md-8'><input type='file' id='file'/></div>" +
+                        "<div class='col-md-4'><input type='button' value='upload' name='upload' id='btnUpload'/></div>"+
+        "</div>";
+
+    $('#dataContainer').html(htmlString);
+    hideOverLay();
+
+    $('#overlayDialog').css('display', 'block');
+});
+
+
+$(document).on('click', '#closeDialog1', function () {
+    $('#overlayDialog').css('display', 'none');
+});
+
+$(document).on('click', '#btnUpload', function () {
+    showOverLay();
+    if (window.FormData !== undefined) {  
+  
+        var fileUpload = $("#file").get(0);
+        var files = fileUpload.files;  
+              
+        // Create FormData object  
+        var fileData = new FormData();  
+  
+        // Looping over all files and add it to FormData object  
+        for (var i = 0; i < files.length; i++) {  
+            fileData.append(files[i].name, files[i]);  
+        }  
+              
+        // Adding one more key to FormData object  
+        //fileData.append('username', ‘Manas’);  
+  
+        jQuery.ajax({
+            url: '/TestScores/UploadCSV',
+            data: fileData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            success: function (data) {
+                alert("data uploaded successfully");
+                hideOverLay();
+                $('#overlayDialog').css('display', 'none');
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
+    }
+    else 
+    {  
+        alert("FormData is not supported.");  
+    }  
+    //debugger;
+    //var data = new FormData();
+    //$.each($('#file')[0].files, function (i, file) {
+    //    data.append(file.name, file);
+    //});
+            
+    
+});

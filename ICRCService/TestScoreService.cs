@@ -26,6 +26,7 @@ namespace ICRCService
         IEnumerable<TestScoreViewModel> GetFirstNames(string name);
         IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
         void UpdateScores(TestScore model);
+        void UploadCSV(string path);
         void Save();
         void Delete(int ID);
 
@@ -44,6 +45,11 @@ namespace ICRCService
 
         #region Methods
 
+
+        public void UploadCSV(string path)
+        {
+            testScoreRepository.UploadCSV(path);
+        }
 
         public void UpdateScores(TestScore model)
         {
