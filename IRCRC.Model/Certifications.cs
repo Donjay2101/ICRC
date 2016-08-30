@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -23,10 +24,13 @@ namespace ICRC.Model
         [DisplayName("Board's Certificate Accronym")]
         public Nullable<int> BoardCertificateAcronym { get; set; }
         [DisplayName("Certificate Issued Date")]
+        [DisplayFormat(ApplyFormatInEditMode =true,DataFormatString ="{0:d}")]
         public Nullable<DateTime> CertIssueDate { get; set; }
         [DisplayName("Expiration Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public Nullable<DateTime> RecertDate { get; set; }
         [DisplayName("Certificate Request Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public Nullable<DateTime> CertRequestDate { get; set; }
         [DisplayName("Certificate Request Fee")]
         public Nullable<double> CertRequestFee { get; set; }

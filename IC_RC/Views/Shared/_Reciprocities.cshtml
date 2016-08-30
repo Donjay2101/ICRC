@@ -31,7 +31,7 @@
                                         <a href="#" onclick="confirmDelete('/Reciprocities/Delete/@c.ID', '/Reciprocities')" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="glyphicon glyphicon-trash space" aria-hidden="true"></span></a>
                                     </b>
                                 </div>);
-                        columns.Add(c => c.OrginiatingBoardName).Titled("Oeginating Board.");
+                        columns.Add(c => c.OrginiatingBoardName).Titled("Originating Board");
                         columns.Add(c => c.RequestedBoardName).Titled("Requested Board");
                         columns.Add(c => c.CertificationAcronym).Titled("Certificate Acronym");
                         columns.Add(c => c.Status).Sanitized(false).Encoded(false).RenderValueAs(c=>@<div>

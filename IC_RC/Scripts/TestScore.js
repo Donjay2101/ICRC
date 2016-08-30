@@ -316,8 +316,9 @@ function getFullData(obj)
         },
         error: function (err) {
             console.log(err);
-            alert(err.statusCode);
+            //alert(err.statusCode);
             alert(err.statusText);
+            hideOverLay();
             //debugger;
         }                
     });
@@ -338,6 +339,8 @@ function deleteScore(url)
             },
             error: function (err) {
                 alert(err.statusText);
+                hideOverLay();
+
             }
         });
     }
@@ -443,8 +446,8 @@ $(document).on('click', '#Import', function () {
     debugger;
     showOverLay();
     var htmlString = "<span id='closeDialog1' class='glyphicon glyphicon-remove pull-right'></span><div class='row'>" +
-                        "<div class='col-md-8'><input type='file' id='file'/></div>" +
-                        "<div class='col-md-4'><input type='button' value='upload' name='upload' id='btnUpload'/></div>"+
+                        "<div class='col-md-8'><input type='file' id='file' style='margin-top: 10%;'/></div>" +
+                        "<div class='col-md-4'><input type='button' value='upload' name='upload' id='btnUpload' class='popup-btn' style='border:none;color:white;'/></div>" +
         "</div>";
 
     $('#dataContainer').html(htmlString);
