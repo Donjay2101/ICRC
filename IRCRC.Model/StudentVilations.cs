@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace ICRC.Model
         [DisplayName("Type of Ethical Violation")]
         public Nullable<int> EthicalViolationId { get; set; }
         [DisplayName("Date of Violation")]
+        [DisplayFormat(ApplyFormatInEditMode =true,DataFormatString ="{0:d}")]
         public Nullable<DateTime> Date { get; set; }
         [DisplayName("Scanned & Saved")]
         public Nullable<bool> IsScanned { get; set; }

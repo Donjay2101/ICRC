@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,9 @@ namespace ICRC.Model
         public string State { get; set; }
         public string Zip { get; set; }
         public string currentBoard { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public Nullable<DateTime> RecertDate { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public Nullable<DateTime> Issueddate { get; set; }
         public string Acronym { get; set; }
         public Nullable<int> CertID { get; set; }

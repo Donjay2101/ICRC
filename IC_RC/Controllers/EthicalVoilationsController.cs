@@ -19,6 +19,7 @@ namespace IC_RC.Controllers
         public readonly IStudentEthicalViolationService studentethicalviolationservice;
         public readonly IEthicalViolationService ethicalviolationservice;
         string returnUrl="";
+        string submitUrl = "";
         public EthicalviolationsController(ICertifiedPersonService CertifiedPersonService, ICertificateService CertificateService, ICertificationService CertificationService, IBoardService BoardService, IStudentEthicalViolationService studentethicalviolationservice, IEthicalViolationService ethicalviolationservice)
         {
             this.CertifiedPersonService = CertifiedPersonService;
@@ -68,7 +69,7 @@ namespace IC_RC.Controllers
             {
                 studentethicalviolationservice.CreateEthicalviolation(model);
                 studentethicalviolationservice.Save();
-                return Redirect(returnUrl);
+                return RedirectToAction(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
@@ -143,6 +144,7 @@ namespace IC_RC.Controllers
             if (Request.QueryString["returnUrl"] != null)
             {
                 returnUrl = Request.QueryString["returnUrl"];
+                var arr = returnUrl.Split('/');
             }
 
             if (string.IsNullOrEmpty(returnUrl))
@@ -156,6 +158,15 @@ namespace IC_RC.Controllers
                 ViewBag.ReturnURL = returnUrl;
             }
             // return returnUrl;
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

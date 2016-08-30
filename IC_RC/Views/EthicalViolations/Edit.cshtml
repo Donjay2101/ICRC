@@ -49,12 +49,15 @@
                     </div>
                 </div>           
                
-                
                 <div class="form-group">
                     @Html.LabelFor(model => model.IsScanned, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.IsScanned)
+                            @Html.CheckBox("IsScanned", Model.IsScanned.HasValue ? Model.IsScanned : false)
+                         
+                            @*<input type="checkbox" name="IsScanned" id="IsScanned" />*@
+
+                            @*@Html.EditorFor(model => model.IsScanned)*@
                             @Html.ValidationMessageFor(model => model.IsScanned, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -63,17 +66,23 @@
                     @Html.LabelFor(model => model.IsLetterSent, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.IsLetterSent)
+                            @Html.CheckBox("IsLetterSent", Model.ISsharable.HasValue ? Model.IsLetterSent : false)
+                            
+                            @*<input type="checkbox" name="IsLetterSent" id="IsLetterSent" />*@
+                            @*@Html.EditorFor(model => model.IsLetterSent)*@
                             @Html.ValidationMessageFor(model => model.IsLetterSent, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-              
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.ISsharable, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.ISsharable)
+                            @Html.CheckBox("ISsharable", Model.ISsharable.HasValue ? Model.IsScanned : false)
+                          
+                            @*<input type="checkbox" name="ISsharable" id="ISsharable" />*@
+                            @*@Html.EditorFor(model => model.ISsharable)*@
                             @Html.ValidationMessageFor(model => model.ISsharable, "", new { @class = "text-danger" })
                         </div>
                     </div>

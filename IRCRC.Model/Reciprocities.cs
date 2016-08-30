@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,11 @@ namespace ICRC.Model
         [DisplayName("IC&RC Credential Acronym")]
         public int ICRCCertID { get; set; }
         [DisplayName("Date of Entry")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime DateofEntry { get; set; }
         public bool Status { get; set; }
         [DisplayName("Approval Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime ApprovalDate { get; set; }
         [DisplayName("Reciprocity Fee")]
         public double RecprocityFee { get; set; }

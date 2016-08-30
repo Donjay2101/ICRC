@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
 }
 
+
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -53,7 +55,11 @@
                     @Html.LabelFor(model => model.IsScanned, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.IsScanned)
+                            @Html.CheckBox("IsScanned")
+
+                            @*<input type="checkbox" name="IsScanned" id="IsScanned" />*@
+
+                            @*@Html.EditorFor(model => model.IsScanned)*@
                             @Html.ValidationMessageFor(model => model.IsScanned, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -62,7 +68,10 @@
                     @Html.LabelFor(model => model.IsLetterSent, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.IsLetterSent)
+                            @Html.CheckBox("IsLetterSent")
+
+                            @*<input type="checkbox" name="IsLetterSent" id="IsLetterSent" />*@
+                            @*@Html.EditorFor(model => model.IsLetterSent)*@
                             @Html.ValidationMessageFor(model => model.IsLetterSent, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -72,7 +81,10 @@
                     @Html.LabelFor(model => model.ISsharable, htmlAttributes: new { @class = "control-label col-md-5" })
                     <div class="col-md-7">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.ISsharable)
+                            @Html.CheckBox("ISsharable")
+
+                            @*<input type="checkbox" name="ISsharable" id="ISsharable" />*@
+                            @*@Html.EditorFor(model => model.ISsharable)*@
                             @Html.ValidationMessageFor(model => model.ISsharable, "", new { @class = "text-danger" })
                         </div>
                     </div>

@@ -43,10 +43,10 @@
                                    .Css("hidden-xs").RenderValueAs(x=>@<div> <input type="checkbox" disabled checked="@x.IsScanned" /></div>).Titled("Scanned & Saved");
                     columns.Add(c => c.IsLetterSent).Encoded(false).Sanitized(false)
                                    .SetWidth(30)
-                                   .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.IsScanned" /></div>).Titled("Letter sent to professional");
+                                   .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.IsLetterSent" /></div>).Titled("Letter sent to professional");
                     columns.Add(c => c.ISsharable).Encoded(false).Sanitized(false)
                                    .SetWidth(30)
-                                   .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.IsScanned" /></div>).Titled("Not to be shared with general public");
+                                   .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.ISsharable" /></div>).Titled("Not to be shared with general public");
                         columns.Add(c => c.Notes).Titled("notes");
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
 <script src="~/Scripts/gridmvc.min.js"></script>
