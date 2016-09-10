@@ -33,8 +33,8 @@ namespace IC_RC.Controllers
 
         public ActionResult GetData()
         {
-            var data=personService.GetCertifiedPersons();
-            return PartialView("_CertifiedPerson",data);
+           // var data=personService.GetCertifiedPersons();
+            return PartialView("_CertifiedPerson");
         }
         public ActionResult About()
         {

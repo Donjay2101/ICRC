@@ -10,25 +10,26 @@ namespace IRCRC.Model.ViewModel
     {
         public int ID { get; set; }
         
-        public int OriginatingBoard { get; set; }
+
+        public Nullable<int> OriginatingBoard { get; set; }
         
-        public int RequestedBoard { get; set; }
+        public Nullable<int> RequestedBoard { get; set; }
         
-        public int ICRCCertID { get; set; }
+        public Nullable<int> ICRCCertID { get; set; }
         
-        public DateTime DateofEntry { get; set; }
-        public bool Status { get; set; }
+        public Nullable<DateTime> DateofEntry { get; set; }
+        public Nullable<bool> Status { get; set; }
         
-        public DateTime ApprovalDate { get; set; }
+        public Nullable<DateTime> ApprovalDate { get; set; }
         
-        public double RecprocityFee { get; set; }
+        public Nullable<double> RecprocityFee { get; set; }
         
-        public int PaymentType { get; set; }
+        public Nullable<int> PaymentType { get; set; }
         
         public string PaymentNumber { get; set; }
         public string Notes { get; set; }
         
-        public int PersonID { get; set; }
+        public Nullable<int> PersonID { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
@@ -42,5 +43,6 @@ namespace IRCRC.Model.ViewModel
         public string CertificationAcronym { get; set; }
         
         public string PaymentTypeName { get; set; }
+        public string PersonName{ get; set; }
     }
 }

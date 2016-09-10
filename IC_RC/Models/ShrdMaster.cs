@@ -48,6 +48,18 @@ namespace IC_RC
 
             return list;
         }
+
+
+        public int GetPageIndex()
+        {
+            int num = 1;
+            if(HttpContext.Current.Request.QueryString["grid-page"]!=null)
+            {
+                int.TryParse(HttpContext.Current.Request.QueryString["grid-page"], out num);
+            }
+
+            return num;
+        }
        
 
     }

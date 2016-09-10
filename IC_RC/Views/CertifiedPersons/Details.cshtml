@@ -18,7 +18,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-12">
-                   <span class="highlight">text</span>
+                   <span class="highlight">@Model.FirstName&nbsp;&nbsp;@Model.MiddleName&nbsp;&nbsp;@Model.LastName</span>
                 </div>
             </div>
             <div class="row">
@@ -28,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @Model.City ,@Model.State @Model.Zip
+                    @Model.City ,@Model.State, @Model.Zip
                 </div>
             </div>
             <div class="row">
@@ -114,23 +114,36 @@
         {
             if (data.toUpperCase() == "SCORES") {
 
+                $('#overlay').css('display', 'block');
                 sessionStorage.setItem('selected', 'Scores');
-                $('#Scores').load('/CertifiedPersons/Scores/' + id);
+
+                $('#Scores').load('/CertifiedPersons/Scores/' + id, function () {
+                    $('#overlay').css('display', 'none');
+                });
 
             }
             else if (data.toUpperCase() == "CERTIFICATIONS") {
+                $('#overlay').css('display', 'block');
                 sessionStorage.setItem('selected', 'Certifications');
-                $('#Certificates').load('/CertifiedPersons/Certificates/' + id);
+                $('#Certificates').load('/CertifiedPersons/Certificates/' + id, function () {
+                    $('#overlay').css('display', 'none');
+                });
 
             }
             else if (data.toUpperCase() == "RECIPROCITY") {
                 sessionStorage.setItem('selected', 'Reciprocity');
-                $('#Reciprocity').load('/CertifiedPersons/Reciprocities/' + id);
+                $('#overlay').css('display', 'block');
+                $('#Reciprocity').load('/CertifiedPersons/Reciprocities/' + id, function () {
+                    $('#overlay').css('display', 'none');
+                });
             }
             else if (data.toUpperCase() == "VIOLATIONS") {
-                debugger;
+               // debugger;
+                $('#overlay').css('display', 'block');
                 sessionStorage.setItem('selected', 'violations');
-                $('#Ethicalviolations').load('/CertifiedPersons/Ethicalviolations/' + id);
+                $('#Ethicalviolations').load('/CertifiedPersons/Ethicalviolations/' + id, function () {
+                    $('#overlay').css('display', 'none');
+                });
             }
         }
 

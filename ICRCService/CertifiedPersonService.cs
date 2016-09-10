@@ -15,6 +15,7 @@ namespace ICRCService
     {
 
         IEnumerable<CertifiedPersons> GetCertifiedPersons();
+        IEnumerable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex);
         CertifiedPersons GetCertifiedPersonByID(int ID);
         IEnumerable<CertifiedPersons> GetCertifiedPersons(Expression<Func<CertifiedPersons, bool>> where);
         void CreateCertifiedPerson(CertifiedPersons Board);
@@ -37,7 +38,34 @@ namespace ICRCService
 
         #region Methods
         
-
+        public IEnumerable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex)
+        {
+            return certifiedRepository.GetAll(PageIndex).Select(x => new CertifiedPersons
+            {
+                Address = x.Address,
+                Address2 = x.Address2,
+                City = x.City,
+                Country = x.Country,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                CurrentBoardID = x.CurrentBoardID,
+                Email = x.Email,
+                //  Ethicalviolation=x.Ethicalviolation,
+                FirstName = x.FirstName,
+                ID = x.ID,
+                LastName = x.LastName,
+                MiddleName = x.MiddleName,
+                ModifiedAt = x.ModifiedAt,
+                ModifiedBy = x.ModifiedBy,
+                Notes = x.Notes,
+                OtherBoardID = x.OtherBoardID,
+                province = x.province,
+                SSN = x.SSN,
+                State = x.State,
+                Zip = x.Zip,
+                FullName = x.FirstName + " " + x.MiddleName + " " + x.LastName
+            }).OrderBy(x => x.FirstName).ThenBy(x => x.MiddleName).ThenBy(x => x.LastName);
+        }
         public IEnumerable<CertifiedPersons> GetCertifiedPersons()
         {
             return certifiedRepository.GetAll().Select(x=> new CertifiedPersons{

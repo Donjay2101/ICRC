@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<ICRC.Model.CertifiedPersons>
+@model  IC_RC.Models.CertifiedPersonsGrid
 @using GridMvc.Html
 @Html.Grid(Model).Columns(columns =>
                     {
@@ -49,6 +49,6 @@
                         columns.Add(c => c.City).Titled("City");
 
 
-                    }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
+                    }).WithPaging(20).Sortable().Filterable().WithMultipleFilters()
 
 <script src="~/Scripts/gridmvc.min.js"></script>

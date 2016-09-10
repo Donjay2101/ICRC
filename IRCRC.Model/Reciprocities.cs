@@ -13,27 +13,27 @@ namespace ICRC.Model
     {
         public int ID { get; set; }
         [DisplayName("Originating Board")]
-        public int OriginatingBoard { get; set; }
+        public Nullable<int> OriginatingBoard { get; set; }
         [DisplayName("Requested Board")]
-        public int RequestedBoard { get; set; }
+        public Nullable<int> RequestedBoard { get; set; }
         [DisplayName("IC&RC Credential Acronym")]
-        public int ICRCCertID { get; set; }
+        public Nullable<int> ICRCCertID { get; set; }
         [DisplayName("Date of Entry")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
-        public DateTime DateofEntry { get; set; }
-        public bool Status { get; set; }
+        public Nullable<DateTime> DateofEntry { get; set; }
+        public Nullable<bool> Status { get; set; }
         [DisplayName("Approval Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
-        public DateTime ApprovalDate { get; set; }
+        public Nullable<DateTime> ApprovalDate { get; set; }
         [DisplayName("Reciprocity Fee")]
-        public double RecprocityFee { get; set; }
+        public Nullable<double> RecprocityFee { get; set; }
         [DisplayName("Payment Type")]
-        public int PaymentType { get; set; }
+        public Nullable<int> PaymentType { get; set; }
         [DisplayName("Payment Number")]
         public string PaymentNumber { get; set; }
         public string Notes { get; set; }        
         [DisplayName("Person")]
-        public int PersonID { get; set; }
+        public Nullable<int> PersonID { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
@@ -47,5 +47,7 @@ namespace ICRC.Model
         public string CertificationAcronym { get; set; }
         [NotMapped]
         public string PaymentTypeName { get; set; }
+        [NotMapped]
+        public string PersonName { get; set; }
     }
 }

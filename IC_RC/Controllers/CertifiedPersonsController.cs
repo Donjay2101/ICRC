@@ -1,4 +1,5 @@
-﻿using ICRC.Model;
+﻿using IC_RC.Models;
+using ICRC.Model;
 using ICRCService;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace IC_RC.Controllers
         public readonly IEthicalViolationService violationservice;
         public readonly IBoardService BoardService;
         public readonly IScoreservice scoreService;
+        int pageIndex = 0;
         public readonly IStudentEthicalViolationService Stundentethicalviolationservice;
         
 
@@ -38,6 +40,9 @@ namespace IC_RC.Controllers
 
         public ActionResult GetData()
         {
+            //pageIndex = ShrdMaster.Instance.GetPageIndex();
+            //var data1 = CertifiedPersonService.GetCertifedPersonsForIndex(pageIndex).AsQueryable();
+            //var data =new CertifiedPersonsGrid(data1,1,true);
             var data = CertifiedPersonService.GetCertifiedPersons();
             return PartialView("_CertifiedPersons", data);
         }

@@ -102,7 +102,8 @@ namespace ICRC.Data.Repositories
                             CertificationAcronym = x.CertificationAcronym,
                             OrginiatingBoardName = x.OrginiatingBoardName,
                             PaymentTypeName = x.PaymentTypeName,
-                            RequestedBoardName = x.RequestedBoardName
+                            RequestedBoardName = x.RequestedBoardName,
+                            PersonName=x.PersonName                           
                         }).ToList();
 
                      
