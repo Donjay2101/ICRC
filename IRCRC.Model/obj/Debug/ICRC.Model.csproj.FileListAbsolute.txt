@@ -32,4 +32,3 @@ E:\Official\Work\Projects\source\IC_RC\icrc\IRCRC.Model\bin\Debug\IRCRC.Model.dl
 E:\Official\Work\Projects\source\IC_RC\icrc\IRCRC.Model\bin\Debug\IRCRC.Model.pdb
 E:\Official\Work\Projects\source\IC_RC\icrc\IRCRC.Model\obj\Debug\IRCRC.Model.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\IRCRC.Model\obj\Debug\IRCRC.Model.pdb
-E:\Official\Work\Projects\source\IC_RC\icrc\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
