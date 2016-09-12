@@ -22,6 +22,7 @@ namespace ICRCService
         void UpdateCertifiedPerson(CertifiedPersons Board);
         void Save();
         void Delete(int ID);
+        
 
     }
 
@@ -66,6 +67,7 @@ namespace ICRCService
                 FullName = x.FirstName + " " + x.MiddleName + " " + x.LastName
             }).OrderBy(x => x.FirstName).ThenBy(x => x.MiddleName).ThenBy(x => x.LastName);
         }
+
         public IEnumerable<CertifiedPersons> GetCertifiedPersons()
         {
             return certifiedRepository.GetAll().Select(x=> new CertifiedPersons{

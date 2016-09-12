@@ -48,6 +48,7 @@ namespace ICRC.Model
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<DateTime> ModifiedAt { get; set; }
+       
 
         [NotMapped]
         public string BoardCertificateAcronymName { get; set; }

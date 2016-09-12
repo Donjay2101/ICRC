@@ -187,7 +187,7 @@ namespace IC_RC.Controllers
                     return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.Failure:
+                case SignInStatus.Failure: 
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);

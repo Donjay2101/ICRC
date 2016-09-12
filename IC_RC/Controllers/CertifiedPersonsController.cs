@@ -63,6 +63,7 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
+
             if(data!=null && data.CurrentBoardID>0)
             {
                 ViewBag.CurrentBoard = BoardService.GetBoardByID(data.CurrentBoardID).Acronym;
@@ -89,6 +90,7 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
+
             var data = CertificationService.GetCertificationsByPersonID(ID.Value);
             return PartialView("_Certifications", data);
         }

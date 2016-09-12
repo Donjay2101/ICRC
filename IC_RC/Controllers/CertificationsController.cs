@@ -29,6 +29,7 @@ namespace IC_RC.Controllers
             this.BoardService = BoardService;
             this.paymenttypeService = paymenttypeService;
         }
+
         // GET: Certifications
         public ActionResult Index()
         {
@@ -93,6 +94,7 @@ namespace IC_RC.Controllers
                 CertifiedPersonService.Save();
                 return Redirect(returnUrl);
                 }
+
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
@@ -106,10 +108,12 @@ namespace IC_RC.Controllers
         {
             SetReturnUrl();
             var data = CertificationService.GetCertificationByID(id);
+
             if(data == null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
+
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");

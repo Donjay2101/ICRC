@@ -34,9 +34,10 @@
                                 </div>);
                         columns.Add(c => c.certificateNo).Titled("Certificate No.");
                         columns.Add(c => c.PersonName).Titled("Individual");
-                        columns.Add(c => c.CertIssueDate).Titled("Start Date").Format("{0:MM/dd/yyyy}");                        
+                        columns.Add(c => c.CertIssueDate).Titled("Start Date").Format("{0:MM/dd/yyyy}");
                         columns.Add(c => c.RecertDate).Titled("State Recert. Date").Format("{0:MM/dd/yyyy}");
-                        columns.Add(c => c.CertificateAcronym).Titled("CertID");                        
+                        columns.Add(c => c.CertificateAcronym).Titled("CertID");
+                        
 
 
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()

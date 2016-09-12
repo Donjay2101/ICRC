@@ -86,3 +86,14 @@ E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\bin\Debug\EntityFramewor
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\obj\Debug\ICRCService.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\obj\Debug\ICRCService.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\ICRCService.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\ICRCService.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\ICRC.Data.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\IRCRC.Model.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\EntityFramework.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\ICRC.Data.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\IRCRC.Model.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\bin\Debug\EntityFramework.xml
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\obj\Debug\ICRCService.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRCService\obj\Debug\ICRCService.pdb

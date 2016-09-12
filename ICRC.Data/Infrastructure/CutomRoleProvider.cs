@@ -38,11 +38,11 @@ namespace ICRC.Data.Infrastructure
         public override bool IsUserInRole(string username, string roleName)
         {
             
-                var user = dataContext.Users.SingleOrDefault(u => u.Username== username);
+                var user = DbContext.Users.SingleOrDefault(u => u.Username== username);
                 if (user == null)
                     return false;
-                var roles = dataContext.UserRoles.Where(x => x.UserID== user.ID);
-                var roleInfo = dataContext.Roles.Where(x => x.Name== roleName);
+                var roles = DbContext.UserRoles.Where(x => x.UserID== user.ID);
+                var roleInfo = DbContext.Roles.Where(x => x.Name== roleName);
 
                 return roles != null && roleInfo != null;
            
@@ -52,7 +52,7 @@ namespace ICRC.Data.Infrastructure
         {
 
 
-                var user = dataContext.Users.Where(x => x.Username == username).FirstOrDefault();
+                var user = DbContext.Users.Where(x => x.Username == username).FirstOrDefault();
 
             if (user== null)
             {
@@ -60,8 +60,8 @@ namespace ICRC.Data.Infrastructure
             }
             else
             {
-                var roles = dataContext.UserRoles.Where(x => x.UserID == user.ID).Select(x => x.RoleID).ToArray();
-                var selectedrole = (from role in dataContext.Roles where roles.Contains(role.ID) select role);
+                var roles = DbContext.UserRoles.Where(x => x.UserID == user.ID).Select(x => x.RoleID).ToArray();
+                var selectedrole = (from role in DbContext.Roles where roles.Contains(role.ID) select role);
                 var roletoUser = selectedrole.Select(x => x.Name).ToArray();
                 return roles == null ? new string[] { } : roletoUser;
             }            

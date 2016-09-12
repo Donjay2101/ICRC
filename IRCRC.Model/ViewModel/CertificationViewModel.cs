@@ -26,6 +26,7 @@ namespace IC_RC.ViewModels
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<DateTime> ModifiedAt { get; set; }
+        
 
        
         public string BoardCertificateAcronymName { get; set; }

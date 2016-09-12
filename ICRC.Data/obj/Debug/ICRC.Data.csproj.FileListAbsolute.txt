@@ -82,3 +82,15 @@ E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\bin\Debug\EntityFramework.
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\obj\Debug\ICRC.Data.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\obj\Debug\ICRC.Data.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\ICRC.Data.dll.config
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\ICRC.Data.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\ICRC.Data.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\EntityFramework.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\IRCRC.Model.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\IRCRC.Model.pdb
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\EntityFramework.xml
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.dll
+C:\Users\EAC-NET01\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.pdb

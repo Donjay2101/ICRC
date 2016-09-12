@@ -40,7 +40,6 @@ namespace ICRC.Data.Repositories
                 OtherBoards=x.OtherBoards,
                 RecertDate=x.RecertDate,
                 Renewal=x.Renewal,
-                SSN=x.SSN,
                 State=x.State,
                 WorkPhone=x.WorkPhone,
                 Zip=x.Zip,

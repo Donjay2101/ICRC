@@ -30,7 +30,7 @@ namespace ICRC.Model
         public string HomePhone { get; set; }
         public string OtherBoards { get; set; }
         public Nullable<DateTime> Renewal { get; set; }
-        public string SSN { get; set; }
+        
         public string WorkPhone { get; set; }
         [NotMapped]
         public string FullName { get; set; }
