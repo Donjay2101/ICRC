@@ -1,2 +1,2 @@
-First Name,Middle Name,Last Name,Address2,City,Provience,Country,Zip,Email,CurrentBoard,OtherBoard,CertificateID,CertificateNumber,BoardCertificateNumber,CertificateIssueDate,Renewal Date,CertificateRequestDate,CertificateRequestFee,PaymentNumber,PaymentType,CertificateNotes
-Test,Test,Test,Test,Test,Test,Test,Test,Test,ADAD,,ICAADC,123444,122,9/12/2016,9/21/2025,9/12/2016,200,123,check,test
+First Name,Middle Name,Last Name,address,City,Provience,Country,Zip,Email,CurrentBoard,OtherBoard,CertificateID,CertificateNumber,IssueBoard,BoardCertificateNumber,BoardCertificateAcronym,CertificateIssueDate,Renewal Date,CertificateRequestDate,CertificateRequestFee,PaymentNumber,PaymentType,CertificateNotes
+Test,Test,Test,Test,Test,Test,Test,Test,Test,ADAD,,ICAADC,123444,,122,,9/12/2016,9/21/2025,9/12/2016,200,123,check,test
