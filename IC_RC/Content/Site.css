@@ -11,6 +11,7 @@
     /*min-height: 500px;*/
 
 }
+
 .grid-mvc{
      padding-top:20px;
     padding-bottom:20px;
@@ -297,3 +298,33 @@ label {
   background:#c17629;
   color:white;
 }
+     /*20/9*/
+     .addon{
+    background: #08314e;
+    color: white;
+    border: 0px;
+}
+span.dark {
+    color: #374040;
+}
+.dl-horizontal dt {
+    white-space: normal;
+    color: #818282;
+    font-weight: 500;
+    /*border-bottom: 1px dotted;*/
+    line-height: 20px;
+    font-size: 12px;
+    text-align: inherit;
+    /* border-right: 1px solid #e4dddd; */
+}
+.dl-horizontal dt::after {
+    content:"";
+    text-indent:20px;
+    text-align:end;
+}
+.dl-horizontal dd {
+    margin-left: 180px;
+    font-size: 12px;
+    font-weight: bolder;
+}
+     /*20/9*/

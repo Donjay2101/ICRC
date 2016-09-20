@@ -3,16 +3,14 @@
 @{
     ViewBag.Title = "Details";
 }
-<div class="row">
-    <div class="col-md-6 col-md-offset-6">
-        <div class="col-md-8 text-right">
-        <input type="text" placeholder="Name" class="form-control pull-right" />
+<div class="row form-group">
+    <div class="col-md-3 col-md-offset-9">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon2" style="height:32px!important;">
+            <span class="input-group-addon addon" id="basic-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+        </div>      
     </div>
-    <div class="col-md-4">
-        <button type="button" class="search">Search<span class="glyphicon glyphicon-search" aria-hidden="true" style="padding-left: 12px;"></span></button>      
-    </div>
-    </div>
-</div>
+  </div>
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
@@ -51,14 +49,24 @@
     </div>
     <div class="col-md-6">
         <div class="row">
-            <span>Current board:</span><label>@ViewBag.CurrentBoard</label>
+            <div class="col-md-3">
+                <span class="dark">Current board</span>
+            </div>
+            <div class="col-md-6">
+                <label>@ViewBag.CurrentBoard</label>
+            </div>         
         </div>
    <div class="row">
-       <span>Ethical violations:</span><input type="checkbox"/>
+       <div class="col-md-3">
+           <span class="dark">Ethical violations</span>
+       </div>
+       <div class="col-md-6">
+           <input type="checkbox" />
+       </div>         
    </div>
         @Html.HiddenFor(model=>model.ID)
     </div>    
-    <div class="col-md-2">
+    <div class="col-md-2 text-right">
         <input type="button" value="Back" class="btn btn-default custom-button" onclick="window.location = '/CertifiedPersons/index';" />
     </div>   
 </div>
