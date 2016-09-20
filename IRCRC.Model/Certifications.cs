@@ -21,8 +21,7 @@ namespace ICRC.Model
 
         [DisplayName("Board's Certificate Number")]
         public string BoardCertificateNumber { get; set; }
-        [DisplayName("Board's Certificate Accronym")]
-        public Nullable<int> BoardCertificateAcronym { get; set; }
+      
         [DisplayName("Certificate Issued Date")]
         [DisplayFormat(ApplyFormatInEditMode =true,DataFormatString ="{0:d}")]
         public Nullable<DateTime> CertIssueDate { get; set; }
@@ -48,7 +47,8 @@ namespace ICRC.Model
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<DateTime> ModifiedAt { get; set; }
-       
+        [DisplayName("Board's Certificate Accronym")]
+        public Nullable<int> BoardCertificateAcronym { get; set; }
 
         [NotMapped]
         public string BoardCertificateAcronymName { get; set; }
