@@ -12,10 +12,11 @@ namespace ICRC.Data.Repositories
     {
         public CertificatesRepository(IDbFactory dbFactory) : base(dbFactory) { }
 
+       
     }
 
     public interface ICertificatesRepository:IRepository<Certificates>
     {
-
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using ICRC.Model;
+﻿using IC_RC.Models;
+using ICRC.Model;
 using ICRCService;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class ScoresController : Controller
     {
 
@@ -50,7 +51,7 @@ namespace IC_RC.Controllers
         // GET: Scores/Create
         public ActionResult Create(string returnUrl="")
         {
-
+            SetReturnUrl();
             if(string.IsNullOrEmpty(returnUrl))
             {
                 ViewBag.ReturnURL = "/Scores/Index";
@@ -78,6 +79,8 @@ namespace IC_RC.Controllers
 
             if (ModelState.IsValid)
             {
+                model.CreatedAt = DateTime.Now;
+                model.CreatedBy = SessionContext<int>.Instance.GetSession("UserID");
                 scoreService.CreateScore(model);
                 scoreService.Save();
 
@@ -96,8 +99,8 @@ namespace IC_RC.Controllers
         // GET: Scores/Edit/5
         public ActionResult Edit(int? id)
         {
-           
-            if(id==null)
+            SetReturnUrl();
+            if (id==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
@@ -127,6 +130,8 @@ namespace IC_RC.Controllers
             ////
             if (ModelState.IsValid)
             {
+                model.ModifiedAt = DateTime.Now;
+                model.ModifiedBy = SessionContext<int>.Instance.GetSession("UserID");
                 scoreService.UpdateScore(model);
                 scoreService.Save();
 
@@ -142,19 +147,22 @@ namespace IC_RC.Controllers
 
         public void SetReturnUrl()
         {
-            //to go to previous page
-            returnUrl = ShrdMaster.Instance.GetQueryString("returnUrl");
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                returnUrl = "/Scores/Index";
-                ViewBag.ReturnURL = returnUrl;
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/Scores/Index");
+            ViewBag.ReturnURL = returnUrl;
 
-            }
-            else
-            {
-                ViewBag.ReturnURL = returnUrl;
-            }
-           // return returnUrl;
+            //to go to previous page
+            //returnUrl = ShrdMaster.Instance.GetQueryString("returnUrl");
+            //if (string.IsNullOrEmpty(returnUrl))
+            //{
+            //    returnUrl = "/Scores/Index";
+            //    ViewBag.ReturnURL = returnUrl;
+
+            //}
+            //else
+            //{
+            //    ViewBag.ReturnURL = returnUrl;
+            //}
+            // return returnUrl;
         }
 
         // GET: Scores/Delete/5

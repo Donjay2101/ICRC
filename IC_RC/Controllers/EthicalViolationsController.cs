@@ -1,4 +1,5 @@
-﻿using ICRC.Model;
+﻿using IC_RC.Models;
+using ICRC.Model;
 using ICRCService;
 using System;
 using System.Collections.Generic;
@@ -33,19 +34,42 @@ namespace IC_RC.Controllers
         // GET: Ethicalviolations
         public ActionResult Index()
         {
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.Error = "User is not active.";
+                return Redirect("/Account/login");
+            }
+
             return View();
         }
 
         public ActionResult GetData()
         {
-            var data = studentethicalviolationservice.GetEthicalviolations();
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);          
+            IEnumerable<Studentviolations> ethicalvoiliation;
+            if (ShrdMaster.Instance.IsAdmin(user.Username))
+            {
+                ethicalvoiliation=studentethicalviolationservice.GetEthicalviolations();
+            }
+            else
+            {
+                ethicalvoiliation = studentethicalviolationservice.GetEthicalviolationsByBoardID(user.BoardID);
+            }
+            
 
-            return PartialView("_violations", data);
+            return PartialView("_violations",ethicalvoiliation);
         }
         // GET: Ethicalviolations/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int ?id)
         {
-            return View();
+            SetReturnUrl();
+            if (id==null)
+            {
+                return HttpNotFound();
+            }
+            var voilation = studentethicalviolationservice.GetEthicalviolationByID(id.Value);
+            return View(voilation);
         }
 
         // GET: Ethicalviolations/Create
@@ -67,9 +91,11 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             if(ModelState.IsValid)
             {
+                model.CreatedAt = DateTime.Now;
+                model.CreatedBy = SessionContext<int>.Instance.GetSession("UserID");
                 studentethicalviolationservice.CreateEthicalviolation(model);
                 studentethicalviolationservice.Save();
-                return RedirectToAction(returnUrl);
+                return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
@@ -103,6 +129,8 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             if (ModelState.IsValid)
             {
+                model.ModifiedAt = DateTime.Now;
+                model.ModifiedBy = SessionContext<int>.Instance.GetSession("UserID");
                 studentethicalviolationservice.UpdateEthicalviolation(model);
                 studentethicalviolationservice.Save();
 
@@ -140,23 +168,26 @@ namespace IC_RC.Controllers
 
         public void SetReturnUrl()
         {
-            //to go to previous page
-            if (Request.QueryString["returnUrl"] != null)
-            {
-                returnUrl = Request.QueryString["returnUrl"];
-                var arr = returnUrl.Split('/');
-            }
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/EthicalVoilations/Index");
+            ViewBag.ReturnURL = returnUrl;
 
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                returnUrl = "/Scores/Index";
-                ViewBag.ReturnURL = returnUrl;
+            ////to go to previous page
+            //if (Request.QueryString["returnUrl"] != null)
+            //{
+            //    returnUrl = Request.QueryString["returnUrl"];
+            //    var arr = returnUrl.Split('/');
+            //}
 
-            }
-            else
-            {
-                ViewBag.ReturnURL = returnUrl;
-            }
+            //if (string.IsNullOrEmpty(returnUrl))
+            //{
+            //    returnUrl = ;
+            //    ViewBag.ReturnURL = returnUrl;
+
+            //}
+            //else
+            //{
+            //    ViewBag.ReturnURL = returnUrl;
+            //}
             // return returnUrl;
         }
 

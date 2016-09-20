@@ -18,7 +18,7 @@ namespace IC_RC.Controllers
         public readonly IEthicalViolationService violationservice;
         public readonly IBoardService BoardService;
         public readonly IScoreservice scoreService;
-        int pageIndex = 0;
+        string returnUrl;
         public readonly IStudentEthicalViolationService Stundentethicalviolationservice;
         
 
@@ -35,6 +35,12 @@ namespace IC_RC.Controllers
 
         public ActionResult Index()
         {
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.Error = "User is not active.";
+                return Redirect("/Account/login");
+            }
             return View();
         }
 
@@ -43,7 +49,23 @@ namespace IC_RC.Controllers
             //pageIndex = ShrdMaster.Instance.GetPageIndex();
             //var data1 = CertifiedPersonService.GetCertifedPersonsForIndex(pageIndex).AsQueryable();
             //var data =new CertifiedPersonsGrid(data1,1,true);
-            var data = CertifiedPersonService.GetCertifiedPersons();
+            List<CertifiedPersons> data=new List<CertifiedPersons> ();
+            if(ShrdMaster.Instance.IsAdmin(User.Identity.Name))
+            {
+                data= CertifiedPersonService.GetCertifiedPersons().ToList();
+            }
+            else
+            {
+                var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+                //if(user==null)
+                //{
+                //    ViewBag.Error = "User is not active.";
+                //    return RedirectToAction("Account/login");
+                //}
+                data = CertifiedPersonService.GetCertifiedPersonsByBoardId(user.BoardID).ToList();
+            }
+
+            
             return PartialView("_CertifiedPersons", data);
         }
 
@@ -53,6 +75,7 @@ namespace IC_RC.Controllers
         // GET: CertifiedPersons/Details/5
         public ActionResult Details(int? id)
         {
+            SetReturnUrl();
             if(id==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
@@ -75,7 +98,8 @@ namespace IC_RC.Controllers
 
         public ActionResult Scores(int? ID)
         {
-            if(ID==null)
+            
+            if (ID==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
@@ -120,6 +144,7 @@ namespace IC_RC.Controllers
         // GET: CertifiedPersons/Create
         public ActionResult Create()
         {
+            SetReturnUrl();
 
             ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Board");
             
@@ -130,16 +155,17 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(CertifiedPersons person)
         {
-            
-                // TODO: Add insert logic here
-                if(ModelState.IsValid)
+            SetReturnUrl();
+
+            // TODO: Add insert logic here
+            if (ModelState.IsValid)
                 {
-                    person.CreatedAt = DateTime.Now;
-                    person.CreatedBy = 1;                                    
-                    CertifiedPersonService.CreateCertifiedPerson(person);
+                person.CreatedAt = DateTime.Now;
+                person.CreatedBy = SessionContext<int>.Instance.GetSession("UserID");
+                CertifiedPersonService.CreateCertifiedPerson(person);
                     CertifiedPersonService.Save();
                 //db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return Redirect(returnUrl);
                 }
 
                 ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
@@ -151,6 +177,7 @@ namespace IC_RC.Controllers
         // GET: CertifiedPersons/Edit/5
         public ActionResult Edit(int id)
         {
+            SetReturnUrl();
             var data = CertifiedPersonService.GetCertifiedPersonByID(id);
 
             ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym",data.CurrentBoardID);
@@ -165,15 +192,16 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(CertifiedPersons person)
         {
+            SetReturnUrl();
             // TODO: Add insert logic here
             if (ModelState.IsValid)
             {
-                person.ModifiedAt= DateTime.Now;
-                person.ModifiedBy= 1;
+                person.ModifiedAt = DateTime.Now;
+                person.ModifiedBy = SessionContext<int>.Instance.GetSession("UserID");
                 CertifiedPersonService.UpdateCertifiedPerson(person);
                 CertifiedPersonService.Save();
                 //db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
 
             ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
@@ -250,6 +278,13 @@ namespace IC_RC.Controllers
             {
                 return View();
             }
+        }
+
+        public void SetReturnUrl()
+        {
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/CertifiedPersons/Index");
+            ViewBag.ReturnURL = returnUrl;
+            
         }
     }
 }

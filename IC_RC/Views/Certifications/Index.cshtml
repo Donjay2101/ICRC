@@ -3,11 +3,78 @@
     ViewBag.Title = "Index";
 }
 
+
 <div id="divContainer">
     @Html.Action("GetData")
 </div>
 <script>
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+
+
+
+    $(document).on('click', '#btnImport', function () {
+        debugger;
+        showOverLay();
+        var htmlString = "<span id='closeDialog1' class='glyphicon glyphicon-remove pull-right'></span><div class='row'>" +
+                            "<div class='col-md-8'><input type='file' id='file' style='margin-top: 10%;'/></div>" +
+                            "<div class='col-md-4'><input type='button' value='upload' name='upload' id='btnUpload' class='popup-btn' style='border:none;color:white;'/></div>" +
+            "</div>";
+
+        $('#dataContainer').html(htmlString);
+        hideOverLay();
+
+        $('#overlayDialog').css('display', 'block');
+    });
+    
+    $(document).on('click', '#btnUpload', function () {
+        showOverLay();
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#file").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object  
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object  
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object  
+            //fileData.append('username', ‘Manas’);  
+
+            jQuery.ajax({
+                url: '/Certifications/UploadCertifications',
+                data: fileData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    alert("data uploaded successfully");
+                    hideOverLay();
+                    $('#overlayDialog').css('display', 'none');
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        }
+        else {
+            alert("FormData is not supported.");
+        }
+        //debugger;
+        //var data = new FormData();
+        //$.each($('#file')[0].files, function (i, file) {
+        //    data.append(file.name, file);
+        //});
+
+
+    });
+
 </script>

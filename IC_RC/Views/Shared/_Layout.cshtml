@@ -11,9 +11,13 @@
     @*<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>*@
     
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    @*<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />*@
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @Scripts.Render("~/bundles/modernizr")  
 
     <script src="~/Scripts/Common.js"></script>
@@ -91,7 +95,7 @@
                     @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@             
                 </div>
                 <div role="navigation" class="signIn pull-right">
-                    <a href="" class="linkbtn"><span class="glyphicon glyphicon-user space" aria-hidden="true"></span>Welcome user</a>
+                    <a href="" class="linkbtn"><span class="glyphicon glyphicon-user space" aria-hidden="true"></span>Welcome @User.Identity.Name</a>
                     <a href="/Account/Logoff" class="linkbtn"><span class="glyphicon glyphicon-off space" aria-hidden="true"></span>Log Out</a>
                 </div>              
             </div>
@@ -107,6 +111,7 @@
                             <li><a href="/TestScores/index" name="Scores">Scores</a></li>
                             <li><a href="/TestingCompanies/index" name="TestingCompanies">Testing Companies</a></li>
                             <li><a href="/Filemaker/Index" name="TestingCompanies">File Maker Data</a></li>
+                            <li><a href="/Users/Index" name="TestingCompanies">Users</a></li>
                            
                         </ul>
                         @*Html.Partial("_LoginPartial")*@

@@ -7,9 +7,11 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class FileMakerController : Controller
     {
         public readonly IFileMakerService FileMakerService;
+        string returnUrl;
         public FileMakerController(IFileMakerService FileMakerService)
         {
             this.FileMakerService = FileMakerService;
@@ -37,12 +39,14 @@ namespace IC_RC.Controllers
         // GET: FileMaker/Details/5
         public ActionResult Details(int id)
         {
+            SetReturnUrl();
             return View();
         }
 
         // GET: FileMaker/Create
         public ActionResult Create()
         {
+            SetReturnUrl();
             return View();
         }
 
@@ -54,6 +58,7 @@ namespace IC_RC.Controllers
             {
                 // TODO: Add insert logic here
 
+                SetReturnUrl();
                 return RedirectToAction("Index");
             }
             catch
@@ -65,6 +70,7 @@ namespace IC_RC.Controllers
         // GET: FileMaker/Edit/5
         public ActionResult Edit(int id)
         {
+            SetReturnUrl();
             return View();
         }
 
@@ -75,7 +81,7 @@ namespace IC_RC.Controllers
             try
             {
                 // TODO: Add update logic here
-
+                SetReturnUrl();
                 return RedirectToAction("Index");
             }
             catch
@@ -104,6 +110,30 @@ namespace IC_RC.Controllers
             {
                 return View();
             }
+        }
+
+        public void SetReturnUrl()
+        {
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/FileMaker/Index");
+            ViewBag.ReturnURL = returnUrl;
+            ////to go to previous page
+            //if (Request.QueryString["returnUrl"] != null)
+            //{
+            //    returnUrl = Request.QueryString["returnUrl"];
+            //    var arr = returnUrl.Split('/');
+            //}
+
+            //if (string.IsNullOrEmpty(returnUrl))
+            //{
+            //    returnUrl = "/FileMaker/Index";
+            //    ViewBag.ReturnURL = returnUrl;
+
+            //}
+            //else
+            //{
+            //    ViewBag.ReturnURL = returnUrl;
+            //}
+            //// return returnUrl;
         }
     }
 }

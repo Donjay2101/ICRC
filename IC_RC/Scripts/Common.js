@@ -29,6 +29,7 @@ function gotoCreate(url) {
 
 function gotoPage(url)
 {
+    debugger;
     window.location.href = url;
 }
 
@@ -55,3 +56,18 @@ function confirmDelete(url,reloadUrl)
         });
     }
 }
+
+
+function showOverLay() {
+    $('#overlay').css('display', 'block');
+
+}
+
+function hideOverLay() {
+    $('#overlay').css('display', 'none');
+
+}
+
+$(document).on('click', '#closeDialog1', function () {
+    $('#overlayDialog').css('display', 'none');
+});

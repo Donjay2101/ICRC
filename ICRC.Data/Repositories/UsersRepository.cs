@@ -1,5 +1,6 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Model;
+using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace ICRC.Data.Repositories
             return DbContext.Users.Where(x => x.ID == ID).Select(x => x.Username).FirstOrDefault();
         }
 
+        public IEnumerable<UsersViewModel> GetAllForIndex()
+        {
+            return DbContext.Database.SqlQuery<UsersViewModel>("exec sp_GetUSers").AsEnumerable();
+        }
         public void AssginRolesToUser(int ID,int[]roles)
         {
             UserRoles userRole;
@@ -58,6 +63,7 @@ namespace ICRC.Data.Repositories
 
     public interface IUsersRepository:IRepository<Users>
     {
+        IEnumerable<UsersViewModel> GetAllForIndex();
         string GetUserName(int ID);
         void AssginRolesToUser(int ID, int[] roles);
         bool ValidateUser(string userName, string password);

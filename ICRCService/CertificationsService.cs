@@ -16,14 +16,18 @@ namespace ICRCService
     {
         IEnumerable<Certifications> GetCertifications();
         IEnumerable<Certifications> GetCertificationsForIndex();
+        IEnumerable<Certifications> GetCertificationsByBoardID(int ID);
         Certifications GetCertificationByID(int ID);
+        
         IEnumerable<Certifications> GetCertifications(Expression<Func<Certifications, bool>> where);
         IEnumerable<Certifications> GetCertificationsByPersonID(int ID);
         void CreateCertification(Certifications Board);
         void UpdateCertification(Certifications Board);
         void Save();
+        void UploadCSV(string filePath);
         bool CheckNumber(int number);
         void Delete(int ID);
+
     }
 
     public class CertificationsService:ICertificationService
@@ -44,6 +48,11 @@ namespace ICRCService
 
         #region Methods
 
+        public IEnumerable<Certifications> GetCertificationsByBoardID(int ID)
+        {
+            return GetCertificationsForIndex().Where(x => x.IssueBoard == ID);
+        }
+
         public bool CheckNumber(int number)
         {
             return certificationRepository.CheckNumber(number);
@@ -62,7 +71,7 @@ namespace ICRCService
 
         public Certifications GetCertificationByID(int ID)
         {
-            return certificationRepository.GetByID(ID);
+            return certificationRepository.GetCertificationsByID(ID);
         }
 
         public  IEnumerable<Certifications> GetCertifications(Expression<Func<Certifications, bool>>where)
@@ -93,6 +102,11 @@ namespace ICRCService
         {
             var data = certificationRepository.GetByID(ID);
             certificationRepository.Delete(data);
+        }
+
+        public void UploadCSV(string filePath)
+        {
+            certificationRepository.UploadCSV(filePath);
         }
 
         public void Save()

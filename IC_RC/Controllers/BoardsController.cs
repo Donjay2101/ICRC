@@ -13,7 +13,7 @@ namespace IC_RC.Controllers
     public class BoardsController : Controller
     {
         public readonly IBoardService boardService;
-
+        string returnUrl;
         public BoardsController(IBoardService boardService)
         {
             this.boardService = boardService;
@@ -23,27 +23,35 @@ namespace IC_RC.Controllers
         // GET: Boards
         public ActionResult Index()
         {
-            
-            
+           
             return View();
         }
 
 
         public ActionResult GetData()
-        {            
+        {
+            
             var data = boardService.GetBoards();
+
             return PartialView("_Boards", data);
         }
 
         // GET: Boards/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int ?id)
         {
-            return View();
+            SetReturnUrl();
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            var board = boardService.GetBoardByID(id.Value);
+            return View(board);
         }
 
         // GET: Boards/Create
         public ActionResult Create()
         {
+            SetReturnUrl();
             return View();
         }
 
@@ -51,12 +59,15 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(Boards model)
         {
-            if(ModelState.IsValid)
+            SetReturnUrl();
+            if (ModelState.IsValid)
             {
+                model.CreatedAt = DateTime.Now;
+                model.CreatedBy = SessionContext<int>.Instance.GetSession("UserID");
                 boardService.CreateBoard(model);
                 boardService.Save();
 
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
             return View(model);
         }
@@ -81,16 +92,26 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(Boards model)
         {
+            SetReturnUrl();
            if(ModelState.IsValid)
             {
+                model.ModifiedAt = DateTime.Now;
+                model.ModifiedBy = SessionContext<int>.Instance.GetSession("UserID");
                 boardService.UpdateBoard(model);
                 boardService.Save();
 
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
 
             return View(model);
 
+        }
+
+
+        public ActionResult GetBoards()
+        {
+            var data = boardService.GetBoards();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Boards/Delete/5
@@ -115,6 +136,14 @@ namespace IC_RC.Controllers
             {
                 return View();
             }
+        }
+
+        public void SetReturnUrl()
+        {
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/Boards/Index");
+            ViewBag.ReturnURL = returnUrl;
+
+            
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class TestScoresController : Controller
     {
 
@@ -170,10 +171,11 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             if (ModelState.IsValid)
             {
+              
                 testScoreService.CreateTestScore(model);
                 testScoreService.Save();
 
-                return RedirectToAction(returnUrl);
+                return Redirect(returnUrl);
             }
             ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
             ViewBag.Boards = new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
@@ -194,6 +196,7 @@ namespace IC_RC.Controllers
         // GET: TestScores/Edit/5
         public ActionResult Edit(int id)
         {
+            SetReturnUrl();
             return View();
         }
 
@@ -201,6 +204,7 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            SetReturnUrl();
             try
             {
                 // TODO: Add update logic here
@@ -234,22 +238,25 @@ namespace IC_RC.Controllers
 
         public void SetReturnUrl()
         {
-            //to go to previous page
-            if (Request.QueryString["returnUrl"] != null)
-            {
-                returnUrl = Request.QueryString["returnUrl"];
-            }
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/TestScores/Index");
+            ViewBag.ReturnURL = returnUrl;
 
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                returnUrl = "/TestScores/Index";
-                ViewBag.ReturnURL = returnUrl;
+            ////to go to previous page
+            //if (Request.QueryString["returnUrl"] != null)
+            //{
+            //    returnUrl = Request.QueryString["returnUrl"];
+            //}
 
-            }
-            else
-            {
-                ViewBag.ReturnURL = returnUrl;
-            }
+            //if (string.IsNullOrEmpty(returnUrl))
+            //{
+            //    returnUrl = "/TestScores/Index";
+            //    ViewBag.ReturnURL = returnUrl;
+
+            //}
+            //else
+            //{
+            //    ViewBag.ReturnURL = returnUrl;
+            //}
             // return returnUrl;
         }
     }

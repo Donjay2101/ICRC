@@ -1,4 +1,5 @@
-﻿using ICRC.Model;
+﻿using IC_RC.Models;
+using ICRC.Model;
 using ICRCService;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace IC_RC.Controllers
         public readonly IBoardService BoardService;
         public readonly IPaymentTypeService paymentService;
         string returnUrl = "";
+        Users user;
 
         public ReciprocitiesController(ICertifiedPersonService CertifiedPersonService, IReciprocitiesService reciprocityService, IBoardService BoardService, ICertificateService certificateService, IPaymentTypeService paymentService)
         {
@@ -24,28 +26,51 @@ namespace IC_RC.Controllers
             this.reciprocityService = reciprocityService;
             this.BoardService = BoardService;
             this.certificateService = certificateService;
-            this.paymentService = paymentService;
+            this.paymentService = paymentService;           
         }
 
 
         // GET: Reciprocity
         public ActionResult Index()
         {
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.Error = "User is not active.";
+                return Redirect("/Account/login");
+            }
+
             return View();
         }
 
         public ActionResult GetData()
         {
-            var data=reciprocityService.GetReciprocities();
-
-            return PartialView("_Reciprocities",data);
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+           
+            IEnumerable<Reciprocities> reciprocities;
+            if (ShrdMaster.Instance.IsAdmin(user.Username))
+            {
+                reciprocities = reciprocityService.GetReciprocities();
+            }
+            else
+            {
+                reciprocities = reciprocityService.GetReciprocitiesByBoardID(user.BoardID);
+            }
+            
+            return PartialView("_Reciprocities",reciprocities);
         }
 
 
         // GET: Reciprocity/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int ?id)
         {
-            return View();
+            SetReturnUrl();
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            var data = reciprocityService.GetReciprocitiesByID(id.Value);
+            return View(data);
         }
 
         // GET: Reciprocity/Create
@@ -66,6 +91,9 @@ namespace IC_RC.Controllers
             SetReturnUrl();
             if(ModelState.IsValid)
             {
+                
+                model.CreatedAt = DateTime.Now;
+                model.CreatedBy = SessionContext<int>.Instance.GetSession("UserID"); 
                 reciprocityService.CreateReciprocity(model);
                 reciprocityService.Save();
                 return Redirect(returnUrl);
@@ -104,6 +132,8 @@ namespace IC_RC.Controllers
             SetReturnUrl();
            if(ModelState.IsValid)
             {
+                model.ModifiedAt = DateTime.Now;
+                model.ModifiedBy = SessionContext<int>.Instance.GetSession("UserID");
                 reciprocityService.UpdateReciprocity(model);
                 reciprocityService.Save();
                 return Redirect(returnUrl);
@@ -142,22 +172,25 @@ namespace IC_RC.Controllers
 
         public void SetReturnUrl()
         {
-            //to go to previous page
-            if (Request.QueryString["returnUrl"] != null)
-            {
-                returnUrl = Request.QueryString["returnUrl"];
-            }
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/Reciprocities/Index");
+            ViewBag.ReturnURL = returnUrl;
 
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                returnUrl = "/Scores/Index";
-                ViewBag.ReturnURL = returnUrl;
+            ////to go to previous page
+            //if (Request.QueryString["returnUrl"] != null)
+            //{
+            //    returnUrl = Request.QueryString["returnUrl"];
+            //}
 
-            }
-            else
-            {
-                ViewBag.ReturnURL = returnUrl;
-            }
+            //if (string.IsNullOrEmpty(returnUrl))
+            //{
+            //    returnUrl = "/Reciprocities/Index";
+            //    ViewBag.ReturnURL = returnUrl;
+
+            //}
+            //else
+            //{
+            //    ViewBag.ReturnURL = returnUrl;
+            //}
             // return returnUrl;
         }
     }

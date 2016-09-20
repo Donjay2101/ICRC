@@ -4,6 +4,7 @@ using ICRC.Model;
 using ICRCService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,14 +34,35 @@ namespace IC_RC.Controllers
         // GET: Certifications
         public ActionResult Index()
         {
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.Error = "User is not active.";
+                return RedirectToAction("/Account/login");
+            }
             return View();
         }
 
         public ActionResult GetData()
         {
-            var userID = SessionContext<int>.Instance.GetSession("UserID");
-            var data=CertificationService.GetCertificationsForIndex();
-            return PartialView("_Certifications",data);
+           // var userID = SessionContext<int>.Instance.GetSession("UserID");
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.Error = "User is not active.";
+                return Redirect("Account/login");
+            }
+            IEnumerable<Certifications> certifications;
+            if(ShrdMaster.Instance.IsAdmin(user.Username))
+            {
+                certifications= CertificationService.GetCertificationsForIndex();
+            }
+            else
+            {
+                certifications = CertificationService.GetCertificationsByBoardID(user.BoardID);
+            }
+            
+            return PartialView("_Certifications",certifications);
         }
 
 
@@ -65,9 +87,15 @@ namespace IC_RC.Controllers
         }
 
         // GET: Certifications/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int ?id)
         {
-            return View();
+            SetReturnUrl();
+            if (id==null)
+            {
+                return HttpNotFound();
+            }
+            var data = CertificationService.GetCertificationByID(id.Value);
+            return View(data);
         }
 
         // GET: Certifications/Create
@@ -90,6 +118,8 @@ namespace IC_RC.Controllers
             
                 if(ModelState.IsValid)
                 {
+                model.CreatedAt = DateTime.Now;
+                model.CreatedBy = SessionContext<int>.Instance.GetSession("UserID");
                 CertificationService.CreateCertification(model);
                 CertifiedPersonService.Save();
                 return Redirect(returnUrl);
@@ -129,6 +159,8 @@ namespace IC_RC.Controllers
             SetReturnUrl();
            if(ModelState.IsValid)
             {
+                model.ModifiedAt = DateTime.Now;
+                model.ModifiedBy = SessionContext<int>.Instance.GetSession("UserID");
                 CertificationService.UpdateCertification(model);
                 CertificateService.Save();
                 return Redirect(returnUrl);
@@ -168,23 +200,50 @@ namespace IC_RC.Controllers
 
         public void SetReturnUrl()
         {
-            //to go to previous page
-            if (Request.QueryString["returnUrl"] != null)
-            {
-                returnUrl = Request.QueryString["returnUrl"];
-            }
             
-            if (string.IsNullOrEmpty(returnUrl))
-            {
-                returnUrl = "/Scores/Index";
+            //to go to previous page
+            
+                returnUrl =ShrdMaster.Instance.GetReturnUrl("/Certifications/Index");
                 ViewBag.ReturnURL = returnUrl;
 
+            
+            // return returnUrl;
+        }
+
+        public ActionResult UploadCertifications()
+        {
+            if (Request.Files.Count > 0)
+            {
+                HttpFileCollectionBase files = Request.Files;
+                HttpPostedFileBase file = files[0];
+                string filename = "";
+
+                if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                {
+                    string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                    filename = testfiles[testfiles.Length - 1];
+                }
+                else
+                {
+                    filename = file.FileName;// + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + "-(" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ")";
+                }
+                filename = Path.Combine(Server.MapPath("~/Uploads/Certifications"),filename);
+                if(System.IO.File.Exists(filename))
+                {
+                    System.IO.File.Delete(filename);
+                }
+                file.SaveAs(filename);
+
+                CertificationService.UploadCSV(filename);
+               // testScoreService.UploadCSV(filename);
+
+                return Json("1", JsonRequestBehavior.AllowGet);
             }
             else
             {
-                ViewBag.ReturnURL = returnUrl;
+                return Json("-1", JsonRequestBehavior.AllowGet);
             }
-            // return returnUrl;
+
         }
     }
 }

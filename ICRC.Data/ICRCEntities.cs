@@ -40,5 +40,6 @@ namespace ICRC.Data
         public DbSet<ScoreBoard> ScoreBoards { get; set; }
         public DbSet<TestScore> TestScores { get; set; }
 
+        public System.Data.Entity.DbSet<IRCRC.Model.ViewModel.UsersViewModel> UsersViewModels { get; set; }
     }
 }

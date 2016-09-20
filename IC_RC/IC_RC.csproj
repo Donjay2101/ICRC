@@ -227,7 +227,7 @@
     <Compile Include="Controllers\BoardsController.cs" />
     <Compile Include="Controllers\CertificationsController.cs" />
     <Compile Include="Controllers\CertifiedPersonsController.cs" />
-    <Compile Include="Controllers\EthicalVoilationsController.cs" />
+    <Compile Include="Controllers\EthicalViolationsController.cs" />
     <Compile Include="Controllers\FileMakerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -235,6 +235,7 @@
     <Compile Include="Controllers\ScoresController.cs" />
     <Compile Include="Controllers\TestingCompaniesController.cs" />
     <Compile Include="Controllers\TestScoresController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -362,10 +363,19 @@
     <Content Include="Views\Shared\_TestScoreNormalView.cshtml" />
     <Content Include="Views\Shared\_TestScoreView.cshtml" />
     <Content Include="Views\TestScores\Create.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Shared\_Users.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Boards\Details.cshtml" />
+    <Content Include="Views\EthicalViolations\Details.cshtml" />
+    <Content Include="Views\Certifications\Details.cshtml" />
+    <Content Include="Views\Reciprocities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Certifications\" />
     <Folder Include="Uploads\TestScores\" />
     <Folder Include="Views\TestingCompany\" />
   </ItemGroup>

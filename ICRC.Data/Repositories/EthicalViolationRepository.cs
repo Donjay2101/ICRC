@@ -1,5 +1,6 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Model;
+using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -119,10 +120,37 @@ namespace ICRC.Data.Repositories
             return data;
         }
 
+        public override Studentviolations GetByID(int ID)
+        {
+            return DbContext.Database.SqlQuery<StudentEthicalViolationViewModel>("exec sp_GetStudentViolationByID @id", new SqlParameter("@id", ID)).ToList()
+                 .Select(x => new Studentviolations
+                 {
+                     Board = x.Board,
+                     BoardName = x.BoardName,
+                     Comments = x.Comments,
+                     CreatedAt = x.CreatedAt,
+                     CreatedBy = x.CreatedBy,
+                     Date = x.Date,
+                     EthicalViolationId = x.EthicalViolationId,
+                     ID = x.ID,
+                     IsLetterSent = x.IsLetterSent,
+                     IsScanned = x.IsScanned,
+                     ISsharable = x.ISsharable,
+                     ModifiedAt = x.ModifiedAt,
+                     ModifiedBy = x.ModifiedBy,
+                     personID = x.personID,
+                     PersonName = x.PersonName,
+                     EthicalViolation = x.EthicalViolation,
+                     Notes = x.Notes
+                 }).ToList().FirstOrDefault();
+        }
+
     }
 
     public interface IStudentEthicalViolationRepository :IRepository<Studentviolations>
     {
         IEnumerable<Studentviolations> GetByPersonID(int ID);
+
+        
     }
 }

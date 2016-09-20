@@ -36,6 +36,7 @@ namespace ICRCService
 
         public IEnumerable<Boards> GetBoards()
         {
+            
             return boardRepository.GetAll().OrderBy(x=>x.Acronym);
         }
 

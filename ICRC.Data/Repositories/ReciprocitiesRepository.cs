@@ -111,6 +111,34 @@ namespace ICRC.Data.Repositories
 
                      return data;
         }
+
+        public override Reciprocities GetByID(int ID)
+        {
+           return  DbContext.Database.SqlQuery<ReciprocitiesViewModel>("exec sp_GetReciprocitiesbyID @id", new SqlParameter("@ID",ID)).Select(x => new Reciprocities
+            {
+                ApprovalDate = x.ApprovalDate,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                DateofEntry = x.DateofEntry,
+                ICRCCertID = x.ICRCCertID,
+                ID = x.ID,
+                ModifiedAt = x.ModifiedAt,
+                ModifiedBy = x.ModifiedBy,
+                Notes = x.Notes,
+                OriginatingBoard = x.OriginatingBoard,
+                PaymentNumber = x.PaymentNumber,
+                PaymentType = x.PaymentType,
+                PersonID = x.PersonID,
+                RecprocityFee = x.RecprocityFee,
+                RequestedBoard = x.RequestedBoard,
+                Status = x.Status,
+                CertificationAcronym = x.CertificationAcronym,
+                OrginiatingBoardName = x.OrginiatingBoardName,
+                PaymentTypeName = x.PaymentTypeName,
+                RequestedBoardName = x.RequestedBoardName,
+                PersonName = x.PersonName
+            }).FirstOrDefault();
+        }
     }
 
     public interface IReciproctiesRepository:IRepository<Reciprocities>

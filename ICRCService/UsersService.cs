@@ -1,6 +1,7 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Data.Repositories;
 using ICRC.Model;
+using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace ICRCService
             this.unitOfWork = unitOfWork;
         }
 
+        public IEnumerable<UsersViewModel> GetAllForIndex()
+        {
+           return userRepository.GetAllForIndex();
+        }
 
         public IEnumerable<Users> GetUsers()
         {
@@ -82,6 +87,7 @@ namespace ICRCService
         int Save();
         bool ValiddateUser(string username, string password);
         bool IsUsernameExists(string username);
+        IEnumerable<UsersViewModel> GetAllForIndex();
         
     }
 }

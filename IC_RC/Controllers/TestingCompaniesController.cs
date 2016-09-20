@@ -8,13 +8,13 @@ using System.Web.Mvc;
 
 namespace IC_RC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public class TestingCompaniesController : Controller
     {
 
         
         public readonly ITestingCompanyService companyService;
-
+        string returnUrl;
         public TestingCompaniesController(ITestingCompanyService companyService)
         {
             this.companyService = companyService;            
@@ -37,12 +37,14 @@ namespace IC_RC.Controllers
         // GET: TestingCompany/Details/5
         public ActionResult Details(int id)
         {
+            SetReturnUrl();
             return View();
         }
 
         // GET: TestingCompany/Create
         public ActionResult Create()
         {
+            SetReturnUrl();
             return View();
         }
 
@@ -50,11 +52,13 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Create(TestingCompany model)
         {
+            SetReturnUrl();
             if(ModelState.IsValid)
             {
+
                 companyService.CreateCompany(model);
                 companyService.Save();
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
 
             return View(model);
@@ -63,6 +67,7 @@ namespace IC_RC.Controllers
         // GET: TestingCompany/Edit/5
         public ActionResult Edit(int? id)
         {
+            SetReturnUrl();
             if(id==null)
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
@@ -79,11 +84,13 @@ namespace IC_RC.Controllers
         [HttpPost]
         public ActionResult Edit(TestingCompany model)
         {
+            SetReturnUrl();
             if(ModelState.IsValid)
             {
+              
                 companyService.UpdateCompany(model);
                 companyService.Save();
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
             return View(model);
         }
@@ -111,6 +118,25 @@ namespace IC_RC.Controllers
             {
                 return View();
             }
+        }
+        public void SetReturnUrl()
+        {
+            returnUrl = ShrdMaster.Instance.GetReturnUrl("/TestingCompanies/Index");
+            ViewBag.ReturnURL = returnUrl;
+
+            ////to go to previous page
+            //returnUrl = ShrdMaster.Instance.GetQueryString("returnUrl");
+            //if (string.IsNullOrEmpty(returnUrl))
+            //{
+            //    returnUrl = "/TestingCompanies/Index";
+            //    ViewBag.ReturnURL = returnUrl;
+
+            //}
+            //else
+            //{
+            //    ViewBag.ReturnURL = returnUrl;
+            //}
+            //// return returnUrl;
         }
     }
 }

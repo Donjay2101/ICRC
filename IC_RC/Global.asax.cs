@@ -37,6 +37,30 @@ namespace IC_RC
             Response.Cache.SetNoStore();
         }
 
+
+        protected void Application_AuthenticateRequest()
+        {
+            //var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            //if (user == null)
+            //{
+            //    //ViewBag.Error = "User is not active.";
+            //    Response.Redirect("/Account/Login");
+            //}
+
+            string url = HttpContext.Current.Request.Url.AbsolutePath;
+
+            if (url.ToUpper().Contains("EDIT") || url.ToUpper().Contains("DELETE")|| url.ToUpper().Contains("CREATE"))
+            {
+                if (!ShrdMaster.Instance.IsAdmin(User.Identity.Name))
+                {
+                    Response.Redirect("/Account/Login");
+                }
+            }
+
+            //url
+
+        }
+
         protected void Application_Error()
         {
             //Server.GetLastError();

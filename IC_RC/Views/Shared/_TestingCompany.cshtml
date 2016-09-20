@@ -4,7 +4,7 @@
 
 <div>
     @*<a href="/TestingCompanies/Create">Create new</a>*@
-    <a href="/TestingCompanies/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    <a href="gotoCreate('/TestingCompanies/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
 </div>
 
 @Html.Grid(Model).Columns(columns =>
@@ -18,7 +18,7 @@
             @<div id="balloon" class="balloonClass">
                 <b>
                     @*@Html.ActionLink("Edit", "Edit", new { id = c.ID }, new { @class = "modal_link", @Id = "editlink" })*@
-                    <a href="/TestingCompanies/edit?id=@c.ID" class="modal_link" id="editlink" data-toggle="tooltip" data-placement="bottom" title="Edit"><span class="glyphicon glyphicon-pencil space" aria-hidden="true"></span></a>
+                    <a href="#" onclick="gotoCreate('/TestingCompanies/edit?id=@c.ID')" class="modal_link" id="editlink" data-toggle="tooltip" data-placement="bottom" title="Edit"><span class="glyphicon glyphicon-pencil space" aria-hidden="true"></span></a>
                 </b>
             </div>);
                         columns.Add()

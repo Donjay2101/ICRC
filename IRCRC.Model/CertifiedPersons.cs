@@ -41,8 +41,8 @@ namespace ICRC.Model
         public Nullable<DateTime> CreatedAt { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<DateTime> ModifiedAt { get; set; }
-        [DisplayName("Board ID")]
-        public Nullable<int> Board_ID { get; set; }
+        //[DisplayName("Board ID")]
+        //public Nullable<int> Board_ID { get; set; }
 
         [NotMapped]
         public string FullName { get; set; }

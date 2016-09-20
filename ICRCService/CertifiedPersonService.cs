@@ -15,6 +15,7 @@ namespace ICRCService
     {
 
         IEnumerable<CertifiedPersons> GetCertifiedPersons();
+        IEnumerable<CertifiedPersons> GetCertifiedPersonsByBoardId(int ID);
         IEnumerable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex);
         CertifiedPersons GetCertifiedPersonByID(int ID);
         IEnumerable<CertifiedPersons> GetCertifiedPersons(Expression<Func<CertifiedPersons, bool>> where);
@@ -38,7 +39,13 @@ namespace ICRCService
         }
 
         #region Methods
-        
+
+
+        public IEnumerable<CertifiedPersons> GetCertifiedPersonsByBoardId(int ID)
+        {
+            return  GetCertifiedPersons().Where(x => x.CurrentBoardID == ID);
+        }
+
         public IEnumerable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex)
         {
             return certifiedRepository.GetAll(PageIndex).Select(x => new CertifiedPersons

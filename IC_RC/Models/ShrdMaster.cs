@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ICRC.Data.Infrastructure;
+using ICRC.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +9,8 @@ namespace IC_RC
 {
     public class ShrdMaster
     {
+
+        ICRC.Data.ICRCEntities db = new ICRC.Data.ICRCEntities();
 
         private static ShrdMaster _instance;
 
@@ -36,6 +40,8 @@ namespace IC_RC
             return "";
         }
 
+        
+
 
 
         public List<Status> Getstatus()
@@ -60,9 +66,43 @@ namespace IC_RC
 
             return num;
         }
-       
+        public bool IsAdmin(string Username)
+        {
+            var data=db.Users.FirstOrDefault(x => x.Username == Username);
 
-    }
+            var roles = db.UserRoles.Where(x => x.UserID == data.ID && x.RoleID==1);
+            if(roles!=null && roles.Count()>0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Users  GetUser(string username)
+        {
+            return db.Users.FirstOrDefault(x => x.Username == username && x.Active==true);
+        }
+
+
+        public string GetReturnUrl(string defaultUrl)
+        {
+            //if (defaultUrl == null) throw new ArgumentNullException(nameof(defaultUrl));
+
+
+            if (HttpContext.Current.Request.QueryString["ReturnUrl"] != null)
+            {
+                string url = HttpContext.Current.Request.Url.AbsoluteUri;
+                int index = url.IndexOf("returnUrl");
+                string returnUrl = url.Substring(index, (url.Length - index));
+                returnUrl = returnUrl.Replace("returnUrl=", "");
+                defaultUrl = returnUrl;
+                //Current.Request.QueryString[$"ReturnUrl"].ToString();
+            }
+
+           return defaultUrl;
+        }
+
+}
 
 
 

@@ -13,6 +13,7 @@ namespace ICRCService
     public interface IStudentEthicalViolationService
     {
         IEnumerable<Studentviolations> GetEthicalviolations();
+        IEnumerable<Studentviolations> GetEthicalviolationsByBoardID(int ID);
         Studentviolations GetEthicalviolationByID(int ID);
         IEnumerable<Studentviolations> GetEthicalviolations(Expression<Func<Studentviolations, bool>> where);
         IEnumerable<Studentviolations> GetVoiltaionsByPersonID(int ID);
@@ -33,6 +34,13 @@ namespace ICRCService
         }
 
         #region Methods
+
+        public IEnumerable<Studentviolations> GetEthicalviolationsByBoardID(int ID)
+        {
+            return GetEthicalviolations().Where(x => x.Board == ID);
+        }
+
+
         public IEnumerable<Studentviolations> GetEthicalviolations()
         {
             return StudentEthicalViolationRepository.GetAll().OrderBy(x=>x.Date);

@@ -13,6 +13,7 @@ namespace ICRCService
     public interface IReciprocitiesService
     {
         IEnumerable<Reciprocities> GetReciprocities();
+        IEnumerable<Reciprocities> GetReciprocitiesByBoardID(int ID);
         Reciprocities GetReciprocitiesByID(int ID);
         IEnumerable<Reciprocities> GetReciprocities(Expression<Func<Reciprocities, bool>> where);
         IEnumerable<Reciprocities> ReciprocityGetByPersonID(int ID);
@@ -36,6 +37,10 @@ namespace ICRCService
 
         #region Methods
          
+        public IEnumerable<Reciprocities> GetReciprocitiesByBoardID(int ID)
+        {
+            return GetReciprocities().Where(x => x.OriginatingBoard == ID);
+        }
         public IEnumerable<Reciprocities> GetReciprocities()
         {
             return reciprocityRepository.GetAll().OrderBy(x=>x.DateofEntry);
