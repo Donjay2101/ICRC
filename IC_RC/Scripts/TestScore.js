@@ -458,7 +458,9 @@ $(document).on('click', '#Import', function () {
 
 
 $(document).on('click', '#closeDialog1', function () {
+    hideOverLay();
     $('#overlayDialog').css('display', 'none');
+    
 });
 
 $(document).on('click', '#btnUpload', function () {

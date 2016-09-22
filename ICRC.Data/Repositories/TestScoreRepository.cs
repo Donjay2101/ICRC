@@ -63,6 +63,7 @@ namespace ICRC.Data.Repositories
             bulkinsert.DestinationTableName = "dbo.TestScores";
             bulkinsert.WriteToServer(dt);
 
+            File.Delete(FilePath);
         }
 
 

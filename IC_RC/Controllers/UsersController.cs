@@ -59,18 +59,12 @@ namespace IC_RC.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-                //Users user = new Users();
-                //user.Username = model.Username;
-                //user.Password = model.Password;
-                //user.IsICRCMember = model.IsICRCMember;
-                //user.BoardID = model.BoardID;
-                //user.Active = true;               
+            {                            
+                    model.Active = true;
                     userService.CreateUser(model);
                     userService.Save();
                     return Redirect(returnUrl);                                                           
-            }
-            
+            }            
             return View(model);
         }
 
@@ -96,6 +90,16 @@ namespace IC_RC.Controllers
             return View(model);
         }
 
+
+
+        public ActionResult Delete(int id)
+        {
+            SetReturnUrl();
+            var data=userService.GetUserByID(id);
+            userService.Delete(data);
+            userService.Save();
+            return Json("1", JsonRequestBehavior.AllowGet);
+        }
 
         public void SetReturnUrl()
         {

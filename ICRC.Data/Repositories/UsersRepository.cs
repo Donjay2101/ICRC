@@ -59,6 +59,15 @@ namespace ICRC.Data.Repositories
             }
             return false;
         }
+
+        public override void Add(Users entity)
+        {
+            DbContext.Users.Add(entity);
+            DbContext.SaveChanges();
+            int[] roles = new int[] { 2 };
+            AssginRolesToUser(entity.ID,roles);
+            DbContext.SaveChanges();
+        }
     }
 
     public interface IUsersRepository:IRepository<Users>

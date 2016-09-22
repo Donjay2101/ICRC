@@ -177,19 +177,14 @@ namespace ICRC.Data.Repositories
            
             string CSVData = File.ReadAllText(filePath);
             string[] cells;
-            count = 0;
-            try
-            {
+            count = 0;         
                 foreach (string row in CSVData.Split('\n'))
                 {
-
-
                     if (count != 0)
                     {
                         if (!string.IsNullOrEmpty(row))
                         {
-                            try
-                            {
+                       
                                 dt.Rows.Add();
                                 int i = 0;
 
@@ -292,33 +287,18 @@ namespace ICRC.Data.Repositories
                                     //DataTable tblPerson = MakeTable<CertifiedPersons>(
                                     personID = person.ID;
                                 }
-
-                                dt.Rows[dt.Rows.Count - 1]["PersonID"] = personID;
-
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
-
-
+                                dt.Rows[dt.Rows.Count - 1]["PersonID"] = personID;                        
                         }
-
-
-
                     }
                     count++;
                 }
-
                 string conn = ConfigurationManager.ConnectionStrings["IRCREntities"].ConnectionString;
                 SqlBulkCopy bulkinsert = new SqlBulkCopy(conn);
                 bulkinsert.DestinationTableName = "dbo.Certifications";
                 bulkinsert.WriteToServer(dt);
-            }
-            catch(Exception ex)
-            {
-
-            }
+                File.Delete(filePath);
+            
+            
 
             
         }

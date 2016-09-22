@@ -28,7 +28,11 @@ namespace IC_RC.Controllers
             this.CertificationService = CertificationService;
             this.CertificateService = CertificateService;
             this.BoardService = BoardService;
-            this.paymenttypeService = paymenttypeService;
+            this.paymenttypeService = paymenttypeService;       
+            //if(Server!=null)
+            //{
+               
+            //}    
         }
 
         // GET: Certifications
@@ -212,38 +216,48 @@ namespace IC_RC.Controllers
 
         public ActionResult UploadCertifications()
         {
-            if (Request.Files.Count > 0)
+            try
             {
-                HttpFileCollectionBase files = Request.Files;
-                HttpPostedFileBase file = files[0];
-                string filename = "";
-
-                if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                LoggerApp.Logger.ExceptionPath = Server.MapPath("~/Errors.txt");
+                if (Request.Files.Count > 0)
                 {
-                    string[] testfiles = file.FileName.Split(new char[] { '\\' });
-                    filename = testfiles[testfiles.Length - 1];
+                    HttpFileCollectionBase files = Request.Files;
+                    HttpPostedFileBase file = files[0];
+                    string filename = "";
+
+                    if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                    {
+                        string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                        filename = testfiles[testfiles.Length - 1];
+                    }
+                    else
+                    {
+                        filename = file.FileName;// + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + "-(" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ")";
+                    }
+                    filename = Path.Combine(Server.MapPath("~/Uploads/Certifications"), filename);
+                    if (System.IO.File.Exists(filename))
+                    {
+                        System.IO.File.Delete(filename);
+                    }
+                    file.SaveAs(filename);
+
+                    CertificationService.UploadCSV(filename);
+                    // testScoreService.UploadCSV(filename);
+
+                    return Json("1", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    filename = file.FileName;// + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + "-(" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ")";
+                    return Json("-1", JsonRequestBehavior.AllowGet);
                 }
-                filename = Path.Combine(Server.MapPath("~/Uploads/Certifications"),filename);
-                if(System.IO.File.Exists(filename))
-                {
-                    System.IO.File.Delete(filename);
-                }
-                file.SaveAs(filename);
-
-                CertificationService.UploadCSV(filename);
-               // testScoreService.UploadCSV(filename);
-
-                return Json("1", JsonRequestBehavior.AllowGet);
             }
-            else
+            catch(Exception ex)
             {
-                return Json("-1", JsonRequestBehavior.AllowGet);
+                LoggerApp.Logger.Instance.LogException(ex);
+                return Json(ex.InnerException.Message, JsonRequestBehavior.AllowGet);
             }
 
+           // return Json("-1", JsonRequestBehavior.AllowGet);
         }
     }
 }

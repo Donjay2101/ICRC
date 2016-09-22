@@ -46,6 +46,7 @@ namespace ICRCService
         }
         public void CreateUser(Users user)
         {
+            
             userRepository.Add(user);
         }
 
@@ -67,6 +68,11 @@ namespace ICRCService
         {
             return userRepository.IsUsernameExists(username);
         }
+
+        public void Delete(Users user)
+        {
+            userRepository.Delete(user);
+        }
         public int Save()
         {
             return unitOfWork.Commit();
@@ -85,6 +91,7 @@ namespace ICRCService
         void UpdateUser(Users users);
         void AssginRolesToUser(int ID, int[] roles);
         int Save();
+        void Delete(Users user);
         bool ValiddateUser(string username, string password);
         bool IsUsernameExists(string username);
         IEnumerable<UsersViewModel> GetAllForIndex();

@@ -208,6 +208,7 @@
     <Content Include="Content\Mysass.css">
       <DependentUpon>Mysass.scss</DependentUpon>
     </Content>
+    <Content Include="Errors.txt" />
     <Content Include="Images\error.png" />
     <Content Include="Images\globe.png" />
     <Content Include="Images\header.png" />
