@@ -939,3 +939,4 @@ E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\bin\Microsoft.Owin.Security.Mi
 E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\obj\Debug\IC_RC.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\obj\Debug\IC_RC.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\obj\Debug\IC_RC.pdb
+E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\bin\Ionic.Zip.dll

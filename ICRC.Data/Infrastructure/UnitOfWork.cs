@@ -35,9 +35,7 @@ namespace ICRC.Data.Infrastructure
            
             HtmlToPdf Convertor = new HtmlToPdf();
             
-            //// create a new pdf document converting an url
-            //  string url = "http://localhost:51369/Customer/InvoicePrint?orderID=" + order.ID + "&PDF=1&cartID=" + cart.GetCartId(this.HttpContext);
-          //string url=""; //= "http://fundraising.infodatixhosting.com/Customer/InvoicePrint?orderID=" + order.ID + "&PDF=1&cartID=" + cart.GetCartId(this.HttpContext);
+           
                         
             string htmlCode;
             using (WebClient client = new WebClient())

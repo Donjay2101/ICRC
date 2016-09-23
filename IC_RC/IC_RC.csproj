@@ -385,6 +385,7 @@
     <Content Include="Views\Reciprocities\Details.cshtml" />
     <Content Include="Views\Certifications\PrintCertificate.cshtml" />
     <Content Include="Views\Certifications\ShowAddtoQueueCertificates.cshtml" />
+    <Content Include="Views\Shared\_QueueCertificates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
