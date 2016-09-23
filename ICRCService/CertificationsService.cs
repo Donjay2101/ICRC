@@ -2,13 +2,16 @@
 using ICRC.Data.Infrastructure;
 using ICRC.Data.Repositories;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ICRCService
 {
@@ -18,12 +21,14 @@ namespace ICRCService
         IEnumerable<Certifications> GetCertificationsForIndex();
         IEnumerable<Certifications> GetCertificationsByBoardID(int ID);
         Certifications GetCertificationByID(int ID);
-        
+        IEnumerable<Certifications> QueueForPrint();
+        ReportViewModel QueueToPrintByCertificationID(int ID);
         IEnumerable<Certifications> GetCertifications(Expression<Func<Certifications, bool>> where);
         IEnumerable<Certifications> GetCertificationsByPersonID(int ID);
         void CreateCertification(Certifications Board);
         void UpdateCertification(Certifications Board);
         void Save();
+        void GenerateCertificate(List<int> certifications,string path);
         void UploadCSV(string filePath);
         bool CheckNumber(int number);
         void Delete(int ID);
@@ -47,6 +52,34 @@ namespace ICRCService
         }
 
         #region Methods
+
+        public void GenerateCertificate(List<int> certifications,string path)
+        {
+            string Url;
+            string folderName = Path.Combine(path, "Certifications");
+            foreach(var item in certifications)
+            {
+                if(Directory.Exists(folderName))
+                {
+                    Directory.Delete(folderName);
+                }
+                Directory.CreateDirectory(folderName);
+                Url = "http://localhost:65147/Certifications/PrintCertificate?id=" + item;
+                unitofwork.PrintPDF(Url, path,item.ToString());                    
+            }
+        }
+
+        public IEnumerable<Certifications> QueueForPrint()
+        {
+            
+            return GetCertificationsForIndex().Where(x => x.AddToPrintQueues == true);
+        }
+
+        public ReportViewModel QueueToPrintByCertificationID(int ID)
+        {
+            return certificationRepository.GetReportDataByCertificationID(ID);
+
+        }
 
         public IEnumerable<Certifications> GetCertificationsByBoardID(int ID)
         {

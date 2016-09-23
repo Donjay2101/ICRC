@@ -9,5 +9,8 @@ namespace ICRC.Data.Infrastructure
     public interface IUnitOfWork
     {
         int Commit();
+
+        void PrintPDF(string url,string Location,string Name);
+
     }
 }

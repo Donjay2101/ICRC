@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ICRC.Model.Certifications>
+@{
+    ViewBag.Title = "ShowAddtoQueueCertificates";
+}
+<div class="row">
+    <input type="button" id="btnPrint" value="Print Queue" />
+    <input type="button" id="btnPrint" value="Print Selected" />
+</div>
+<div id="divContainer">
+    @Html.Partial("_Certifications",Model)
+</div>
+
+<script>
+    $(document).on('click', '#btnPrint', function () {
+
+        window.open("/Certifications/PrintBatchCertificates", "_blank");
+
+        //$.ajax({
+        //    url: 'Certifications/PrintBatchCertificates',
+        //    type: "POST",
+        //    success: function (data) {
+        //        if(data==1)
+        //        {
+        //            alert('printed the batch');
+        //        }
+        //    },
+        //    error: function (err) {
+        //        alert(err.statusText);
+        //    }
+            
+
+
+        //});
+    });
+</script>
+

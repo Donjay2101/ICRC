@@ -259,5 +259,31 @@ namespace IC_RC.Controllers
 
            // return Json("-1", JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult ShowAddtoQueueCertificates()
+        {
+            var data = CertificationService.QueueForPrint();
+            return View(data);
+        }
+        public ActionResult PrintBatchCertificates()
+        {
+            var data = CertificationService.QueueForPrint();
+            string path = Server.MapPath("~/PrintedCertifications");            
+            CertificationService.GenerateCertificate(data.Select(x => x.ID).ToList(),path); 
+            
+            
+                       
+            return View();
+        }
+
+        
+
+        [AllowAnonymous]
+        public ActionResult  PrintCertificate(int ID)
+        {
+            var data= CertificationService.QueueToPrintByCertificationID(ID);
+            return View(data);
+        }
     }
 }

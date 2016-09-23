@@ -1,6 +1,7 @@
 ﻿using IC_RC.ViewModels;
 using ICRC.Data.Infrastructure;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -164,6 +165,11 @@ namespace ICRC.Data.Repositories
                 }).FirstOrDefault();
         }
 
+
+        public ReportViewModel GetReportDataByCertificationID(int ID)
+        {
+            return DbContext.Database.SqlQuery<ReportViewModel>("exec sp_ReportCertificationsByCertificationID @ID", new SqlParameter("@ID", ID)).FirstOrDefault();
+        }
 
         public void UploadCSV(string filePath)
         {
@@ -348,6 +354,8 @@ namespace ICRC.Data.Repositories
         Certifications GetCertificationsByID(int ID);
 
         void UploadCSV(string filePath);
+
+        ReportViewModel GetReportDataByCertificationID(int ID);
         //IEnumerable<Certifications> GetAll();
 
 

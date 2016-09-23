@@ -1,0 +1,44 @@
+﻿@model  ICRC.Model.ViewModel.ReportViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <title>Generate Certificate</title>
+</head>
+<body>
+    <div id="container"> 
+        <div class="row">
+            <h1>
+                @Model.FullName                
+            </h1>
+            <h3>
+                @Model.CurrentBoardName
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="~/Images/Sign.png" />
+            </div>
+            <div class="col-md-4">
+                @Model.DateIssued.ToShortDateString()
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Model.CertificateNumber
+            </div>
+            <div class="col-md-4">
+                @Model.RenewalDate.ToShortDateString()
+            </div>
+        </div>
+    </div>
+</body>
+</html>
