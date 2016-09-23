@@ -328,3 +328,12 @@ span.dark {
     font-weight: bolder;
 }
      /*20/9*/
+     .navbar-nav {
+    float: none;
+    margin: 0 auto;
+    width: 70%;
+}
+     .nav>li>a {
+    padding: 15px 10px;
+    font-size: 15px;
+}
