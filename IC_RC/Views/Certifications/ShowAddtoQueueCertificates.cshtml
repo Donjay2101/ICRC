@@ -2,12 +2,9 @@
 @{
     ViewBag.Title = "ShowAddtoQueueCertificates";
 }
-<div class="row">
-    <input type="button" id="btnPrint" value="Print Queue" />
-    <input type="button" id="btnPrint" value="Print Selected" />
-</div>
+
 <div id="divContainer">
-    @Html.Partial("_QueueCertifications",Model)
+    @Html.Partial("_QueueCertificates",Model)
 </div>
 
 <script>
