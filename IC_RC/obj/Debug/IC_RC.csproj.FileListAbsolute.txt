@@ -940,3 +940,7 @@ E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\bin\Microsoft.Owin.Security.Mi
 E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\obj\Debug\IC_RC.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\obj\Debug\IC_RC.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\obj\Debug\IC_RC.pdb
+C:\Users\EACD-044\Source\Repos\ICRC\IC_RC\bin\Select.Html.dep
+C:\Users\EACD-044\Source\Repos\ICRC\IC_RC\bin\Ionic.Zip.dll
+C:\Users\EACD-044\Source\Repos\ICRC\IC_RC\bin\Select.HtmlToPdf.dll
+C:\Users\EACD-044\Source\Repos\ICRC\IC_RC\bin\Select.HtmlToPdf.xml

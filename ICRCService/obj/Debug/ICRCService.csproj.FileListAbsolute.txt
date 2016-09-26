@@ -110,3 +110,5 @@ E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\bin\Debug\Select.HtmlToP
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\obj\Debug\ICRCService.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\obj\Debug\ICRCService.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\obj\Debug\ICRCService.pdb
+C:\Users\EACD-044\Source\Repos\ICRC\ICRCService\bin\Debug\Select.HtmlToPdf.dll
+C:\Users\EACD-044\Source\Repos\ICRC\ICRCService\bin\Debug\Select.HtmlToPdf.xml
