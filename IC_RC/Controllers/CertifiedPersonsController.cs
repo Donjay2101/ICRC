@@ -41,18 +41,16 @@ namespace IC_RC.Controllers
                 ViewBag.Error = "User is not active.";
                 return Redirect("/Account/login");
             }
-            return View();
+            var data = PersonsData();
+            return View(data);
         }
 
-        public ActionResult GetData()
+        public List<CertifiedPersons> PersonsData()
         {
-            //pageIndex = ShrdMaster.Instance.GetPageIndex();
-            //var data1 = CertifiedPersonService.GetCertifedPersonsForIndex(pageIndex).AsQueryable();
-            //var data =new CertifiedPersonsGrid(data1,1,true);
-            List<CertifiedPersons> data=new List<CertifiedPersons> ();
-            if(ShrdMaster.Instance.IsAdmin(User.Identity.Name))
+            List<CertifiedPersons> data = new List<CertifiedPersons>();
+            if (ShrdMaster.Instance.IsAdmin(User.Identity.Name))
             {
-                data= CertifiedPersonService.GetCertifiedPersons().ToList();
+                data = CertifiedPersonService.GetCertifiedPersons().ToList();
             }
             else
             {
@@ -64,8 +62,15 @@ namespace IC_RC.Controllers
                 //}
                 data = CertifiedPersonService.GetCertifiedPersonsByBoardId(user.BoardID).ToList();
             }
+            return data;
+        }
+        public ActionResult GetData()
+        {
+            //pageIndex = ShrdMaster.Instance.GetPageIndex();
+            //var data1 = CertifiedPersonService.GetCertifedPersonsForIndex(pageIndex).AsQueryable();
+            //var data =new CertifiedPersonsGrid(data1,1,true);
 
-            
+            var data = PersonsData();
             return PartialView("_CertifiedPersons", data);
         }
 

@@ -18,6 +18,7 @@ namespace ICRCService
         void CreateCertificate(Certificates cetificate);
         void UpdateCertificate(Certificates cetificate);
         void Save();
+        
         void Delete(int ID);
     }
 
@@ -36,6 +37,8 @@ namespace ICRCService
 
         #region Methods
         
+
+
         public IEnumerable<Certificates> GetCertificates()
         {
             return certificateRepository.GetAll().OrderBy(x=>x.Name);

@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ionic.Zip;
+using Newtonsoft.Json;
 
 namespace IC_RC.Controllers
 {
@@ -262,22 +264,64 @@ namespace IC_RC.Controllers
 
 
         public ActionResult ShowAddtoQueueCertificates()
-        {
+        {   
             var data = CertificationService.QueueForPrint();
             return View(data);
         }
-        public ActionResult PrintBatchCertificates()
+        public ActionResult ShowCertificationQueue()
         {
             var data = CertificationService.QueueForPrint();
-            string path = Server.MapPath("~/PrintedCertifications");            
-            CertificationService.GenerateCertificate(data.Select(x => x.ID).ToList(),path); 
-            
-            
-                       
-            return View();
+            return PartialView("_QueueCertificates",data);
         }
 
-        
+
+        public ActionResult PrintBatchCertificates(string ids)
+        {
+            List<Certifications> data = new List<Certifications>();
+            string path = Server.MapPath("~/PrintedCertifications/Certifications");
+            List<int> cetificates;
+            if (!string.IsNullOrEmpty(ids))
+            {            
+                cetificates=JsonConvert.DeserializeObject<List<int>>(ids);                
+            }
+            else
+            { 
+                data = CertificationService.QueueForPrint().ToList();
+                cetificates = data.Select(x => x.ID).ToList();                                
+            }
+            CertificationService.GenerateCertificate(cetificates, path);           
+            string zipFolder;
+            //string zipFolder= Path.Combine(Server.MapPath("~/ PrintedCertifications"),"ZipCertifications.zip");
+            using (ZipFile zp = new ZipFile())
+            {
+                zipFolder = Server.MapPath("~/PrintedCertifications/Certifications.zip");
+                string[] files = Directory.GetFiles(path);
+                zp.AddFiles(files,"files");
+                zp.Save(zipFolder);
+            }
+            return File(zipFolder,System.Net.Mime.MediaTypeNames.Application.Zip);
+        }
+
+        [HttpPost]
+        public ActionResult ClearQueue(string ids)
+        {
+            
+            try
+            {
+                if(!string.IsNullOrEmpty(ids))
+                {
+                    
+                    CertificationService.ClearQueue(ids);
+                }
+                return Json("1", JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+            
+           
+        }
 
         [AllowAnonymous]
         public ActionResult  PrintCertificate(int ID)

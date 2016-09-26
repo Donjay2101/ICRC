@@ -345,6 +345,11 @@ namespace ICRC.Data.Repositories
             return -1;
         }
 
+        public void ClearQueue(string ids)
+        {
+            DbContext.Database.ExecuteSqlCommand("exec SP_ClearCertificatePrintingQueue @ids", new SqlParameter("@ids",ids??(object)DBNull.Value));
+        }
+
     }
 
     public interface ICertificationsRepository:IRepository<Certifications>
@@ -352,7 +357,7 @@ namespace ICRC.Data.Repositories
         IEnumerable<Certifications> GetCertificationsByPersonID(int ID);
         bool CheckNumber(int number);
         Certifications GetCertificationsByID(int ID);
-
+        void ClearQueue(string ids);
         void UploadCSV(string filePath);
 
         ReportViewModel GetReportDataByCertificationID(int ID);

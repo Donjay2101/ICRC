@@ -28,6 +28,7 @@ namespace ICRCService
         void CreateCertification(Certifications Board);
         void UpdateCertification(Certifications Board);
         void Save();
+        void ClearQueue(string ids);
         void GenerateCertificate(List<int> certifications,string path);
         void UploadCSV(string filePath);
         bool CheckNumber(int number);
@@ -53,16 +54,30 @@ namespace ICRCService
 
         #region Methods
 
+        public void ClearQueue(string ids)
+        {
+            certificationRepository.ClearQueue(ids);
+        }
+
+
+
         public void GenerateCertificate(List<int> certifications,string path)
         {
             string Url;
             string folderName = Path.Combine(path, "Certifications");
-            foreach(var item in certifications)
+            if (Directory.Exists(folderName))
             {
-                if(Directory.Exists(folderName))
+                DirectoryInfo dir=new DirectoryInfo (folderName);
+
+                FileInfo[] files = dir.GetFiles();
+                foreach(var file in files)
                 {
-                    Directory.Delete(folderName);
+                    file.Delete();
                 }
+                Directory.Delete(folderName);
+            }
+            foreach (var item in certifications)
+            {               
                 Directory.CreateDirectory(folderName);
                 Url = "http://localhost:65147/Certifications/PrintCertificate?id=" + item;
                 unitofwork.PrintPDF(Url, path,item.ToString());                    
