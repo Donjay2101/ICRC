@@ -45,8 +45,8 @@ namespace ICRC.Data.Infrastructure
             Convertor.Options.MarginTop = 50;
             Convertor.Options.MarginBottom = 50;            
             PdfDocument doc = Convertor.ConvertHtmlString(htmlCode);
-            string path = Path.Combine("Certifications",Name + "_Certificate.Pdf");
-            path=Path.Combine(Location,path);            
+            string path;//= Path.Combine("Certifications",);
+            path=Path.Combine(Location, Name + "_Certificate.Pdf");            
             doc.Save(path);
         }
     }

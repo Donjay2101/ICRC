@@ -46,29 +46,38 @@ namespace IC_RC.Controllers
                 ViewBag.Error = "User is not active.";
                 return RedirectToAction("/Account/login");
             }
-            return View();
+            var data = GetCertifications();
+            return View(data);
+        }
+
+
+        public List<Certifications> GetCertifications()
+        {
+            // var userID = SessionContext<int>.Instance.GetSession("UserID");
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            List<Certifications> certifications;
+            if (ShrdMaster.Instance.IsAdmin(user.Username))
+            {
+                certifications = CertificationService.GetCertificationsForIndex().ToList();
+            }
+            else
+            {
+                certifications = CertificationService.GetCertificationsByBoardID(user.BoardID).ToList();
+            }
+            return certifications;
         }
 
         public ActionResult GetData()
         {
-           // var userID = SessionContext<int>.Instance.GetSession("UserID");
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
             if (user == null)
             {
                 ViewBag.Error = "User is not active.";
                 return Redirect("Account/login");
             }
-            IEnumerable<Certifications> certifications;
-            if(ShrdMaster.Instance.IsAdmin(user.Username))
-            {
-                certifications= CertificationService.GetCertificationsForIndex();
-            }
-            else
-            {
-                certifications = CertificationService.GetCertificationsByBoardID(user.BoardID);
-            }
-            
-            return PartialView("_Certifications",certifications);
+
+            var data = GetCertifications();
+            return PartialView("_Certifications",data);
         }
 
 
@@ -278,7 +287,26 @@ namespace IC_RC.Controllers
         public ActionResult PrintBatchCertificates(string ids)
         {
             List<Certifications> data = new List<Certifications>();
-            string path = Server.MapPath("~/PrintedCertifications/Certifications");
+            string path= Server.MapPath("~/PrintedCertifications");
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo dir = new DirectoryInfo(path);
+
+                FileInfo[] files = dir.GetFiles();
+                foreach (var file in files)
+                {
+                    file.Delete();
+                }
+                //DirectoryInfo[] di = dir.GetDirectories();
+                //foreach (var directory in di)
+                //{
+                //    directory.Delete();
+                //}
+
+                //Directory.Delete(path);
+            }
+
+            path = Path.Combine(path,"Certifications");
             List<int> cetificates;
             if (!string.IsNullOrEmpty(ids))
             {            
@@ -295,6 +323,7 @@ namespace IC_RC.Controllers
             using (ZipFile zp = new ZipFile())
             {
                 zipFolder = Server.MapPath("~/PrintedCertifications/Certifications.zip");
+
                 string[] files = Directory.GetFiles(path);
                 zp.AddFiles(files,"files");
                 zp.Save(zipFolder);
@@ -328,6 +357,13 @@ namespace IC_RC.Controllers
         {
             var data= CertificationService.QueueToPrintByCertificationID(ID);
             return View(data);
+        }
+
+        public ActionResult downloadExcel()
+        {
+            string path=Server.MapPath("~/Template/CeritficationTemplate.xlsx");
+            
+            return File(path,"application/vnd.ms-excel","CertificationTemplate.xlsx");
         }
     }
 }

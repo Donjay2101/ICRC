@@ -39,24 +39,31 @@ namespace IC_RC.Controllers
                 ViewBag.Error = "User is not active.";
                 return Redirect("/Account/login");
             }
+            var data = GetReciprocities();
 
-            return View();
+            return View(data);
+        }
+
+        public List<Reciprocities> GetReciprocities()
+        {
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+
+            List<Reciprocities> reciprocities;
+            if (ShrdMaster.Instance.IsAdmin(user.Username))
+            {
+                reciprocities = reciprocityService.GetReciprocities().ToList();
+            }
+            else
+            {
+                reciprocities = reciprocityService.GetReciprocitiesByBoardID(user.BoardID).ToList();
+            }
+
+            return reciprocities;
         }
 
         public ActionResult GetData()
         {
-            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
-           
-            IEnumerable<Reciprocities> reciprocities;
-            if (ShrdMaster.Instance.IsAdmin(user.Username))
-            {
-                reciprocities = reciprocityService.GetReciprocities();
-            }
-            else
-            {
-                reciprocities = reciprocityService.GetReciprocitiesByBoardID(user.BoardID);
-            }
-            
+            var reciprocities = GetReciprocities();
             return PartialView("_Reciprocities",reciprocities);
         }
 

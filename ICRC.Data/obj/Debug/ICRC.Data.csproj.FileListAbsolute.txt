@@ -94,6 +94,9 @@ C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\EntityFramework.SqlServe
 C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
 C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.dll
 C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\obj\Debug\ICRC.Data.pdb
+C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\Select.Html.dep
+C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\Select.HtmlToPdf.dll
+C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\Select.HtmlToPdf.xml
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\bin\Debug\ICRC.Data.dll.config
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\bin\Debug\ICRC.Data.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\bin\Debug\ICRC.Data.pdb
@@ -109,6 +112,3 @@ E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\bin\Debug\Select.HtmlToPdf
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\obj\Debug\ICRC.Data.csprojResolveAssemblyReference.cache
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\obj\Debug\ICRC.Data.dll
 E:\Official\Work\Projects\source\IC_RC\icrc\ICRC.Data\obj\Debug\ICRC.Data.pdb
-C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\Select.Html.dep
-C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\Select.HtmlToPdf.dll
-C:\Users\EACD-044\Source\Repos\ICRC\ICRC.Data\bin\Debug\Select.HtmlToPdf.xml

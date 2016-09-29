@@ -16,7 +16,7 @@ namespace ICRCService
 
         IEnumerable<CertifiedPersons> GetCertifiedPersons();
         IEnumerable<CertifiedPersons> GetCertifiedPersonsByBoardId(int ID);
-        IEnumerable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex);
+        IQueryable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex);
         CertifiedPersons GetCertifiedPersonByID(int ID);
         IEnumerable<CertifiedPersons> GetCertifiedPersons(Expression<Func<CertifiedPersons, bool>> where);
         void CreateCertifiedPerson(CertifiedPersons Board);
@@ -46,33 +46,34 @@ namespace ICRCService
             return  GetCertifiedPersons().Where(x => x.CurrentBoardID == ID);
         }
 
-        public IEnumerable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex)
+        public IQueryable<CertifiedPersons> GetCertifedPersonsForIndex(int PageIndex)
         {
-            return certifiedRepository.GetAll(PageIndex).Select(x => new CertifiedPersons
-            {
-                Address = x.Address,
-                Address2 = x.Address2,
-                City = x.City,
-                Country = x.Country,
-                CreatedAt = x.CreatedAt,
-                CreatedBy = x.CreatedBy,
-                CurrentBoardID = x.CurrentBoardID,
-                Email = x.Email,
-                //  Ethicalviolation=x.Ethicalviolation,
-                FirstName = x.FirstName,
-                ID = x.ID,
-                LastName = x.LastName,
-                MiddleName = x.MiddleName,
-                ModifiedAt = x.ModifiedAt,
-                ModifiedBy = x.ModifiedBy,
-                Notes = x.Notes,
-                OtherBoardID = x.OtherBoardID,
-                province = x.province,
-                SSN = x.SSN,
-                State = x.State,
-                Zip = x.Zip,
-                FullName = x.FirstName + " " + x.MiddleName + " " + x.LastName
-            }).OrderBy(x => x.FirstName).ThenBy(x => x.MiddleName).ThenBy(x => x.LastName);
+            return certifiedRepository.GetAlla(PageIndex);
+            //return certifiedRepository.GetAll(PageIndex).Select(x => new CertifiedPersons
+            //{
+            //    Address = x.Address,
+            //    Address2 = x.Address2,
+            //    City = x.City,
+            //    Country = x.Country,
+            //    CreatedAt = x.CreatedAt,
+            //    CreatedBy = x.CreatedBy,
+            //    CurrentBoardID = x.CurrentBoardID,
+            //    Email = x.Email,
+            //    //  Ethicalviolation=x.Ethicalviolation,
+            //    FirstName = x.FirstName,
+            //    ID = x.ID,
+            //    LastName = x.LastName,
+            //    MiddleName = x.MiddleName,
+            //    ModifiedAt = x.ModifiedAt,
+            //    ModifiedBy = x.ModifiedBy,
+            //    Notes = x.Notes,
+            //    OtherBoardID = x.OtherBoardID,
+            //    province = x.province,
+            //    SSN = x.SSN,
+            //    State = x.State,
+            //    Zip = x.Zip,
+            //    FullName = x.FirstName + " " + x.MiddleName + " " + x.LastName
+            //}).OrderBy(x => x.FirstName).ThenBy(x => x.MiddleName).ThenBy(x => x.LastName);
         }
 
         public IEnumerable<CertifiedPersons> GetCertifiedPersons()

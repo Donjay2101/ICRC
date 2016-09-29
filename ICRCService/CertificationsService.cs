@@ -64,22 +64,29 @@ namespace ICRCService
         public void GenerateCertificate(List<int> certifications,string path)
         {
             string Url;
-            string folderName = Path.Combine(path, "Certifications");
-            if (Directory.Exists(folderName))
+            //string folderName = Path.Combine(path, "Certifications");
+            if (Directory.Exists(path))
             {
-                DirectoryInfo dir=new DirectoryInfo (folderName);
+                DirectoryInfo dir=new DirectoryInfo(path);
 
                 FileInfo[] files = dir.GetFiles();
                 foreach(var file in files)
                 {
                     file.Delete();
                 }
-                Directory.Delete(folderName);
+                //DirectoryInfo[] di = dir.GetDirectories();
+                //foreach (var directory in di)
+                //{
+                //    directory.Delete();
+                //}
+
+                Directory.Delete(path);
             }
             foreach (var item in certifications)
             {               
-                Directory.CreateDirectory(folderName);
-                Url = "http://localhost:65147/Certifications/PrintCertificate?id=" + item;
+                Directory.CreateDirectory(path);
+                Url= "http://icrc.infodatixhosting.com/Certifications/PrintCertificate?id="+ item;
+                //Url = "http://localhost:65147/Certifications/PrintCertificate?id=" + item;
                 unitofwork.PrintPDF(Url, path,item.ToString());                    
             }
         }

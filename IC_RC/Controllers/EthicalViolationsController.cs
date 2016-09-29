@@ -40,25 +40,34 @@ namespace IC_RC.Controllers
                 ViewBag.Error = "User is not active.";
                 return Redirect("/Account/login");
             }
-
-            return View();
+            var data = GetVoilations();
+            return View(data);
         }
 
-        public ActionResult GetData()
+        public List<Studentviolations> GetVoilations()
         {
-            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);          
-            IEnumerable<Studentviolations> ethicalvoiliation;
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            List<Studentviolations> ethicalvoiliation;
             if (ShrdMaster.Instance.IsAdmin(user.Username))
             {
-                ethicalvoiliation=studentethicalviolationservice.GetEthicalviolations();
+                ethicalvoiliation = studentethicalviolationservice.GetEthicalviolations().ToList();
             }
             else
             {
-                ethicalvoiliation = studentethicalviolationservice.GetEthicalviolationsByBoardID(user.BoardID);
+                ethicalvoiliation = studentethicalviolationservice.GetEthicalviolationsByBoardID(user.BoardID).ToList();
             }
-            
-
-            return PartialView("_violations",ethicalvoiliation);
+            return ethicalvoiliation;
+        }
+        public ActionResult GetData()
+        {
+            var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.Error = "User is not active.";
+                return Redirect("/Account/login");
+            }
+            var data = GetVoilations();
+            return PartialView("_violations",data);
         }
         // GET: Ethicalviolations/Details/5
         public ActionResult Details(int ?id)

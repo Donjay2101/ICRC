@@ -1,8 +1,8 @@
-﻿
+﻿@model IEnumerable<ICRC.Model.Studentviolations>
 @{
     ViewBag.Title = "Index";
 }
 
 <div id="divContainer">
-    @Html.Action("GetData")
+    @Html.Partial("_violations",Model)    
 </div>

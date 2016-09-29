@@ -97,12 +97,21 @@ namespace IC_RC.Controllers
                 SetupFormsAuthTicket(user, false);
                 SessionContext<Users>.Instance.SetSession("User", user);
                 SessionContext<int>.Instance.SetSession("UserID",user.ID);
+                HttpCookie isADminCookie = new HttpCookie("AdminCookie");
                 
-                if(user.Name=="admin")
-                {
-                    SessionContext<bool>.Instance.SetSession("IsAdmin", true);                    
+                
+                //isADminCookie.Value = "User";
+                if (user.Username=="admin")
+                {                    
+                    SessionContext<bool>.Instance.SetSession("IsAdmin", true);
+                    isADminCookie.Value = "Admin";
                 }
-                
+                else
+                {
+                    isADminCookie.Value = "User";
+                }
+                Response.Cookies.Add(isADminCookie);
+
                 return RedirectToLocal(returnUrl);
             }
 

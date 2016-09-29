@@ -23,7 +23,33 @@
     <script src="~/Scripts/Common.js"></script>
     
     <script>
-        $(document).ready(function () {  
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        $(document).ready(function () {
+            debugger;
+            var cookie = readCookie("AdminCookie");
+
+            if (cookie == "Admin")
+            {
+
+                var htmlString= '<li><a href="/TestScores/index" name="Scores">Scores</a></li>'+
+                            '<li><a href="/TestingCompanies/index" name="TestingCompanies">Testing Companies</a></li>'+
+                            '<li><a href="/Filemaker/Index" name="Filemaker">File Maker Data</a></li>'+
+                            '<li><a href="/Certifications/ShowAddtoQueueCertificates" name="Users">Queue To Print</a></li>'+
+                            '<li><a href="/Users/Index" name="Users">Users</a></li>';
+                $('#liMenu').append(htmlString);
+                $('#liMenu').removeAttr('style');
+            }
+
                 var url = document.URL,
                 shortUrl = url.substring(0, url.lastIndexOf("/"));
                 var link = shortUrl.split('/');
@@ -102,17 +128,13 @@
             <div class="menu">
                 <div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
+                        <ul id="liMenu" style="padding-left:3.5em;" class="nav navbar-nav">
                             <li><a href="/CertifiedPersons/index" name="CertifiedPersons">Certified Persons</a></li>
                             <li><a href="/Boards/index" name="Boards">Boards</a></li>
                             <li><a href="/Certifications/index" name="Certifications">Certifications</a></li>                           
                             <li><a href="/Ethicalviolations/index" name="Ethicalviolations">Ethical Violations</a></li>
                             <li><a href="/Reciprocities/index" name="Reciprocities">Reciprocities</a></li>
-                            <li><a href="/TestScores/index" name="Scores">Scores</a></li>
-                            <li><a href="/TestingCompanies/index" name="TestingCompanies">Testing Companies</a></li>
-                            <li><a href="/Filemaker/Index" name="Filemaker">File Maker Data</a></li>
-                            <li><a href="/Certifications/ShowAddtoQueueCertificates" name="Users">Queue To Print</a></li>
-                            <li><a href="/Users/Index" name="Users">Users</a></li>                           
+                                                
                         </ul>
                         @*Html.Partial("_LoginPartial")*@
                     </div>

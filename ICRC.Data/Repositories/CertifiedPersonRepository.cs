@@ -15,14 +15,15 @@ namespace ICRC.Data.Repositories
         {
         }
 
-        public IEnumerable<CertifiedPersons> GetAll(int pageIndex)
+        public IQueryable<CertifiedPersons> GetAlla(int pageIndex)
         {
-            return DbContext.Database.SqlQuery<CertifiedPersons>("exec sp_GetCertifiedPersons @pageindex", new SqlParameter("@pageindex", pageIndex)).ToList();
+            return DbContext.CertifiedPersons.AsQueryable();
+            //return DbContext.Database.SqlQuery<CertifiedPersons>("exec sp_GetCertifiedPersons @pageindex", new SqlParameter("@pageindex", pageIndex)).ToList();
         }
     }
 
     public interface ICertifiedPersonRepository:IRepository<CertifiedPersons>
     {
-         IEnumerable<CertifiedPersons> GetAll(int pageIndex);
+         IQueryable<CertifiedPersons> GetAlla(int pageIndex);
     }
 }

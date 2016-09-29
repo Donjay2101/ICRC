@@ -1,11 +1,11 @@
-﻿
+﻿@model IEnumerable<ICRC.Model.Certifications>
 @{
     ViewBag.Title = "Index";
 }
 
 
-<div id="divContainer">
-    @Html.Action("GetData")
+<div id="divContainer">    
+    @Html.Partial("_Certifications",Model)    
 </div>
 <script>
 
@@ -78,4 +78,9 @@
 
     });
 
+
+    function downloadExcel()
+    {
+        window.open('/Certifications/downloadExcel','_blank')
+    }
 </script>
