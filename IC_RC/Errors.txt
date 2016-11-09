@@ -202,3 +202,41 @@ Stack Trace:   at System.Reflection.RuntimeMethodInfo.CheckConsistency(Object ta
    at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\Official\Work\Projects\source\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
    at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\Official\Work\Projects\source\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 255
 -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Log Time:11/9/2016 10:59:29 PM
+Exception:Object reference not set to an instance of an object.
+Inner Exception:
+Stack Trace:   at ICRC.Data.Repositories.CertificationsRepository.UploadCSV(String filePath, Users loggedInUser) in E:\IC_RC\icrc\ICRC.Data\Repositories\CertificationsRepository.cs:line 266
+   at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
+   at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 260
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Log Time:11/9/2016 11:00:36 PM
+Exception:Object reference not set to an instance of an object.
+Inner Exception:
+Stack Trace:   at ICRC.Data.Repositories.CertificationsRepository.UploadCSV(String filePath, Users loggedInUser) in E:\IC_RC\icrc\ICRC.Data\Repositories\CertificationsRepository.cs:line 266
+   at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
+   at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 260
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Log Time:11/9/2016 11:04:28 PM
+Exception:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Inner Exception:
+Stack Trace:   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at ICRC.Data.Repositories.CertificationsRepository.UploadCSV(String filePath, Users loggedInUser) in E:\IC_RC\icrc\ICRC.Data\Repositories\CertificationsRepository.cs:line 305
+   at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
+   at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 260
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Log Time:11/9/2016 11:07:52 PM
+Exception:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Inner Exception:
+Stack Trace:   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at ICRC.Data.Repositories.CertificationsRepository.UploadCSV(String filePath, Users loggedInUser) in E:\IC_RC\icrc\ICRC.Data\Repositories\CertificationsRepository.cs:line 305
+   at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
+   at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 260
+-----------------------------------------------------------------------------

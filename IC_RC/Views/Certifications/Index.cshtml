@@ -122,8 +122,9 @@
                     $('#overlayDialog').css('display', 'none');
                 },
                 error: function (err) {
-                    alert(err);
+                    //alert(err);
                     alert(err.statusText);
+                    hideOverLay();
                 }
             });
         }

@@ -136,7 +136,7 @@ namespace ICRC.Data.Repositories
 
         public Certifications GetCertificationsByID(int ID)
         {
-            return DbContext.Database.SqlQuery<CertificationViewModel>("exec SP_GetCertificationsByID @ID", new SqlParameter("@ID", ID)).ToList()
+            return DbContext.Database.SqlQuery<CertificationViewModel>("exec SP_GetCertificationsByID @ID", new SqlParameter("@ID", ID)).AsQueryable()
                 .Select(x => new Certifications
                 {
                     AddToPrintQueues = x.AddToPrintQueues,
@@ -182,10 +182,9 @@ namespace ICRC.Data.Repositories
             DataTable dt = MakeTable<Certifications>();
             Boards board;
             CertifiedPersons person;
-            string firstName, middlename, lastname, address, email, city, provience, Zip, country,
-                boardCertificateNumber, CertificateIssueDate, RenewalDate, CertificaterequestDate, certificateRequestFee,
-                paymentNumber, CertificateNotes,boardName,otherboardName,certificateName,issueBoardName,boardcertificateName,paymentTypeName;
-            int personID=0, certifcateID=0, otherboard=0, issueBoard=0, paymentType=0, boardCertificateAcronym=0, count=0, certificateNumber=0;
+            string firstName, middlename, lastname, address, email, city, state, Zip, country,
+                boardCertificateNumber, CertificateIssueDate, RenewalDate, CertificaterequestDate,certificateName,issueBoardName, boardCertificateAcronym;
+            int personID=0, certifcateID=0, otherboard=0, issueBoard=0,count=0, certificateNumber=0;
            
             string CSVData = File.ReadAllText(filePath);
             string[] cells;
@@ -201,7 +200,7 @@ namespace ICRC.Data.Repositories
                                 int i = 0;
 
                                 cells = row.Split(',');
-                        if(cells.Where(x=>x=="").Count()==21)
+                        if(cells.Where(x=>x=="").Count()!=17)
                         {
                             //board = DbContext.Boards.FirstOrDefault(x => x.Acronym == "ADAD");
                            // boardName = cells[9];
@@ -212,57 +211,59 @@ namespace ICRC.Data.Repositories
                             lastname = cells[2];
                             address = cells[3];
                             city = cells[4];
-                            provience = cells[5];
-                            country = cells[6];
-                            Zip = cells[7];
+                            state = cells[5];
+                            Zip = cells[6];
+                            country = cells[7];                            
                             email = cells[8];
+
+                            //CurrentboardName = cells[9];
                             //otherboardName = cells[10];
 
-                            //var data = DbContext.Boards.FirstOrDefault(x => x.Acronym == otherboardName);
+                            //var data = DbContext.Boards.FirstOrDefault(x => x.Acronym == CurrentboardName);
                             //if (data != null)
                             //{
-                            //    otherboard = data.ID;
+                            //    currentBoard= data.ID;
                             //}
 
                             certificateName = cells[9];
-                            var certificate = DbContext.Boards.FirstOrDefault(x => x.Acronym == certificateName);
+                            var certificate = DbContext.Certificates.FirstOrDefault(x => x.Name== certificateName);
                             if (certificate != null)
                             {
                                 certifcateID = certificate.ID;
                             }
 
 
-                            int.TryParse(cells[10], out certificateNumber);
+                         //   int.TryParse(cells[10], out certificateNumber);
                             //cells[11];
-                            issueBoardName = cells[11];
+                            issueBoardName = cells[10];
                             var issueb = DbContext.Boards.FirstOrDefault(x => x.Acronym == issueBoardName);
                             if (issueb != null)
                             {
                                 issueBoard = issueb.ID;
                             }
 
-                            boardCertificateNumber = cells[12];
-                            boardcertificateName = cells[13];
-                            var BCN = DbContext.Boards.FirstOrDefault(x => x.Acronym == boardcertificateName);
-                            if (BCN != null)
-                            {
-                                boardCertificateAcronym = BCN.ID;
-                            }
+                            boardCertificateNumber = cells[11];
+                            boardCertificateAcronym = cells[12];
+                            //var BCN = DbContext.Boards.FirstOrDefault(x => x.Acronym == boardcertificateName);
+                            //if (BCN != null)
+                            //{
+                            //    boardCertificateAcronym = BCN.ID;
+                            //}
 
-                            CertificateIssueDate = cells[14];
-                            RenewalDate = cells[15];
-                            CertificaterequestDate = cells[16];
-                            certificateRequestFee = cells[17];
-                            paymentNumber = cells[18];
-                            paymentTypeName = cells[19];
-                            var paytpe = DbContext.PaymentTypes.FirstOrDefault(x => x.Name == paymentTypeName);
-                            if (paytpe != null)
-                            {
-                                paymentType = paytpe.ID;
-                            }
+                            CertificateIssueDate = cells[13];
+                            RenewalDate = cells[14];
+                            CertificaterequestDate = cells[15];
+                            //certificateRequestFee = cells[17];
+                            //paymentNumber = cells[18];
+                            //paymentTypeName = cells[19];
+                            //var paytpe = DbContext.PaymentTypes.FirstOrDefault(x => x.Name == paymentTypeName);
+                            //if (paytpe != null)
+                            //{
+                            //    paymentType = paytpe.ID;
+                            //}
 
-                            CertificateNotes = cells[20];
-                            personID = SearchPerson(lastname, city, provience, address, email, board.ID);
+                            //CertificateNotes = cells[20];
+                            personID = SearchPerson(lastname, city, state, address, email, board==null?0:board.ID);
                             //int SearchPerson(string lastname, string city, string state, string address, string email, int boardID)
                             dt.Rows[dt.Rows.Count - 1]["CertID"] = certifcateID;
                             dt.Rows[dt.Rows.Count - 1]["CertificateNo"] = certificateNumber;
@@ -272,10 +273,10 @@ namespace ICRC.Data.Repositories
                             dt.Rows[dt.Rows.Count - 1]["CertIssueDate"] = CertificateIssueDate;
                             dt.Rows[dt.Rows.Count - 1]["RecertDate"] = RenewalDate;
                             dt.Rows[dt.Rows.Count - 1]["certRequestDate"] = CertificaterequestDate;
-                            dt.Rows[dt.Rows.Count - 1]["CertRequestFee"] = certificateRequestFee;
-                            dt.Rows[dt.Rows.Count - 1]["PaymentNumber"] = paymentNumber;
-                            dt.Rows[dt.Rows.Count - 1]["PaymentType"] = paymentType;
-                            dt.Rows[dt.Rows.Count - 1]["CertNotes"] = CertificateNotes;
+                            //dt.Rows[dt.Rows.Count - 1]["CertRequestFee"] = certificateRequestFee;
+                           // dt.Rows[dt.Rows.Count - 1]["PaymentNumber"] = paymentNumber;
+                           // dt.Rows[dt.Rows.Count - 1]["PaymentType"] = paymentType;
+                          ///  dt.Rows[dt.Rows.Count - 1]["CertNotes"] = CertificateNotes;
                             dt.Rows[dt.Rows.Count - 1]["createdBy"] = -1;
                             dt.Rows[dt.Rows.Count - 1]["createdAt"] = DateTime.Now;
                             dt.Rows[dt.Rows.Count - 1]["ModifiedBy"] = -1;
@@ -284,16 +285,18 @@ namespace ICRC.Data.Repositories
                             if (personID <= 0)
                             {
                                 person = new CertifiedPersons();
+                                person.Suffix = "";
                                 person.FirstName = firstName;
                                 person.MiddleName = middlename;
                                 person.LastName = lastname;
                                 person.Address = address;
                                 person.City = city;
-                                person.State = provience;
+                                person.State = state;
                               //  person.province = provience;
                                 person.Country = country;
                                 person.Zip = Zip;
                                 person.Email = email;
+                                
                                 if (board != null)
                                 {
                                     person.CurrentBoardID = board.ID;

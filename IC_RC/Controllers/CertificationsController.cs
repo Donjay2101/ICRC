@@ -118,7 +118,7 @@ namespace IC_RC.Controllers
         public ActionResult Create()
         {
             SetReturnUrl();
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(),"ID","FullName");
+            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(),"ID","FullName");
             ViewBag.Certificates= new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.CertificateNumber = GenerateNumber();
@@ -141,7 +141,7 @@ namespace IC_RC.Controllers
                 return Redirect(returnUrl);
                 }
 
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.CertificateNumber = GenerateNumber();
@@ -160,7 +160,7 @@ namespace IC_RC.Controllers
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
 
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
           
@@ -181,7 +181,7 @@ namespace IC_RC.Controllers
                 CertificateService.Save();
                 return Redirect(returnUrl);
             }
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             
@@ -270,7 +270,7 @@ namespace IC_RC.Controllers
             catch(Exception ex)
             {
                 LoggerApp.Logger.Instance.LogException(ex);
-                return Json(ex.InnerException.Message, JsonRequestBehavior.AllowGet);
+                return Json(ex.InnerException!=null?ex.InnerException.Message:ex.Message, JsonRequestBehavior.AllowGet);
             }
 
            // return Json("-1", JsonRequestBehavior.AllowGet);

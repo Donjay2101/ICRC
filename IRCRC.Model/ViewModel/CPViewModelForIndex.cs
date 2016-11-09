@@ -16,6 +16,8 @@ namespace ICRC.Model.ViewModel
         public string City { get; set; }
         public string State { get; set; }
 
+
+        public string FullName { get; set; }
         public int CurrentBoardID { get; set; }
         public string BoardAcronym { get; set; }
     }

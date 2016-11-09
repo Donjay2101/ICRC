@@ -12,7 +12,7 @@ namespace IC_RC.ViewModels
         public Nullable<int> certificateNo { get; set; }
         public Nullable<int> IssueBoard { get; set; }
         public string BoardCertificateNumber { get; set; }
-        public Nullable<int> BoardCertificateAcronym { get; set; }
+        public string BoardCertificateAcronym { get; set; }
         public Nullable<DateTime> CertIssueDate { get; set; }
         public Nullable<DateTime> RecertDate { get; set; }
         public Nullable<DateTime> CertRequestDate { get; set; }
