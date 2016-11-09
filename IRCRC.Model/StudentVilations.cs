@@ -15,7 +15,7 @@ namespace ICRC.Model
         public int ID { get; set; }
         [DisplayName("Originating Board")]
         public Nullable<int> Board { get; set; }
-        [DisplayName("Type of Ethical Violation")]
+        [DisplayName("Outcome of Violation")]
         public Nullable<int> EthicalViolationId { get; set; }
         [DisplayName("Date of Violation")]
         [DisplayFormat(ApplyFormatInEditMode =true,DataFormatString ="{0:d}")]

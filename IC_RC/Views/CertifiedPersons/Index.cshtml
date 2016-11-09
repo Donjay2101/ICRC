@@ -2,64 +2,47 @@
 @{
     //ViewBag.Title = "Index";
 }
-
-
-<p>
-    @*@Html.ActionLink("Create New", "Create")*@
-    <a href="/CertifiedPersons/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
-    <a  class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+<div class="row form-group">
+<div class="col-md-6 col-md-offset-6 text-right">
+    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
     <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
-</p>
-
-<div class="searchDiv">
+</div>
+</div>
+    @*@Html.ActionLink("Create New", "Create")*@
+<div class="searchDiv bottom-space">
     <div class="row">
         <div class="col-md-2">
-            <div class="row">
-                Last Name:
-            </div>
-            <div class="row">
-                <input type="Search" placeholder="Search first name" id="txtLastName" />
-            </div>
+   
+              <label class="control-label"> Last Name:</label> 
+    
+                <input type="Search" placeholder="Search first name" id="txtLastName" class="form-control"/>
+  
         </div>
         <div class="col-md-2">
-            <div class="row">
-                First Name:
-            </div>
-            <div class="row">
-                <input type="Search" placeholder="Search last name" id="txtFirstName" />
-            </div>
+         
+                <label class="control-label">  First Name:</label>
+       
+                <input type="Search" placeholder="Search last name" id="txtFirstName" class="form-control"/>
+
         </div>
         <div class="col-md-2">
-            <div class="row">
-                Middle Name:
-            </div>
-            <div class="row">
-                <input type="Search" placeholder="Search middle name" id="txtMiddleName" />
-            </div>
+          
+                <label class="control-label">   Middle Name:</label>
+
+                <input type="Search" placeholder="Search middle name" id="txtMiddleName" class="form-control"/>
+ 
         </div>
         <div class="col-md-2">
-            <div class="row">
-                Board Acronym:
-            </div>
-            <div class="row">
-                <input type="Search" placeholder="Search Board Acronym" id="txtBoardAcronym" />
-            </div>
+                <label class="control-label">    Board Acronym:</label>
+                <input type="Search" placeholder="Search Board Acronym" id="txtBoardAcronym" class="form-control"/>
         </div>
-        <div class="col-md-2">
-            <div class="row">
-                City:
-            </div>
-            <div class="row">
-                <input type="Search" placeholder="Search City" id="txtCity" />
-            </div>
+        <div class="col-md-2">         
+                <label class="control-label"> City:</label>       
+                <input type="Search" placeholder="Search City" id="txtCity" class="form-control"/>       
         </div>
-        <div class="col-md-2">
-            <div class="row">
-                State:
-            </div>
-            <div class="row">
-                <input type="Search" placeholder="Search State" id="txtState" />
-            </div>
+        <div class="col-md-2">         
+                <label class="control-label">  State:</label>
+                <input type="Search" placeholder="Search State" id="txtState" class="form-control"/>
         </div>
     </div>
 </div>

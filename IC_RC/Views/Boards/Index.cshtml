@@ -2,30 +2,29 @@
 @{
     ViewBag.Title = "Index";
 }
-<div>
-    <a href="/Boards/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
-    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
-    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+<div class="row">
+    <div class="col-md-6 col-md-offset-6 text-right">
+        <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+        <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+    </div>
+ 
 </div>
 
-<div class="searchDiv">
+<div class="searchDiv bottom-space">
     <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    Board Name:
-                </div>
-                <div>
-                    <input type="text" placeholder="Board Name" id="txtBoardName" />
-                </div>
+            <div class="col-md-3">        
+                   <label class="control-label"> Board Name:</label>
+                
+                    <input type="text" placeholder="Board Name" id="txtBoardName" class="form-control"/>
+             
             </div>                   
 
-        <div class="col-md-6">
-            <div class="row">
-                Board Acronym:
-            </div>
-            <div>
-                <input type="text" placeholder="Board Acronym" id="txtBoardAcronym" />
-            </div>
+        <div class="col-md-3">
+  
+                <label class="control-label">   Board Acronym:</label>
+         
+                <input type="text" placeholder="Board Acronym" id="txtBoardAcronym" class="form-control"/>
+     
         </div>                   
     </div>
 </div>

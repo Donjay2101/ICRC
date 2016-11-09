@@ -39,9 +39,9 @@ a.linkbtn:hover {
 .space {
   margin-right: 20px; }
 
-.grid-mvc {
-  margin-top: 20px; }
-
+/*.grid-mvc{
+    margin-top: $num;
+}*/
 label {
   color: #2B90D1; }
 

@@ -2,7 +2,11 @@
 @using GridMvc.Html
 @using ICRC.Model
 
-
+<div class="row">
+    <div class="col-md-6">
+        <a href="#" onclick="gotoCreate('/Ethicalviolations/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    </div>
+</div>
 
 @Html.Grid(Model).Columns(columns =>
                     {

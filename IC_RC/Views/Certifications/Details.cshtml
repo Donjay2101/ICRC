@@ -18,12 +18,18 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.PersonID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+        @*<dt>
             @Html.DisplayNameFor(model => model.CertID)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CertificateAcronym)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.certificateNo)
@@ -34,10 +40,84 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CertIssueDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CertIssueDate)
+        </dd>
+
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.RecertDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecertDate)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.IssueBoard)
         </dt>
-
         <dd>
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardCertificateAcronym)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BoardCertificateAcronymName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CertRequestDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CertRequestDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentNumber)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CertRequestFee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CertRequestFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+        <dd>
+            @if (Model.PaymentType == 1)
+            {
+                <span>Credit Card</span>
+            }
+            else if (Model.PaymentType == 2)
+            {
+                <span>Money Order</span>
+            }
+            else
+            {
+                <span>Check</span>
+            }
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddToPrintQueues)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddToPrintQueues)
+        </dd>
+
+
+
+
+
+        @*<dd>
             @Html.DisplayFor(model => model.IssueBoardAcronym)
         </dd>
 
@@ -49,73 +129,6 @@
             @Html.DisplayFor(model => model.BoardCertificateNumber)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BoardCertificateAcronym)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BoardCertificateAcronymName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CertIssueDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CertIssueDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RecertDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RecertDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CertRequestDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CertRequestDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CertRequestFee)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CertRequestFee)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PaymentNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PaymentNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PaymentType)
-        </dt>
-
-        <dd>
-            @if (Model.PaymentType == 1)
-            {
-                <span>Credit Card</span>                
-            }
-            else if (Model.PaymentType == 2)
-            {
-                <span>Money Order</span>                
-            }
-            else
-            {
-                <span>Check</span>                
-            }
-            
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.CertNotes)
@@ -123,23 +136,10 @@
 
         <dd>
             @Html.DisplayFor(model => model.CertNotes)
-        </dd>
+        </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AddToPrintQueues)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddToPrintQueues)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PersonID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PersonName)
-        </dd>
+       
+     
 
        
 

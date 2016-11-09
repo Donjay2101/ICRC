@@ -3,62 +3,58 @@
     ViewBag.Title = "Index";
 }
 
-<div>
+<div class="row form-group">
+    <div class="col-md-6 col-md-offset-6 text-right">
+        <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+        <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+    </div>
     @*<a href="/Reciprocity/Create">Create new</a>*@
-    <a href="#" onclick="gotoCreate('/Reciprocities/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
-    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
-    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+   
 </div>
 
-<div class="divSearch">
+<div class="divSearch bottom-space">
     <div class="row">
          <div class="col-md-2">
-             <div class="row">
-                 Person
-             </div>
-             <div class="row">
-                 <input type="text" id="txtPerson" placeholder="person" />
-             </div>
+            
+               <label class="control-label">Person</label>  
+         
+                 <input type="text" id="txtPerson" placeholder="person" class="form-control"/>
+         
          </div>
         <div class="col-md-2">
-            <div class="row">
-                Originating Board
-            </div>
-            <div class="row">
-                <input type="text" id="txtOBoard" placeholder="Originating board" />
-            </div>
+       
+                <label class="control-label">Originating Board</label>
+     
+                <input type="text" id="txtOBoard" placeholder="Originating board" class="form-control"/>
+           
         </div>
         <div class="col-md-2">
-            <div class="row">
-                Requested Board
-            </div>
-            <div class="row">
-                <input type="text" id="txtRBoard" placeholder="Requested board" />
-            </div>
+           
+                <label class="control-label"> Requested Board</label> 
+         
+                <input type="text" id="txtRBoard" placeholder="Requested board" class="form-control"/>
+         
         </div>
         <div class="col-md-2">
-            <div class="row">
-                Certificate
-            </div>
-            <div class="row">
-                <input type="text" id="txtCertificate" placeholder="Certificate acronym" />
-            </div>
+          
+                <label class="control-label">Certificate</label>
+        
+                <input type="text" id="txtCertificate" placeholder="Certificate acronym" class="form-control"/>
+
         </div>
         <div class="col-md-2">
-            <div class="row">
-                Payment Number
-            </div>
-            <div class="row">
-                <input type="text" id="txtPNumber" placeholder="Payment number" />
-            </div>
+
+                <label class="control-label">Payment Number</label>
+      
+                <input type="text" id="txtPNumber" placeholder="Payment number" class="form-control"/>
+          
         </div>
         <div class="col-md-2">
-            <div class="row">
-                Notes
-            </div>
-            <div class="row">
-                <input type="text" id="txtNotes" placeholder="Notes" />
-            </div>
+         
+                <label class="control-label">Notes</label>
+    
+                <input type="text" id="txtNotes" placeholder="Notes" class="form-control"/>
+          
         </div>        
     </div>
 

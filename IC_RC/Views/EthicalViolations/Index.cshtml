@@ -3,40 +3,38 @@
     ViewBag.Title = "Index";
 }
 
-<div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-6 text-right">
+        <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+        <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+    </div>
     @*<a href="/Ethicalviolations/Create">Create new</a>*@
-    <a href="#" onclick="gotoCreate('/Ethicalviolations/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
-    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
-    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
 </div>
 
 
-<div class="divSearch">
+<div class="divSearch bottom-space">
     <div class="row">
         <div class="col-md-3">
-            <div class="row">
-                Originating Board
-            </div>
-            <div class="row">
-                <input type="text" placeholder="Originating board" id="txtBoard" />
-            </div>
+         
+               <label class="control-label">Originating Board</label> 
+          
+                <input type="text" placeholder="Originating board" id="txtBoard"  class="form-control"/>
+        
         </div>
         <div class="col-md-3">
-            <div class="row">
-                Person
-            </div>
-            <div class="row">
-                <input type="text" placeholder="Person" id="txtPerson" />
-            </div>
+          
+                <label class="control-label"> Person</label> 
+        
+                <input type="text" placeholder="Person" id="txtPerson" class="form-control"/>
+          
         </div>
 
         <div class="col-md-3">
-            <div class="row">
-                Type of Ethical Violation
-            </div>
-            <div class="row">
-                <input type="text" id="txtViolation"  placeholder="Ethical violation"/>
-            </div>
+         
+                <label class="control-label"> Type of Ethical Violation</label> 
+            
+                <input type="text" id="txtViolation"  placeholder="Ethical violation" class="form-control"/>
+       
         </div>
     </div>
 </div>

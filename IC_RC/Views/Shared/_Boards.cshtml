@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<ICRC.Model.Boards>
 @using GridMvc.Html
 
-
+<div class="row">
+    <div class="col-md-6">
+        <a href="/Boards/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    </div>
+</div>
 
 
 @Html.Grid(Model).Columns(columns =>
