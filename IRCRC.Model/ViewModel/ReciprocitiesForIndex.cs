@@ -10,7 +10,7 @@ namespace ICRC.Model.ViewModel
     {
         public int ID { get; set; }
         public string PersonName { get; set; }
-
+        public int Person { get; set; }
         public string OriginatingBoardName { get; set; }
         public string RequestedBoardName { get; set; }
         public string CertificateAcronym { get; set; }

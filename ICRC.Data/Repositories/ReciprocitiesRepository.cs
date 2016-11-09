@@ -17,36 +17,37 @@ namespace ICRC.Data.Repositories
         {
         
         }
-        public IEnumerable<Reciprocities> GetByPersonID(int ID)
+        public IQueryable<ReciprocitiesForIndex> GetByPersonID(int ID)
         {
 
-            var data = DbContext.Database.SqlQuery<ReciprocitiesViewModel>("exec sp_GetReciprocities @personID", new SqlParameter("@personID", ID))
-              .Select(x => new Reciprocities
-              {
-                  ApprovalDate = x.ApprovalDate,
-                  CreatedAt = x.CreatedAt,
-                  CreatedBy = x.CreatedBy,
-                  DateofEntry = x.DateofEntry,
-                  ICRCCertID = x.ICRCCertID,
-                  ID = x.ID,
-                  ModifiedAt = x.ModifiedAt,
-                  ModifiedBy = x.ModifiedBy,
-                  Notes = x.Notes,
-                  OriginatingBoard = x.OriginatingBoard,
-                  PaymentNumber = x.PaymentNumber,
-                  PaymentType = x.PaymentType,
-                  PersonID = x.PersonID,
-                  RecprocityFee = x.RecprocityFee,
-                  RequestedBoard = x.RequestedBoard,
-                  Status = x.Status,
-                  CertificationAcronym = x.CertificationAcronym,
-                  OrginiatingBoardName = x.OrginiatingBoardName,
-                  PaymentTypeName = x.PaymentTypeName,
-                  RequestedBoardName = x.RequestedBoardName
-              }).AsQueryable();
+            return GetReciprocitiesForIndex().Where(x => x.Person == ID).AsQueryable();
+            //var data = DbContext.Database.SqlQuery<ReciprocitiesViewModel>("exec sp_GetReciprocities @personID", new SqlParameter("@personID", ID))
+            //  .Select(x => new Reciprocities
+            //  {
+            //      ApprovalDate = x.ApprovalDate,
+            //      CreatedAt = x.CreatedAt,
+            //      CreatedBy = x.CreatedBy,
+            //      DateofEntry = x.DateofEntry,
+            //      ICRCCertID = x.ICRCCertID,
+            //      ID = x.ID,
+            //      ModifiedAt = x.ModifiedAt,
+            //      ModifiedBy = x.ModifiedBy,
+            //      Notes = x.Notes,
+            //      OriginatingBoard = x.OriginatingBoard,
+            //      PaymentNumber = x.PaymentNumber,
+            //      PaymentType = x.PaymentType,
+            //      PersonID = x.PersonID,
+            //      RecprocityFee = x.RecprocityFee,
+            //      RequestedBoard = x.RequestedBoard,
+            //      Status = x.Status,
+            //      CertificationAcronym = x.CertificationAcronym,
+            //      OrginiatingBoardName = x.OrginiatingBoardName,
+            //      PaymentTypeName = x.PaymentTypeName,
+            //      RequestedBoardName = x.RequestedBoardName
+            //  }).AsQueryable();
 
 
-            return data;
+            //return data;
         }
 
         public override IEnumerable<Reciprocities> GetAll()
@@ -142,7 +143,7 @@ namespace ICRC.Data.Repositories
         }
 
 
-        public IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person,string oboard,string rboard,string certifcate,string number,string notes)
+        public IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person="",string oboard="",string rboard="",string certifcate="",string number="",string notes="")
         {
             return DbContext.Database.SqlQuery<ReciprocitiesForIndex>("sp_GetReciprocitiesForIndex @person,@Oboard,@Rboard,@certificateAcronym,@paymentNumber,@notes",
                 new SqlParameter("@person",person),
@@ -156,7 +157,7 @@ namespace ICRC.Data.Repositories
 
     public interface IReciproctiesRepository:IRepository<Reciprocities>
     {
-        IEnumerable<Reciprocities> GetByPersonID(int ID);
+        IQueryable<ReciprocitiesForIndex> GetByPersonID(int ID);
 
         IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person, string oboard, string rboard, string certifcate, string number, string notes);
     }

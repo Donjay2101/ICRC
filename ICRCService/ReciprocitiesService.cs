@@ -19,7 +19,7 @@ namespace ICRCService
         IEnumerable<ReciprocitiesForIndex> GetReciprocitiesByBoardID(int ID, string person, string oboard, string rboard, string certifcate, string number, string notes);
         Reciprocities GetReciprocitiesByID(int ID);
         IEnumerable<Reciprocities> GetReciprocities(Expression<Func<Reciprocities, bool>> where);
-        IEnumerable<Reciprocities> ReciprocityGetByPersonID(int ID);
+        IEnumerable<ReciprocitiesForIndex> ReciprocityGetByPersonID(int ID);
         void CreateReciprocity(Reciprocities reciprocity);
         void UpdateReciprocity(Reciprocities reciprocity);
         void Save();
@@ -82,7 +82,7 @@ namespace ICRCService
         }
 
 
-        public IEnumerable<Reciprocities> ReciprocityGetByPersonID(int ID)
+        public IEnumerable<ReciprocitiesForIndex> ReciprocityGetByPersonID(int ID)
         {
             return reciprocityRepository.GetByPersonID(ID);
         }
