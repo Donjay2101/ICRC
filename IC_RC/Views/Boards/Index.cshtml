@@ -1,8 +1,86 @@
-﻿
+﻿@model IEnumerable<ICRC.Model.Boards>
 @{
     ViewBag.Title = "Index";
 }
+<div>
+    <a href="/Boards/Create" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+</div>
+
+<div class="searchDiv">
+    <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    Board Name:
+                </div>
+                <div>
+                    <input type="text" placeholder="Board Name" id="txtBoardName" />
+                </div>
+            </div>                   
+
+        <div class="col-md-6">
+            <div class="row">
+                Board Acronym:
+            </div>
+            <div>
+                <input type="text" placeholder="Board Acronym" id="txtBoardAcronym" />
+            </div>
+        </div>                   
+    </div>
+</div>
+
 
 <div id="divContainer">
-    @Html.Action("GetData")
+    @Html.Partial("_Boards",Model)
+    @*@Html.Action("GetData")*@
 </div>
+
+@section scripts
+{
+    <script>
+
+        $(document).on('click', '#btnClearSearch', function () {
+            $('#txtBoardName').val("");
+            $('#txtBoardAcronym').val("");
+          
+            searchData('', '');
+        });
+
+
+
+        $(document).on('click', '#btnSearch', function () {
+            var obj = new Object;
+
+            var BoardName = $('#txtBoardName').val();
+            var BoardAcronym= $('#txtBoardAcronym').val();
+          
+
+
+            if (BoardName == '' && BoardAcronym == '')
+                return;
+            searchData(BoardName,BoardAcronym);
+
+        });
+
+        function searchData(BoardName,BoardAcronym) {
+
+            var url = "/Boards/GetData?BoardName=" + BoardName + "&BoardAcronym=" + BoardAcronym;
+            showOverLay();
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (data) {
+                    $('#divContainer').html(data);
+                    hideOverLay();
+                },
+                error: function (err) {
+                    hideOverLay();
+                    console.log(err.statusText);
+                }
+
+            });
+        }
+    </script>
+
+    }

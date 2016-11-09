@@ -60,12 +60,16 @@
     <Compile Include="UserRoles.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="ViewModel\CertificationViewModel.cs" />
+    <Compile Include="ViewModel\CertificationViewModelForIndex.cs" />
     <Compile Include="ViewModel\CertifiedPersonViewModel.cs" />
+    <Compile Include="ViewModel\CPViewModelForIndex.cs" />
+    <Compile Include="ViewModel\ReciprocitiesForIndex.cs" />
     <Compile Include="ViewModel\ReciprocitiesViewModel.cs" />
     <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\ScoresViewModel.cs" />
     <Compile Include="ViewModel\ScoreViewModel.cs" />
     <Compile Include="ViewModel\StudentEthicalVoilationViewModel.cs" />
+    <Compile Include="ViewModel\StudentVoilationForIndex.cs" />
     <Compile Include="ViewModel\TestScoreViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
   </ItemGroup>

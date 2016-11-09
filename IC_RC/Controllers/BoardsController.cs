@@ -23,16 +23,21 @@ namespace IC_RC.Controllers
         // GET: Boards
         public ActionResult Index()
         {
-           
-            return View();
+
+            var data = GetBoardsList();
+            return View(data);
         }
 
-
-        public ActionResult GetData()
+        public List<Boards> GetBoardsList(string BoardName = "", string BoardAcronym = "")
         {
-            
-            var data = boardService.GetBoards();
+            return boardService.GetBoardsForIndex(BoardName,BoardAcronym).ToList();
 
+
+        }
+        public ActionResult GetData(string BoardName="",string BoardAcronym="")
+        {
+
+            var data = GetBoardsList(BoardName,BoardAcronym);
             return PartialView("_Boards", data);
         }
 

@@ -1,5 +1,6 @@
 ﻿using IC_RC.Models;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using ICRCService;
 using System;
 using System.Collections.Generic;
@@ -44,26 +45,26 @@ namespace IC_RC.Controllers
             return View(data);
         }
 
-        public List<Reciprocities> GetReciprocities()
+        public List<ReciprocitiesForIndex> GetReciprocities(string person = "", string oboard = "", string rboard = "", string certificate = "", string number = "", string notes = "")
         {
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
 
-            List<Reciprocities> reciprocities;
+            List<ReciprocitiesForIndex> reciprocities;
             if (ShrdMaster.Instance.IsAdmin(user.Username))
             {
-                reciprocities = reciprocityService.GetReciprocities().ToList();
+                reciprocities = reciprocityService.GetReciprocitiesForIndex(person, oboard, rboard, certificate, number, notes).ToList();
             }
             else
             {
-                reciprocities = reciprocityService.GetReciprocitiesByBoardID(user.BoardID).ToList();
+                reciprocities = reciprocityService.GetReciprocitiesByBoardID(user.BoardID, person, oboard, rboard, certificate, number, notes).ToList();
             }
 
             return reciprocities;
         }
 
-        public ActionResult GetData()
+        public ActionResult GetData(string person="",string oboard="",string rboard="",string certificate="",string number="",string notes="")
         {
-            var reciprocities = GetReciprocities();
+            var reciprocities = GetReciprocities(person,oboard,rboard,certificate,number,notes);
             return PartialView("_Reciprocities",reciprocities);
         }
 

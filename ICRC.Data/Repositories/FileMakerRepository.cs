@@ -44,14 +44,14 @@ namespace ICRC.Data.Repositories
                 WorkPhone=x.WorkPhone,
                 Zip=x.Zip,
                 FullName=x.FirstName+" "+x.MiddleName+" "+x.LastName                 
-            }); 
+            }).AsQueryable(); 
 
 
         }
 
         public IEnumerable<FileMakerReciprocities> GetReciprocities()
         {
-            return DbContext.FileMakerReciprocities.ToList();
+            return DbContext.FileMakerReciprocities.AsQueryable();
         }
     }
 }

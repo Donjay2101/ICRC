@@ -1,5 +1,6 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace ICRC.Data.Repositories
                     PersonName = x.PersonName,
                     EthicalViolation= x.EthicalViolation,
                     Notes = x.Notes
-                }).ToList();
+                }).AsQueryable();
 
             //var data=(from bc in DbContext.Boards join
             //    voi in DbContext.Studentviolations on bc.ID equals voi.Board
@@ -93,31 +94,33 @@ namespace ICRC.Data.Repositories
             return data;
         }
 
-        public IEnumerable<Studentviolations> GetByPersonID(int ID)
+        public IQueryable<StudentVoilationForIndex> GetByPersonID(int ID)
         {
-             var data = DbContext.Database.SqlQuery<IRCRC.Model.ViewModel.StudentEthicalViolationViewModel>("exec sp_StudentViolatons @personID",new SqlParameter("@personID",ID))
-               .Select(x => new Studentviolations
-               {
-                   Board = x.Board,
-                   BoardName = x.BoardName,
-                   Comments = x.Comments,
-                   CreatedAt = x.CreatedAt,
-                   CreatedBy = x.CreatedBy,
-                   Date = x.Date,
-                   EthicalViolationId = x.EthicalViolationId,
-                   ID = x.ID,
-                   IsLetterSent = x.IsLetterSent,
-                   IsScanned = x.IsScanned,
-                   ISsharable = x.ISsharable,
-                   ModifiedAt = x.ModifiedAt,
-                   ModifiedBy = x.ModifiedBy,
-                   personID = x.personID,
-                   PersonName = x.PersonName,
-                   EthicalViolation = x.EthicalViolation,
-                   Notes = x.Notes
-               }).ToList();
 
-            return data;
+            return GetVoilationForIndex().Where(x => x.Person == ID).AsQueryable();
+            // var data = DbContext.Database.SqlQuery<IRCRC.Model.ViewModel.StudentEthicalViolationViewModel>("exec sp_StudentViolatons @personID",new SqlParameter("@personID",ID))
+            //   .Select(x => new Studentviolations
+            //   {
+            //       Board = x.Board,
+            //       BoardName = x.BoardName,
+            //       Comments = x.Comments,
+            //       CreatedAt = x.CreatedAt,
+            //       CreatedBy = x.CreatedBy,
+            //       Date = x.Date,
+            //       EthicalViolationId = x.EthicalViolationId,
+            //       ID = x.ID,
+            //       IsLetterSent = x.IsLetterSent,
+            //       IsScanned = x.IsScanned,
+            //       ISsharable = x.ISsharable,
+            //       ModifiedAt = x.ModifiedAt,
+            //       ModifiedBy = x.ModifiedBy,
+            //       personID = x.personID,
+            //       PersonName = x.PersonName,
+            //       EthicalViolation = x.EthicalViolation,
+            //       Notes = x.Notes
+            //   }).AsQueryable();
+
+            //return data;
         }
 
         public override Studentviolations GetByID(int ID)
@@ -145,12 +148,23 @@ namespace ICRC.Data.Repositories
                  }).ToList().FirstOrDefault();
         }
 
+
+        public IQueryable<StudentVoilationForIndex> GetVoilationForIndex(string board = "", string person = "", string violation = "")
+        {
+            return DbContext.Database.SqlQuery<StudentVoilationForIndex>("exec sp_GetStudentVoilationsForIndex @board,@person,@violation",
+                new SqlParameter("@board",board??(object)DBNull.Value),
+                new SqlParameter("@person", person ?? (object)DBNull.Value),
+                new SqlParameter("@violation",violation ?? (object)DBNull.Value)).AsQueryable();
+        }
     }
 
     public interface IStudentEthicalViolationRepository :IRepository<Studentviolations>
     {
-        IEnumerable<Studentviolations> GetByPersonID(int ID);
+        IQueryable<StudentVoilationForIndex> GetByPersonID(int ID);
 
-        
+        IQueryable<StudentVoilationForIndex> GetVoilationForIndex(string board = "", string person = "", string violation = "");
+
+
+
     }
 }

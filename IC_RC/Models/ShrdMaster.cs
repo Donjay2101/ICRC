@@ -102,12 +102,30 @@ namespace IC_RC
            return defaultUrl;
         }
 
+
+        public List<Suffix> GetSuffix()
+        {
+            List<Suffix> list = new List<Suffix>()
+            {
+                new Suffix() {ID="Mr.",Name="Mr." },
+                new Suffix() {ID="Ms.",Name="Ms." },
+                new Suffix() {ID="Mrs.",Name="Mrs." },
+
+            };
+
+            return list;
+        }
+
 }
 
 
 
 
-
+    public class Suffix
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+    }
 
     public class PaymentType
     {

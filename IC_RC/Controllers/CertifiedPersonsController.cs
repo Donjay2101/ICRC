@@ -1,6 +1,8 @@
 ﻿using IC_RC.Models;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using ICRCService;
+using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,12 +47,12 @@ namespace IC_RC.Controllers
             return View(data);
         }
 
-        public List<CertifiedPersons> PersonsData()
+        public IQueryable<CPViewModelForIndex> PersonsData(string FirstName = "", string LastName = "", string MiddleName = "", string Acronym = "", string City = "", string State = "")
         {
-            List<CertifiedPersons> data = new List<CertifiedPersons>();
+            IQueryable<CPViewModelForIndex> data;
             if (ShrdMaster.Instance.IsAdmin(User.Identity.Name))
             {
-                data = CertifiedPersonService.GetCertifiedPersons().ToList();
+                data = CertifiedPersonService.GetCertifedPersonsForIndex(FirstName, LastName, MiddleName, Acronym, City, State).AsQueryable();
             }
             else
             {
@@ -60,17 +62,18 @@ namespace IC_RC.Controllers
                 //    ViewBag.Error = "User is not active.";
                 //    return RedirectToAction("Account/login");
                 //}
-                data = CertifiedPersonService.GetCertifiedPersonsByBoardId(user.BoardID).ToList();
+                data = CertifiedPersonService.GetCertifiedPersonsByBoardId(user.BoardID, FirstName, LastName, MiddleName, Acronym, City, State).AsQueryable();
             }
             return data;
         }
-        public ActionResult GetData()
+        public ActionResult GetData(string FirstName="",string LastName="",string MiddleName="",string Acronym="",string City="",string State="")
         {
+
             //pageIndex = ShrdMaster.Instance.GetPageIndex();
             //var data1 = CertifiedPersonService.GetCertifedPersonsForIndex(pageIndex).AsQueryable();
             //var data =new CertifiedPersonsGrid(data1,1,true);
 
-            var data = PersonsData();
+            var data = PersonsData(FirstName,LastName,MiddleName,Acronym,City,State);
             return PartialView("_CertifiedPersons", data);
         }
 
@@ -120,7 +123,7 @@ namespace IC_RC.Controllers
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
 
-            var data = CertificationService.GetCertificationsByPersonID(ID.Value);
+            var data = CertificationService.GetCertificationsByPersonID(ID.Value).ToList();
             return PartialView("_Certifications", data);
         }
 
@@ -151,8 +154,9 @@ namespace IC_RC.Controllers
         {
             SetReturnUrl();
 
-            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Board");
-            
+            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            ViewBag.Suffix = new SelectList(ShrdMaster.Instance.GetSuffix(), "ID", "Name");
             return View();
         }
 
@@ -161,7 +165,6 @@ namespace IC_RC.Controllers
         public ActionResult Create(CertifiedPersons person)
         {
             SetReturnUrl();
-
             // TODO: Add insert logic here
             if (ModelState.IsValid)
                 {
@@ -172,9 +175,9 @@ namespace IC_RC.Controllers
                 //db.SaveChanges();
                     return Redirect(returnUrl);
                 }
-
                 ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
                 ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            ViewBag.Suffix = new SelectList(ShrdMaster.Instance.GetSuffix(), "ID", "Name");
                 return View(person);
                             
         }
@@ -187,6 +190,7 @@ namespace IC_RC.Controllers
 
             ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym",data.CurrentBoardID);
             ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym",data.OtherBoardID);
+            ViewBag.Suffix = new SelectList(ShrdMaster.Instance.GetSuffix(), "ID", "Name",data.Suffix);
             //Certifications
 
 
@@ -198,6 +202,9 @@ namespace IC_RC.Controllers
         public ActionResult Edit(CertifiedPersons person)
         {
             SetReturnUrl();
+            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym", person.CurrentBoardID);
+            ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym", person.OtherBoardID);
+            ViewBag.Suffix = new SelectList(ShrdMaster.Instance.GetSuffix(), "ID", "Name", person.Suffix);
             // TODO: Add insert logic here
             if (ModelState.IsValid)
             {
@@ -208,10 +215,11 @@ namespace IC_RC.Controllers
                 //db.SaveChanges();
                 return Redirect(returnUrl);
             }
-
-            ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
-            ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Name");
             return View(person);
+           
+            //ViewBag.CurrentBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            //ViewBag.OtherBoardID = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
+            //return View(person);
         }
 
         //[ChildActionOnly]

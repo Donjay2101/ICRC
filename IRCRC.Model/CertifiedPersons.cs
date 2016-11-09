@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,18 +12,25 @@ namespace ICRC.Model
     public class CertifiedPersons
     {
         public int ID { get; set; }
+
+
+        [Required]
+        public string Suffix { get; set; }
+        [Required]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
         [DisplayName("First Name")]
+        [Required]
         public string FirstName { get; set; }
         [DisplayName("Middle Name")]
         public string MiddleName { get; set; }
         public string Address { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
+        [DisplayName("State/Proince")]
         public string State { get; set; }
-        [DisplayName("province")]
-        public string province { get; set; }
+        //[DisplayName("province")]
+        //public string province { get; set; }
         public string Country { get; set; }
         public string Zip { get; set; }
         public string SSN { get; set; }
@@ -46,5 +54,8 @@ namespace ICRC.Model
 
         [NotMapped]
         public string FullName { get; set; }
+
+        [NotMapped]
+        public string BoardAcronym { get; set; }
     }
 }

@@ -1,10 +1,6 @@
-﻿@model IEnumerable<ICRC.Model.Reciprocities>
+﻿@model IEnumerable<ICRC.Model.ViewModel.ReciprocitiesForIndex>
 @using GridMvc.Html
 
-<div>
-    @*<a href="/Reciprocity/Create">Create new</a>*@
-    <a href="#" onclick="gotoCreate('/Reciprocities/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
-</div>
 @Html.Grid(Model).Columns(columns =>
                     {
                         columns.Add()
@@ -44,14 +40,14 @@
                             </b>
                         </div>);
     columns.Add(c => c.PersonName).Titled("Person");
-    columns.Add(c => c.OrginiatingBoardName).Titled("Originating Board");
+    columns.Add(c => c.OriginatingBoardName).Titled("Originating Board");
     columns.Add(c => c.RequestedBoardName).Titled("Requested Board");
-    columns.Add(c => c.CertificationAcronym).Titled("Certificate Acronym");
+    columns.Add(c => c.CertificateAcronym).Titled("Certificate Acronym");
     columns.Add(c => c.Status).Sanitized(false).Encoded(false).RenderValueAs(c =>@<div>
                                         <input type="checkbox" disabled checked="@c.Status" />    
     </div>) .Titled("Approved?");
                         columns.Add(c => c.ApprovalDate).Titled("Approval Date").Format("{0:MM/dd/yyyy}");
-                        columns.Add(c => c.RecprocityFee).Titled("Reciprocity Fee");
+                        columns.Add(c => c.ReciprocityFee).Titled("Reciprocity Fee");
                         columns.Add(c => c.PaymentTypeName).Titled("Payment Type");
                         columns.Add(c => c.PaymentNumber).Titled("Payment Number");
                         columns.Add(c => c.Notes).Titled("Reciprocity Notes");

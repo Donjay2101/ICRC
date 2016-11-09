@@ -386,7 +386,7 @@
     <Content Include="Views\Certifications\PrintCertificate.cshtml" />
     <Content Include="Views\Certifications\ShowAddtoQueueCertificates.cshtml" />
     <Content Include="Views\Shared\_QueueCertificates.cshtml" />
-    <Content Include="Template\CertificationTemplate.xlsx" />
+    <Content Include="Template\CeritficationTemplate.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

@@ -3,11 +3,113 @@
     ViewBag.Title = "ShowAddtoQueueCertificates";
 }
 
+<div>
+    <a href="#" id="btnPrint" class="linkbtn"><span class="glyphicon glyphicon-print space" aria-hidden="true"></span>Print all</a>
+    <a href="#" id="btnSelectedPrint" class="linkbtn"><span class="glyphicon glyphicon-print space" aria-hidden="true"></span>Print selected certificates</a>
+    <a href="#" id="btnClearQueue" class="linkbtn"><span class="glyphicon glyphicon-remove-circle space" aria-hidden="true"></span>Clear Queue</a>
+    <a href="#" id="btnSClearQueue" class="linkbtn"><span class="glyphicon glyphicon-remove-circle space" aria-hidden="true"></span>Clear selected from Queue</a>
+    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+</div>
+
+<div class="divSearch">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                CertId:
+            </div>
+            <div class="row">
+                <input type="Search" placeholder="Search CertId" id="txtCertID" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Certificate number
+            </div>
+            <div class="row">
+                <input type="Search" placeholder="Search certificate number" id="txtCertificateNumber" />
+            </div>
+        </div>
+        @*<div class="col-md-2">
+                <div class="row">
+                    Start Date:
+                </div>
+                <div class="row">
+                    <input type="Search" class="date" placeholder="Search Start Date" id="txtStartDate" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    State Recret. Date
+                </div>
+                <div class="row">
+                    <input type="Search" class="date" placeholder="Search State recert. date" id="txtRecertDate" />
+                </div>
+            </div>*@
+        <div class="col-md-2">
+            <div class="row">
+                Individual:
+            </div>
+            <div class="row">
+                <input type="Search" placeholder="Search Individual" id="txtPerson" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <div id="divContainer">
     @Html.Partial("_QueueCertificates",Model)
 </div>
 
-<script>
-   
-</script>
+
+@section scripts
+{
+    <script>
+        $(document).on('click', '#btnClearSearch', function () {
+            $('#txtCertID').val("");
+            $('#txtCertificateNumber').val("");
+            $('#txtPerson').val("");
+
+            searchData('', '', '');
+        });
+
+
+
+        $(document).on('click', '#btnSearch', function () {
+            var obj = new Object;
+
+            var certID = $('#txtCertID').val();
+            var certNumber = $('#txtCertificateNumber').val();
+            var person = $('#txtPerson').val();
+
+
+
+            if (certID == '' && certNumber == '' && person == '')
+                return;
+            searchData(certID, certNumber, person);
+
+        });
+
+        function searchData(certID, certNumber, person) {
+
+            var url = "/ShowCertificationQueue/GetData?certID=" + certID + "&certNumber=" + certNumber + "&person=" + person;
+            showOverLay();
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (data) {
+                    $('#divContainer').html(data);
+                    hideOverLay();
+                },
+                error: function (err) {
+                    hideOverLay();
+                    console.log(err.statusText);
+                }
+
+            });
+        }
+    </script>
+    }
+
 

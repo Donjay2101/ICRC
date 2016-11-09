@@ -1,6 +1,7 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Data.Repositories;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace ICRCService
     public interface IStudentEthicalViolationService
     {
         IEnumerable<Studentviolations> GetEthicalviolations();
-        IEnumerable<Studentviolations> GetEthicalviolationsByBoardID(int ID);
+
+        IQueryable<StudentVoilationForIndex> GetVoilationsForIndex(string board = "", string person = "", string violation = "");
+        IQueryable<StudentVoilationForIndex> GetEthicalviolationsByBoardID(int ID, string board = "", string person = "", string violation = "");
         Studentviolations GetEthicalviolationByID(int ID);
         IEnumerable<Studentviolations> GetEthicalviolations(Expression<Func<Studentviolations, bool>> where);
-        IEnumerable<Studentviolations> GetVoiltaionsByPersonID(int ID);
+        IEnumerable<StudentVoilationForIndex> GetVoiltaionsByPersonID(int ID);
         void CreateEthicalviolation(Studentviolations Board);
         void UpdateEthicalviolation(Studentviolations Board);
         void Save();
@@ -27,6 +30,9 @@ namespace ICRCService
         public readonly IStudentEthicalViolationRepository StudentEthicalViolationRepository;
         public readonly IUnitOfWork unitOfWork;
 
+
+
+
         public StudentEthicalviolationService(IStudentEthicalViolationRepository StudentEthicalViolationRepository, IUnitOfWork unitOfWork)
         {
             this.StudentEthicalViolationRepository = StudentEthicalViolationRepository;
@@ -35,9 +41,15 @@ namespace ICRCService
 
         #region Methods
 
-        public IEnumerable<Studentviolations> GetEthicalviolationsByBoardID(int ID)
+        public IQueryable<StudentVoilationForIndex> GetVoilationsForIndex(string board = "", string person = "", string violation = "")
         {
-            return GetEthicalviolations().Where(x => x.Board == ID);
+            return StudentEthicalViolationRepository.GetVoilationForIndex(board, person, violation);
+        }
+
+
+        public IQueryable<StudentVoilationForIndex> GetEthicalviolationsByBoardID(int ID, string board = "", string person = "", string violation = "")
+        {
+            return GetVoilationsForIndex(board, person, violation).Where(x => x.Board == ID).AsQueryable();
         }
 
 
@@ -66,9 +78,9 @@ namespace ICRCService
             StudentEthicalViolationRepository.Update(violation);
         }
 
-        public IEnumerable<Studentviolations> GetVoiltaionsByPersonID(int ID)
+        public IEnumerable<StudentVoilationForIndex> GetVoiltaionsByPersonID(int ID)
         {
-            return StudentEthicalViolationRepository.GetByPersonID(ID);
+            return StudentEthicalViolationRepository.GetByPersonID(ID).AsEnumerable();
         }
 
         public void Delete(int ID)

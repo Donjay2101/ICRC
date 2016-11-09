@@ -1,5 +1,6 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using IRCRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace ICRC.Data.Repositories
                   OrginiatingBoardName = x.OrginiatingBoardName,
                   PaymentTypeName = x.PaymentTypeName,
                   RequestedBoardName = x.RequestedBoardName
-              }).ToList();
+              }).AsQueryable();
 
 
             return data;
@@ -104,7 +105,7 @@ namespace ICRC.Data.Repositories
                             PaymentTypeName = x.PaymentTypeName,
                             RequestedBoardName = x.RequestedBoardName,
                             PersonName=x.PersonName                           
-                        }).ToList();
+                        }).AsQueryable();
 
                      
                       
@@ -139,10 +140,24 @@ namespace ICRC.Data.Repositories
                 PersonName = x.PersonName
             }).FirstOrDefault();
         }
+
+
+        public IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person,string oboard,string rboard,string certifcate,string number,string notes)
+        {
+            return DbContext.Database.SqlQuery<ReciprocitiesForIndex>("sp_GetReciprocitiesForIndex @person,@Oboard,@Rboard,@certificateAcronym,@paymentNumber,@notes",
+                new SqlParameter("@person",person),
+                new SqlParameter("@oboard",oboard),
+                new SqlParameter("@rboard",rboard),
+                new SqlParameter("@certificateAcronym",certifcate),
+                new SqlParameter("@paymentNumber",number),
+                new SqlParameter("@notes",notes)).AsQueryable();
+        }
     }
 
     public interface IReciproctiesRepository:IRepository<Reciprocities>
     {
         IEnumerable<Reciprocities> GetByPersonID(int ID);
+
+        IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person, string oboard, string rboard, string certifcate, string number, string notes);
     }
 }

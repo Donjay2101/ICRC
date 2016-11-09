@@ -1,6 +1,7 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Data.Repositories;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace ICRCService
     public interface IReciprocitiesService
     {
         IEnumerable<Reciprocities> GetReciprocities();
-        IEnumerable<Reciprocities> GetReciprocitiesByBoardID(int ID);
+
+        IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person, string oboard, string rboard, string certifcate, string number, string notes);
+        IEnumerable<ReciprocitiesForIndex> GetReciprocitiesByBoardID(int ID, string person, string oboard, string rboard, string certifcate, string number, string notes);
         Reciprocities GetReciprocitiesByID(int ID);
         IEnumerable<Reciprocities> GetReciprocities(Expression<Func<Reciprocities, bool>> where);
         IEnumerable<Reciprocities> ReciprocityGetByPersonID(int ID);
@@ -37,9 +40,14 @@ namespace ICRCService
 
         #region Methods
          
-        public IEnumerable<Reciprocities> GetReciprocitiesByBoardID(int ID)
+
+        public IEnumerable<ReciprocitiesForIndex> GetReciprocitiesForIndex(string person, string oboard, string rboard, string certifcate, string number, string notes)
         {
-            return GetReciprocities().Where(x => x.OriginatingBoard == ID);
+            return reciprocityRepository.GetReciprocitiesForIndex(person,oboard,rboard,certifcate,number,notes);
+        }
+        public IEnumerable<ReciprocitiesForIndex> GetReciprocitiesByBoardID(int ID, string person, string oboard, string rboard, string certifcate, string number, string notes)
+        {
+            return GetReciprocitiesForIndex(person, oboard, rboard, certifcate, number, notes).Where(x => x.OriginatingBoard == ID);
         }
         public IEnumerable<Reciprocities> GetReciprocities()
         {

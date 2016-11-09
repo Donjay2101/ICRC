@@ -38,7 +38,7 @@ namespace ICRC.Data.Repositories
                          ScaledScore = x.ScaledScore,
                          Status = x.Status,
                          TestingCompany = x.TestingCompany,
-                     });
+                     }).AsQueryable();
 
 
             return data;

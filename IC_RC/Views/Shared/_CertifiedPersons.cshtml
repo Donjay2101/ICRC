@@ -1,5 +1,6 @@
 ﻿
-@model  IEnumerable<ICRC.Model.CertifiedPersons>
+@model  IQueryable<ICRC.Model.ViewModel.CPViewModelForIndex>
+@*@model  ICRC.Model.CertifiedPersons*@
 @using GridMvc.Html
 
 
@@ -39,10 +40,13 @@
                               <a href="#" onclick="gotoCreate('/CertifiedPersons/details?id=@c.ID')" data-toggle="tooltip" data-placement="bottom" title="Details"><span class="glyphicon glyphicon-file space" aria-hidden="true"></span></a>
                           </b>
                       </div>);
-                        columns.Add(c => c.FirstName).Titled("First Name");
+
+                        columns.Add(c => c.Suffix).Titled("Suffix");
                         columns.Add(c => c.LastName).Titled("Last Name");
+                        columns.Add(c => c.FirstName).Titled("First Name");
                         //columns.Add(c => c.productType).Titled("Product Type");
                         columns.Add(c => c.MiddleName).Titled("Middle Name");
+                        columns.Add(c => c.BoardAcronym).Titled("Board Acronym");
                         //columns.Add(c => c.SSN).Titled("SSN");
                         columns.Add(c => c.State).Titled("State");
                         //columns.Add(c => c.ItemWeight).Titled("Item Weight?");

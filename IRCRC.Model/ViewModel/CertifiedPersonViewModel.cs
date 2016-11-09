@@ -45,6 +45,8 @@ namespace IRCRC.Model.ViewModel
         
         public string FullName { get; set; }
         public string CurrentBoardName { get; set; }
+
+        public string BoardAcronym { get; set; }
     }
 }
 

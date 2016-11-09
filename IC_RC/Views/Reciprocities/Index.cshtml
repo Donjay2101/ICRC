@@ -1,7 +1,126 @@
-﻿@model IEnumerable<ICRC.Model.Reciprocities>
+﻿@model IEnumerable<ICRC.Model.ViewModel.ReciprocitiesForIndex>
 @{
     ViewBag.Title = "Index";
 }
+
+<div>
+    @*<a href="/Reciprocity/Create">Create new</a>*@
+    <a href="#" onclick="gotoCreate('/Reciprocities/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+</div>
+
+<div class="divSearch">
+    <div class="row">
+         <div class="col-md-2">
+             <div class="row">
+                 Person
+             </div>
+             <div class="row">
+                 <input type="text" id="txtPerson" placeholder="person" />
+             </div>
+         </div>
+        <div class="col-md-2">
+            <div class="row">
+                Originating Board
+            </div>
+            <div class="row">
+                <input type="text" id="txtOBoard" placeholder="Originating board" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Requested Board
+            </div>
+            <div class="row">
+                <input type="text" id="txtRBoard" placeholder="Requested board" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Certificate
+            </div>
+            <div class="row">
+                <input type="text" id="txtCertificate" placeholder="Certificate acronym" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Payment Number
+            </div>
+            <div class="row">
+                <input type="text" id="txtPNumber" placeholder="Payment number" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Notes
+            </div>
+            <div class="row">
+                <input type="text" id="txtNotes" placeholder="Notes" />
+            </div>
+        </div>        
+    </div>
+
+</div>
+
+
 <div id="divContainer">
     @Html.Partial("_Reciprocities",Model)     
 </div>
+
+
+@section scripts
+{
+    
+    <script>
+        $(document).on('click', '#btnClearSearch', function () {
+            $('#txtPerson').val("");
+            $('#txtOBoard').val("");
+            $('#txtRBoard').val("");
+            $('#txtCertificate').val("");
+            $('#txtPNumber').val("");
+            $('#txtNotes').val("");
+
+            searchData('', '', '','','','');
+        });
+
+        $(document).on('click', '#btnSearch', function () {
+            var obj = new Object;
+
+            var person = $('#txtPerson').val();
+            var oboard= $('#txtOBoard').val();
+            var rboard= $('#txtRBoard').val();
+            var certificate= $('#txtCertificate').val();
+            var  number= $('#txtPNumber').val();
+            var notes= $('#txtNotes').val();
+
+
+
+            if (person == '' && oboard== '' && rboard== '' && certificate=='' && number=='' && notes=='')
+                return;
+            searchData(person,oboard,rboard,certificate,number,notes);
+
+        });
+
+        function searchData(person,oboard,rboard,certificate,number,notes){
+
+            var url = "/Reciprocities/GetData?person=" + person+ "&oboard=" + oboard+ "&rboard=" + rboard+"&certificate="+certificate+"&number="+number+"&notes="+notes;
+            showOverLay();
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (data) {
+                    $('#divContainer').html(data);
+                    hideOverLay();
+                },
+                error: function (err) {
+                    hideOverLay();
+                    console.log(err.statusText);
+                }
+
+            });
+        }
+    </script>
+    
+    }

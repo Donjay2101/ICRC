@@ -1,5 +1,6 @@
 ﻿using IC_RC.Models;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using ICRCService;
 using System;
 using System.Collections.Generic;
@@ -44,13 +45,13 @@ namespace IC_RC.Controllers
             return View(data);
         }
 
-        public List<Studentviolations> GetVoilations()
+        public List<StudentVoilationForIndex> GetVoilations(string board="",string person="",string violation="")
         {
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
-            List<Studentviolations> ethicalvoiliation;
+            List<StudentVoilationForIndex> ethicalvoiliation;
             if (ShrdMaster.Instance.IsAdmin(user.Username))
             {
-                ethicalvoiliation = studentethicalviolationservice.GetEthicalviolations().ToList();
+                ethicalvoiliation = studentethicalviolationservice.GetVoilationsForIndex(board,person,violation).ToList();
             }
             else
             {
@@ -58,7 +59,7 @@ namespace IC_RC.Controllers
             }
             return ethicalvoiliation;
         }
-        public ActionResult GetData()
+        public ActionResult GetData(string board = "", string person = "", string violation = "")
         {
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
             if (user == null)
@@ -66,7 +67,7 @@ namespace IC_RC.Controllers
                 ViewBag.Error = "User is not active.";
                 return Redirect("/Account/login");
             }
-            var data = GetVoilations();
+            var data = GetVoilations(board,person,violation);
             return PartialView("_violations",data);
         }
         // GET: Ethicalviolations/Details/5

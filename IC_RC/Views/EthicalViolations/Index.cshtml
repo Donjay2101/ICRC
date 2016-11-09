@@ -1,8 +1,97 @@
-﻿@model IEnumerable<ICRC.Model.Studentviolations>
+﻿@model IEnumerable<ICRC.Model.ViewModel.StudentVoilationForIndex>
 @{
     ViewBag.Title = "Index";
 }
 
+<div>
+    @*<a href="/Ethicalviolations/Create">Create new</a>*@
+    <a href="#" onclick="gotoCreate('/Ethicalviolations/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+</div>
+
+
+<div class="divSearch">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                Originating Board
+            </div>
+            <div class="row">
+                <input type="text" placeholder="Originating board" id="txtBoard" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                Person
+            </div>
+            <div class="row">
+                <input type="text" placeholder="Person" id="txtPerson" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                Type of Ethical Violation
+            </div>
+            <div class="row">
+                <input type="text" id="txtViolation"  placeholder="Ethical violation"/>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="divContainer">
     @Html.Partial("_violations",Model)    
 </div>
+
+
+@section scripts
+{
+
+    <script>
+        $(document).on('click', '#btnClearSearch', function () {
+            $('#txtBoard').val("");
+            $('#txtPerson').val("");
+            $('#txtViolation').val("");
+
+            searchData('', '', '');
+        });
+
+
+
+        $(document).on('click', '#btnSearch', function () {
+            var obj = new Object;
+
+            var Board = $('#txtBoard').val();
+            var Person= $('#txtPerson').val();
+            var Violation = $('#txtViolation').val();
+
+
+
+            if (Board == '' && Person == '' && Violation == '')
+                return;
+            searchData(Board, Person, Violation);
+
+        });
+
+        function searchData(Board, Person, Violation) {
+
+            var url = "/EthicalViolations/GetData?board=" + Board + "&person=" + Person + "&violation=" + Violation;
+            showOverLay();
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (data) {
+                    $('#divContainer').html(data);
+                    hideOverLay();
+                },
+                error: function (err) {
+                    hideOverLay();
+                    console.log(err.statusText);
+                }
+
+            });
+        }
+    </script>
+    }

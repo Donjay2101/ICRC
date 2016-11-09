@@ -10,7 +10,7 @@ namespace IC_RC.Models
 {
     public class CertifiedPersonsGrid:Grid<CertifiedPersons>
     {
-        public CertifiedPersonsGrid(IQueryable<CertifiedPersons> items, int page, bool renderOnlyRows)
+        public CertifiedPersonsGrid(IEnumerable<CertifiedPersons> items, int page, bool renderOnlyRows)
             : base(items)
         {
             Pager = new AjaxGridPager(this) { CurrentPage = page }; ; //override  default pager

@@ -62,12 +62,12 @@ namespace ICRC.Data.Infrastructure
 
         public virtual IEnumerable<T> GetAll()
         {
-            return dbSet.ToList<T>();
+            return dbSet.AsQueryable<T>();
         }
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T,bool>>where)
         {
-            return dbSet.Where(where).ToList();
+            return dbSet.Where(where).AsQueryable();
         }
 
         public virtual T GetByID(int ID)

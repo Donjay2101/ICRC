@@ -1,11 +1,7 @@
-﻿@model IEnumerable<ICRC.Model.Studentviolations>
+﻿@model IEnumerable<ICRC.Model.ViewModel.StudentVoilationForIndex>
 @using GridMvc.Html
 @using ICRC.Model
 
-<div>
-    @*<a href="/Ethicalviolations/Create">Create new</a>*@
-    <a href="#" onclick="gotoCreate('/Ethicalviolations/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
-</div>
 
 
 @Html.Grid(Model).Columns(columns =>
@@ -58,9 +54,9 @@ columns.Add(c => c.IsScanned).Encoded(false).Sanitized(false)
                     columns.Add(c => c.IsLetterSent).Encoded(false).Sanitized(false)
                                    .SetWidth(30)
                                    .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.IsLetterSent" /></div>).Titled("Letter sent to professional");
-                    columns.Add(c => c.ISsharable).Encoded(false).Sanitized(false)
+                    columns.Add(c => c.IsSharable).Encoded(false).Sanitized(false)
                                    .SetWidth(30)
-                                   .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.ISsharable" /></div>).Titled("Not to be shared with general public");
+                                   .Css("hidden-xs").RenderValueAs(x =>@<div> <input type="checkbox" disabled checked="@x.IsSharable" /></div>).Titled("Not to be shared with general public");
                         columns.Add(c => c.Notes).Titled("notes");
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
 <script src="~/Scripts/gridmvc.min.js"></script>

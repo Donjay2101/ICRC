@@ -1,20 +1,74 @@
-﻿@model IEnumerable<ICRC.Model.Certifications>
+﻿@model IEnumerable<ICRC.Model.ViewModel.CertificationViewModelForIndex>
 @{
     ViewBag.Title = "Index";
 }
 
+<div>
+    <a href="#" onclick="gotoCreate('/Certifications/Create')" class="linkbtn"><span class="glyphicon glyphicon-plus space" aria-hidden="true"></span>Create new</a>
+
+    <a href="#" id="btnImport" class="linkbtn"><span class="glyphicon glyphicon-import space" aria-hidden="true"></span>Import certifications</a>
+    <a href="#" id="btnImport" onclick="downloadExcel()" class="linkbtn"><span class="glyphicon glyphicon-import space" aria-hidden="true"></span>Download template</a>
+    <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+    <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Clear Search</a>
+</div>
+
+<div class="divSearch">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                CertId:
+            </div>
+            <div class="row">
+                <input type="Search" placeholder="Search CertId" id="txtCertID" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Certificate number
+            </div>
+            <div class="row">
+                <input type="Search" placeholder="Search certificate number" id="txtCertificateNumber" />
+            </div>
+        </div>
+        @*<div class="col-md-2">
+            <div class="row">
+                Start Date:
+            </div>
+            <div class="row">
+                <input type="Search" class="date" placeholder="Search Start Date" id="txtStartDate" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                State Recret. Date
+            </div>
+            <div class="row">
+                <input type="Search" class="date" placeholder="Search State recert. date" id="txtRecertDate" />
+            </div>
+        </div>*@
+        <div class="col-md-2">
+            <div class="row">
+                Individual:
+            </div>
+            <div class="row">
+                <input type="Search" placeholder="Search Individual" id="txtPerson" />
+            </div>
+        </div>        
+    </div>
+
+</div>
 
 <div id="divContainer">    
     @Html.Partial("_Certifications",Model)    
 </div>
-<script>
+
+@section  scripts
+{
+    <script>
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-
-
-
 
     $(document).on('click', '#btnImport', function () {
         debugger;
@@ -29,7 +83,7 @@
 
         $('#overlayDialog').css('display', 'block');
     });
-    
+
     $(document).on('click', '#btnUpload', function () {
         showOverLay();
         if (window.FormData !== undefined) {
@@ -37,16 +91,16 @@
             var fileUpload = $("#file").get(0);
             var files = fileUpload.files;
 
-            // Create FormData object  
+            // Create FormData object
             var fileData = new FormData();
 
-            // Looping over all files and add it to FormData object  
+            // Looping over all files and add it to FormData object
             for (var i = 0; i < files.length; i++) {
                 fileData.append(files[i].name, files[i]);
             }
 
-            // Adding one more key to FormData object  
-            //fileData.append('username', ‘Manas’);  
+            // Adding one more key to FormData object
+            //fileData.append('username', ‘Manas’);
 
             jQuery.ajax({
                 url: '/Certifications/UploadCertifications',
@@ -56,7 +110,14 @@
                 processData: false,
                 type: 'POST',
                 success: function (data) {
-                    alert("data uploaded successfully");
+                    if (data == "-3")
+                    {
+                        window.location.href= '/Account/login';
+                    }
+                    else
+                    {
+                        alert("data uploaded successfully");
+                    }
                     hideOverLay();
                     $('#overlayDialog').css('display', 'none');
                 },
@@ -78,9 +139,53 @@
 
     });
 
-
     function downloadExcel()
     {
         window.open('/Certifications/downloadExcel','_blank')
     }
+
+    $(document).on('click', '#btnClearSearch', function () {
+        $('#txtCertID').val("");
+        $('#txtCertificateNumber').val("");
+        $('#txtPerson').val("");
+
+        searchData('','','');
+    });
+
+
+
+    $(document).on('click', '#btnSearch', function () {
+        var obj = new Object;
+
+        var certID=$('#txtCertID').val();
+        var certNumber=$('#txtCertificateNumber').val();
+        var person=$('#txtPerson').val();
+
+
+
+        if (certID == '' && certNumber== '' && person=='')
+            return;
+        searchData(certID, certNumber,person);
+
+    });
+
+    function searchData(certID, certNumber,person) {
+
+        var url = "/Certifications/GetData?certID=" + certID + "&certNumber=" + certNumber + "&person=" + person;
+        showOverLay();
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (data) {
+                $('#divContainer').html(data);
+                hideOverLay();
+            },
+            error: function (err) {
+                hideOverLay();
+                console.log(err.statusText);
+            }
+
+        });
+    }
 </script>
+    }

@@ -17,20 +17,20 @@ namespace ICRCService
 {
     public interface ICertificationService
     {
-        IEnumerable<Certifications> GetCertifications();
-        IEnumerable<Certifications> GetCertificationsForIndex();
-        IEnumerable<Certifications> GetCertificationsByBoardID(int ID);
+        IQueryable<Certifications> GetCertifications();
+        IQueryable<CertificationViewModelForIndex> GetCertificationsForIndex(string certID = "", string certNumber = "", string person = "");
+        IQueryable<CertificationViewModelForIndex> GetCertificationsByBoardID(int ID, string certID = "", string certNumber = "", string person = "");
         Certifications GetCertificationByID(int ID);
-        IEnumerable<Certifications> QueueForPrint();
+        IQueryable<Certifications> QueueForPrint();
         ReportViewModel QueueToPrintByCertificationID(int ID);
         IEnumerable<Certifications> GetCertifications(Expression<Func<Certifications, bool>> where);
-        IEnumerable<Certifications> GetCertificationsByPersonID(int ID);
+        IQueryable<CertificationViewModelForIndex> GetCertificationsByPersonID(int ID);
         void CreateCertification(Certifications Board);
         void UpdateCertification(Certifications Board);
         void Save();
         void ClearQueue(string ids);
         void GenerateCertificate(List<int> certifications,string path);
-        void UploadCSV(string filePath);
+        void UploadCSV(string filePath,Users LoggedInUser);
         bool CheckNumber(int number);
         void Delete(int ID);
 
@@ -91,10 +91,10 @@ namespace ICRCService
             }
         }
 
-        public IEnumerable<Certifications> QueueForPrint()
+        public IQueryable<Certifications> QueueForPrint()
         {
             
-            return GetCertificationsForIndex().Where(x => x.AddToPrintQueues == true);
+            return GetCertifications().Where(x => x.AddToPrintQueues == true);
         }
 
         public ReportViewModel QueueToPrintByCertificationID(int ID)
@@ -103,7 +103,7 @@ namespace ICRCService
 
         }
 
-        public IEnumerable<Certifications> GetCertificationsByBoardID(int ID)
+        public IQueryable<CertificationViewModelForIndex> GetCertificationsByBoardID(int ID, string certID = "", string certNumber = "", string person = "")
         {
             return GetCertificationsForIndex().Where(x => x.IssueBoard == ID);
         }
@@ -113,15 +113,15 @@ namespace ICRCService
             return certificationRepository.CheckNumber(number);
         }
 
-        public IEnumerable<Certifications> GetCertificationsForIndex()
+        public IQueryable<CertificationViewModelForIndex> GetCertificationsForIndex(string certID = "", string certNumber = "", string person = "")
         {
-            var certifications = certificationRepository.GetAll().OrderBy(x=>x.CertID);            
-            return certifications;
+            var certifications = certificationRepository.GetCertificationsForIndex(certID,certNumber,person).OrderBy(x=>x.CertID);            
+            return certifications.AsQueryable();
         }
 
-        public IEnumerable<Certifications> GetCertifications()
+        public IQueryable<Certifications> GetCertifications()
         {        
-            return certificationRepository.GetAll(); ;
+            return certificationRepository.GetAllCertifications();
         }
 
         public Certifications GetCertificationByID(int ID)
@@ -129,7 +129,7 @@ namespace ICRCService
             return certificationRepository.GetCertificationsByID(ID);
         }
 
-        public  IEnumerable<Certifications> GetCertifications(Expression<Func<Certifications, bool>>where)
+        public IEnumerable<Certifications> GetCertifications(Expression<Func<Certifications, bool>>where)
         {
             return certificationRepository.GetMany(where);
         }
@@ -148,7 +148,7 @@ namespace ICRCService
             certificationRepository.Update(certification);
         }
 
-        public IEnumerable<Certifications> GetCertificationsByPersonID(int ID)
+        public IQueryable<CertificationViewModelForIndex> GetCertificationsByPersonID(int ID)
         {
             return certificationRepository.GetCertificationsByPersonID(ID);
         }
@@ -159,9 +159,9 @@ namespace ICRCService
             certificationRepository.Delete(data);
         }
 
-        public void UploadCSV(string filePath)
+        public void UploadCSV(string filePath,Users LoggedInUser)
         {
-            certificationRepository.UploadCSV(filePath);
+            certificationRepository.UploadCSV(filePath,LoggedInUser);
         }
 
         public void Save()

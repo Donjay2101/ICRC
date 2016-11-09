@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ionic.Zip;
 using Newtonsoft.Json;
+using ICRC.Model.ViewModel;
 
 namespace IC_RC.Controllers
 {
@@ -51,23 +52,23 @@ namespace IC_RC.Controllers
         }
 
 
-        public List<Certifications> GetCertifications()
+        public List<CertificationViewModelForIndex> GetCertifications(string certID = "", string certNumber = "", string person = "")
         {
             // var userID = SessionContext<int>.Instance.GetSession("UserID");
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
-            List<Certifications> certifications;
+            List<CertificationViewModelForIndex> certifications;
             if (ShrdMaster.Instance.IsAdmin(user.Username))
             {
-                certifications = CertificationService.GetCertificationsForIndex().ToList();
+                certifications = CertificationService.GetCertificationsForIndex(certID,certNumber,person).ToList();
             }
             else
             {
-                certifications = CertificationService.GetCertificationsByBoardID(user.BoardID).ToList();
+                certifications = CertificationService.GetCertificationsByBoardID(user.BoardID,certID,certNumber,person).ToList();
             }
             return certifications;
         }
 
-        public ActionResult GetData()
+        public ActionResult GetData(string certID="",string certNumber="",string person="")
         {
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);
             if (user == null)
@@ -76,7 +77,7 @@ namespace IC_RC.Controllers
                 return Redirect("Account/login");
             }
 
-            var data = GetCertifications();
+            var data = GetCertifications(certID,certNumber,person);
             return PartialView("_Certifications",data);
         }
 
@@ -251,8 +252,12 @@ namespace IC_RC.Controllers
                         System.IO.File.Delete(filename);
                     }
                     file.SaveAs(filename);
-
-                    CertificationService.UploadCSV(filename);
+                    var user=SessionContext<Users>.Instance.GetSession("User");
+                    if(user==null)
+                    {
+                        return Json("-3",JsonRequestBehavior.AllowGet);
+                    }
+                    CertificationService.UploadCSV(filename,user);
                     // testScoreService.UploadCSV(filename);
 
                     return Json("1", JsonRequestBehavior.AllowGet);

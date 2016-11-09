@@ -13,7 +13,10 @@ namespace ICRCService
     public interface IBoardService
     {
         IEnumerable<Boards> GetBoards();
-        Boards GetBoardByID(int ID);        
+
+         IEnumerable<Boards> GetBoardsForIndex(string BoardName = "", string BoardAcronym = "");
+
+        Boards GetBoardByID(int ID);
         IEnumerable<Boards> GetBoard(Expression<Func<Boards,bool>> where);
         void CreateBoard(Boards Board);
         void UpdateBoard(Boards Board);
@@ -39,6 +42,13 @@ namespace ICRCService
             
             return boardRepository.GetAll().OrderBy(x=>x.Acronym);
         }
+
+        public IEnumerable<Boards> GetBoardsForIndex(string BoardName = "", string BoardAcronym = "")
+        {
+
+            return boardRepository.GetBoardsForIndex(BoardName,BoardAcronym).OrderBy(x => x.Acronym).AsEnumerable();
+        }
+
 
         public Boards GetBoardByID(int ID)
         {
