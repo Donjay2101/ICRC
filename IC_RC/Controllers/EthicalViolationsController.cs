@@ -87,7 +87,7 @@ namespace IC_RC.Controllers
         {
             SetReturnUrl();
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+           // ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");            
             return View();
         }
@@ -108,7 +108,7 @@ namespace IC_RC.Controllers
                 return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+          //  ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");
             return View(model);
         }
@@ -127,7 +127,28 @@ namespace IC_RC.Controllers
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+            // ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+            var person = CertifiedPersonService.GetCertifiedPersonByID(data.personID ?? data.personID.Value);
+            string name = "";
+            if (person != null)
+            {
+                if (!string.IsNullOrEmpty(person.FirstName))
+                {
+                    name += person.FirstName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.MiddleName))
+                {
+                    name += person.MiddleName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.LastName))
+                {
+                    name += person.LastName + " ";
+                }
+
+                //name = string.Format($"{person.FirstName != null ? person.FirstName + " ":\"\"}");
+                //name = person.FirstName != null ? person.FirstName + " " + person.MiddleName != null ? person.MiddleName + " " + person.LastName != null ? person.LastName:"":"":"";
+            }
+            ViewBag.Person = name;
             ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");
             return View(data);
         }
@@ -147,7 +168,28 @@ namespace IC_RC.Controllers
                 return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+            var person = CertifiedPersonService.GetCertifiedPersonByID(model.personID ?? model.personID.Value);
+            string name = "";
+            if (person != null)
+            {
+                if (!string.IsNullOrEmpty(person.FirstName))
+                {
+                    name += person.FirstName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.MiddleName))
+                {
+                    name += person.MiddleName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.LastName))
+                {
+                    name += person.LastName + " ";
+                }
+
+                //name = string.Format($"{person.FirstName != null ? person.FirstName + " ":\"\"}");
+                //name = person.FirstName != null ? person.FirstName + " " + person.MiddleName != null ? person.MiddleName + " " + person.LastName != null ? person.LastName:"":"":"";
+            }
+            ViewBag.Person = name;
+            //  ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Ethicalviolations = new SelectList(ethicalviolationservice.GetEthicalviolations(), "ID", "Name");
             return View(model);
         }

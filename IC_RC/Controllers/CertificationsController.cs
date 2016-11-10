@@ -118,7 +118,8 @@ namespace IC_RC.Controllers
         public ActionResult Create()
         {
             SetReturnUrl();
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(),"ID","FullName");
+            ViewBag.Fees = new SelectList(ShrdMaster.Instance.GetFees(), "ID", "Name");
+           // ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(),"ID","FullName");
             ViewBag.Certificates= new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.CertificateNumber = GenerateNumber();
@@ -140,8 +141,8 @@ namespace IC_RC.Controllers
                 CertifiedPersonService.Save();
                 return Redirect(returnUrl);
                 }
-
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+            ViewBag.Fees = new SelectList(ShrdMaster.Instance.GetFees(), "ID", "Name");
+            //ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.CertificateNumber = GenerateNumber();
@@ -159,8 +160,29 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
+            var person = CertifiedPersonService.GetCertifiedPersonByID(data.PersonID ?? data.PersonID.Value);
+            string name = "";
+            if (person != null)
+            {
+                if(!string.IsNullOrEmpty(person.FirstName))
+                {
+                    name += person.FirstName+" ";
+                }
+                if(!string.IsNullOrEmpty(person.MiddleName))
+                {
+                    name += person.MiddleName+" ";
+                }
+                if (!string.IsNullOrEmpty(person.LastName))
+                {
+                    name += person.LastName+ " ";
+                }
 
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+                //name = string.Format($"{person.FirstName != null ? person.FirstName + " ":\"\"}");
+                //name = person.FirstName != null ? person.FirstName + " " + person.MiddleName != null ? person.MiddleName + " " + person.LastName != null ? person.LastName:"":"":"";
+            }
+            ViewBag.Person = name;
+            ViewBag.Fees = new SelectList(ShrdMaster.Instance.GetFees(), "ID", "Name",data.CertRequestFee);
+            // ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
           
@@ -181,7 +203,27 @@ namespace IC_RC.Controllers
                 CertificateService.Save();
                 return Redirect(returnUrl);
             }
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
+
+            var person = CertifiedPersonService.GetCertifiedPersonByID(model.PersonID ?? model.PersonID.Value);
+            string name="";
+            if (person!=null)
+            {
+                if (!string.IsNullOrEmpty(person.FirstName))
+                {
+                    name += person.FirstName = " ";
+                }
+                if (!string.IsNullOrEmpty(person.MiddleName))
+                {
+                    name += person.MiddleName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.LastName))
+                {
+                    name += person.LastName + " ";
+                }
+            }
+            ViewBag.Person = name;
+            ViewBag.Fees = new SelectList(ShrdMaster.Instance.GetFees(), "ID", "Name",model.CertRequestFee);
+            //  ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
             ViewBag.Certificates = new SelectList(CertificateService.GetCertificates(), "ID", "Name");
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             
@@ -233,34 +275,42 @@ namespace IC_RC.Controllers
                 LoggerApp.Logger.ExceptionPath = Server.MapPath("~/Errors.txt");
                 if (Request.Files.Count > 0)
                 {
-                    HttpFileCollectionBase files = Request.Files;
-                    HttpPostedFileBase file = files[0];
-                    string filename = "";
+                    try
+                    {
+                        HttpFileCollectionBase files = Request.Files;
+                        HttpPostedFileBase file = files[0];
+                        string filename = "";
 
-                    if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
-                    {
-                        string[] testfiles = file.FileName.Split(new char[] { '\\' });
-                        filename = testfiles[testfiles.Length - 1];
-                    }
-                    else
-                    {
-                        filename = file.FileName;// + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + "-(" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ")";
-                    }
-                    filename = Path.Combine(Server.MapPath("~/Uploads/Certifications"), filename);
-                    if (System.IO.File.Exists(filename))
-                    {
-                        System.IO.File.Delete(filename);
-                    }
-                    file.SaveAs(filename);
-                    var user=SessionContext<Users>.Instance.GetSession("User");
-                    if(user==null)
-                    {
-                        return Json("-3",JsonRequestBehavior.AllowGet);
-                    }
-                    CertificationService.UploadCSV(filename,user);
-                    // testScoreService.UploadCSV(filename);
+                        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                        {
+                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                            filename = testfiles[testfiles.Length - 1];
+                        }
+                        else
+                        {
+                            filename = file.FileName;// + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + "-(" + DateTime.Now.Minute + "-" + DateTime.Now.Second + ")";
+                        }
+                        filename = Path.Combine(Server.MapPath("~/Uploads/Certifications"), filename);
+                        if (System.IO.File.Exists(filename))
+                        {
+                            System.IO.File.Delete(filename);
+                        }
+                        file.SaveAs(filename);
+                        var user = SessionContext<Users>.Instance.GetSession("User");
+                        if (user == null)
+                        {
+                            return Json("-3", JsonRequestBehavior.AllowGet);
+                        }
+                        CertificationService.UploadCSV(filename, user);
+                        // testScoreService.UploadCSV(filename);
 
-                    return Json("1", JsonRequestBehavior.AllowGet);
+                        return Json("1", JsonRequestBehavior.AllowGet);
+                    }
+                    catch(Exception ex)
+                    {
+                        return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                    }
+                   
                 }
                 else
                 {
@@ -370,5 +420,9 @@ namespace IC_RC.Controllers
             
             return File(path,"application/vnd.ms-excel","CertificationTemplate.xlsx");
         }
+
+
+
+     
     }
 }

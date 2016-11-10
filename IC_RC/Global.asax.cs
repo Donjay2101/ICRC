@@ -47,15 +47,15 @@ namespace IC_RC
             //    Response.Redirect("/Account/Login");
             //}
 
-            string url = HttpContext.Current.Request.Url.AbsolutePath;
+            //string url = HttpContext.Current.Request.Url.AbsolutePath;
 
-            if (url.ToUpper().Contains("EDIT") || url.ToUpper().Contains("DELETE")|| url.ToUpper().Contains("CREATE"))
-            {
-                if (!ShrdMaster.Instance.IsAdmin(User.Identity.Name))
-                {
-                    Response.Redirect("/Account/Login");
-                }
-            }
+            //if (url.ToUpper().Contains("EDIT") || url.ToUpper().Contains("DELETE")|| url.ToUpper().Contains("CREATE"))
+            //{
+            //    if (!ShrdMaster.Instance.IsAdmin(User.Identity.Name))
+            //    {
+            //        Response.Redirect("/Account/Login");
+            //    }
+            //}
 
             //url
 

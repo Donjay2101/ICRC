@@ -18,7 +18,7 @@ namespace ICRC.Model.ViewModel
 
 
         public string FullName { get; set; }
-        public int CurrentBoardID { get; set; }
+        public Nullable<int> CurrentBoardID { get; set; }
         public string BoardAcronym { get; set; }
     }
 }

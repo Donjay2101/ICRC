@@ -22,7 +22,7 @@ namespace ICRC.Model
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public Nullable<DateTime> DateofEntry { get; set; }
         public Nullable<bool> Status { get; set; }
-        [DisplayName("Approval Date")]
+        [DisplayName("Processed Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public Nullable<DateTime> ApprovalDate { get; set; }
         [DisplayName("Reciprocity Fee")]

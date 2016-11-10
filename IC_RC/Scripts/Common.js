@@ -4,6 +4,29 @@
 function gotoCreate(url) {
     debugger;
     var cururl = window.location.href;
+    var isAdmin = readCookie('AdminCookie');
+    if (isAdmin.toUpperCase() != "ADMIN")
+    {
+        if (url.indexOf('CertifiedPersons') > -1)
+        {
+            if (url.indexOf('edit') > -1)
+            {
+                
+            }
+            else
+            {
+                alert('admin privilages required.');
+                return;
+            }
+            
+        }
+        else
+        {
+            alert('admin privilages required.');
+            return;
+        }
+
+     }
     var comidx = cururl.split('/');
     var returnUrl=""; 
     for(i=3;i<comidx.length;i++)
@@ -37,6 +60,12 @@ function gotoPage(url)
 function confirmDelete(url,reloadUrl)
 {
     debugger;
+    var isAdmin = readCookie('AdminCookie');
+    if (isAdmin.toUpperCase() != "ADMIN") {
+
+        alert('admin privilages required.');
+        return;
+    }
     if(confirm('you are about to delete this record are you sure?'))
     {
         $.ajax({
@@ -83,3 +112,33 @@ function readCookie(name) {
     }
     return null;
 }
+
+$(document).ready(function () {
+
+    $("#person").autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+            $.ajax({
+                url: '/CertifiedPersons/GetPersons',
+                type: "GET",
+                dataType: "json",
+                data: {
+                    term: request.term,
+                },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        debugger;
+                        return { label: item.FullName, value: item.FullName, id: item.ID };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            $("#PersonID").val(ui.item.id);
+        }
+    });
+});
+
+//$("#person").autocomplete({
+//    source: 
+//});

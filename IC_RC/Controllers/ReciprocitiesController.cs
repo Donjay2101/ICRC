@@ -88,7 +88,7 @@ namespace IC_RC.Controllers
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
-            ViewBag.Persons= new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+           // ViewBag.Persons= new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             return View();
         }
 
@@ -110,7 +110,7 @@ namespace IC_RC.Controllers
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+          //  ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
             return View(model);
         }
 
@@ -123,12 +123,32 @@ namespace IC_RC.Controllers
             {
                 return RedirectToActionPermanent("PageNotFound", "Home");
             }
-
+            var data = reciprocityService.GetReciprocitiesByID(id.Value);
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
-            var data=reciprocityService.GetReciprocitiesByID(id.Value);
+            var person = CertifiedPersonService.GetCertifiedPersonByID(data.PersonID ?? data.PersonID.Value);
+            string name = "";
+            if (person != null)
+            {
+                if (!string.IsNullOrEmpty(person.FirstName))
+                {
+                    name += person.FirstName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.MiddleName))
+                {
+                    name += person.MiddleName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.LastName))
+                {
+                    name += person.LastName + " ";
+                }
+
+                //name = string.Format($"{person.FirstName != null ? person.FirstName + " ":\"\"}");
+                //name = person.FirstName != null ? person.FirstName + " " + person.MiddleName != null ? person.MiddleName + " " + person.LastName != null ? person.LastName:"":"":"";
+            }
+            ViewBag.Person = name;
+          
 
             return View(data);
         }
@@ -138,6 +158,7 @@ namespace IC_RC.Controllers
         public ActionResult Edit(Reciprocities model)
         {
             SetReturnUrl();
+            model.Status = true;
            if(ModelState.IsValid)
             {
                 model.ModifiedAt = DateTime.Now;
@@ -150,7 +171,27 @@ namespace IC_RC.Controllers
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             ViewBag.Certificates = new SelectList(certificateService.GetCertificates(), "ID", "Name");
             ViewBag.PaymentTypes = paymentService.GetPaymentTypes();
-            ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifiedPersons(), "ID", "FullName");
+            var person = CertifiedPersonService.GetCertifiedPersonByID(model.PersonID ?? model.PersonID.Value);
+            string name = "";
+            if (person != null)
+            {
+                if (!string.IsNullOrEmpty(person.FirstName))
+                {
+                    name += person.FirstName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.MiddleName))
+                {
+                    name += person.MiddleName + " ";
+                }
+                if (!string.IsNullOrEmpty(person.LastName))
+                {
+                    name += person.LastName + " ";
+                }
+
+                //name = string.Format($"{person.FirstName != null ? person.FirstName + " ":\"\"}");
+                //name = person.FirstName != null ? person.FirstName + " " + person.MiddleName != null ? person.MiddleName + " " + person.LastName != null ? person.LastName:"":"":"";
+            }
+            ViewBag.Person = name;
             return View(model);
         }
 

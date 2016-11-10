@@ -6,10 +6,40 @@
 
 @*<h2>Create</h2>*@
 
+@section scripts
+{
+  
+    <script>
+        //$(document).ready(function () {
+
+        //    //var data="1234567890";
+        //    //var num = Math.random(100000, 999999);
+
+        //    $.ajax({
+        //        url: "/certifications/GenerateCertificateNumber",
+        //        //data:{number:num},
+        //        success:function(result){
+        //            $('#certificateNo').val(result);
+        //        },
+        //        error:function(){
+
+        //        }
+        //    });
+        //    $('certificateNo').val();
+
+
+        //});
+    </script>
+}
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     <div class="row">
+        <div class="col-md-4">
+            <span style="color:red">
+                *enter three characters to search the Individual in given field.
+            </span>
+        </div>
         <div class="col-md-offset-8 col-md-5 text-right">
             <div class="form-group bottom-space">
                 <div class="col-md-offset-2 col-md-7">
@@ -24,6 +54,7 @@
         @*<h4>Certifications</h4>
         <hr />*@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -31,8 +62,10 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PersonID, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-8">
-                                @Html.DropDownListFor(model => model.PersonID, (SelectList)ViewBag.Persons, "select--", new { @class = "form-control" })
+                                <input type="search" autocomplete="off" class="form-control" id="person" />
+                                @*@Html.DropDownListFor(model => model.PersonID, (SelectList)ViewBag.Persons, "select--", new { @class = "form-control" })*@
                                 @*@Html.EditorFor(model => model.PersonID, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.HiddenFor(model=>model.PersonID)
                                 @Html.ValidationMessageFor(model => model.PersonID, "", new { @class = "text-danger" })
                             </div>
                         </div> 
@@ -62,9 +95,9 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.BoardCertificateAcronym, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-8">
-                                @Html.DropDownListFor(model => model.BoardCertificateAcronym, (SelectList)ViewBag.Certificates, "select--", new { @class = "form-control" })
+                                @*@Html.DropDownListFor(model => model.BoardCertificateAcronym, (SelectList)ViewBag.Certificates, "select--", new { @class = "form-control" })*@
                                 @*@Html.DropDownListFor(model => model.IssueBoard, (SelectList)ViewBag.Boards, new { @class = "form-control" })*@
-                                @*@Html.EditorFor(model => model.BoardCertificateAcronym, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.EditorFor(model => model.BoardCertificateAcronym, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.BoardCertificateAcronym, "", new { @class = "text-danger" })
                             </div>
                         </div>   
@@ -97,8 +130,9 @@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.CertRequestFee, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-8">
-                                @Html.EditorFor(model => model.CertRequestFee, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="col-md-8" name="CertRequestFee" id="CertRequestFee">
+                                @Html.DropDownListFor(model=>model.CertRequestFee,ViewBag.Fees as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                @*@Html.EditorFor(model => model.CertRequestFee, new { htmlAttributes = new { @class = "form-control" } })*@
                                 @Html.ValidationMessageFor(model => model.CertRequestFee, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -107,7 +141,7 @@
                             <div class="col-md-8">
                                 @foreach (var item in ViewBag.PaymentTypes)
                                 {
-                                    <span>@item.Name</span><input type="radio" value="@item.ID" name="PaymentType" />
+                                    <span>@item.Name     </span><input type="radio" value="@item.ID" name="PaymentType" />
                                 }
 
                                 @*@Html.EditorFor(model => model.CertRequestFee, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -124,6 +158,28 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CertID, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.CertID, (SelectList)ViewBag.Certificates, "select--", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.CertID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                                                                      
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CertNotes, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.CertNotes, new { rows = 10, cols = 50 })
+                            </div>
+                        </div>  
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -166,29 +222,4 @@
     </div>
 }
 
-@section scripts
-{
-    
-    <script>
-        //$(document).ready(function () {
-
-        //    //var data="1234567890";
-        //    //var num = Math.random(100000, 999999);
-
-        //    $.ajax({
-        //        url: "/certifications/GenerateCertificateNumber",
-        //        //data:{number:num},
-        //        success:function(result){
-        //            $('#certificateNo').val(result);
-        //        },
-        //        error:function(){
-                
-        //        }
-        //    });
-        //    $('certificateNo').val();
-
-
-        //});
-    </script>
-    }
 

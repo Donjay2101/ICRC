@@ -23,7 +23,7 @@ namespace ICRC.Data.Repositories
         public  IQueryable<Certifications> GetAllCertifications()
         {
 
-            var data = DbContext.Database.SqlQuery<CertificationViewModel>("exec SP_GetCertifications").ToList().Select(x => new Certifications
+            var data = DbContext.Database.SqlQuery<CertificationViewModel>("exec SP_GetCertifications").AsQueryable().Select(x => new Certifications
             {
                 AddToPrintQueues = x.AddToPrintQueues,
                 BoardCertificateAcronym = x.BoardCertificateAcronym,
@@ -123,7 +123,7 @@ namespace ICRC.Data.Repositories
 
         public bool CheckNumber(int Number)
         {
-            var data = DbContext.Certifications.Where(x => x.certificateNo == Number).ToList();
+            var data = DbContext.Certifications.AsQueryable().Where(x => x.certificateNo == Number).ToList();
             if (data.Count > 0)
             {
                 return true;

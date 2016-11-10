@@ -240,3 +240,25 @@ Stack Trace:   at System.Data.Entity.Internal.InternalContext.SaveChanges()
    at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
    at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 260
 -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Log Time:11/10/2016 7:27:50 PM
+Exception:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Inner Exception:
+Stack Trace:   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at ICRC.Data.Repositories.CertificationsRepository.UploadCSV(String filePath, Users loggedInUser) in E:\IC_RC\icrc\ICRC.Data\Repositories\CertificationsRepository.cs:line 307
+   at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
+   at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 302
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Log Time:11/10/2016 7:29:44 PM
+Exception:Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+Inner Exception:
+Stack Trace:   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at ICRC.Data.Repositories.CertificationsRepository.UploadCSV(String filePath, Users loggedInUser) in E:\IC_RC\icrc\ICRC.Data\Repositories\CertificationsRepository.cs:line 307
+   at ICRCService.CertificationsService.UploadCSV(String filePath, Users LoggedInUser) in E:\IC_RC\icrc\ICRCService\CertificationsService.cs:line 164
+   at IC_RC.Controllers.CertificationsController.UploadCertifications() in E:\IC_RC\icrc\IC_RC\Controllers\CertificationsController.cs:line 302
+-----------------------------------------------------------------------------

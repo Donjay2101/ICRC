@@ -14,7 +14,7 @@ namespace ICRC.Model
         public int ID { get; set; }
 
 
-        [Required]
+        //[Required]
         public string Suffix { get; set; }
         [Required]
         [DisplayName("Last Name")]
@@ -41,8 +41,9 @@ namespace ICRC.Model
         public int TestingCompany { get; set; }
         [DisplayName("Ethical violation")]
         public bool EthicalViolation { get; set; }
+
         [DisplayName("Current Board")]
-        public int CurrentBoardID { get; set; }
+        public Nullable<int> CurrentBoardID { get; set; }
         [DisplayName("Other Board")]
         public int OtherBoardID { get; set; }
         public Nullable<int> CreatedBy { get; set; }

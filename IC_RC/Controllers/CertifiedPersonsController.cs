@@ -97,7 +97,7 @@ namespace IC_RC.Controllers
 
             if(data!=null && data.CurrentBoardID>0)
             {
-                ViewBag.CurrentBoard = BoardService.GetBoardByID(data.CurrentBoardID).Acronym;
+                ViewBag.CurrentBoard = BoardService.GetBoardByID(data.CurrentBoardID==null?0:data.CurrentBoardID.Value).Acronym;
             }
             
             return View(data);
@@ -166,6 +166,7 @@ namespace IC_RC.Controllers
         {
             SetReturnUrl();
             // TODO: Add insert logic here
+           // person.CurrentBoardID
             if (ModelState.IsValid)
                 {
                 person.CreatedAt = DateTime.Now;
@@ -298,6 +299,12 @@ namespace IC_RC.Controllers
             returnUrl = ShrdMaster.Instance.GetReturnUrl("/CertifiedPersons/Index");
             ViewBag.ReturnURL = returnUrl;
             
+        }
+
+        public ActionResult GetPersons(string term)
+        {
+            var data = PersonsData().Where(x => x.FullName.Contains(term)).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

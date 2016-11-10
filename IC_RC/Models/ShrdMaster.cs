@@ -1,5 +1,6 @@
 ﻿using ICRC.Data.Infrastructure;
 using ICRC.Model;
+using ICRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace IC_RC
         
 
 
-
+     
         public List<Status> Getstatus()
         {
             List<Status> list = new List<Status>()
@@ -102,6 +103,11 @@ namespace IC_RC
            return defaultUrl;
         }
 
+        //public List<CPViewModelForIndex> getPersons()
+        //{
+
+        //}
+
 
         public List<Suffix> GetSuffix()
         {
@@ -116,11 +122,28 @@ namespace IC_RC
             return list;
         }
 
+        public  List<Fee> GetFees()
+        {
+            List<Fee> list = new List<IC_RC.Fee>()
+            {
+                new Fee() { ID=25.00,Name="$25.00"},
+                new Fee() { ID=50.00,Name="$50.00"},
+                new Fee() { ID=75.00,Name="$75.00"},
+                new Fee() { ID=10.00,Name="$100.00"},
+            };
+
+            return list;
+        }
+
 }
 
 
 
-
+    public class Fee
+    {
+        public double ID { get; set; }
+        public string Name{get;set;}
+    }
     public class Suffix
     {
         public string ID { get; set; }

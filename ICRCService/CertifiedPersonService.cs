@@ -55,7 +55,7 @@ namespace ICRCService
         public IEnumerable<CPViewModelForIndex> GetCertifedPersonsForIndex(string FirstName = "", string LastName = "", string MiddleName = "", string Acronym = "", string City = "", string State = "")
         {
 
-            return certifiedRepository.GetAllIndex(FirstName, LastName, MiddleName, Acronym, City, State).ToList();
+                return certifiedRepository.GetAllIndex(FirstName, LastName, MiddleName, Acronym, City, State).ToList();
             //.Select(x => new CPViewModelForIndex
             //{
             //    FirstName=x.FirstName,

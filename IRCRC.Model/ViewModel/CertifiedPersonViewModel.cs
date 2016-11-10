@@ -32,7 +32,7 @@ namespace IRCRC.Model.ViewModel
         
         public bool EthicalViolation { get; set; }
         
-        public int CurrentBoardID { get; set; }
+        public Nullable<int> CurrentBoardID { get; set; }
         
         public int OtherBoardID { get; set; }
         public Nullable<int> CreatedBy { get; set; }
