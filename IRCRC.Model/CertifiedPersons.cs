@@ -27,7 +27,7 @@ namespace ICRC.Model
         public string Address { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
-        [DisplayName("State/Proince")]
+        [DisplayName("State/Province")]
         public string State { get; set; }
         //[DisplayName("province")]
         //public string province { get; set; }

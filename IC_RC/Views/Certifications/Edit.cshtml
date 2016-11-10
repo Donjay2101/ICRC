@@ -83,6 +83,7 @@
                             <div class="col-md-8">
 
                                 <label id="certificateNo1" name="certificateNo1" value="">@Model.certificateNo </label>
+                                @Html.HiddenFor(model=>model.certificateNo)
                                 @*<input type="hidden" value="@Model.certificateNo" name="certificateNo" id="certificateNo" />*@
                                 @*@Html.HiddenFor(model=>model.certificateNo,new { value=ViewBag.CertificateNumber })*@
                                 @*@Html.EditorFor(model => model.certificateNo,new { htmlAttributes = new { @class = "form-control",value= "@@ViewBag.CertificateNumber" } })*@
