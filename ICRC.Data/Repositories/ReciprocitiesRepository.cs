@@ -21,7 +21,7 @@ namespace ICRC.Data.Repositories
         {
 
             return GetReciprocitiesForIndex().Where(x => x.Person == ID).AsQueryable();
-            //var data = DbContext.Database.SqlQuery<ReciprocitiesViewModel>("exec sp_GetReciprocities @personID", new SqlParameter("@personID", ID))
+            //var data = DbContext.Database.SqlQuery<ReciprocitiesViewModel>("exec sp_GetReciprocities @PersonID", new SqlParameter("@PersonID", ID))
             //  .Select(x => new Reciprocities
             //  {
             //      ApprovalDate = x.ApprovalDate,

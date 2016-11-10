@@ -128,7 +128,7 @@ namespace IC_RC.Controllers
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
             // ViewBag.Persons = new SelectList(CertifiedPersonService.GetCertifedPersonsForIndex(), "ID", "FullName");
-            var person = CertifiedPersonService.GetCertifiedPersonByID(data.personID ?? data.personID.Value);
+            var person = CertifiedPersonService.GetCertifiedPersonByID(data.PersonID ?? data.PersonID.Value);
             string name = "";
             if (person != null)
             {
@@ -168,7 +168,7 @@ namespace IC_RC.Controllers
                 return Redirect(returnUrl);
             }
             ViewBag.Boards = new SelectList(BoardService.GetBoards(), "ID", "Acronym");
-            var person = CertifiedPersonService.GetCertifiedPersonByID(model.personID ?? model.personID.Value);
+            var person = CertifiedPersonService.GetCertifiedPersonByID(model.PersonID ?? model.PersonID.Value);
             string name = "";
             if (person != null)
             {

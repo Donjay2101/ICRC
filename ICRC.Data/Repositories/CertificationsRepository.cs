@@ -184,7 +184,7 @@ namespace ICRC.Data.Repositories
             CertifiedPersons person;
             string firstName, middlename, lastname, address, email, city, state, Zip, country,
                 boardCertificateNumber, CertificateIssueDate, RenewalDate, CertificaterequestDate,certificateName,issueBoardName, boardCertificateAcronym;
-            int personID=0, certifcateID=0, otherboard=0, issueBoard=0,count=0, certificateNumber=0;
+            int PersonID=0, certifcateID=0, otherboard=0, issueBoard=0,count=0, certificateNumber=0;
            
             string CSVData = File.ReadAllText(filePath);
             string[] cells;
@@ -263,7 +263,7 @@ namespace ICRC.Data.Repositories
                             //}
 
                             //CertificateNotes = cells[20];
-                            personID = SearchPerson(lastname, city, state, address, email, board==null?0:board.ID);
+                            PersonID = SearchPerson(lastname, city, state, address, email, board==null?0:board.ID);
                             //int SearchPerson(string lastname, string city, string state, string address, string email, int boardID)
                             dt.Rows[dt.Rows.Count - 1]["CertID"] = certifcateID;
                             dt.Rows[dt.Rows.Count - 1]["CertificateNo"] = certificateNumber;
@@ -282,7 +282,7 @@ namespace ICRC.Data.Repositories
                             dt.Rows[dt.Rows.Count - 1]["ModifiedBy"] = -1;
                             dt.Rows[dt.Rows.Count - 1]["ModifiedAt"] = DateTime.Now;
                             dt.Rows[dt.Rows.Count - 1]["BoardCertificateAcronym"] = boardCertificateAcronym;
-                            if (personID <= 0)
+                            if (PersonID <= 0)
                             {
                                 person = new CertifiedPersons();
                                 person.Suffix = "";
@@ -306,9 +306,9 @@ namespace ICRC.Data.Repositories
                                 DbContext.CertifiedPersons.Add(person);
                                 DbContext.SaveChanges();
                                 //DataTable tblPerson = MakeTable<CertifiedPersons>(
-                                personID = person.ID;
+                                PersonID = person.ID;
                             }
-                            dt.Rows[dt.Rows.Count - 1]["PersonID"] = personID;
+                            dt.Rows[dt.Rows.Count - 1]["PersonID"] = PersonID;
                         }
                                                    
                         }

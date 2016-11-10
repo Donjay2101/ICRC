@@ -24,7 +24,7 @@ namespace IRCRC.Model.ViewModel
         
         public string Comments { get; set; }
         
-        public Nullable<int> personID { get; set; }
+        public Nullable<int> PersonID { get; set; }
         public string Notes { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<DateTime> CreatedAt { get; set; }

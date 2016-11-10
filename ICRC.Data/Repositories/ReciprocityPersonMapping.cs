@@ -9,7 +9,7 @@ namespace ICRC.Data.Repositories
     public class ReciprocityPersonMapping
     {
         public int ID { get; set; }
-        public int personID { get; set; }
+        public int PersonID { get; set; }
         public int ReciprocityID { get; set; }
     }
 }

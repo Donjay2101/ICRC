@@ -67,7 +67,7 @@ columns.Add()
                         columns.Add(c => c.RecertDate).Titled("State Recert. Date").Format("{0:MM/dd/yyyy}");
                         columns.Add(c => c.PersonName).Titled("Individual");
                     }).WithPaging(10).Sortable().Filterable().WithMultipleFilters()
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@*@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@*@
 <script src="~/Scripts/gridmvc.min.js"></script>
 <script>
     $(document).on('click', '#btnPrint', function () {

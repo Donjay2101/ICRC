@@ -37,7 +37,7 @@ namespace ICRC.Data.Repositories
                     ISsharable = x.ISsharable,
                     ModifiedAt = x.ModifiedAt,
                     ModifiedBy = x.ModifiedBy,
-                    personID = x.personID,
+                    PersonID = x.PersonID,
                     PersonName = x.PersonName,
                     EthicalViolation= x.EthicalViolation,
                     Notes = x.Notes
@@ -47,7 +47,7 @@ namespace ICRC.Data.Repositories
             //    voi in DbContext.Studentviolations on bc.ID equals voi.Board
             //      into g1
             //          from grp1 in g1.DefaultIfEmpty()
-            //          join person in DbContext.CertifiedPersons on grp1.personID equals person.ID
+            //          join person in DbContext.CertifiedPersons on grp1.PersonID equals person.ID
             //       into g2
             //          from grp2 in g2.DefaultIfEmpty()
             //          join ethi in DbContext.Ethicalviolations on  grp1.EthicalviolationId equals ethi.ID
@@ -66,7 +66,7 @@ namespace ICRC.Data.Repositories
             //             ISsharable= grp1.ISsharable,
             //             ModifiedAt= grp1.ModifiedAt,
             //             ModifiedBy= grp1.ModifiedBy,
-            //             personID=(int?)grp1.personID,
+            //             PersonID=(int?)grp1.PersonID,
             //             PersonName=grp2!=null?(grp2.FirstName+" "+ grp2.MiddleName+" "+ grp2.LastName):null,
             //             Ethicalviolation=ethi.Name,
             //             Notes= grp1.Notes
@@ -85,7 +85,7 @@ namespace ICRC.Data.Repositories
             //             ISsharable = x.ISsharable,
             //             ModifiedAt = x.ModifiedAt,
             //             ModifiedBy = x.ModifiedBy,
-            //             personID = x.personID??x.personID.Value,
+            //             PersonID = x.PersonID??x.PersonID.Value,
             //             PersonName = x.PersonName,
             //             Ethicalviolation=x.Ethicalviolation,
             //             Notes=x.Notes                         
@@ -98,7 +98,7 @@ namespace ICRC.Data.Repositories
         {
 
             return GetVoilationForIndex().Where(x => x.Person == ID).AsQueryable();
-            // var data = DbContext.Database.SqlQuery<IRCRC.Model.ViewModel.StudentEthicalViolationViewModel>("exec sp_StudentViolatons @personID",new SqlParameter("@personID",ID))
+            // var data = DbContext.Database.SqlQuery<IRCRC.Model.ViewModel.StudentEthicalViolationViewModel>("exec sp_StudentViolatons @PersonID",new SqlParameter("@PersonID",ID))
             //   .Select(x => new Studentviolations
             //   {
             //       Board = x.Board,
@@ -114,7 +114,7 @@ namespace ICRC.Data.Repositories
             //       ISsharable = x.ISsharable,
             //       ModifiedAt = x.ModifiedAt,
             //       ModifiedBy = x.ModifiedBy,
-            //       personID = x.personID,
+            //       PersonID = x.PersonID,
             //       PersonName = x.PersonName,
             //       EthicalViolation = x.EthicalViolation,
             //       Notes = x.Notes
@@ -141,7 +141,7 @@ namespace ICRC.Data.Repositories
                      ISsharable = x.ISsharable,
                      ModifiedAt = x.ModifiedAt,
                      ModifiedBy = x.ModifiedBy,
-                     personID = x.personID,
+                     PersonID = x.PersonID,
                      PersonName = x.PersonName,
                      EthicalViolation = x.EthicalViolation,
                      Notes = x.Notes
