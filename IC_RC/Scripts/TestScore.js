@@ -159,7 +159,7 @@ function getFirstName() {
         data: "GET",
         success: function (data) {
             hideOverLay();
-            if (data != null) {
+            if (data!= null) {
                 $('#tblfirstname').html("");
                 var htmlString = "<tr>"+
                                             "<th>FirstName</th>"+
