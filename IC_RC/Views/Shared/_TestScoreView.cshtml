@@ -1,9 +1,10 @@
 ﻿@model ICRC.Model.TestScore
-    <div class="row">
+    @*<div class="row">
         <span id="closeDialog" class="glyphicon glyphicon-remove pull-right"></span>
-    </div>
-<div class="row" style="margin-top: 30px;">
+    </div>*@
+<div class="row">
     @Html.HiddenFor(model=>model.ID)
+    
         <div class="form-group field-space">
             @Html.LabelFor(model => model.Exam, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
@@ -14,7 +15,15 @@
         <div class="form-group field-space">
             @Html.LabelFor(model => model.ExamDate, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                <input type="text" class="form-control date" id="ExamDate" name="ExamDate" value="@Model.ExamDate" />
+                @if (Model != null)
+                {
+                    <input type="text" class="form-control date" id="ExamDate" name="ExamDate" value="@string.Format("{0:d}",Model.ExamDate)" />
+                }
+                else
+                {
+                    <input type="text" class="form-control date" id="ExamDate" name="ExamDate" />
+                }
+
 
                 @*@Html.EditorFor(model => model.ExamDate.Value.ToShortDateString(), new { htmlAttributes = new { @class = "form-control date" } })*@
                 @Html.ValidationMessageFor(model => model.ExamDate, "", new { @class = "text-danger" })
@@ -25,7 +34,7 @@
             <div class="col-md-8">
                 <select name="Status" id="Status" class="form-control">
                     <option  value="-1">Select--</option>
-                    @if (Model.Status == "Pass")
+                    @if (Model!=null && Model.Status.ToUpper() == "PASS")
                     {
                         <option selected value="Pass">Pass</option>
                     }
@@ -33,7 +42,7 @@
                     {
                         <option value="Pass">Pass</option>
                     }
-                    @if (Model.Status == "Fail")
+                    @if (Model!=null && Model.Status.ToUpper() == "FAIL")
                     {
                         <option selected value="Fail">Fail</option>
                     }
@@ -69,16 +78,15 @@
                 @Html.ValidationMessageFor(model => model.Board, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group field-space">
-            <div class="col-md-offset-2 col-md-7">
-                @*<input type="submit" value="Create" class="btn btn-default custom-button">*@
+        @*<div class="form-group field-space">
+            <div class="col-md-offset-2 col-md-7">               
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="button" value="Save" id="btnScoreSave" class="btn btn-default custom-button popup-btn">
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>*@    
 </div>
 
 <script>
@@ -93,7 +101,11 @@
 
     });
 
-    $(document).on('click', '#btnScoreSave', function () {
+
+
+    function saveScore()
+    {
+        debugger;
 
         var ID = $('#ID').val();
         var Exam = $('#Exam').val();
@@ -112,16 +124,16 @@
         obj.ExamDate = ExamDate;
         obj.Status = Status;
         obj.TestingCompany = TestingCompany;
-        if (Board == "" || Board == undefined)
-        {
+        obj.FirstName = firstname;
+        obj.LastName = lastname;
+        obj.Address1 = address;
+        if (Board == "" || Board == undefined) {
             obj.Board = 0;
         }
-        else
-        {
+        else {
             obj.Board = Board;
         }
-
-        
+       
         obj.Score = Score;
         showOverLay();
         $.ajax({
@@ -130,12 +142,15 @@
             data: { Model: obj },
             dataType: "JSON",
             success: function (data) {
-                hideOverLay();
+                
                 var obj1 = {};
                 obj1.FirstName = firstname;
                 obj1.LastName = lastname;
                 obj1.Address1 = address;
-                getFullData(obj1);
+                $('#scoresContainer').load('/TestScores/LoadScores?firstname=' + firstname + "&lastname=" + lastname + "&address1=" + encodeURIComponent(address), function () {
+                    hideOverLay();
+                });
+                //getFullData(obj1);
             },
             error: function (err) {
                 alert(err.statusText);
@@ -143,11 +158,13 @@
             }
         });
 
-    });
+    }
 
-    $(document).on('click', '#closeDialog', function () {
-        $('#overlayDialog').css('display', 'none');
-    })
+
+
+    //$(document).on('click', '#closeDialog', function () {
+    //    $('#overlayDialog').css('display', 'none');
+    //})
 </script>
 
 

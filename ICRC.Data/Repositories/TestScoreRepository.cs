@@ -73,7 +73,7 @@ namespace ICRC.Data.Repositories
             return DbContext.Database.SqlQuery<TestScore>("spGetTestSocreForIndex @LastName,@FirstName,@middleName,@emailAddress,@address1,@address2,@exam,@status",
                 new SqlParameter("@LastName",lastname),
                 new SqlParameter("@firstName",firstname),
-                new SqlParameter("@middleName",lastname),
+                new SqlParameter("@middleName", middlename),
                 new SqlParameter("@emailAddress",emailaddress),
                 new SqlParameter("@address1",address1),
                 new SqlParameter("@address2",address2),
@@ -110,22 +110,26 @@ namespace ICRC.Data.Repositories
         public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(string firstname,string lastname,string address1)
         {
                 var data= DbContext.Database.SqlQuery<TestScoreViewModel>("sp_GetAllByFirstandLastName @Firstname, @Lastname , @address1", 
-                    new SqlParameter("@Firstname", firstname), 
-                    new SqlParameter("@Lastname",lastname), 
-                    new SqlParameter("@Address1",address1)).AsQueryable();
+                    new SqlParameter("@Firstname", firstname??(object)DBNull.Value), 
+                    new SqlParameter("@Lastname",lastname ?? (object)DBNull.Value), 
+                    new SqlParameter("@Address1",address1 ?? (object)DBNull.Value)).AsQueryable();
                     return data;
         }
 
 
         public void UpdateScores(TestScore model)
         {
-            DbContext.Database.ExecuteSqlCommand("sp_udpateScores @Exam,@ExamDate,@Score,@Status,@TestingCompany,@Board,@Id", new SqlParameter("@Exam", model.Exam),
+            DbContext.Database.ExecuteSqlCommand("sp_udpateScores @Exam,@ExamDate,@Score,@Status,@TestingCompany,@Board,@Id,@firstname,@lastname,@address1", new SqlParameter("@Exam", model.Exam),
                 new SqlParameter("@ExamDate", model.ExamDate),
                 new SqlParameter("@Score", model.Score)
                 , new SqlParameter("@Status", model.Status),
                 new SqlParameter("@TestingCompany", model.TestingCompany),
                 new SqlParameter("@Board", model.Board),
-                new SqlParameter("@ID", model.ID));
+                new SqlParameter("@ID", model.ID),
+                new SqlParameter("@firstname", model.FirstName??(object)DBNull.Value),
+                new SqlParameter("@lastname",model.LastName ?? (object)DBNull.Value),
+                new SqlParameter("@address1", model.Address1 ?? (object)DBNull.Value)
+                );
 
             //DbContext.Database.SqlQuery(null,"sp_udpateScores @Eaxm,@ExamDate,@Status,@TestingCompany,@Board,@Id", new SqlParameter("@Exam", model.Exam),
             //    new SqlParameter("@ExamDate", model.ExamDate)

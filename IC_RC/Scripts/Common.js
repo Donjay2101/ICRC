@@ -114,6 +114,15 @@ function readCookie(name) {
 }
 
 $(document).ready(function () {
+    
+
+        //$("#myModal iframe").attr({
+        //    'src': src,
+        //    'height': height,
+        //    'width': width
+        //});
+    //});
+
 
     $("#person").autocomplete({
         minLength: 2,

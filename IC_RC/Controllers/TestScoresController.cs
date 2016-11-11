@@ -36,18 +36,36 @@ namespace IC_RC.Controllers
 
         public ActionResult Edit(string firstname ,string lastname,string address1)
         {
-            var data = testScoreService.GetDataByFirstAndLastName(firstname,lastname,address1);
+            ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
+            ViewBag.Boards = new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
+            ViewBag.Status = new SelectList(ShrdMaster.Instance.Getstatus(), "ID", "Name");
+            var data = GetScoresData(firstname, lastname, address1);
             return View(data);
+        }
+
+
+        public List<TestScoreViewModel> GetScoresData(string firstname,string lastname,string address1)
+        {
+            var data = testScoreService.GetDataByFirstAndLastName(firstname, lastname, address1).ToList();
+
+            return data;
+        }
+
+
+        public ActionResult LoadScores(string firstname="", string lastname="", string address1="")
+        {
+            var data = GetScoresData(firstname, lastname, address1);
+            return PartialView("_TestScoresEditView",data);
         }
 
 
 
         public ActionResult GetData(int option=0, string lastname="", string firstname="", string middlename="", string emailaddress="", string address1="", string address2="", string exam="", string status="")
         {
-            if(option== 0)
-            {
-                return PartialView("_TestScoreNormalView");
-            }
+            //if(option== 0)
+            //{
+            //    return PartialView("_TestScoreNormalView");
+            //}
             var data = testScoreService.GetScoresForIndex(lastname, firstname, middlename, emailaddress, address1, address2, exam, status).ToList();
             return PartialView("_TestScore",data);
         }
@@ -134,11 +152,19 @@ namespace IC_RC.Controllers
         public ActionResult EditTestScores(int ID)
         {
 
-            var data = testScoreService.GetTestScoresByID(ID);
+            var data = testScoreService.GetTestScoresByID(ID);            
             ViewBag.Companies = new SelectList(companyService.GetTestingCompanies(), "ID", "Name");
             ViewBag.Boards = new SelectList(scoreboardService.GetScoreboards(), "ID", "Name");
             ViewBag.Status = new SelectList(ShrdMaster.Instance.Getstatus(), "ID", "Name");
-            return PartialView("_TestScoreView", data);
+            if(data==null)
+            {
+                return PartialView("_TestScoreView");
+            }
+            else
+            {
+                return PartialView("_TestScoreView", data);
+            }
+            
         }
 
         [HttpPost]
@@ -239,7 +265,7 @@ namespace IC_RC.Controllers
         //}
 
         // POST: TestScores/Delete/5
-       
+       [HttpPost]
         public ActionResult Delete(int id)
         {
 

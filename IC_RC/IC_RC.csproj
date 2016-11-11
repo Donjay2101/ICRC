@@ -389,6 +389,7 @@
     <Content Include="Views\Shared\_QueueCertificates.cshtml" />
     <Content Include="Template\CeritficationTemplate.xlsx" />
     <Content Include="Views\TestScores\Edit.cshtml" />
+    <Content Include="Views\Shared\_TestScoresEditView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

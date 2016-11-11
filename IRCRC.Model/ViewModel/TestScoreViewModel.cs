@@ -22,7 +22,7 @@ namespace IRCRC.Model.ViewModel
         [DisplayName("Email Address")]
         public string EmailAddress { get; set; }
         [DisplayName("Exam Date")]
-        public string ExamDate { get; set; }
+        public Nullable<DateTime> ExamDate { get; set; }
         public string Status { get; set; }
         [DisplayName("Address 1")]
         public string Address1 { get; set; }
@@ -31,15 +31,21 @@ namespace IRCRC.Model.ViewModel
         [DisplayName("Address 2")]
         public string Address2 { get; set; }
         
+
+        public string CandidateId { get; set; }
+        public Nullable<int> Board { get; set; }
+
+        public string BoardName { get; set; }
         public string TestingCompanyName { get; set; }
         [DisplayName("Testing Company")]
         public Nullable<int> TestingCompany { get; set; }
-        [DisplayName("Board Name")]
-        public string BoardName { get; set; }
-        
+      
         public string ZipPlus { get; set; }
         
         public string ZipCode { get; set; }
-        public string Score { get; set; }
+        public Nullable<int> Score { get; set; }
+        public Nullable<int> Scale { get; set; }
+        public Nullable<int> TestCode { get; set; }
+        public Nullable<int> Form { get; set; }
     }
 }
