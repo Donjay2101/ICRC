@@ -33,7 +33,7 @@ namespace IRCRC.Model.ViewModel
         
         public string TestingCompanyName { get; set; }
         [DisplayName("Testing Company")]
-        public string TestingCompany { get; set; }
+        public Nullable<int> TestingCompany { get; set; }
         [DisplayName("Board Name")]
         public string BoardName { get; set; }
         

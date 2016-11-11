@@ -1,27 +1,29 @@
 ﻿
 $(document).on('click', '#completeView', function () {
     showOverLay();
-                $('#divContainer').load('/TestScores/GetData', function () {
-                    hideOverLay();
-                });
+    window.location.href = "/TestScores/Index?option=1";
+                //$('#divContainer').load('/TestScores/GetData', function () {
+                //    hideOverLay();
+                //});
      });
 
 $(document).on('click', '#normalView', function () {
     showOverLay();
-    $('#divContainer').load('/TestScores/NormalView', function () {
-        hideOverLay();
-    });
+    window.location.href = "/TestScores/Index?option=0";
+    //$('#divContainer').load('/TestScores/NormalView', function () {
+    //    hideOverLay();
+    //});
 });
 
 
 
 //lazy loading code
-$(document).on('focus', '#txtLastName', function () {
+//$(document).on('focus', '#txtLastName', function () {
    
-    //showOverLay();
-    $('#tblfirstname').html("");
-    GetLastNames();                   
-});
+//    //showOverLay();
+//    $('#tblfirstname').html("");
+//    GetLastNames();                   
+//});
        
 
 
@@ -124,107 +126,107 @@ $(document).ready(function () {
 
 //AutoComplete Code
 
-$(document).on('input', '#txtLastName', function () {
-    //debugger;
-    var data = $(this).val();
-    if (data.length >=3) {
-        $.ajax({
-            url: "/TestScores/SearchLastNames?initial=" + data,
-            type: "GET",
-            success: function (data) {
-                var htmlString = "";
-                for (i = 0; i < data.length; i++) {
-                    htmlString += "<li>" + data[i].LastName + "</li>";
-                }
-                $('#cmbLastName').html(htmlString);
-                $('#tblfirstname').html("");
-            },
+//$(document).on('input', '#txtLastName', function () {
+//    //debugger;
+//    var data = $(this).val();
+//    if (data.length >=3) {
+//        $.ajax({
+//            url: "/TestScores/SearchLastNames?initial=" + data,
+//            type: "GET",
+//            success: function (data) {
+//                var htmlString = "";
+//                for (i = 0; i < data.length; i++) {
+//                    htmlString += "<li>" + data[i].LastName + "</li>";
+//                }
+//                $('#cmbLastName').html(htmlString);
+//                $('#tblfirstname').html("");
+//            },
 
-        });
-    }
-    else
-    {
-      //  GetLastNames();
-    }
-
-
-});
+//        });
+//    }
+//    else
+//    {
+//      //  GetLastNames();
+//    }
 
 
-function getFirstName() {
-    showOverLay();
-    var data = $('#txtLastName').val();
-    $.ajax({
-        url: "/TestScores/GetFirstNames?name=" + data,
-        data: "GET",
-        success: function (data) {
-            hideOverLay();
-            if (data!= null) {
-                $('#tblfirstname').html("");
-                var htmlString = "<tr>"+
-                                            "<th>FirstName</th>"+
-                                            "+<th>MI</th>"+
-                                            "<th>Address1</th>"+
-                                            "<th>City</th>"+
-                                            "<th>State</th>"+
-                                        "</tr>";
-                for (i = 0; i < data.length; i++) {
-                    htmlString += "<tr>" +
-                            "<td>" + data[i].FirstName + "</td>" +
-                            "<td>" + data[i].MiddleName + "</td>" +
-                            "<td>" + data[i].Address1 + "</td>" +
-                            "<td>" + data[i].City + "</td>" +
-                            "<td>" + data[i].State + "</td>" +
-                            "</tr>";
-                }
-                $('#tblfirstname').append(htmlString);
+//});
+
+
+//function getFirstName() {
+//    showOverLay();
+//    var data = $('#txtLastName').val();
+//    $.ajax({
+//        url: "/TestScores/GetFirstNames?name=" + data,
+//        data: "GET",
+//        success: function (data) {
+//            hideOverLay();
+//            if (data!= null) {
+//                $('#tblfirstname').html("");
+//                var htmlString = "<tr>"+
+//                                            "<th>FirstName</th>"+
+//                                            "+<th>MI</th>"+
+//                                            "<th>Address1</th>"+
+//                                            "<th>City</th>"+
+//                                            "<th>State</th>"+
+//                                        "</tr>";
+//                for (i = 0; i < data.length; i++) {
+//                    htmlString += "<tr>" +
+//                            "<td>" + data[i].FirstName + "</td>" +
+//                            "<td>" + data[i].MiddleName + "</td>" +
+//                            "<td>" + data[i].Address1 + "</td>" +
+//                            "<td>" + data[i].City + "</td>" +
+//                            "<td>" + data[i].State + "</td>" +
+//                            "</tr>";
+//                }
+//                $('#tblfirstname').append(htmlString);
                        
-            }
-            $('#tblfirstname').css('display', 'block');
-        }
-    });
+//            }
+//            $('#tblfirstname').css('display', 'block');
+//        }
+//    });
 
-}
-$(document).on('focus', '#txtFirstName', function () {
-    //debugger;
-    var html=$('#tblfirstname').html();
+//}
+//$(document).on('focus', '#txtFirstName', function () {
+//    //debugger;
+//    var html=$('#tblfirstname').html();
     
-    if (html == undefined || html == "")
-    {
-        getFirstName();
-    }
+//    if (html == undefined || html == "")
+//    {
+//        getFirstName();
+//    }
 
-    $('#tblfirstname').css('display', 'block');
-});
+//    $('#tblfirstname').css('display', 'block');
+//});
 
-$(document).on('click', '#tblfirstname tr', function () {
+//$(document).on('click', '#tblfirstname tr', function () {
             
-    //debugger;
-    var FirstName=$(this).find('td').eq(0).html();
-    if (FirstName != undefined)
-    {
-        var LastName = $('#txtLastName').val();
-        var MiddleName = $(this).find('td').eq(1).html();
-        var Address1= $(this).find('td').eq(2).html();
-        var City= $(this).find('td').eq(3).html();
-        var State = $(this).find('td').eq(4).html();
+//    //debugger;
+//    var FirstName=$(this).find('td').eq(0).html();
+//    if (FirstName != undefined)
+//    {
+//        var LastName = $('#txtLastName').val();
+//        var MiddleName = $(this).find('td').eq(1).html();
+//        var Address1= $(this).find('td').eq(2).html();
+//        var City= $(this).find('td').eq(3).html();
+//        var State = $(this).find('td').eq(4).html();
 
-        var obj = {};
+//        var obj = {};
 
-        obj.FirstName = FirstName;
-        obj.LastName = LastName;
-        // obj.MiddleName = MiddleName;
-        obj.Address1 = Address1;
-        //obj.City= City;
-        //obj.State = State;
+//        obj.FirstName = FirstName;
+//        obj.LastName = LastName;
+//        // obj.MiddleName = MiddleName;
+//        obj.Address1 = Address1;
+//        //obj.City= City;
+//        //obj.State = State;
                 
-        getFullData(obj);
+//        getFullData(obj);
 
 
-    }
+//    }
             
 
-});
+//});
 
 function reloadData()
 {

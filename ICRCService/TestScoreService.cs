@@ -16,6 +16,8 @@ namespace ICRCService
     {
 
         IEnumerable<TestScore> GetTestScores();
+
+        IEnumerable<TestScore> GetScoresForIndex(string lastname, string firstname, string middlename, string emailaddress, string address1, string address2, string exam, string status);
         TestScore GetTestScoresByID(int ID);
         IEnumerable<TestScore> GetTestScores(Expression<Func<TestScore, bool>> where);
         void CreateTestScore(TestScore Board);
@@ -24,7 +26,7 @@ namespace ICRCService
         IEnumerable<TestScoreViewModel> GetLastNames(int num);
         IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string data);
         IEnumerable<TestScoreViewModel> GetFirstNames(string name);
-        IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
+        IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(string firstname,string lastname,string address1);
         void UpdateScores(TestScore model);
         void UploadCSV(string path);
         void Save();
@@ -51,14 +53,19 @@ namespace ICRCService
             testScoreRepository.UploadCSV(path);
         }
 
+        public IEnumerable<TestScore> GetScoresForIndex(string lastname, string firstname, string middlename, string emailaddress, string address1, string address2, string exam, string status)
+        {
+            return testScoreRepository.GetScoresForIndex(lastname, firstname, middlename, emailaddress, address1, address2, exam, status).AsQueryable();
+        }
+
         public void UpdateScores(TestScore model)
         {
             testScoreRepository.UpdateScores(model);
         }
 
-        public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model)
+        public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(string firstname,string lastname,string address1)
         {
-            return testScoreRepository.GetDataByFirstAndLastName(model);
+            return testScoreRepository.GetDataByFirstAndLastName(firstname,lastname,address1);
         }
         public IEnumerable<TestScoreViewModel> GetFirstNames(string name)
         {

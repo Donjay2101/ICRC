@@ -68,7 +68,18 @@ namespace ICRC.Data.Repositories
 
 
 
-
+        public IEnumerable<TestScore> GetScoresForIndex(string lastname,string firstname,string middlename,string emailaddress,string address1,string address2,string exam,string status)
+        {
+            return DbContext.Database.SqlQuery<TestScore>("spGetTestSocreForIndex @LastName,@FirstName,@middleName,@emailAddress,@address1,@address2,@exam,@status",
+                new SqlParameter("@LastName",lastname),
+                new SqlParameter("@firstName",firstname),
+                new SqlParameter("@middleName",lastname),
+                new SqlParameter("@emailAddress",emailaddress),
+                new SqlParameter("@address1",address1),
+                new SqlParameter("@address2",address2),
+                new SqlParameter("@exam",exam),
+                new SqlParameter("@status", status)).AsQueryable();
+        }
         public IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string name)
         {
             return DbContext.Database.SqlQuery<TestScoreViewModel>("sp_SearchLastName @value", new SqlParameter("@value", name));
@@ -96,10 +107,13 @@ namespace ICRC.Data.Repositories
             return data;
         }
 
-        public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model)
+        public IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(string firstname,string lastname,string address1)
         {
-        var data= DbContext.Database.SqlQuery<TestScoreViewModel>("sp_GetAllByFirstandLastName @Firstname, @Lastname , @address1", new SqlParameter("@Firstname", model.FirstName), new SqlParameter("@Lastname",model.LastName), new SqlParameter("@Address1",model.Address1)).ToList();
-            return data;
+                var data= DbContext.Database.SqlQuery<TestScoreViewModel>("sp_GetAllByFirstandLastName @Firstname, @Lastname , @address1", 
+                    new SqlParameter("@Firstname", firstname), 
+                    new SqlParameter("@Lastname",lastname), 
+                    new SqlParameter("@Address1",address1)).AsQueryable();
+                    return data;
         }
 
 
@@ -146,13 +160,14 @@ namespace ICRC.Data.Repositories
     {
         IEnumerable<TestScoreViewModel> GetTestScoreByPerson(string name);
 
+        IEnumerable<TestScore> GetScoresForIndex(string lastname, string firstname, string middlename, string emailaddress, string address1, string address2, string exam, string status);
         IEnumerable<TestScoreViewModel> GetDistinctTestScores();
 
         IEnumerable<TestScoreViewModel> GetLastNames(int num);
 
         IEnumerable<TestScoreViewModel> GetFirstNames(string name);
 
-        IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(TestScoreViewModel model);
+        IEnumerable<TestScoreViewModel> GetDataByFirstAndLastName(string firstname,string lastname,string address1);
 
 
         void UploadCSV(string FilePath);

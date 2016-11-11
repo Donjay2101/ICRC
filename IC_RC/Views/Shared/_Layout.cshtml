@@ -34,7 +34,7 @@
                 var htmlString= '<li><a href="/TestScores/index" name="Scores">Scores</a></li>'+
                             '<li><a href="/TestingCompanies/index" name="TestingCompanies">Testing Companies</a></li>'+
                             '<li><a href="/Filemaker/Index" name="Filemaker">File Maker Data</a></li>'+
-                            '<li><a href="/Certifications/ShowAddtoQueueCertificates" name="Users">Queue To Print</a></li>'+
+                            '<li><a href="/Certifications/ShowAddtoQueueCertificates" name="ShowAddtoQueueCertificates">Queue To Print</a></li>' +
                             '<li><a href="/Users/Index" name="Users">Users</a></li>';
                 $('#liMenu').append(htmlString);
                 $('#liMenu').removeAttr('style');
@@ -43,12 +43,22 @@
                 var url = document.URL,
                 shortUrl = url.substring(0, url.lastIndexOf("/"));
                 var link = shortUrl.split('/');
+                if (link.length == 3)
+                {
+                    $(".nav li a").eq(0).addClass("active-link");
+                }
+                var secondName = url.substring(url.lastIndexOf('/') + 1, url.length);
                 $(".nav li a").each(function () {
                     var name=$(this).attr("name");
-                    if(shortUrl.indexOf(name)>0)
+                    debugger;
+                    if (link[3].toUpperCase() == name.toUpperCase() || secondName.toUpperCase() == name.toUpperCase())
                     {
+                        if (secondName.toUpperCase() == name.toUpperCase())
+                        {
+                            $(".nav li a").removeClass('active-link');
+                        }
                         $(this).addClass("active-link");
-                    }                                      
+                    }                    
                 });
 
                 $('#candidateNav>li>a').click(function (e) {

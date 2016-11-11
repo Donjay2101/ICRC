@@ -26,15 +26,30 @@ namespace IC_RC.Controllers
         }
 
         // GET: TestScores
-        public ActionResult Index()
+        public ActionResult Index(int option=0)
         {
+            ViewBag.Option = option;
+
+         //   var data = testScoreService.GetTestScores().ToList();
             return View();
         }
 
-        public ActionResult GetData()
+        public ActionResult Edit(string firstname ,string lastname,string address1)
         {
-            var data = testScoreService.GetTestScores().ToList();
-            return PartialView("_TestScore", data);
+            var data = testScoreService.GetDataByFirstAndLastName(firstname,lastname,address1);
+            return View(data);
+        }
+
+
+
+        public ActionResult GetData(int option=0, string lastname="", string firstname="", string middlename="", string emailaddress="", string address1="", string address2="", string exam="", string status="")
+        {
+            if(option== 0)
+            {
+                return PartialView("_TestScoreNormalView");
+            }
+            var data = testScoreService.GetScoresForIndex(lastname, firstname, middlename, emailaddress, address1, address2, exam, status).ToList();
+            return PartialView("_TestScore",data);
         }
 
         public ActionResult NormalView()
@@ -108,12 +123,12 @@ namespace IC_RC.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ActionResult GetFullData(TestScoreViewModel model)
-        {            
-                var data = testScoreService.GetDataByFirstAndLastName(model);
-                return Json(data,JsonRequestBehavior.AllowGet);            
-        }
+        //[HttpPost]
+        //public ActionResult GetFullData(TestScoreViewModel model)
+        //{            
+        //     //   var data = testScoreService.GetDataByFirstAndLastName(model);
+        //        return Json(data,JsonRequestBehavior.AllowGet);            
+        //}
 
 
         public ActionResult EditTestScores(int ID)
@@ -193,12 +208,12 @@ namespace IC_RC.Controllers
             //}
         }
 
-        // GET: TestScores/Edit/5
-        public ActionResult Edit(int id)
-        {
-            SetReturnUrl();
-            return View();
-        }
+        //// GET: TestScores/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    SetReturnUrl();
+        //    return View();
+        //}
 
         // POST: TestScores/Edit/5
         [HttpPost]

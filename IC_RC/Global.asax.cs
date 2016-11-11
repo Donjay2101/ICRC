@@ -63,9 +63,9 @@ namespace IC_RC
 
         protected void Application_Error()
         {
-            Server.GetLastError();
-            Server.ClearError();
-            Response.Redirect("/Home/Error");
+            //Server.GetLastError();
+            //Server.ClearError();
+            //Response.Redirect("/Home/Error");
         }
     }
 
