@@ -10,7 +10,8 @@
         <a href="#" id="Import" class="linkbtn">Import Data</a>
     </div>
     <div class="col-md-4 text-right">        
-            <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
+        <a class="linkbtn" id="btnDownload"><span class="glyphicon glyphicon-download-alt space" aria-hidden="true"></span>Download</a>   
+          <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
             <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-remove-circle space" aria-hidden="true"></span>Clear Search</a>        
     </div>
 </div>
@@ -91,6 +92,21 @@
 {         
 <script src="~/Scripts/TestScore.js"></script>
     <script>
+
+        $(document).on('click', '#btnDownload', function () {
+            var lastname = $('#txtLastName').val();
+            var firstname = $('#txtFirstName').val();
+            var middlename = $('#txtMiddleName').val();
+            var emailaddress = $('#txtEmailAddress').val();
+            var address1 = $('#txtAddress1').val();
+            var address2 = $('#txtAddress2').val();
+            var exam = $('#txtExam').val();
+            var status = $('#txtStatus').val();
+
+            var _url = "/TestScores/ExportToExcel?option=1&lastname=" + lastname + "&firstname=" + firstname + "&middlename=" + middlename + "&EmailAddress=" + emailaddress + "&address1=" + address1 + "&address2=" + address2 + "&exam=" + exam + "&status=" + status;
+            window.open(_url, 'blank');
+
+        });
         $(document).on('click', '#btnClearSearch', function () {
             $('#txtLastName').val("");
             $('#txtFirstName').val("");

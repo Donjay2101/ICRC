@@ -47,6 +47,12 @@ namespace IC_RC.Controllers
             return View(data);
         }
 
+        public void ExportToExcel(string FirstName = "", string LastName = "", string MiddleName = "", string Acronym = "", string City = "", string State = "")
+        {
+            var data = PersonsData(FirstName, LastName, MiddleName, Acronym, City, State).AsEnumerable();
+            ShrdMaster.Instance.ExportListFromTsv(data,"CertifiedPersonsData");
+        }
+
         public IQueryable<CPViewModelForIndex> PersonsData(string FirstName = "", string LastName = "", string MiddleName = "", string Acronym = "", string City = "", string State = "")
         {
             IQueryable<CPViewModelForIndex> data;
@@ -72,9 +78,11 @@ namespace IC_RC.Controllers
             //pageIndex = ShrdMaster.Instance.GetPageIndex();
             //var data1 = CertifiedPersonService.GetCertifedPersonsForIndex(pageIndex).AsQueryable();
             //var data =new CertifiedPersonsGrid(data1,1,true);
+            
 
-            var data = PersonsData(FirstName,LastName,MiddleName,Acronym,City,State);
+            var data = PersonsData(FirstName, LastName, MiddleName, Acronym, City, State);
             return PartialView("_CertifiedPersons", data);
+
         }
 
 

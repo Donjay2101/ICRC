@@ -11,7 +11,7 @@ namespace ICRC.Model
 {
     public class CertifiedPersons
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
 
         //[Required]

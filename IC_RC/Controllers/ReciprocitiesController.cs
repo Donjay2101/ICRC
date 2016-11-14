@@ -44,7 +44,11 @@ namespace IC_RC.Controllers
 
             return View(data);
         }
-
+        public void ExportToExcel(string person = "", string oboard = "", string rboard = "", string certificate = "", string number = "", string notes = "")
+        {
+            var data = GetReciprocities(person, oboard, rboard, certificate, number, notes).AsEnumerable();
+            ShrdMaster.Instance.ExportListFromTsv(data, "Reciprocities");
+        }
         public List<ReciprocitiesForIndex> GetReciprocities(string person = "", string oboard = "", string rboard = "", string certificate = "", string number = "", string notes = "")
         {
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);

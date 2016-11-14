@@ -4,7 +4,8 @@
 }
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-6 text-right">       
+    <div class="col-md-6 col-md-offset-6 text-right">     
+        <a class="linkbtn" id="btnDownload"><span class="glyphicon glyphicon-download-alt space" aria-hidden="true"></span>Download</a>  
         <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
         <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-remove-circle space" aria-hidden="true"></span>Clear Search</a>
     </div>
@@ -61,6 +62,15 @@
 @section  scripts
 {
     <script>
+
+        $(document).on('click', '#btnDownload', function () {
+            var certID = $('#txtCertID').val();
+            var certNumber = $('#txtCertificateNumber').val();
+            var person = $('#txtPerson').val();
+            var _url = "/Certifications/ExportToExcel?certID=" + certID + "&certNumber=" + certNumber + "&person=" + person;
+            window.open(_url, 'blank');
+
+        });
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

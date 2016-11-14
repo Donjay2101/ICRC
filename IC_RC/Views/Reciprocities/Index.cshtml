@@ -5,6 +5,7 @@
 
 <div class="row form-group">
     <div class="col-md-6 col-md-offset-6 text-right">
+        <a class="linkbtn" id="btnDownload"><span class="glyphicon glyphicon-download-alt space" aria-hidden="true"></span>Download</a> 
         <a class="linkbtn" id="btnSearch"><span class="glyphicon glyphicon-search space" aria-hidden="true"></span>Search</a>
         <a class="linkbtn" id="btnClearSearch"><span class="glyphicon glyphicon-remove-circle space" aria-hidden="true"></span>Clear Search</a>
     </div>
@@ -70,6 +71,19 @@
 {
     
     <script>
+
+        $(document).on('click', '#btnDownload', function () {
+            var person = $('#txtPerson').val();
+            var oboard = $('#txtOBoard').val();
+            var rboard = $('#txtRBoard').val();
+            var certificate = $('#txtCertificate').val();
+            var number = $('#txtPNumber').val();
+            var notes = $('#txtNotes').val();
+
+            var _url = "/Reciprocities/ExportToExcel?person=" + person + "&oboard=" + oboard + "&rboard=" + rboard + "&certificate=" + certificate + "&number=" + number + "&notes=" + notes;
+            window.open(_url, 'blank');
+
+        });
         $(document).on('click', '#btnClearSearch', function () {
             $('#txtPerson').val("");
             $('#txtOBoard').val("");

@@ -31,7 +31,7 @@ namespace ICRC.Data.Repositories
         }
         public int GetMax()
         {
-            return DbContext.CertifiedPersons.Max(x => x.ID);
+            return DbContext.CertifiedPersons.Max(x => x.Id);
         }
     }
 

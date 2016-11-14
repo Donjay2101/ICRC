@@ -28,6 +28,12 @@ namespace IC_RC.Controllers
             return View(data);
         }
 
+
+        public void ExportToExcel(string BoardName = "", string BoardAcronym = "")
+        {
+            var data = GetBoardsList(BoardName, BoardAcronym).AsEnumerable();
+            ShrdMaster.Instance.ExportListFromTsv(data, "BoardsData");
+        }
         public List<Boards> GetBoardsList(string BoardName = "", string BoardAcronym = "")
         {
             return boardService.GetBoardsForIndex(BoardName,BoardAcronym).ToList();

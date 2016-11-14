@@ -73,7 +73,7 @@ namespace ICRC.Data.Repositories
             return DbContext.Database.SqlQuery<TestScore>("spGetTestSocreForIndex @LastName,@FirstName,@middleName,@emailAddress,@address1,@address2,@exam,@status",
                 new SqlParameter("@LastName",lastname),
                 new SqlParameter("@firstName",firstname),
-                new SqlParameter("@middleName", middlename),
+                new SqlParameter("@middleName",middlename),
                 new SqlParameter("@emailAddress",emailaddress),
                 new SqlParameter("@address1",address1),
                 new SqlParameter("@address2",address2),

@@ -59,7 +59,11 @@ namespace IC_RC.Controllers
         }
 
 
-
+        public void ExportToExcel(int option = 0, string lastname = "", string firstname = "", string middlename = "", string emailaddress = "", string address1 = "", string address2 = "", string exam = "", string status = "")
+        {
+            var data = testScoreService.GetScoresForIndex(lastname, firstname, middlename, emailaddress, address1, address2, exam, status).AsEnumerable();
+            ShrdMaster.Instance.ExportListFromTsv(data, "ScoresData");
+        }
         public ActionResult GetData(int option=0, string lastname="", string firstname="", string middlename="", string emailaddress="", string address1="", string address2="", string exam="", string status="")
         {
             //if(option== 0)

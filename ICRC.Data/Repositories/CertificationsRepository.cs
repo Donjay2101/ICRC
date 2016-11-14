@@ -306,7 +306,7 @@ namespace ICRC.Data.Repositories
                                 DbContext.CertifiedPersons.Add(person);
                                 DbContext.SaveChanges();
                                 //DataTable tblPerson = MakeTable<CertifiedPersons>(
-                                PersonID = person.ID;
+                                PersonID = person.Id;
                             }
                             dt.Rows[dt.Rows.Count - 1]["PersonID"] = PersonID;
                         }
@@ -369,7 +369,7 @@ namespace ICRC.Data.Repositories
 
             if (data != null)
             {
-                return data.ID;
+                return data.Id;
             }
             return -1;
 

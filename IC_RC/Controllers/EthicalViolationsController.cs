@@ -31,6 +31,7 @@ namespace IC_RC.Controllers
             this.studentethicalviolationservice = studentethicalviolationservice;
             this.ethicalviolationservice = ethicalviolationservice;
         }
+      
 
         // GET: Ethicalviolations
         public ActionResult Index()
@@ -44,7 +45,11 @@ namespace IC_RC.Controllers
             var data = GetVoilations();
             return View(data);
         }
-
+        public void ExportToExcel(string board = "", string person = "", string violation = "")
+        {
+            var data = GetVoilations(board, person, violation).AsEnumerable();
+            ShrdMaster.Instance.ExportListFromTsv(data, "StudentEthicalVoilations");
+        }
         public List<StudentVoilationForIndex> GetVoilations(string board="",string person="",string violation="")
         {
             var user = ShrdMaster.Instance.GetUser(User.Identity.Name);

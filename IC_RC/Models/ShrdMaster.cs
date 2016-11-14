@@ -3,6 +3,8 @@ using ICRC.Model;
 using ICRC.Model.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -135,7 +137,44 @@ namespace IC_RC
             return list;
         }
 
-}
+        #region export
+
+
+        public void WriteTsv<T>(IEnumerable<T> data, TextWriter output)
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
+            foreach (PropertyDescriptor prop in props)
+            {
+                output.Write(prop.DisplayName); // header
+                output.Write("\t");
+            }
+            output.WriteLine();
+            foreach (T item in data)
+            {
+                foreach (PropertyDescriptor prop in props)
+                {
+                    output.Write(prop.Converter.ConvertToString(
+                         prop.GetValue(item)));
+                    output.Write("\t");
+                }
+                output.WriteLine();
+            }
+        }
+
+
+
+        public void ExportListFromTsv<T>(IEnumerable<T> data,string name)
+        {         
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename="+name+".xls");
+            HttpContext.Current.Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+            WriteTsv(data, HttpContext.Current.Response.Output);
+            HttpContext.Current.Response.End();
+        }
+        #endregion
+
+
+    }
 
 
 

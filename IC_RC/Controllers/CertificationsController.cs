@@ -50,7 +50,11 @@ namespace IC_RC.Controllers
             var data = GetCertifications();
             return View(data);
         }
-
+        public void ExportToExcel(string certID = "", string certNumber = "", string person = "")
+        {
+            var data = GetCertifications(certID, certNumber, person).AsEnumerable();
+            ShrdMaster.Instance.ExportListFromTsv(data, "CertificationsData");
+        }
 
         public List<CertificationViewModelForIndex> GetCertifications(string certID = "", string certNumber = "", string person = "")
         {
