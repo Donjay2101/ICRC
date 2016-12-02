@@ -43,3 +43,8 @@ E:\IC_RC\icrc\IRCRC.Model\bin\Debug\IRCRC.Model.pdb
 E:\IC_RC\icrc\IRCRC.Model\obj\Debug\IRCRC.Model.dll
 E:\IC_RC\icrc\IRCRC.Model\obj\Debug\IRCRC.Model.pdb
 E:\IC_RC\icrc\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
+C:\Users\dmehta\Documents\GitHub\ICRC\IRCRC.Model\bin\Debug\IRCRC.Model.dll
+C:\Users\dmehta\Documents\GitHub\ICRC\IRCRC.Model\bin\Debug\IRCRC.Model.pdb
+C:\Users\dmehta\Documents\GitHub\ICRC\IRCRC.Model\obj\Debug\ICRC.Model.csprojResolveAssemblyReference.cache
+C:\Users\dmehta\Documents\GitHub\ICRC\IRCRC.Model\obj\Debug\IRCRC.Model.dll
+C:\Users\dmehta\Documents\GitHub\ICRC\IRCRC.Model\obj\Debug\IRCRC.Model.pdb
